@@ -16,6 +16,7 @@ class CreateEstudioRealizadosTable extends Migration
         Schema::create('estudios_realizados', function (Blueprint $table) {
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
+            $table->increments('id');
             $table->string('rut');
             $table->unsignedInteger('titulo_id');
             $table->unsignedInteger('institucion_id');

@@ -16,5 +16,6 @@ class TitulosTableSeeder extends Seeder
         App\Titulo::create(['nombre' => 'Técnico de Nivel Medio en Mecánica Automotriz']);
         App\Titulo::create(['nombre' => 'Técnico de Nivel Superior en Programación']);
         App\Titulo::create(['nombre' => 'Ingeniería en Ejecución Informática']);
+        App\Titulo::create(['nombre' => 'Sin Título']);
     }
 }

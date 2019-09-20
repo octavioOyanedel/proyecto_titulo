@@ -14,7 +14,6 @@ class KeysEstudiosRealizadosTable extends Migration
     public function up()
     {
         Schema::table('estudios_realizados', function (Blueprint $table) {
-            $table->primary(['rut', 'titulo_id','institucion_id','grado_academico_id','estado_grado_academico_id'],'PRIMARY_KEY');
             $table->foreign('rut')->references('rut')->on('socios')->onDelete('cascade');
             $table->foreign('titulo_id')->references('id')->on('titulos')->onDelete('cascade');
             $table->foreign('institucion_id')->references('id')->on('instituciones')->onDelete('cascade');
