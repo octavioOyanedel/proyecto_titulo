@@ -11,6 +11,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(RolesTableSeeder::class);
+        $this->call(TiposRegistroContableTableSeeder::class);
+        $this->call(TiposCuentaTableSeeder::class);
+        $this->call(BancosTableSeeder::class);
+        $this->call(ComunasTableSeeder::class);
+        $this->call(SedesTableSeeder::class);
+        $this->call(CargosTableSeeder::class);
+        $this->call(EstadosSocioTableSeeder::class);
+        $this->call(NacionalidadesTableSeeder::class);
+        $this->call(ParentescosTableSeeder::class);
+        $this->call(CiudadesTableSeeder::class);
+        $this->call(AreasTableSeeder::class);
+        $this->call(EstadosGradoAcademicoTableSeeder::class);
+        $this->call(GradosAcademicosTableSeeder::class);
+        $this->call(InstitucionesTableSeeder::class);
+        $this->call(TitulosTableSeeder::class);
+        $this->call(InteresesTableSeeder::class);
+        $this->call(FormasPagoTableSeeder::class);
+        $this->call(EstadosDeudaTableSeeder::class);
+        $this->call(DetallesConceptoTableSeeder::class);
+        $this->call(CuentasTableSeeder::class);
+        $this->call(UsuariosTableSeeder::class);
+        $this->call(SociosTableSeeder::class);
+        $this->call(CargasFamiliaresTableSeeder::class);
         // $this->call(UsersTableSeeder::class);
     }
 }

@@ -16,7 +16,7 @@ class Interes extends Model
     * @var array
     */
     protected $fillable = [
-        'nombre',
+        'cantidad',
     ];
 
     /**
