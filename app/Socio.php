@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Prestamo;
-use App\EstudioRealizado;
+use App\EstudioRealizadoSocio;
 use App\Comuna;
 use App\Ciudad;
 use App\Sede;
@@ -12,6 +12,7 @@ use App\Cargo;
 use App\EstadoSocio;
 use App\Nacionalidad;
 use App\CargaFamiliar;
+use App\RegistroContable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -46,9 +47,9 @@ class Socio extends Model
     /**
      * Relación 
      */
-    public function estudios_realizados()
+    public function estudios_realizados_socios()
     {
-        return $this->hasMany('App\EstudioRealizado');
+        return $this->hasMany('App\EstudioRealizadoSocio');
     }
 
     /**
@@ -113,5 +114,13 @@ class Socio extends Model
     public function cargas_familiares()
     {
         return $this->hasMany('App\CargaFamiliar');
+    }
+
+    /**
+     * Relación 
+     */
+    public function registros_contables()
+    {
+        return $this->belongsToMany('App\RegistroContable');
     }
 }

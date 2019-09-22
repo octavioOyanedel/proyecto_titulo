@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetalleConceptosTable extends Migration
+class CreateEstudioRealizadoSociosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateDetalleConceptosTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalles_concepto', function (Blueprint $table) {
+        Schema::create('estudios_realizados_socios', function (Blueprint $table) {
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
-            $table->increments('id');
-            $table->string('nombre');
-            $table->unsignedInteger('tipo_registro_contable_id');
+            $table->string('rut');
+            $table->unsignedInteger('estudio_realizado_id');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateDetalleConceptosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalles_concepto');
+        Schema::dropIfExists('estudios_realizados_socios');
     }
 }

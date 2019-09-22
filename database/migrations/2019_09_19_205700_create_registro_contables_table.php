@@ -19,11 +19,14 @@ class CreateRegistroContablesTable extends Migration
             $table->increments('id');
             $table->date('fecha');
             $table->unsignedInteger('numero_registro');
-            $table->unsignedInteger('forma_pago');
+            $table->unsignedInteger('cheque')->nullable();
             $table->unsignedInteger('monto');
             $table->unsignedInteger('concepto_id');
             $table->unsignedInteger('tipo_registro_contable_id');
             $table->unsignedInteger('cuenta_id');
+            $table->unsignedInteger('asociado_id')->nullable();
+            $table->unsignedInteger('usuario_id');
+            $table->string('rut')->nullable();
             $table->timestamps();
         });
     }

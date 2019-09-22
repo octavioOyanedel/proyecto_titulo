@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InteresesTableSeeder::class);
         $this->call(FormasPagoTableSeeder::class);
         $this->call(EstadosDeudaTableSeeder::class);
-        $this->call(DetallesConceptoTableSeeder::class);
         $this->call(CuentasTableSeeder::class);
         $this->call(UsuariosTableSeeder::class);
         $this->call(SociosTableSeeder::class);
@@ -38,6 +37,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PrestamosTableSeeder::class);
         $this->call(CuotasTableSeeder::class);
         $this->call(EstudiosRealizadosTableSeeder::class);
+        $this->call(AsociadosTableSeeder::class);
+        $this->call(ConceptosTableSeeder::class);
+        $this->call(RegistrosContablesTableSeeder::class);
+        
         // $this->call(UsersTableSeeder::class);
     }
 }

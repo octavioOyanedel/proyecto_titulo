@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegistroContableUsuariosTable extends Migration
+class CreateAsociadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateRegistroContableUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('registros_contables_usuarios', function (Blueprint $table) {
+        Schema::create('asociados', function (Blueprint $table) {
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
-            $table->unsignedInteger('usuario_id');
-            $table->unsignedInteger('registro_contable_id');
+            $table->increments('id');
+            $table->string('concepto');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateRegistroContableUsuariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registros_contables_usuarios');
+        Schema::dropIfExists('asociados');
     }
 }

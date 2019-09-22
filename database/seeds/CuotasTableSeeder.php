@@ -12,10 +12,10 @@ class CuotasTableSeeder extends Seeder
     public function run()
     {
 
-        $array_prestamos = array(1,2,3);
-        $array_cuotas = array(5,6,3);
-        $array_montos = array(50000,60000,30000);
-        $array_fechas_solicitud = array('2010-01-01','2015-11-20','2019-09-20');
+        $array_prestamos = array(1,2);
+        $array_cuotas = array(5,6);
+        $array_montos = array(50000,60000);
+        $array_fechas_solicitud = array('2010-01-01','2015-11-20');
 
         $id = 1;
 

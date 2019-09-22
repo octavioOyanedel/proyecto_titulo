@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\RegistroContableUsuario;
+use App\EstudioRealizadoSocio;
 use Illuminate\Http\Request;
 
-class RegistroContableUsuarioController extends Controller
+class EstudioRealizadoSocioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class RegistroContableUsuarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\RegistroContableUsuario  $registroContableUsuario
+     * @param  \App\EstudioRealizadoSocio  $estudioRealizadoSocio
      * @return \Illuminate\Http\Response
      */
-    public function show(RegistroContableUsuario $registroContableUsuario)
+    public function show(EstudioRealizadoSocio $estudioRealizadoSocio)
     {
         //
     }
@@ -52,10 +52,10 @@ class RegistroContableUsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\RegistroContableUsuario  $registroContableUsuario
+     * @param  \App\EstudioRealizadoSocio  $estudioRealizadoSocio
      * @return \Illuminate\Http\Response
      */
-    public function edit(RegistroContableUsuario $registroContableUsuario)
+    public function edit(EstudioRealizadoSocio $estudioRealizadoSocio)
     {
         //
     }
@@ -64,10 +64,10 @@ class RegistroContableUsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RegistroContableUsuario  $registroContableUsuario
+     * @param  \App\EstudioRealizadoSocio  $estudioRealizadoSocio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RegistroContableUsuario $registroContableUsuario)
+    public function update(Request $request, EstudioRealizadoSocio $estudioRealizadoSocio)
     {
         //
     }
@@ -75,10 +75,10 @@ class RegistroContableUsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RegistroContableUsuario  $registroContableUsuario
+     * @param  \App\EstudioRealizadoSocio  $estudioRealizadoSocio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RegistroContableUsuario $registroContableUsuario)
+    public function destroy(EstudioRealizadoSocio $estudioRealizadoSocio)
     {
         //
     }

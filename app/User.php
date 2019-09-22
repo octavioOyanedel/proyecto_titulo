@@ -4,7 +4,7 @@ namespace App;
 
 use App\LogSistema;
 use App\Rol;
-use App\RegistroContableUsuario;
+use App\RegistroContable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -62,8 +62,8 @@ class User extends Authenticatable
     /**
      * Relación 
      */
-    public function registros_contables_usuario()
+    public function registros_contables()
     {
-        return $this->hasMany('App\RegistroContableUsuario');
+        return $this->belongsToMany('App\RegistroContable');
     }
 }

@@ -24,14 +24,6 @@ class TipoRegistroContable extends Model
     /**
      * Relación 
      */
-    public function detalle_condepto()
-    {
-        return $this->belongsTo('App\DetalleConcepto');
-    }
-
-    /**
-     * Relación 
-     */
     public function concepto()
     {
         return $this->belongsTo('App\Concepto');

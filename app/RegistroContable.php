@@ -6,6 +6,8 @@ use App\Concepto;
 use App\TipoRegistroContable;
 use App\RegistroContableUsuario;
 use App\Cuenta;
+use App\Asociado;
+use App\Socio;
 use Illuminate\Database\Eloquent\Model;
 
 class RegistroContable extends Model
@@ -19,7 +21,7 @@ class RegistroContable extends Model
     * @var array
     */
     protected $fillable = [
-        'fecha','numero_registro','forma_pago','monto','concepto_id','tipo_registro_contable_id','cuenta_id',
+        'fecha','numero_registro','forma_pago','monto','concepto_id','tipo_registro_contable_id','cuenta_id','asociado_id','rut','usuario_id',
     ];
 
     /**
@@ -33,18 +35,26 @@ class RegistroContable extends Model
     /**
      * Relación 
      */
-    public function tipo_registro_contable()
+    public function asociado()
     {
-        return $this->hasOne('App\TipoRegistroContable');
-    } 
+        return $this->hasOne('App\Asociado');
+    }
 
     /**
      * Relación 
      */
-    public function registro_contable_usuario()
+    public function socio()
     {
-        return $this->BelongsToMany('App\RegistroContableUsuario');
+        return $this->hasOne('App\Socio');
     }
+    /**
+     * Relación 
+     */
+
+    public function tipo_registro_contable()
+    {
+        return $this->hasOne('App\TipoRegistroContable');
+    } 
 
     /**
      * Relación 

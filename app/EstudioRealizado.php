@@ -6,7 +6,7 @@ use App\Titulo;
 use App\Institucion;
 use App\GradoAcademico;
 use App\EstadoGradoAcademico;
-use App\Socio;
+use App\EstudioRealizadoSocio;
 use Illuminate\Database\Eloquent\Model;
 
 class EstudioRealizado extends Model
@@ -58,8 +58,8 @@ class EstudioRealizado extends Model
     /**
      * Relación 
      */
-    public function socio()
+    public function estudios_realizados_socio()
     {
-        return $this->belongsTo('App\Socio');
-    }   
+        return $this->BelongsToMany('App\EstudioRealizadoSocio');
+    } 
 }

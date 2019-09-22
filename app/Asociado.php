@@ -2,11 +2,10 @@
 
 namespace App;
 
-use App\DetalleConcepto;
 use App\RegistroContable;
 use Illuminate\Database\Eloquent\Model;
 
-class Concepto extends Model
+class Asociado extends Model
 {
     /**
     * The attributes that are mass assignable.
@@ -14,14 +13,14 @@ class Concepto extends Model
     * @var array
     */
     protected $fillable = [
-        'nombre','detalle',
+        'concepto','nombre',
     ];
 
     /**
      * Relación 
      */
-    public function registros_contables()
+    public function registro_contable()
     {
-        return $this->BelongsToMany('App\RegistroContable');
-    }
+        return $this->belongsTo('App\RegistroContable');
+    }  
 }

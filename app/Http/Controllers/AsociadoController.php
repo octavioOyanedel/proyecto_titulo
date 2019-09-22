@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\DetalleConcepto;
+use App\Asociado;
 use Illuminate\Http\Request;
 
-class DetalleConceptoController extends Controller
+class AsociadoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class DetalleConceptoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\DetalleConcepto  $detalleConcepto
+     * @param  \App\Asociado  $asociado
      * @return \Illuminate\Http\Response
      */
-    public function show(DetalleConcepto $detalleConcepto)
+    public function show(Asociado $asociado)
     {
         //
     }
@@ -52,10 +52,10 @@ class DetalleConceptoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\DetalleConcepto  $detalleConcepto
+     * @param  \App\Asociado  $asociado
      * @return \Illuminate\Http\Response
      */
-    public function edit(DetalleConcepto $detalleConcepto)
+    public function edit(Asociado $asociado)
     {
         //
     }
@@ -64,10 +64,10 @@ class DetalleConceptoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\DetalleConcepto  $detalleConcepto
+     * @param  \App\Asociado  $asociado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DetalleConcepto $detalleConcepto)
+    public function update(Request $request, Asociado $asociado)
     {
         //
     }
@@ -75,10 +75,10 @@ class DetalleConceptoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\DetalleConcepto  $detalleConcepto
+     * @param  \App\Asociado  $asociado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DetalleConcepto $detalleConcepto)
+    public function destroy(Asociado $asociado)
     {
         //
     }

@@ -13,8 +13,8 @@ class PrestamosTableSeeder extends Seeder
     {
         App\Prestamo::create([
             'fecha_solicitud' => '2010-01-01',
-            'numero_egreso' => rand(1, 999999),
-            'cheque' => rand(10000000, 99999999),
+            'numero_egreso' => 300,
+            'cheque' => 123456789,
             'monto' => 50000,
             'numero_cuotas' => 5,
             'rut' => '111111111',
@@ -22,25 +22,15 @@ class PrestamosTableSeeder extends Seeder
             'interes_id' => 1,
             'forma_pago_id' => 1
         ]);
+
         App\Prestamo::create([
             'fecha_solicitud' => '2015-11-20',
-            'numero_egreso' => rand(1, 999999),
-            'cheque' => rand(10000000, 99999999),
+            'numero_egreso' => 450,
+            'cheque' => 987654321,
             'monto' => 60000,
             'numero_cuotas' => 6,
             'rut' => '111111111',
             'estado_deuda_id' => 1,           
-            'interes_id' => 1,
-            'forma_pago_id' => 1
-        ]);
-        App\Prestamo::create([
-            'fecha_solicitud' => '2019-09-20',
-            'numero_egreso' => rand(1, 999999),
-            'cheque' => rand(10000000, 99999999),
-            'monto' => 30000,
-            'numero_cuotas' => 3,
-            'rut' => '111111111',
-            'estado_deuda_id' => 2,           
             'interes_id' => 1,
             'forma_pago_id' => 1
         ]);

@@ -17,10 +17,8 @@ class CreateConceptosTable extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->increments('id');
-            $table->string('asociado_a');
-            $table->string('observaciones');
-            $table->unsignedInteger('detalle_concepto_id');
-            $table->unsignedInteger('tipo_registro_contable_id');
+            $table->string('nombre');
+            $table->string('detalle');
             $table->timestamps();
         });
     }
