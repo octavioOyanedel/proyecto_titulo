@@ -14,7 +14,6 @@ class KeysSociosTable extends Migration
     public function up()
     {
         Schema::table('socios', function (Blueprint $table) {
-            $table->primary('rut');
             $table->foreign('comuna_id')->references('id')->on('comunas')->onDelete('cascade');
             $table->foreign('ciudad_id')->references('id')->on('ciudades')->onDelete('cascade');
             $table->foreign('sede_id')->references('id')->on('sedes')->onDelete('cascade');

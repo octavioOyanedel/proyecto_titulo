@@ -22,7 +22,7 @@ class CreatePrestamosTable extends Migration
             $table->unsignedInteger('cheque');
             $table->unsignedInteger('monto');
             $table->unsignedInteger('numero_cuotas');
-            $table->string('rut');
+            $table->unsignedInteger('socio_id');
             $table->unsignedInteger('estado_deuda_id');
             $table->unsignedInteger('interes_id');
             $table->unsignedInteger('forma_pago_id');

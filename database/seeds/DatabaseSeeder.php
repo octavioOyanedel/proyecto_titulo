@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AsociadosTableSeeder::class);
         $this->call(ConceptosTableSeeder::class);
         $this->call(RegistrosContablesTableSeeder::class);
-        
+        $this->call(EstudiosRealizadosSociosTableSeeder::class);
         // $this->call(UsersTableSeeder::class);
     }
 }

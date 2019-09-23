@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Socio;
+use App\Comuna;
+use App\Sede;
+use App\Cargo;
+use App\EstadoSocio;
+use App\Nacionalidad;
+use App\Prestamo;
+use App\CargaFamiliar;
+use App\EstudioRealizadoSocio;
 use Illuminate\Http\Request;
 
 class SocioController extends Controller
@@ -24,7 +32,12 @@ class SocioController extends Controller
      */
     public function create()
     {
-        //
+        $comunas = Comuna::orderBy('nombre', 'ASC')->get();
+        $sedes = Sede::orderBy('nombre', 'ASC')->get();
+        $cargos = Cargo::orderBy('nombre', 'ASC')->get();
+        $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
+        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();
+        return view('sind1.socios.create', compact('cargos', 'estados', 'nacionalidades', 'comunas', 'sedes'));
     }
 
     /**
@@ -44,9 +57,14 @@ class SocioController extends Controller
      * @param  \App\Socio  $socio
      * @return \Illuminate\Http\Response
      */
-    public function show(Socio $socio)
+    public function show($id)
     {
-        //
+
+        $socio = Socio::findOrFail($id);
+        $prestamos = $socio->prestamos()->simplePaginate(10);
+        $estudios = $socio->estudios_realizados_socios;
+        $cargas = $socio->cargas_familiares;
+        return view('sind1.socios.show', compact('socio','prestamos','estudios','cargas'));
     }
 
     /**

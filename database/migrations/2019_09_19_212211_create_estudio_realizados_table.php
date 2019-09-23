@@ -17,7 +17,6 @@ class CreateEstudioRealizadosTable extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->increments('id');
-            $table->string('rut');
             $table->unsignedInteger('titulo_id');
             $table->unsignedInteger('institucion_id');
             $table->unsignedInteger('grado_academico_id');

@@ -21,6 +21,55 @@ class Prestamo extends Model
     ];
 
     /**
+     * Modificador de estado deuda
+     */
+    public function getEstadoDeudaIdAttribute($valor)
+    {
+        $estado_deuda_id = $valor;
+        $estado_deuda = EstadoDeuda::findOrFail($estado_deuda_id);
+        $valor = $estado_deuda->nombre;
+        return $valor;
+    }
+
+    /**
+     * Modificador de interes
+     */
+    public function getInteresIdAttribute($valor)
+    {
+        $interes_id = $valor;
+        $interes = Interes::findOrFail($interes_id);
+        $valor = $interes->cantidad;
+        return $valor;
+    }
+
+    /**
+     * Modificador de forma pago
+     */
+    public function getFormaPagoIdAttribute($valor)
+    {
+        $forma_pago_id = $valor;
+        $forma_pago = FormaPago::findOrFail($forma_pago_id);
+        $valor = $forma_pago->nombre;
+        return $valor;
+    }
+
+    /**
+     * Modificador de fecha sind1
+     */
+    public function getMontoAttribute($valor)
+    {
+        return formatoMoneda($valor);
+    }
+
+    /**
+     * Modificador de fecha de nacimiento
+     */
+    public function getFechaSolicitudAttribute($valor)
+    {
+        return formatoFecha($valor);
+    }
+
+    /**
      * Relación 
      */
     public function socio()

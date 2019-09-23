@@ -19,7 +19,7 @@ class CargasFamiliaresTableSeeder extends Seeder
             'apellido2' => null,        
             'fecha_nac' => '2000-01-01',
             'parentesco_id' => 2,
-            'rut_socio' => '111111111'
+            'socio_id' => 2
         ]);
         App\CargaFamiliar::create([
             'rut' => '88888888',
@@ -29,7 +29,7 @@ class CargasFamiliaresTableSeeder extends Seeder
             'apellido2' => null,        
             'fecha_nac' => '1950-07-07',
             'parentesco_id' => 5,
-            'rut_socio' => '22222222'
+            'socio_id' => 2
         ]);
         App\CargaFamiliar::create([
             'rut' => '66555222k',
@@ -39,7 +39,7 @@ class CargasFamiliaresTableSeeder extends Seeder
             'apellido2' => null,        
             'fecha_nac' => '2010-12-12',
             'parentesco_id' => 1,
-            'rut_socio' => '22222222'
+            'socio_id' => 2
         ]);
     }
 }

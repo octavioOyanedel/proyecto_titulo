@@ -16,7 +16,8 @@ class CreateSociosTable extends Migration
         Schema::create('socios', function (Blueprint $table) {
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
-            $table->string('rut')->unique();
+            $table->increments('id');
+            $table->string('rut');
             $table->string('nombre1');
             $table->string('nombre2')->nullable();
             $table->string('apellido1');

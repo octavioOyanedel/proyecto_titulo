@@ -33,6 +33,6 @@ class EstudioRealizadoSocio extends Model
      */
     public function estudio_realizado()
     {
-        return $this->hasOne('App\EstudioRealizado');
+        return $this->belongsTo('App\EstudioRealizado');
     } 
 }

@@ -14,8 +14,7 @@ class KeysCargasFamiliaresTable extends Migration
     public function up()
     {
         Schema::table('cargas_familiares', function (Blueprint $table) {
-            $table->primary('rut');
-            $table->foreign('rut_socio')->references('rut')->on('socios')->onDelete('cascade');
+            $table->foreign('socio_id')->references('id')->on('socios')->onDelete('cascade');
             $table->foreign('parentesco_id')->references('id')->on('parentescos')->onDelete('cascade');
         });
     }

@@ -17,7 +17,7 @@ class PrestamosTableSeeder extends Seeder
             'cheque' => 123456789,
             'monto' => 50000,
             'numero_cuotas' => 5,
-            'rut' => '111111111',
+            'socio_id' => 1,
             'estado_deuda_id' => 1,           
             'interes_id' => 1,
             'forma_pago_id' => 1
@@ -29,7 +29,7 @@ class PrestamosTableSeeder extends Seeder
             'cheque' => 987654321,
             'monto' => 60000,
             'numero_cuotas' => 6,
-            'rut' => '111111111',
+            'socio_id' => 1,
             'estado_deuda_id' => 1,           
             'interes_id' => 1,
             'forma_pago_id' => 1

@@ -15,7 +15,7 @@ class KeysRegistrosContablesTable extends Migration
     {
         Schema::table('registros_contables', function (Blueprint $table) {
             $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->foreign('rut')->references('rut')->on('socios')->onDelete('cascade');
+            $table->foreign('socio_id')->references('id')->on('socios')->onDelete('cascade');
             $table->foreign('concepto_id')->references('id')->on('conceptos')->onDelete('cascade');
             $table->foreign('tipo_registro_contable_id')->references('id')->on('tipos_registro_contable')->onDelete('cascade');
             $table->foreign('cuenta_id')->references('id')->on('cuentas')->onDelete('cascade');

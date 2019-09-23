@@ -26,7 +26,7 @@ class CreateRegistroContablesTable extends Migration
             $table->unsignedInteger('cuenta_id');
             $table->unsignedInteger('asociado_id')->nullable();
             $table->unsignedInteger('usuario_id');
-            $table->string('rut')->nullable();
+            $table->unsignedInteger('socio_id')->nullable();
             $table->timestamps();
         });
     }

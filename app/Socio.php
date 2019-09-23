@@ -4,6 +4,7 @@ namespace App;
 
 use App\Prestamo;
 use App\EstudioRealizadoSocio;
+use App\EstudioRealizado;
 use App\Comuna;
 use App\Ciudad;
 use App\Sede;
@@ -37,6 +38,157 @@ class Socio extends Model
     ];
 
     /**
+     * scope busqueda por rut
+     */
+    public function scopeRut($query, $rut)
+    {
+        if ($rut) {
+            return $query->orWhere('rut', 'LIKE', "%$rut%");
+        }
+    }
+    /**
+     * scope busqueda por nombre 1
+     */
+    public function scopeNombre1($query, $nombre1)
+    {
+        if ($nombre1) {
+            return $query->orWhere('nombre1', 'LIKE', "%$nombre1%");
+        }
+    }
+    /**
+     * scope busqueda por nombre 2
+     */
+    public function scopeNombre2($query, $nombre2)
+    {
+        if ($nombre2) {
+            return $query->orWhere('nombre2', 'LIKE', "%$nombre2%");
+        }
+    }
+    /**
+     * scope busqueda por apellido 1
+     */
+    public function scopeApellido1($query, $apellido1)
+    {
+        if ($apellido1) {
+            return $query->orWhere('apellido1', 'LIKE', "%$apellido1%");
+        }
+    }
+    /**
+     * scope busqueda por apellido 2
+     */
+    public function scopeApellido2($query, $apellido2)
+    {
+        if ($apellido2) {
+            return $query->orWhere('apellido2', 'LIKE', "%$apellido2%");
+        }
+    }
+
+    /**
+     * Modificador de comuna
+     */
+    public function getComunaIdAttribute($valor)
+    {
+        $comuna_id = $valor;
+        $comuna = Comuna::findOrFail($comuna_id);
+        $valor = $comuna->nombre;
+        return $valor;
+    }
+
+    /**
+     * Modificador de ciudad
+     */
+    public function getCiudadIdAttribute($valor)
+    {
+        $ciudad_id = $valor;
+        $ciudad = Ciudad::findOrFail($ciudad_id);
+        $valor = $ciudad->nombre;
+        return $valor;
+    }
+    /**
+     * Modificador de sedes
+     */
+    public function getSedeIdAttribute($valor)
+    {
+        $sede_id = $valor;
+        $sede = Sede::findOrFail($sede_id);
+        $valor = $sede->nombre;
+        return $valor;
+    }
+    /**
+     * Modificador de areas
+     */
+    public function getAreaIdAttribute($valor)
+    {
+        $area_id = $valor;
+        $area = Area::findOrFail($area_id);
+        $valor = $area->nombre;
+        return $valor;
+    }
+
+    /**
+     * Modificador de cargos
+     */
+    public function getCargoIdAttribute($valor)
+    {
+        $cargo_id = $valor;
+        $cargo = Cargo::findOrFail($cargo_id);
+        $valor = $cargo->nombre;
+        return $valor;
+    }
+    /**
+     * Modificador de estado socio
+     */
+    public function getEstadoSocioIdAttribute($valor)
+    {
+        $estado_id = $valor;
+        $estado = EstadoSocio::findOrFail($estado_id);
+        $valor = $estado->nombre;
+        return $valor;
+    }
+    /**
+     * Modificador de nacionalidad
+     */
+    public function getNacionalidadIdAttribute($valor)
+    {
+        $nacionalidad_id = $valor;
+        $nacionalidad = Nacionalidad::findOrFail($nacionalidad_id);
+        $valor = $nacionalidad->nombre;
+        return $valor;
+    }
+
+    /**
+     * Modificador de rut
+     */
+    public function getRutAttribute($valor)
+    {
+        return formatoRut($valor);
+    }
+
+    /**
+     * Modificador de fecha de nacimiento
+     */
+    public function getFechaNacAttribute($valor)
+    {
+        return formatoFecha($valor);
+    }
+
+    /**
+     * Modificador de fecha pucv
+     */
+    public function getFechaPucvAttribute($valor)
+    {
+        return formatoFecha($valor);
+    }
+
+    /**
+     * Modificador de fecha sind1
+     */
+    public function getFechaSind1Attribute($valor)
+    {
+        return formatoFecha($valor);
+    }
+
+    /**
      * Relación 
      */
     public function prestamos()
@@ -52,6 +204,13 @@ class Socio extends Model
         return $this->hasMany('App\EstudioRealizadoSocio');
     }
 
+    /**
+     * Relación 
+     */
+    public function estudios_realizados()
+    {
+        return $this->hasManyThrough('App\EstudioRealizado', 'App\EstudioRealizadoSocio');
+    }
     /**
      * Relación 
      */

@@ -21,7 +21,7 @@ class RegistrosContablesTableSeeder extends Seeder
             'tipo_registro_contable_id' => 1,
             'cuenta_id' => 2,
             'asociado_id' => null,
-            'rut' => '111111111'
+            'socio_id' => 1
         ]);
         App\RegistroContable::create([
             'fecha' => '2015-11-20',
@@ -33,7 +33,7 @@ class RegistrosContablesTableSeeder extends Seeder
             'tipo_registro_contable_id' => 1,
             'cuenta_id' => 2,
             'asociado_id' => null,
-            'rut' => '111111111'
+            'socio_id' => 1
         ]);
     }
 }

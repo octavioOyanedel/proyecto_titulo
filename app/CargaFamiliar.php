@@ -17,8 +17,19 @@ class CargaFamiliar extends Model
     * @var array
     */
     protected $fillable = [
-        'rut','nombre1','nombre2','apellido1','apellido2','fecha_nac','rut_socio','parentesco_id',
+        'rut','nombre1','nombre2','apellido1','apellido2','fecha_nac','socio_id','parentesco_id',
     ];
+
+    /**
+     * Modificador de parentescos
+     */
+    public function getParentescoIdAttribute($value)
+    {
+        $parentesco_id = $value;
+        $parentesco = Parentesco::findOrFail($parentesco_id);
+        $value = $parentesco->nombre;
+        return $value;
+    }
 
     /**
      * Relación 

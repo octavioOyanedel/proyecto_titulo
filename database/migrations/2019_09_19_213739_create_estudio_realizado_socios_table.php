@@ -16,7 +16,8 @@ class CreateEstudioRealizadoSociosTable extends Migration
         Schema::create('estudios_realizados_socios', function (Blueprint $table) {
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
-            $table->string('rut');
+            $table->increments('id');
+            $table->unsignedInteger('socio_id');
             $table->unsignedInteger('estudio_realizado_id');
             $table->timestamps();
         });

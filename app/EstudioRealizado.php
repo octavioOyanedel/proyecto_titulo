@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Socio;
 use App\Titulo;
 use App\Institucion;
 use App\GradoAcademico;
@@ -20,8 +21,52 @@ class EstudioRealizado extends Model
     * @var array
     */
     protected $fillable = [
-        'rut','titulo_id','institucion_id','grado_academico_id','estado_grado_academico_id',
+        'titulo_id','institucion_id','grado_academico_id','estado_grado_academico_id',
     ];
+
+    /**
+     * Modificador de titulo
+     */
+    public function getTituloIdAttribute($value)
+    {
+        $titulo_id = $value;
+        $titulo = Titulo::findOrFail($titulo_id);
+        $value = $titulo->nombre;
+        return $value;
+    }
+
+    /**
+     * Modificador de institucion
+     */
+    public function getInstitucionIdAttribute($value)
+    {
+        $institucion_id = $value;
+        $institucion = Institucion::findOrFail($institucion_id);
+        $value = $institucion->nombre;
+        return $value;
+    }
+
+    /**
+     * Modificador de grado academico
+     */
+    public function getGradoAcademicoIdAttribute($value)
+    {
+        $grado_academico_id = $value;
+        $grado_academico = GradoAcademico::findOrFail($grado_academico_id);
+        $value = $grado_academico->nombre;
+        return $value;
+    }
+
+    /**
+     * Modificador de grado academico
+     */
+    public function getEstadoGradoAcademicoIdAttribute($value)
+    {
+        $estado_grado_academico_id = $value;
+        $estado_grado_academico = EstadoGradoAcademico::findOrFail($estado_grado_academico_id);
+        $value = $estado_grado_academico->nombre;
+        return $value;
+    }
 
     /**
      * Relación 
@@ -58,8 +103,16 @@ class EstudioRealizado extends Model
     /**
      * Relación 
      */
-    public function estudios_realizados_socio()
+    public function estudio_realizado_socio()
     {
-        return $this->BelongsToMany('App\EstudioRealizadoSocio');
+        return $this->BelongsTo('App\EstudioRealizadoSocio');
+    } 
+
+    /**
+     * Relación 
+     */
+    public function socio()
+    {
+        return $this->BelongsTo('App\Socio');
     } 
 }
