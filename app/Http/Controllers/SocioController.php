@@ -10,7 +10,6 @@ use App\EstadoSocio;
 use App\Nacionalidad;
 use App\Prestamo;
 use App\CargaFamiliar;
-use App\EstudioRealizadoSocio;
 use Illuminate\Http\Request;
 
 class SocioController extends Controller
@@ -57,10 +56,9 @@ class SocioController extends Controller
      * @param  \App\Socio  $socio
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Socio $socio)
     {
 
-        $socio = Socio::findOrFail($id);
         $prestamos = $socio->prestamos()->simplePaginate(10);
         $estudios = $socio->estudios_realizados_socios;
         $cargas = $socio->cargas_familiares;
@@ -75,7 +73,12 @@ class SocioController extends Controller
      */
     public function edit(Socio $socio)
     {
-        //
+        $comunas = Comuna::orderBy('nombre', 'ASC')->get();
+        $sedes = Sede::orderBy('nombre', 'ASC')->get();
+        $cargos = Cargo::orderBy('nombre', 'ASC')->get();
+        $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
+        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();
+        return view('sind1.socios.edit', compact('socio','cargos', 'estados', 'nacionalidades', 'comunas', 'sedes'));    
     }
 
     /**

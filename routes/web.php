@@ -18,4 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('/socios', 'SocioController')->middleware('auth');
+Route::get('/busqueda', 'BuscarController@busquedaAvanzada')->name('buscar')->middleware('auth');

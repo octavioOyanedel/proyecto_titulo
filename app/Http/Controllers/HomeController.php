@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Socio;
+use App\EstadoSocio;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
         $rut = $request->get('search');
         $nombre1 = $request->get('search');
         $nombre2 = $request->get('search');
@@ -36,6 +38,6 @@ class HomeController extends Controller
         ->apellido1($apellido1)
         ->apellido2($apellido2)
         ->simplePaginate(10);
-        return view('home', compact('socios'));
+        return view('home', compact('socios','estados'));
     }
 }
