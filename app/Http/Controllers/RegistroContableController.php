@@ -6,6 +6,7 @@ use App\RegistroContable;
 use App\Cuenta;
 use App\Concepto;
 use App\Socio;
+use App\Asociado;
 use App\TipoRegistroContable;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,8 @@ class RegistroContableController extends Controller
         $cuentas = Cuenta::all();
         $conceptos = Concepto::where('id','<>',3)->orderBy('nombre')->get();
         $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
-        return view('sind1.contables.create', compact('tipos_registro','cuentas','conceptos','socios'));
+        $asociados = Asociado::orderBy('concepto')->get();
+        return view('sind1.contables.create', compact('tipos_registro','cuentas','conceptos','socios','asociados'));
     }
 
     /**

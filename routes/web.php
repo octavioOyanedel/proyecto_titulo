@@ -25,3 +25,4 @@ Route::get('/busqueda', 'BuscarController@busquedaAvanzada')->name('buscar')->mi
 Route::resource('/prestamos', 'PrestamoController')->middleware('auth');
 
 Route::resource('/contables', 'RegistroContableController')->middleware('auth');
+Route::get('/conciliacion', 'ConciliacionController@conciliacion')->name('conciliacion')->middleware('auth');

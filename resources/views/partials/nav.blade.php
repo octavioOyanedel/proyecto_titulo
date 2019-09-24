@@ -62,8 +62,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('contables.create') }}">Registrar</a>
                 <a class="dropdown-item" href="{{ route('contables.index') }}">Listar</a>
-                <a class="dropdown-item" href="#">Ver registros por mes</a>
-                <a class="dropdown-item" href="#">Ver registros por cuentas</a>
+                <a class="dropdown-item" href="{{ route('conciliacion') }}">Conciliación bancaria</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
                 </div>
