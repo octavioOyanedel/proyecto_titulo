@@ -19,6 +19,28 @@ class Cuenta extends Model
     ];
 
     /**
+     * Modificador de tipo cuenta
+     */
+    public function getTipoCuentaIdAttribute($valor)
+    {
+        $tipo_cuenta_id = $valor;
+        $tipo_cuenta = TipoCuenta::findOrFail($tipo_cuenta_id);
+        $valor = $tipo_cuenta->nombre;
+        return $valor;
+    }
+
+    /**
+     * Modificador de banco
+     */
+    public function getBancoIdAttribute($valor)
+    {
+        $banco_id = $valor;
+        $banco = Banco::findOrFail($banco_id);
+        $valor = $banco->nombre;
+        return $valor;
+    }
+
+    /**
      * Relación 
      */
     public function tipo_cuenta()

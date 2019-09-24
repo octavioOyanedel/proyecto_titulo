@@ -64,6 +64,6 @@ class User extends Authenticatable
      */
     public function registros_contables()
     {
-        return $this->belongsToMany('App\RegistroContable');
+        return $this->hasMany('App\RegistroContable');
     }
 }

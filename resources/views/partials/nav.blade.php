@@ -60,7 +60,7 @@
                     Registros Contables
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Registrar</a>
+                <a class="dropdown-item" href="{{ route('contables.create') }}">Registrar</a>
                 <a class="dropdown-item" href="{{ route('contables.index') }}">Listar</a>
                 <a class="dropdown-item" href="#">Ver registros por mes</a>
                 <a class="dropdown-item" href="#">Ver registros por cuentas</a>

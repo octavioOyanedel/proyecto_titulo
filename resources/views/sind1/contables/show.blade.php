@@ -13,15 +13,21 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h4>Información préstamo</h4>
-                    {{ dd($registro) }}
-                    <div class="table-responsive">                       
+                    <h4>Información registro contable</h4>
+                    <div class="table-responsive">                     
                         <table class="table table-hover">
                             <thead></thead>
                             <tbody>
-                                <th>Registrado por</th>
-                                <td class="text-center"></td>
-                                <td class="text-center">{{ $registro->usuario->nombre1 }} {{ $registro->usuario->nombre2 }} {{ $registro->usuario->apellido1 }} {{ $registro->usuario->apellido2 }}</td>
+                                <tr><th>Registrado por</th>
+                                <td>{{ $registroContable->usuario->nombre1 }} {{ $registroContable->usuario->nombre2 }} {{ $registroContable->usuario->apellido1 }} {{ $registroContable->usuario->apellido1 }}</td></tr>
+                                <tr><th>Fecha de solicitud</th><td>{{ $registroContable->fecha }}</td></tr>
+                                <tr><th>Tipo de registro</th><td>{{ $registroContable->tipo_registro_contable_id }}</td></tr>
+                                <tr><th>Concepto</th><td>{{ $registroContable->concepto_id }}, {{ $registroContable->socio->nombre1 }} {{ $registroContable->socio->apellido2 }} {{ $registroContable->asociado_id }}</td></tr>
+                                <tr><th>Número de registro</th><td>{{ $registroContable->numero_registro }}</td></tr>
+                                <tr><th>Cheque</th><td>{{ $registroContable->cheque }}</td></tr>
+                                <tr><th>Monto</th><td>{{ $registroContable->monto }}</td></tr>
+                                <tr><th>Cuenta</th><td>{{ $registroContable->cuenta->tipo_cuenta_id }} N° {{ $registroContable->cuenta->numero }}</td></tr>
+                                <tr><th>Banco</th><td> {{ $registroContable->cuenta->banco_id }}</td></tr>
                             </tbody>
                         </table>
                     </div>

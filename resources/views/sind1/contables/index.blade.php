@@ -28,9 +28,8 @@
                             </thead>
                             <tbody>
                                 @foreach($registros as $r)
-                         
                                     <tr>
-                                        <td class="text-center" scope="row" title="Ver detalle registro contable"><a class="text-secondary" href="{{ route('contables.show',$r) }}"><span>@svg('ver')</span></a></td>
+                                        <td class="text-center" scope="row" title="Ver detalle registro contable"><a class="text-primary" href="{{ route('contables.show',['id' => $r->id]) }}"><span>@svg('ver')</span></a></td>
                                         <td class="text-center">{{ $r->fecha }}</td>
                                         <td class="text-center">{{ $r->tipo_registro_contable_id }}</td>
                                         <td class="text-center">

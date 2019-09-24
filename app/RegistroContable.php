@@ -64,8 +64,7 @@ class RegistroContable extends Model
     }
 
     /**
-     * Relación 
-     */
+     * Relación      */
     public function concepto()
     {
         return $this->hasOne('App\Concepto');
@@ -92,7 +91,7 @@ class RegistroContable extends Model
      */
     public function usuario()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
 
     /**

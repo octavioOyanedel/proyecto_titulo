@@ -22,7 +22,7 @@
                                 <tr>
                                     <th>Nombre</th><td>
                                         {{ $socio->nombre1 }} {{ $socio->nombre2 }} {{ $socio->apellido1 }} {{ $socio->apellido2 }}
-                                    </td>
+                                    </td></tr> 
                                     <tr><th>Rut</th><td>{{ $socio->rut }}</td></tr>
                                     <tr><th>Género</th><td>{{ $socio->genero }}</td></tr>
                                     <tr><th>Fecha nacimiento</th><td>{{ $socio->fecha_nac }}</td></tr>
@@ -40,7 +40,6 @@
                                     <tr><th>Cargo</th><td>{{ $socio->cargo_id }}</td></tr>
                                     <tr><th>Situación</th><td>{{ $socio->estado_socio_id }}</td></tr>
                                     <tr><th>Nacionalidad</th><td>{{ $socio->nacionalidad_id }}</td></tr>
-                                </tr> 
                             </tbody>
                         </table>                         
                     </div>

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\RegistroContable;
+use App\Cuenta;
+use App\Concepto;
+use App\Socio;
+use App\TipoRegistroContable;
 use Illuminate\Http\Request;
 
 class RegistroContableController extends Controller
@@ -25,7 +29,11 @@ class RegistroContableController extends Controller
      */
     public function create()
     {
-        //
+        $socios = Socio::orderBy('apellido1')->get();
+        $cuentas = Cuenta::all();
+        $conceptos = Concepto::where('id','<>',3)->orderBy('nombre')->get();
+        $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
+        return view('sind1.contables.create', compact('tipos_registro','cuentas','conceptos','socios'));
     }
 
     /**
@@ -45,13 +53,11 @@ class RegistroContableController extends Controller
      * @param  \App\RegistroContable  $registroContable
      * @return \Illuminate\Http\Response
      */
-    public function show(RegistroContable $registro_contable)
+    public function show($id)
     {
-        $registro = RegistroContable::findOrFail($registro_contable);
-        //dd($registro_contable);
-        return view('sind1.contables.show', compact('registro'));
+        $registroContable = RegistroContable::findOrFail($id);
+        return view('sind1.contables.show', compact('registroContable'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *

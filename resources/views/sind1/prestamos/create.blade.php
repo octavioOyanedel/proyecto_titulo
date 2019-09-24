@@ -124,8 +124,7 @@
                                     {{ __('Simular') }}
                                 </button>
                             </div>
-                        </div>                                                                                                                                                                                                                                                                                                                      
-                        <!-- fin form -->                                                                                                                 
+                        </div>                                                                                                                 <!-- fin form -->
                     </form>
                 </div>
             </div>
