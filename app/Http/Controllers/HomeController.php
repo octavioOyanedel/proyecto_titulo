@@ -31,12 +31,20 @@ class HomeController extends Controller
         $nombre2 = $request->get('search');
         $apellido1 = $request->get('search');
         $apellido2 = $request->get('search');
+        $celular = $request->get('search');
+        $anexo = $request->get('search');
+        $correo = $request->get('search');
+        $direccion = $request->get('search');
         $socios = Socio::orderBy('fecha_sind1', 'DESC')
         ->rut($rut)
         ->nombre1($nombre1)
         ->nombre2($nombre2)
         ->apellido1($apellido1)
         ->apellido2($apellido2)
+        ->celular($celular)
+        ->anexo($anexo)
+        ->correo($correo)
+        ->direccion($direccion)
         ->simplePaginate(10);
         return view('home', compact('socios','estados'));
     }

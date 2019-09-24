@@ -18,6 +18,33 @@ class Cuota extends Model
     ];
 
     /**
+     * Modificador de interes
+     */
+    public function getEstadoDeudaIdAttribute($valor)
+    {
+        $estado_deuda_id = $valor;
+        $estado_deuda = EstadoDeuda::findOrFail($estado_deuda_id);
+        $valor = $estado_deuda->nombre;
+        return $valor;
+    }
+
+    /**
+     * Modificador de fecha de nacimiento
+     */
+    public function getFechaPagoAttribute($valor)
+    {
+        return formatoFecha($valor);
+    }
+
+    /**
+     * Modificador de fecha sind1
+     */
+    public function getMontoAttribute($valor)
+    {
+        return formatoMoneda($valor);
+    }
+
+    /**
      * Relación 
      */
     public function estado_deuda()

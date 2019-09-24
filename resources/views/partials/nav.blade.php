@@ -48,8 +48,8 @@
                     Préstamos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Incorporar</a>
+                <a class="dropdown-item" href="{{ route('prestamos.create') }}">Solicitar</a>
+                <a class="dropdown-item" href="{{ route('prestamos.index') }}">Listar</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
                 </div>
@@ -60,8 +60,10 @@
                     Registros Contables
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Registrar</a>
+                <a class="dropdown-item" href="{{ route('contables.index') }}">Listar</a>
+                <a class="dropdown-item" href="#">Ver registros por mes</a>
+                <a class="dropdown-item" href="#">Ver registros por cuentas</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
                 </div>
@@ -76,12 +78,26 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-        </li>             
+        </li>  
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ayuda
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Buscar</a>
+          <a class="dropdown-item" href="#">Incorporar socio</a>
+          <a class="dropdown-item" href="#">Solicitar préstamo</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>         
       </ul>
 
       <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('home') }}">
-        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Nombre, rut, apellido" aria-label="Search">
+        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
       </form>
+
     </div>
   </nav>

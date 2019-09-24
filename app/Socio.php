@@ -73,6 +73,7 @@ class Socio extends Model
             return $query->orWhere('apellido1', 'LIKE', "%$apellido1%");
         }
     }
+
     /**
      * scope busqueda por apellido 2
      */
@@ -80,6 +81,46 @@ class Socio extends Model
     {
         if ($apellido2) {
             return $query->orWhere('apellido2', 'LIKE', "%$apellido2%");
+        }
+    }
+
+    /**
+     * scope busqueda por celular
+     */
+    public function scopeCelular($query, $celular)
+    {
+        if ($celular) {
+            return $query->orWhere('celular', 'LIKE', "%$celular%");
+        }
+    }
+
+    /**
+     * scope busqueda por anexo
+     */
+    public function scopeAnexo($query, $anexo)
+    {
+        if ($anexo) {
+            return $query->orWhere('anexo', 'LIKE', "%$anexo%");
+        }
+    }
+
+    /**
+     * scope busqueda por anexo
+     */
+    public function scopeCorreo($query, $correo)
+    {
+        if ($correo) {
+            return $query->orWhere('correo', 'LIKE', "%$correo%");
+        }
+    }
+
+    /**
+     * scope busqueda por anexo
+     */
+    public function scopeDireccion($query, $direccion)
+    {
+        if ($direccion) {
+            return $query->orWhere('direccion', 'LIKE', "%$direccion%");
         }
     }
 

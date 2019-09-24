@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Prestamo;
+use App\FormaPago;
+use App\Interes;
 use Illuminate\Http\Request;
 
 class PrestamoController extends Controller
@@ -14,7 +16,9 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        //
+        $prestamos = Prestamo::orderBy('fecha_solicitud', 'DESC')->simplePaginate(10);
+        $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
+        return view('sind1.prestamos.index', compact('prestamos','formas_pago'));       
     }
 
     /**
@@ -24,7 +28,8 @@ class PrestamoController extends Controller
      */
     public function create()
     {
-        //
+        $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
+        return view('sind1.prestamos.create', compact('formas_pago'));
     }
 
     /**
@@ -46,7 +51,8 @@ class PrestamoController extends Controller
      */
     public function show(Prestamo $prestamo)
     {
-        //
+        $interes = Interes::findOrFail($prestamo->getOriginal('interes_id'));
+        return view('sind1.prestamos.show', compact('prestamo','interes'));        
     }
 
     /**

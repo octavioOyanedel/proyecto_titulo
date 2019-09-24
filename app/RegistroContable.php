@@ -8,6 +8,7 @@ use App\RegistroContableUsuario;
 use App\Cuenta;
 use App\Asociado;
 use App\Socio;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class RegistroContable extends Model
@@ -23,6 +24,44 @@ class RegistroContable extends Model
     protected $fillable = [
         'fecha','numero_registro','forma_pago','monto','concepto_id','tipo_registro_contable_id','cuenta_id','asociado_id','socio_id','usuario_id',
     ];
+
+    /**
+     * Modificador de tipo de registro
+     */
+    public function getTipoRegistroContableIdAttribute($valor)
+    {
+        $tipo_registro_contable_id = $valor;
+        $tipo_registro_contable = TipoRegistroContable::findOrFail($tipo_registro_contable_id);
+        $valor = $tipo_registro_contable->nombre;
+        return $valor;
+    }
+
+    /**
+     * Modificador de concepto
+     */
+    public function getConceptoIdAttribute($valor)
+    {
+        $concepto_id = $valor;
+        $concepto = Concepto::findOrFail($concepto_id);
+        $valor = $concepto->nombre;
+        return $valor;
+    }
+
+    /**
+     * Modificador de fecha 
+     */
+    public function getFechaAttribute($valor)
+    {
+        return formatoFecha($valor);
+    }
+
+    /**
+     * Modificador de monto
+     */
+    public function getMontoAttribute($valor)
+    {
+        return formatoMoneda($valor);
+    }
 
     /**
      * Relación 
@@ -45,8 +84,17 @@ class RegistroContable extends Model
      */
     public function socio()
     {
-        return $this->hasOne('App\Socio');
+        return $this->belongsTo('App\Socio');
     }
+
+    /**
+     * Relación 
+     */
+    public function usuario()
+    {
+        return $this->hasOne('App\User');
+    }
+
     /**
      * Relación 
      */
@@ -61,6 +109,6 @@ class RegistroContable extends Model
      */
     public function cuenta()
     {
-        return $this->hasOne('App\Cuenta');
+        return $this->belongsTo('App\Cuenta');
     } 
 }

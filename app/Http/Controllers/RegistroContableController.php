@@ -14,7 +14,8 @@ class RegistroContableController extends Controller
      */
     public function index()
     {
-        //
+        $registros = RegistroContable::orderBy('fecha','DESC')->simplePaginate(10);
+        return view('sind1.contables.index', compact('registros'));       
     }
 
     /**
@@ -44,9 +45,11 @@ class RegistroContableController extends Controller
      * @param  \App\RegistroContable  $registroContable
      * @return \Illuminate\Http\Response
      */
-    public function show(RegistroContable $registroContable)
+    public function show(RegistroContable $registro_contable)
     {
-        //
+        $registro = RegistroContable::findOrFail($registro_contable);
+        //dd($registro_contable);
+        return view('sind1.contables.show', compact('registro'));
     }
 
     /**

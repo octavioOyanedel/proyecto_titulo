@@ -3,9 +3,33 @@
     /**
      * Formato moneda
      */
+    function calculoTotal($prestamo, $interes)
+    {
+        return $prestamo + ($prestamo * ($interes / 100));
+    }
+
+    /**
+     * Formato moneda
+     */
+    function calculoSaldo($prestamo, $interes)
+    {
+        return $prestamo * ($interes / 100);
+    }
+
+    /**
+     * Formato moneda
+     */
     function formatoMoneda($valor)
     {
         return '$'.number_format($valor, 0, 3, '.');
+    }
+
+    /**
+     * Formato interes
+     */
+    function formatoInteres($valor)
+    {
+        return $valor.'%';
     }
 
     /**

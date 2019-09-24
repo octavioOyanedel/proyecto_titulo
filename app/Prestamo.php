@@ -39,7 +39,7 @@ class Prestamo extends Model
         $interes_id = $valor;
         $interes = Interes::findOrFail($interes_id);
         $valor = $interes->cantidad;
-        return $valor;
+        return formatoInteres($valor);
     }
 
     /**
@@ -54,7 +54,7 @@ class Prestamo extends Model
     }
 
     /**
-     * Modificador de fecha sind1
+     * Modificador de monto
      */
     public function getMontoAttribute($valor)
     {
