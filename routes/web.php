@@ -25,4 +25,8 @@ Route::get('/busqueda', 'BuscarController@busquedaAvanzada')->name('buscar')->mi
 Route::resource('/prestamos', 'PrestamoController')->middleware('auth');
 
 Route::resource('/contables', 'RegistroContableController')->middleware('auth');
-Route::get('/conciliacion', 'ConciliacionController@conciliacion')->name('conciliacion')->middleware('auth');
+
+Route::get('/crear-conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
+Route::post('/mostrar-conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
+
+Route::get('/mantenedor','MantenedorController@mantenedor')->name('mantenedor')->middleware('auth');

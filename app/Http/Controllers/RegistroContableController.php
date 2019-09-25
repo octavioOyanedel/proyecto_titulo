@@ -60,6 +60,7 @@ class RegistroContableController extends Controller
         $registroContable = RegistroContable::findOrFail($id);
         return view('sind1.contables.show', compact('registroContable'));
     }
+    
     /**
      * Show the form for editing the specified resource.
      *

@@ -35,5 +35,29 @@ class RegistrosContablesTableSeeder extends Seeder
             'asociado_id' => null,
             'socio_id' => 1
         ]);
+        App\RegistroContable::create([
+            'fecha' => '2015-11-07',
+            'numero_registro' => 455,
+            'cheque' => 887889990,
+            'monto' => 400000,
+            'usuario_id' => 1,
+            'concepto_id' => 2,
+            'tipo_registro_contable_id' => 2,
+            'cuenta_id' => 1,
+            'asociado_id' => null,
+            'socio_id' => 10
+        ]);
+        App\RegistroContable::create([
+            'fecha' => '2015-11-11',
+            'numero_registro' => 466,
+            'cheque' => null,
+            'monto' => 400000,
+            'usuario_id' => 1,
+            'concepto_id' => 1,
+            'tipo_registro_contable_id' => 1,
+            'cuenta_id' => 1,
+            'asociado_id' => null,
+            'socio_id' => 10
+        ]);
     }
 }

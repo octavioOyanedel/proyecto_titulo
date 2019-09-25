@@ -1,6 +1,14 @@
 <?php
 
     /**
+     * formato fecha para busqueda
+     */
+    function obtenerFechaConciliacion($fecha)
+    {
+        return date('Y-m-d',strtotime($fecha));
+    }
+
+    /**
      * Formato moneda
      */
     function calculoTotal($prestamo, $interes)

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -17,6 +17,7 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Actualizar datos</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
@@ -29,10 +30,6 @@
             </div>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Socios
@@ -41,6 +38,7 @@
                 <a class="dropdown-item" href="{{ route('home') }}">Listar</a>
                 <a class="dropdown-item" href="{{ route('socios.create') }}">Incorporar</a>
                 <a class="dropdown-item" href="{{ route('buscar') }}">Búsqueda avanzada</a>
+            </div>
         </li>
 
         <li class="nav-item dropdown">
@@ -48,10 +46,8 @@
                     Préstamos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('prestamos.create') }}">Solicitar</a>
-                <a class="dropdown-item" href="{{ route('prestamos.index') }}">Listar</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="{{ route('prestamos.create') }}">Solicitar</a>
+                  <a class="dropdown-item" href="{{ route('prestamos.index') }}">Listar</a>
                 </div>
         </li>
 
@@ -60,22 +56,18 @@
                     Registros Contables
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('contables.create') }}">Registrar</a>
-                <a class="dropdown-item" href="{{ route('contables.index') }}">Listar</a>
-                <a class="dropdown-item" href="{{ route('conciliacion') }}">Conciliación bancaria</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="{{ route('contables.create') }}">Registrar</a>
+                  <a class="dropdown-item" href="{{ route('contables.index') }}">Listar</a>
+                  <a class="dropdown-item" href="{{ route('crear_conciliacion') }}">Conciliación bancaria</a>
                 </div>
-        </li>  
+
         <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Administración
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Historial de acciones</a>
+                  <a class="dropdown-item" href="{{ route('mantenedor') }}">Mantenedores</a>
                 </div>
         </li>  
         
@@ -84,11 +76,9 @@
               Ayuda
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Buscar</a>
-          <a class="dropdown-item" href="#">Incorporar socio</a>
-          <a class="dropdown-item" href="#">Solicitar préstamo</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#">Buscar</a>
+            <a class="dropdown-item" href="#">Incorporar socio</a>
+            <a class="dropdown-item" href="#">Solicitar préstamo</a>
           </div>
         </li>         
       </ul>
