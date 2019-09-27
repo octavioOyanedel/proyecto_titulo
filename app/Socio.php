@@ -145,6 +145,7 @@ class Socio extends Model
         $valor = $ciudad->nombre;
         return $valor;
     }
+    
     /**
      * Modificador de sedes
      */
@@ -155,6 +156,7 @@ class Socio extends Model
         $valor = $sede->nombre;
         return $valor;
     }
+
     /**
      * Modificador de areas
      */

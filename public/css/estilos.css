@@ -3,3 +3,26 @@
 	overflow: hidden;
 	white-space: nowrap;
 }
+
+#tabla-areas_filter input, #tabla-areas_length select{
+	margin-top:  3px;
+	margin-right:  3px;
+	outline: none;
+    padding: .375rem .75rem;
+    font-size: .9rem;
+    line-height: 1.6;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#tabla-areas_filter input:focus, #tabla-areas_length select:focus{
+    color: #495057;
+    background-color: #fff;
+    border-color: #a1cbef;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(52,144,220,.25);
+}

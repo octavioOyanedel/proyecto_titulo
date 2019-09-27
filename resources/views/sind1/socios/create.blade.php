@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -223,36 +223,9 @@
                             @enderror
                             </div>
                         </div>
-                        <!-- Sede -->
-                        <div class="form-group row">
-                                <label for="sede_id" class="col-md-4 col-form-label text-md-right">{{ __('Sede') }}</label>
-                                <div class="col-md-6">
-                                <select id="sede_id" class="default-selects form-control @error('sede_id') is-invalid @enderror" name="sede_id" required autocomplete="sede_id" autofocus>
-                                    <option selected="true" value="">Seleccione...</option>
-                                    @foreach($sedes as $s)
-                                    <option value="{{ $s->id }}">{{ $s->nombre }}</option>
-                                    @endforeach
-                                    <option value="new">Nuevo...</option>
-                                </select>
-                                @error('sede_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>      
-                        <!-- Nueva sede -->
-                        <div class="form-group new-divs row d-none" id="new_div_central">
-                            <label for="nueva_sede" class="col-md-4 col-form-label text-md-right"><span class="bg-warning text-dark pl-2 pr-2 pt-1 pb-1 rounded"><b>Nueva sede</b></span></label>
-                            <div class="col-md-6">
-                                <input id="nueva_sede" type="text" class="new-inputs form-control @error('nueva_sede') is-invalid @enderror" name="nueva_sede" value="{{ old('nueva_sede') }}" required autocomplete="nueva_sede" autofocus>
-                                @error('nueva_sede')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>     
+                           
+                        @include('partials.components.elementos.sede')   
+
                         <!-- Área -->
                         <div class="form-group row">
                                 <label for="area_id" class="col-md-4 col-form-label text-md-right">{{ __('Área') }}</label>

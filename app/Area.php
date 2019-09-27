@@ -18,6 +18,17 @@ class Area extends Model
     ];
 
     /**
+     * Modificador de sedes
+     */
+    public function getSedeIdAttribute($valor)
+    {
+        $sede_id = $valor;
+        $sede = Sede::findOrFail($sede_id);
+        $valor = $sede->nombre;
+        return $valor;
+    }
+
+    /**
      * Relación 
      */
     public function socio()

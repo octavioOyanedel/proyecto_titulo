@@ -60,17 +60,22 @@
                   <a class="dropdown-item" href="{{ route('contables.index') }}">Listar</a>
                   <a class="dropdown-item" href="{{ route('crear_conciliacion') }}">Conciliación bancaria</a>
                 </div>
-
+ 
         <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Administración
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Historial de acciones</a>
-                  <a class="dropdown-item" href="{{ route('mantenedor') }}">Mantenedores</a>
-                </div>
-        </li>  
-        
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Mantenedor
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ route('mantenedor_socios') }}">Socios</a>
+            <a class="dropdown-item" href="#">Préstamos</a>
+            <a class="dropdown-item" href="#">Registro contable</a>
+          </div>
+        </li>   
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Historial</a>
+        </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Ayuda
@@ -80,7 +85,8 @@
             <a class="dropdown-item" href="#">Incorporar socio</a>
             <a class="dropdown-item" href="#">Solicitar préstamo</a>
           </div>
-        </li>         
+        </li>
+
       </ul>
 
       <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('home') }}">

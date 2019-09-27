@@ -29,4 +29,4 @@ Route::resource('/contables', 'RegistroContableController')->middleware('auth');
 Route::get('/crear-conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar-conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
 
-Route::get('/mantenedor','MantenedorController@mantenedor')->name('mantenedor')->middleware('auth');
+Route::get('/mantenedor-socios','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
