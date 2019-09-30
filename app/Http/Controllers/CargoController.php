@@ -24,7 +24,7 @@ class CargoController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.cargo.create');
     }
 
     /**

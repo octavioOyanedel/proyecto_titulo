@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Listado de socios (activos)</h3></div>
+                <div class="card-header"><h3 class="mb-0">Listado de socios</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,12 +14,12 @@
                         </div>
                     @endif
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="tabla-socios">
                             <thead>
                                 <tr>
-                                    <th class="text-center text-success" scope="col" title=""></th>
-                                    <th class="text-center text-success" scope="col" title=""></th>
-                                    <th class="text-center text-success" scope="col" title=""></th>
+                                    <th width="50" class="text-center text-success" scope="col" title=""></th>
+                                    <th width="50" class="text-center text-success" scope="col" title=""></th>
+                                    <th width="50" class="text-center text-success" scope="col" title=""></th>
                                     <th scope="col">Nombre</th>
                                     <th class="text-center" scope="col">Género</th>
                                     <th scope="col">Rut</th>
@@ -55,9 +55,7 @@
                             </tbody>
                         </table>                      
                     </div>
-                    <div class="mx-auto mt-4">
-                        {{ $socios->links() }}
-                    </div> 
+ 
                 </div>
             </div>
         </div>

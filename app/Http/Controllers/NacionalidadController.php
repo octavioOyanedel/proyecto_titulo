@@ -24,7 +24,7 @@ class NacionalidadController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.nacionalidades.create');
     }
 
     /**

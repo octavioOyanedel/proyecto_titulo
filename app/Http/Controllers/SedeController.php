@@ -24,7 +24,7 @@ class SedeController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.sede.create');
     }
 
     /**

@@ -1,5 +1,5 @@
 $(document).ready( function () {
-    $('#tabla-areas').DataTable({
+    $('#tabla-asociados').DataTable({
         "language": {
             "sProcessing":     "Procesando...",
             "sLengthMenu":     "Mostrar _MENU_ registros",

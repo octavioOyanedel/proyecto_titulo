@@ -12,7 +12,17 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/data_table.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_acentos.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_sedes.js') }}" defer></script>
     <script src="{{ asset('js/data_table_areas.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_cargos.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_estados.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_naciones.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_formas_pago.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_cuentas.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_conceptos.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_asociados.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_socios.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

@@ -24,7 +24,7 @@ class EstadoSocioController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.estado_socio.create');
     }
 
     /**

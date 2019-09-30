@@ -4,7 +4,26 @@
 	white-space: nowrap;
 }
 
-#tabla-areas_filter input, #tabla-areas_length select{
+#tabla-sedes_filter input, 
+#tabla-sedes_length select,
+#tabla-areas_filter input, 
+#tabla-areas_length select,
+#tabla-cargos_filter input, 
+#tabla-cargos_length select,
+#tabla-nacionalidades_filter input, 
+#tabla-nacionalidades_length select,
+#tabla-estados_filter input, 
+#tabla-estados_length select,
+#tabla-formas-pago_filter input, 
+#tabla-formas-pago_length select,
+#tabla-cuentas_filter input, 
+#tabla-cuentas_length select,
+#tabla-conceptos_filter input, 
+#tabla-conceptos_length select,
+#tabla-asociados_filter input, 
+#tabla-asociados_length select,
+#tabla-socios_filter input, 
+#tabla-socios_length select{
 	margin-top:  3px;
 	margin-right:  3px;
 	outline: none;
@@ -19,10 +38,33 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-#tabla-areas_filter input:focus, #tabla-areas_length select:focus{
+#tabla-sedes_filter input:focus, 
+#tabla-sedes_length select:focus,
+#tabla-areas_filter input:focus, 
+#tabla-areas_length select:focus,
+#tabla-cargos_filter input:focus, 
+#tabla-cargos_length select:focus,
+#tabla-nacionalidaes_filter input:focus, 
+#tabla-nacionalidaes_length select:focus,
+#tabla-estados_filter input:focus, 
+#tabla-estados_length select:focus
+#tabla-formas-pago_filter input:focus, 
+#tabla-formas-pago_length select:focus,
+#tabla-cuentas_filter input:focus, 
+#tabla-cuentas_length select:focus,
+#tabla-conceptos_filter input:focus, 
+#tabla-conceptos_length select:focus,
+#tabla-asociados_filter input:focus, 
+#tabla-asociados_length select:focus
+#tabla-socios_filter input:focus, 
+#tabla-socios_length select:focus{
     color: #495057;
     background-color: #fff;
     border-color: #a1cbef;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(52,144,220,.25);
 }
+
+.no-sort::after { display: none!important; }
+
+.no-sort { pointer-events: none!important; cursor: default!important; }

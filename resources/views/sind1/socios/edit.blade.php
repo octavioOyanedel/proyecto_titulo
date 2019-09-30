@@ -16,54 +16,15 @@
                     <!-- Formulario -->
                     <form method="POST" action="">
                         @csrf
-                        <!-- Nombre -->
-                        <div class="form-group row">
-                            <label for="nombre1" class="col-md-4 col-form-label text-md-right">{{ __('Primer nombre') }}</label>
-                            <div class="col-md-6">
-                                <input id="nombre1" type="text" class="form-control @error('nombre1') is-invalid @enderror" name="nombre1" value="{{ old('nombre1') == true ? old('nombre1') : $socio->nombre1 }}" autocomplete="nombre1" autofocus>
-                                @error('nombre1')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- Nombre 2 -->
-                        <div class="form-group row">
-                            <label for="nombre2" class="col-md-4 col-form-label text-md-right">{{ __('Segundo nombre') }}</label>
-                            <div class="col-md-6">
-                                <input id="nombre2" type="text" class="form-control @error('nombre2') is-invalid @enderror" name="nombre2" value="{{ old('nombre2') == true ? old('nombre2') : $socio->nombre2 }}" autocomplete="nombre2" autofocus>
-                                @error('nombre2')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>  
-                        <!-- Apellido -->
-                        <div class="form-group row">
-                            <label for="apellido1" class="col-md-4 col-form-label text-md-right">{{ __('Apellido paterno') }}</label>
-                            <div class="col-md-6">
-                                <input id="apellido1" type="text" class="form-control @error('apellido1') is-invalid @enderror" name="apellido1" value="{{ old('apellido1') == true ? old('apellido1') : $socio->apellido1 }}" autocomplete="apellido1" autofocus>
-                                @error('apellido1')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- Apellido 2-->
-                        <div class="form-group row">
-                            <label for="apellido2" class="col-md-4 col-form-label text-md-right">{{ __('Apellido materno') }}</label>
-                            <div class="col-md-6">
-                                <input id="apellido2" type="text" class="form-control @error('apellido2') is-invalid @enderror" name="apellido2" value="{{ old('apellido2') == true ? old('apellido2') : $socio->apellido2 }}" autocomplete="apellido2" autofocus>
-                                @error('apellido2')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
+
+                        @include('partials.components.elementos.nombre1') 
+
+                        @include('partials.components.elementos.nombre2') 
+
+                        @include('partials.components.elementos.apellido1')
+
+                        @include('partials.components.elementos.apellido2')
+                        
                         <!-- Rut -->
                         <div class="form-group row">
                             <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>

@@ -5,9 +5,8 @@
         <select id="sede_id" class="default-selects form-control @error('sede_id') is-invalid @enderror" name="sede_id" required autocomplete="sede_id" autofocus>
             <option selected="true" value="">Seleccione...</option>
             @foreach($sedes as $s)
-            <option value="{{ $s->id }}">{{ $s->nombre }}</option>
+                <option value="{{ $s->id }}">{{ $s->nombre }}</option>
             @endforeach
-            <option value="new">Nuevo...</option>
         </select>
         @error('sede_id')
         <span class="invalid-feedback" role="alert">

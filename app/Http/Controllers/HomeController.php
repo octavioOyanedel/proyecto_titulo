@@ -45,7 +45,7 @@ class HomeController extends Controller
         ->anexo($anexo)
         ->correo($correo)
         ->direccion($direccion)
-        ->simplePaginate(10);
+        ->get();
         return view('home', compact('socios','estados'));
     }
 }

@@ -67,8 +67,8 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ route('mantenedor_socios') }}">Socios</a>
-            <a class="dropdown-item" href="#">Préstamos</a>
-            <a class="dropdown-item" href="#">Registro contable</a>
+            <a class="dropdown-item" href="{{ route('mantenedor_prestamos') }}">Préstamos</a>
+            <a class="dropdown-item" href="{{ route('mantenedor_contables') }}">Registro contable</a>
           </div>
         </li>   
 

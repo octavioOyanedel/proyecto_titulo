@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use App\Sede;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -24,7 +25,8 @@ class AreaController extends Controller
      */
     public function create()
     {
-        //
+        $sedes = Sede::orderBy('nombre','ASC')->get();
+        return view('sind1.area.create', compact('sedes'));
     }
 
     /**
