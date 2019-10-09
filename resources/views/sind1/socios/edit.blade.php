@@ -25,151 +25,28 @@
 
                         @include('partials.components.elementos.apellido2')
                         
-                        <!-- Rut -->
-                        <div class="form-group row">
-                            <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>
-                            <div class="col-md-6">
-                                <input id="rut" type="text" class="form-control @error('rut') is-invalid @enderror" name="rut" value="{{ old('rut') == true ? old('rut') : $socio->getOriginal('rut') }}" autocomplete="rut" autofocus>
-                                @error('rut')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- Género -->
-                        <div class="form-group row">
-                            <label for="genero" class="col-md-4 col-form-label text-md-right">{{ __('Género') }}</label>
-                            <div class="col-md-6">
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-outline-secondary {{ $socio->genero == 'Dama' ? 'active focus' : ''}}">
-                                        <input type="radio" class="w-50" name="genero" id="option1" autocomplete="off" value="Dama"> Dama
-                                    </label>
-                                    <label class="btn btn-outline-secondary {{ $socio->genero == 'Varón' ? 'active focus' : ''}}">
-                                        <input type="radio" class="w-50" name="genero" id="option2" autocomplete="off" value="Varón"> Varón
-                                    </label>
-                                </div>
-                                @error('genero')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div> 
-                        <!-- Fecha nacimiento -->
-                        <div class="form-group row">
-                            <label for="fecha_nac" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de nacimiento') }}</label>
-                            <div class="col-md-6">
-                                <input id="fecha_nac" type="date" class="form-control @error('fecha_nac') is-invalid @enderror" name="fecha_nac" value="{{ old('fecha_nac') == true ? old('fecha_nac') : $socio->getOriginal('fecha_nac') }}" autocomplete="fecha_nac" autofocus>
-                                @error('fecha_nac')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- Celular -->
-                        <div class="form-group row">
-                            <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('Celular') }}</label>
-                            <div class="col-md-6">
-                                <input id="celular" type="text" class="form-control @error('celular') is-invalid @enderror" name="celular" value="{{ old('celular') == true ? old('celular') : $socio->celular }}" autocomplete="celular" autofocus>
-                                @error('celular')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- Correo -->
-                        <div class="form-group row">
-                            <label for="correo" class="col-md-4 col-form-label text-md-right">{{ __('Correo electrónico') }}</label>
-                            <div class="col-md-6">
-                                <input id="correo" type="correo" class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{ old('correo') == true ? old('correo') : $socio->correo }}" autocomplete="correo" autofocus>
-                                @error('correo')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>   
+                        @include('partials.components.elementos.rut') 
 
-                        <!-- Dirección -->
-                        <div class="form-group row">
-                            <label for="direccion" class="col-md-4 col-form-label text-md-right">{{ __('Dirección') }}</label>
-                            <div class="col-md-6">
-                                <input id="direccion" type="text" class="form-control @error('direccion') is-invalid @enderror" name="direccion" value="{{ old('direccion') == true ? old('direccion') : $socio->direccion }}" autocomplete="direccion" autofocus>
-                                @error('direccion')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>      
-                        <!-- Fecha ingreso pucv -->
-                        <div class="form-group row">
-                            <label for="fecha_pucv" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de ingreso PUCV') }}</label>
-                            <div class="col-md-6">
-                                <input id="fecha_pucv" type="date" class="form-control @error('fecha_pucv') is-invalid @enderror" name="fecha_pucv" value="{{ old('fecha_pucv') == true ? old('fecha_pucv') : $socio->getOriginal('fecha_pucv') }}" autocomplete="fecha_pucv" autofocus>
-                                @error('fecha_pucv')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>   
-                        <!-- Anexo -->
-                        <div class="form-group row">
-                            <label for="anexo" class="col-md-4 col-form-label text-md-right">{{ __('Anexo') }}</label>
-                            <div class="col-md-6">
-                                <input id="anexo" type="text" class="form-control @error('anexo') is-invalid @enderror" name="anexo" value="{{ old('anexo') == true ? old('anexo') : $socio->getOriginal('anexo') }}" autocomplete="anexo" autofocus>
-                                @error('anexo')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- Número socio -->
-                        <div class="form-group row">
-                            <label for="numero_socio" class="col-md-4 col-form-label text-md-right">{{ __('Número de socio') }}</label>
-                            <div class="col-md-6">
-                                <input id="numero_socio" type="text" class="form-control @error('numero_socio') is-invalid @enderror" name="numero_socio" value="{{ old('numero_socio') == true ? old('numero_socio') : $socio->getOriginal('numero_socio') }}" autocomplete="numero_socio" autofocus>
-                                @error('numero_socio')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- Fecha ingreso sind1 -->
-                        <div class="form-group row">
-                            <label for="fecha_sind1" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de ingreso Sind1') }}</label>
-                            <div class="col-md-6">
-                                <input id="fecha_sind1" type="date" class="form-control @error('fecha_sind1') is-invalid @enderror" name="fecha_sind1" value="{{ old('fecha_sind1') == true ? old('fecha_sind1') : $socio->getOriginal('fecha_sind1') }}" autocomplete="fecha_sind1" autofocus>
-                                @error('fecha_sind1')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- Comuna -->
-                        <div class="form-group row">
-                            <label for="comuna_id" class="col-md-4 col-form-label text-md-right">{{ __('Comuna') }}</label>
-                            <div class="col-md-6">
-                               <select id="comuna_id" class="default-selects form-control @error('comuna_id') is-invalid @enderror" name="comuna_id" autocomplete="comuna_id" autofocus>
-                                <option selected="true" value="">Seleccione...</option>
-                                @foreach($comunas as $c)
-                                <option value="{{ $c->id }}" {{ $socio->getOriginal('comuna_id') == $c->id ? 'selected' : ''}}>{{ $c->nombre }}</option>
-                                @endforeach
-                            </select>
-                            @error('comuna_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                            </div>
-                        </div>   
+                        @include('partials.components.elementos.genero') 
+
+                        @include('partials.components.elementos.fecha_nac') 
+
+                        @include('partials.components.elementos.celular')
+
+                        @include('partials.components.elementos.correo')
+
+                        @include('partials.components.elementos.direccion')
+
+                        @include('partials.components.elementos.fecha_pucv')
+
+                        @include('partials.components.elementos.anexo')
+
+                        @include('partials.components.elementos.numero_socio')
+
+                        @include('partials.components.elementos.fecha_sind1')
+
+                        @include('partials.components.elementos.comuna')
+                        
                         <!-- Ciudad -->
                         <div class="form-group row">
                             <label for="ciudad_id" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad') }}</label>
