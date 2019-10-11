@@ -11,6 +11,8 @@ use App\FormaPago;
 use App\Cuenta;
 use App\Concepto;
 use App\Asociado;
+use App\User;
+use App\Rol;
 use Illuminate\Http\Request;
 
 class MantenedorController extends Controller
@@ -52,6 +54,17 @@ class MantenedorController extends Controller
         $conceptos = Concepto::orderBy('nombre', 'ASC')->get();
         $asociados = Asociado::orderBy('nombre', 'ASC')->get();
         return view('sind1.mantenedores.contables', compact('cuentas','conceptos','asociados'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function usuarios()
+    {
+        $usuarios = User::orderBy('nombre1', 'ASC')->get();
+        return view('sind1.mantenedores.usuarios', compact('usuarios'));
     }
 
 }

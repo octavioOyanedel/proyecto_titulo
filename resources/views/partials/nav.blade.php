@@ -69,6 +69,7 @@
             <a class="dropdown-item" href="{{ route('mantenedor_socios') }}">Socios</a>
             <a class="dropdown-item" href="{{ route('mantenedor_prestamos') }}">Préstamos</a>
             <a class="dropdown-item" href="{{ route('mantenedor_contables') }}">Registro contable</a>
+            <a class="dropdown-item" href="{{ route('mantenedor_usuarios') }}">Usuarios</a>
           </div>
         </li>   
 

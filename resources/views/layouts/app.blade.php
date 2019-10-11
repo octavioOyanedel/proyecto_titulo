@@ -23,6 +23,7 @@
     <script src="{{ asset('js/data_table_conceptos.js') }}" defer></script>
     <script src="{{ asset('js/data_table_asociados.js') }}" defer></script>
     <script src="{{ asset('js/data_table_socios.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_usuarios.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

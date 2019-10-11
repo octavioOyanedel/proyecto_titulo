@@ -36,3 +36,4 @@ Route::post('/mostrar-conciliacion', 'ConciliacionController@mostrar')->name('mo
 Route::get('/mantenedor-socios','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
 Route::get('/mantenedor-prestamos','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
 Route::get('/mantenedor-contables','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
+Route::get('/mantenedor-usuarios','MantenedorController@usuarios')->name('mantenedor_usuarios')->middleware('auth');
