@@ -27,7 +27,6 @@
                                 </button>
                             </div>
                         </div>
-                                                                                                                                         <!-- fin form -->
                     </form>
                     
                 </div>

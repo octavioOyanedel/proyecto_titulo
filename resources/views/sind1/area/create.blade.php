@@ -17,8 +17,8 @@
                     <form method="POST" action="">
                         @csrf
 
-                        @include('partials.components.elementos.sede')
-                        @include('partials.components.elementos.nueva_area')
+                        @include('partials.components.elementos.socio.sede')
+                        @include('partials.components.elementos.socio.nueva_area')
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

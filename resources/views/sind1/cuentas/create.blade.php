@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Nueva Situación Socio</h3></div>
+                <div class="card-header"><h3 class="mb-0">Nueva Cuenta</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,7 +17,9 @@
                     <form method="POST" action="">
                         @csrf
 
-                        @include('partials.components.elementos.nueva_situacion')
+                        @include('partials.components.elementos.contable.nuevo_numero_cuenta')
+                        @include('partials.components.elementos.contable.tipos_cuentas')
+                        @include('partials.components.elementos.contable.bancos')
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
@@ -27,7 +29,8 @@
                                 </button>
                             </div>
                         </div>
-                    </form>                   
+                    </form>
+                    
                 </div>
             </div>
         </div>

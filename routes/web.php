@@ -29,6 +29,10 @@ Route::resource('/areas', 'AreaController')->middleware('auth');
 Route::resource('/cargos', 'CargoController')->middleware('auth');
 Route::resource('/situaciones', 'EstadoSocioController')->middleware('auth');
 Route::resource('/nacionalidades', 'NacionalidadController')->middleware('auth');
+Route::resource('/formas_pago', 'FormaPagoController')->middleware('auth');
+Route::resource('/cuentas', 'CuentaController')->middleware('auth');
+Route::resource('/conceptos', 'ConceptoController')->middleware('auth');
+Route::resource('/asociados', 'AsociadoController')->middleware('auth');
 
 Route::get('/crear-conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar-conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');

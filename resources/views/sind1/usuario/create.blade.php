@@ -3,9 +3,9 @@
 @section('content')
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-7">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Registrar Egreso/Ingreso</h3></div>
+                <div class="card-header"><h3 class="mb-0">Nuevo Usuario</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,26 +16,19 @@
                     <!-- Formulario -->
                     <form method="POST" action="">
                         @csrf
-
-                        @include('partials.components.elementos.contable.fecha_solicitud')
-                        @include('partials.components.elementos.contable.numero_registro')
-                        @include('partials.components.elementos.prestamo.cheque')
-                        @include('partials.components.elementos.prestamo.monto')
-                        @include('partials.components.elementos.contable.tipo_registro')
-                        @include('partials.components.elementos.contable.cuentas')
-                        @include('partials.components.elementos.contable.conceptos')
-                        @include('partials.components.elementos.contable.socios')
-                        @include('partials.components.elementos.contable.asociados')
+                        
+                        
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrar') }}
+                                    {{ __('Agregar') }}
                                 </button>
                             </div>
                         </div>                                                                                                                 <!-- fin form -->
                     </form>
+                    
                 </div>
             </div>
         </div>

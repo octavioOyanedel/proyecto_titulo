@@ -24,7 +24,7 @@ class AsociadoController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.asociado.create');
     }
 
     /**

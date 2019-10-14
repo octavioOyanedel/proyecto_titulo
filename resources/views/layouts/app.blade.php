@@ -36,6 +36,7 @@
 </head>
 <body>
     <div id="app">
+
         @if(auth()->check())
             @include('partials.nav')
         @else

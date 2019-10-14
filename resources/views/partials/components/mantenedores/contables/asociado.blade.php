@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="nav-asociado" role="tabpanel" aria-labelledby="nav-asociado-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="">Nuevo asociado</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('asociados.create') }}">Nuevo asociado</a> 
 
     <div class="table-responsive">
         <table class="table table-hover" id="tabla-asociados">

@@ -24,7 +24,7 @@ class FormaPagoController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.forma_pago.create');
     }
 
     /**

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Banco;
 use App\Cuenta;
+use App\TipoCuenta;
 use Illuminate\Http\Request;
 
 class CuentaController extends Controller
@@ -24,7 +26,9 @@ class CuentaController extends Controller
      */
     public function create()
     {
-        //
+        $tipos_cuenta = TipoCuenta::orderBy('nombre','ASC')->get();
+        $bancos = Banco::orderBy('nombre','ASC')->get();
+        return view('sind1.cuentas.create', compact('tipos_cuenta', 'bancos'));
     }
 
     /**

@@ -1,5 +1,5 @@
 <div class="tab-pane fade show active" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-cuenta-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="">Nueva cuenta</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('cuentas.create') }}">Nueva cuenta</a> 
 
     <div class="table-responsive">
         <table class="table table-hover" id="tabla-cuentas">

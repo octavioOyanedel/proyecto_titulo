@@ -24,7 +24,7 @@ class ConceptoController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.concepto.create');
     }
 
     /**

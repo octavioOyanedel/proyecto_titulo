@@ -1,5 +1,5 @@
 <div class="tab-pane fade show active" id="nav-forma-pago" role="tabpanel" aria-labelledby="nav-forma-pago-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="">Agregar nueva forma de pago</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('formas_pago.create') }}">Agregar nueva forma de pago</a> 
 
     <div class="table-responsive">
         <table class="table table-hover" id="tabla-formas-pago">
