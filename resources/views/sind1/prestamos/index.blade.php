@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="tabla-prestamos">
                             <thead>
                                 <tr>
                                     <th class="text-center text-success" scope="col" title=""></th>

@@ -57,7 +57,7 @@ class SedeController extends Controller
      */
     public function edit(Sede $sede)
     {
-        //
+        return view('sind1.sede.edit', compact('sede'));
     }
 
     /**

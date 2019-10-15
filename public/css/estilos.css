@@ -23,7 +23,11 @@
 #tabla-asociados_filter input, 
 #tabla-asociados_length select,
 #tabla-socios_filter input, 
-#tabla-socios_length select{
+#tabla-socios_length select,
+#tabla-historial_filter input, 
+#tabla-historial_length select,
+#tabla-prestamos_filter input, 
+#tabla-prestamos_length select{
 	margin-top:  3px;
 	margin-right:  3px;
 	outline: none;
@@ -57,7 +61,11 @@
 #tabla-asociados_filter input:focus, 
 #tabla-asociados_length select:focus
 #tabla-socios_filter input:focus, 
-#tabla-socios_length select:focus{
+#tabla-socios_length select:focus,
+#tabla-historial_filter input:focus, 
+#tabla-historial_length select:focus,
+#tabla-prestamos_filter input:focus, 
+#tabla-prestamos_length select:focus{
     color: #495057;
     background-color: #fff;
     border-color: #a1cbef;

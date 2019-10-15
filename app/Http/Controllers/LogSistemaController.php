@@ -14,7 +14,8 @@ class LogSistemaController extends Controller
      */
     public function index()
     {
-        //
+        $registros = LogSistema::orderBy('created_at', 'DESC');
+        return view('sind1.historial.index', compact('registros'));
     }
 
     /**
