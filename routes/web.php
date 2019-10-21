@@ -34,6 +34,7 @@ Route::resource('/cuentas', 'CuentaController')->middleware('auth');
 Route::resource('/conceptos', 'ConceptoController')->middleware('auth');
 Route::resource('/asociados', 'AsociadoController')->middleware('auth');
 Route::resource('/historial', 'LogSistemaController')->middleware('auth');
+Route::resource('/usuarios', 'UsuarioController')->middleware('auth');
 
 Route::get('/crear-conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar-conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');

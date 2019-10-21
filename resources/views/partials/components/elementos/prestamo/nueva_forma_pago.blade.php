@@ -1,9 +1,10 @@
+@php isset($formaPago) ? $nombre = $formaPago->nombre : $nombre = '' @endphp
 <!-- Nueva nacionalidad -->
 <div class="form-group new-divs row" id="new_div_nation">
-    <label for="nueva_forma_pago" class="col-md-4 col-form-label text-md-right">{{ __('Forma de pago') }}</label>
+    <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Forma de pago') }}</label>
     <div class="col-md-6">
-        <input id="nueva_forma_pago" type="text" class="new-inputs form-control @error('nueva_forma_pago') is-invalid @enderror" name="nueva_forma_pago" value="{{ old('nueva_forma_pago') }}" required autocomplete="nueva_forma_pago" autofocus>
-        @error('nueva_forma_pago')
+        <input id="nombre" type="text" class="new-inputs form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') == true ? old('nombre') : $nombre }}" required autocomplete="nombre" autofocus>
+        @error('nombre')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>

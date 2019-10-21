@@ -14,7 +14,7 @@
             <tbody>
                 @foreach($areas as $a)
                     <tr>                                                
-                        <td class="text-center" scope="row" title="Editar área"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
+                        <td class="text-center" scope="row" title="Editar área"><a class="text-secondary" href="{{ route('areas.edit',$a) }}"><span>@svg('editar')</span></a></td>
                         <td class="text-center" scope="row" title="Eliminar área"><a class="text-danger" data-toggle="modal" data-target="#exampleModal" href="#"><span>@svg('eliminar')</span></a></td>
                         <td>{{ $a->sede_id }}</td>
                         <td>{{ $a->nombre }}</td>

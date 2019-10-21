@@ -55,9 +55,10 @@ class NacionalidadController extends Controller
      * @param  \App\Nacionalidad  $nacionalidad
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nacionalidad $nacionalidad)
+    public function edit($id)
     {
-        //
+        $nacionalidad = Nacionalidad::findOrFail($id);
+        return view('sind1.nacionalidades.edit', compact('nacionalidad'));
     }
 
     /**

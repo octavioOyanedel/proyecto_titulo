@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Editar Sede</h3></div>
+                <div class="card-header"><h3 class="mb-0">Editar Nacionalidad</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,7 +16,7 @@
                     <!-- Formulario -->
                     <form method="POST" action="">   
                         @csrf
-                        @include('partials.components.elementos.socio.nueva_sede')
+                        @include('partials.components.elementos.socio.nueva_nacionalidad')
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

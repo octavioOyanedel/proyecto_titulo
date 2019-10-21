@@ -55,9 +55,10 @@ class FormaPagoController extends Controller
      * @param  \App\FormaPago  $formaPago
      * @return \Illuminate\Http\Response
      */
-    public function edit(FormaPago $formaPago)
+    public function edit($id)
     {
-        //
+        $formaPago = FormaPago::findOrFail($id);
+        return view('sind1.forma_pago.edit', compact('formaPago'));
     }
 
     /**

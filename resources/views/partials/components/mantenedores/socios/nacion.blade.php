@@ -13,7 +13,7 @@
             <tbody>
                 @foreach($nacionalidades as $n)
                     <tr>                                                
-                        <td class="text-center" scope="row" title="Editar nacionalidad"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
+                        <td class="text-center" scope="row" title="Editar nacionalidad"><a class="text-secondary" href="{{ route('nacionalidades.edit',$n) }}"><span>@svg('editar')</span></a></td>
                         <td class="text-center" scope="row" title="Eliminar nacionalidad"><a class="text-danger" data-toggle="modal" data-target="#exampleModal" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="text-center">{{ $n->nombre }}</td>
                     </tr>

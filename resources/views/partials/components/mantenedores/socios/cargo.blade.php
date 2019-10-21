@@ -13,7 +13,7 @@
             <tbody>
                 @foreach($cargos as $c)
                     <tr>                                                
-                        <td class="text-center" scope="row" title="Editar cargo"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
+                        <td class="text-center" scope="row" title="Editar cargo"><a class="text-secondary" href="{{ route('cargos.edit',$c) }}"><span>@svg('editar')</span></a></td>
                         <td class="text-center" scope="row" title="Eliminar cargo"><a class="text-danger" data-toggle="modal" data-target="#exampleModal" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="text-center">{{ $c->nombre }}</td>
                     </tr>

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\EstadoSocio;
+use App\Titulo;
 use Illuminate\Http\Request;
 
-class EstadoSocioController extends Controller
+class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class EstadoSocioController extends Controller
      */
     public function create()
     {
-        return view('sind1.estado_socio.create');
+        //
     }
 
     /**
@@ -41,10 +41,10 @@ class EstadoSocioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\EstadoSocio  $estadoSocio
+     * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(EstadoSocio $estadoSocio)
+    public function show(Usuario $usuario)
     {
         //
     }
@@ -52,23 +52,22 @@ class EstadoSocioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\EstadoSocio  $estadoSocio
+     * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {   
-        $estadoSocio = EstadoSocio::findOrFail($id);
-        return view('sind1.estado_socio.edit', compact('estadoSocio'));
+    public function edit(Usuario $usuario)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EstadoSocio  $estadoSocio
+     * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EstadoSocio $estadoSocio)
+    public function update(Request $request, Usuario $usuario)
     {
         //
     }
@@ -76,11 +75,12 @@ class EstadoSocioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EstadoSocio  $estadoSocio
+     * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EstadoSocio $estadoSocio)
+    public function destroy(Usuario $usuario)
     {
         //
     }
 }
+

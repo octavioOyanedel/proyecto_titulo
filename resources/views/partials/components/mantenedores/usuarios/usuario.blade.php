@@ -12,7 +12,7 @@
             <tbody>
                 @foreach($usuarios as $u)
                     <tr>                                                
-                        <td class="text-center" with="50" scope="row" title="Editar usuario"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
+                        <td class="text-center" with="50" scope="row" title="Editar usuario"><a class="text-secondary" href="{{ route('') }}"><span>@svg('editar')</span></a></td>
                         <td class="text-center" with="50" scope="row" title="Eliminar usuario"><a class="text-danger" data-toggle="modal" data-target="#exampleModal" href="#"><span>@svg('eliminar')</span></a></td>
                         <td>{{ $u->nombre1 }} {{ $u->nombre2 }} {{ $u->apellido1 }} {{ $u->apellido2 }}</td>
                     </tr>

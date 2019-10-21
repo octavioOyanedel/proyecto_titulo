@@ -57,7 +57,7 @@ class CargoController extends Controller
      */
     public function edit(Cargo $cargo)
     {
-        //
+        return view('sind1.cargo.edit', compact('cargo'));
     }
 
     /**
