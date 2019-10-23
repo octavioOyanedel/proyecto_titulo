@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CargaFamiliar;
+use App\Parentesco;
 use Illuminate\Http\Request;
 
 class CargaFamiliarController extends Controller
@@ -24,7 +25,8 @@ class CargaFamiliarController extends Controller
      */
     public function create()
     {
-        //
+        $parentescos = Parentesco::orderBy('nombre','ASC')->get();
+        return view('sind1.carga.create', compact('parentescos'));
     }
 
     /**
@@ -55,9 +57,11 @@ class CargaFamiliarController extends Controller
      * @param  \App\CargaFamiliar  $cargaFamiliar
      * @return \Illuminate\Http\Response
      */
-    public function edit(CargaFamiliar $cargaFamiliar)
+    public function edit($id)
     {
-        //
+        $cargaFamiliar = CargaFamiliar::findOrFail($id);
+        $parentescos = Parentesco::orderBy('nombre','ASC')->get();
+        return view('sind1.carga.edit', compact('cargaFamiliar','parentescos'));
     }
 
     /**

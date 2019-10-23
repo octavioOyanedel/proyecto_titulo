@@ -66,4 +66,15 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\RegistroContable');
     }
+
+    /**
+     * Modificador de rol
+     */
+    public function getRolIdAttribute($valor)
+    {
+        $rol_id = $valor;
+        $rol = Rol::findOrFail($rol_id);
+        $valor = $rol->nombre;
+        return $valor;
+    }
 }

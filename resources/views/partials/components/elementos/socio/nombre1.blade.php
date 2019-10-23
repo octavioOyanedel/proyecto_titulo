@@ -1,4 +1,7 @@
-@php isset($socio->nombre1) ? $nombre1 = $socio->nombre1 : $nombre1 = '' @endphp
+@php $nombre1 = '' @endphp
+@isset($socio)
+    @php $nombre1 = $socio->nombre1 @endphp
+@endisset
 <!-- Nombre -->
 <div class="form-group row">
     <label for="nombre1" class="col-md-4 col-form-label text-md-right">{{ __('Primer nombre') }}</label>

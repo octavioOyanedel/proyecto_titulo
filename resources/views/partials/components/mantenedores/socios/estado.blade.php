@@ -14,7 +14,7 @@
                 @foreach($estados as $e)
                     <tr>                                                
                         <td class="text-center" scope="row" title="Editar estado socio"><a class="text-secondary" href="{{ route('situaciones.edit',$e->id) }}"><span>@svg('editar')</span></a></td>
-                        <td class="text-center" scope="row" title="Eliminar estado socio"><a class="text-danger" data-toggle="modal" data-target="#exampleModal" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td class="text-center" scope="row" title="Eliminar estado socio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estado" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="text-center">{{ $e->nombre }}</td>
                     </tr>
                 @endforeach

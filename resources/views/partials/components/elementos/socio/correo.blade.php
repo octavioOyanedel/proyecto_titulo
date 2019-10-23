@@ -1,5 +1,5 @@
-@php isset($socio->correo) ? $correo = $socio->correo : $correo = '' @endphp
-<!-- Correo -->
+@php isset($socio) ? $correo = $socio->correo : $correo = '' @endphp
+<!-- Correo socio-->
 <div class="form-group row">
     <label for="correo" class="col-md-4 col-form-label text-md-right">{{ __('Correo electrónico') }}</label>
     <div class="col-md-6">

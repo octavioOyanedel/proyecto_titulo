@@ -17,10 +17,10 @@
                     <form method="POST" action="">
                         @csrf
                         
-                        @include('partials.components.elementos.socio.nombre1') 
-                        @include('partials.components.elementos.socio.nombre2') 
-                        @include('partials.components.elementos.socio.apellido1') 
-                        @include('partials.components.elementos.socio.apellido2') 
+                        @include('partials.components.elementos.usuario.nombre1') 
+                        @include('partials.components.elementos.usuario.nombre2') 
+                        @include('partials.components.elementos.usuario.apellido1') 
+                        @include('partials.components.elementos.usuario.apellido2') 
                         @include('partials.components.elementos.usuario.correo')
                         @include('partials.components.elementos.usuario.roles')       
                         @include('partials.components.elementos.usuario.pass')  
@@ -33,9 +33,8 @@
                                     {{ __('Agregar') }}
                                 </button>
                             </div>
-                        </div>                                                                                                                 <!-- fin form -->
-                    </form>
-                    
+                        </div>
+                    </form>                   
                 </div>
             </div>
         </div>

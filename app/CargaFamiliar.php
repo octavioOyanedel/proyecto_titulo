@@ -45,5 +45,21 @@ class CargaFamiliar extends Model
     public function parentesco()
     {
         return $this->hasOne('App\Parentesco');
-    }       
+    }   
+
+    /**
+     * Modificador de fecha de nacimiento
+     */
+    public function getFechaNacAttribute($valor)
+    {
+        return formatoFecha($valor);
+    }   
+
+    /**
+     * Modificador de rut
+     */
+    public function getRutAttribute($valor)
+    {
+        return formatoRut($valor);
+    }
 }

@@ -26,6 +26,7 @@
     <script src="{{ asset('js/data_table_usuarios.js') }}" defer></script>
     <script src="{{ asset('js/data_table_historial.js') }}" defer></script>
     <script src="{{ asset('js/data_table_prestamos.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_prestamos_socio.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

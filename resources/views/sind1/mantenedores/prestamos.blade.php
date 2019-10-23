@@ -29,3 +29,4 @@
     </div>
 </div>
 @endsection
+@include('partials.modals.eliminar_forma_pago')

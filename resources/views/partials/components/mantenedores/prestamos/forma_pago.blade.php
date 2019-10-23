@@ -14,7 +14,7 @@
                 @foreach($formas_pago as $f)
                     <tr>                                                
                         <td class="text-center" scope="row" title="Editar forma de pago"><a class="text-secondary" href="{{ route('formas_pago.edit',$f) }}"><span>@svg('editar')</span></a></td>
-                        <td class="text-center" scope="row" title="Eliminar forma de pago"><a class="text-danger" data-toggle="modal" data-target="#exampleModal" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td class="text-center" scope="row" title="Eliminar forma de pago"><a class="text-danger" data-toggle="modal" data-target="#eliminar_forma_pago" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="text-center">{{ $f->nombre }}</td>
                     </tr>
                 @endforeach

@@ -14,7 +14,7 @@
                 @foreach($conceptos as $c)
                     <tr>                                                
                         <td class="text-center" scope="row" title="Editar concepto"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
-                        <td class="text-center" scope="row" title="Eliminar concepto"><a class="text-danger" data-toggle="modal" data-target="#exampleModal" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td class="text-center" scope="row" title="Eliminar concepto"><a class="text-danger" data-toggle="modal" data-target="#eliminar_concepto" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="text-center">{{ $c->nombre }}</td>
                     </tr>
                 @endforeach

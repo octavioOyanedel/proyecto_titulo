@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Titulo;
+use App\User;
+use App\Rol;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -41,23 +42,24 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\user  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show(user $usuario)
     {
-        //
+        return view('sind1.usuario.show', compact('usuario'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\user  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuario $usuario)
+    public function edit(user $usuario)
     {
-        //
+    	$roles = Rol::orderBy('nombre','ASC')->get();
+        return view('sind1.usuario.edit', compact('usuario','roles'));
     }
 
     /**
@@ -75,12 +77,23 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\user  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(user $usuario)
     {
         //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\user  $usuario
+     * @return \Illuminate\Http\Response
+     */
+    public function editPassword(user $usuario)
+    {
+        return view('sind1.usuario.password', compact('usuario'));
     }
 }
 

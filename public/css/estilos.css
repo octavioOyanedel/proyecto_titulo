@@ -27,7 +27,9 @@
 #tabla-historial_filter input, 
 #tabla-historial_length select,
 #tabla-prestamos_filter input, 
-#tabla-prestamos_length select{
+#tabla-prestamos_length select,
+#tabla-prestamos-socio_filter input, 
+#tabla-prestamos-socio_length select{
 	margin-top:  3px;
 	margin-right:  3px;
 	outline: none;
@@ -65,7 +67,9 @@
 #tabla-historial_filter input:focus, 
 #tabla-historial_length select:focus,
 #tabla-prestamos_filter input:focus, 
-#tabla-prestamos_length select:focus{
+#tabla-prestamos_length select:focus,
+#tabla-prestamos-socio_filter input:focus, 
+#tabla-prestamos-socio_length select:focus{
     color: #495057;
     background-color: #fff;
     border-color: #a1cbef;

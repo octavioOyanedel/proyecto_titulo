@@ -36,6 +36,11 @@ Route::resource('/asociados', 'AsociadoController')->middleware('auth');
 Route::resource('/historial', 'LogSistemaController')->middleware('auth');
 Route::resource('/usuarios', 'UsuarioController')->middleware('auth');
 
+Route::get('/cambiar_password', 'UsuarioController@editPassword')->name('usuarios.editPassword')->middleware('auth');
+
+Route::resource('/cargas', 'CargaFamiliarController')->middleware('auth');
+Route::resource('/estudios', 'EstudioRealizadoController')->middleware('auth');
+
 Route::get('/crear-conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar-conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
 

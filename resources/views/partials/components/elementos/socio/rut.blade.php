@@ -1,4 +1,4 @@
-@php isset($socio->rut) ? $rut = $socio->rut : $rut = '' @endphp
+@php isset($socio->rut) ? $rut = $socio->getOriginal('rut') : $rut = '' @endphp
 <!-- Rut -->
 <div class="form-group row">
     <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>

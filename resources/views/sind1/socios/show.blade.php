@@ -38,7 +38,7 @@
                                     <tr><th>Sede</th><td>{{ $socio->sede_id }}</td></tr>
                                     <tr><th>Área</th><td>{{ $socio->area_id }}</td></tr>
                                     <tr><th>Cargo</th><td>{{ $socio->cargo_id }}</td></tr>
-                                    <tr><th>Situación</th><td>{{ $socio->estado_socio_id }}</td></tr>
+                                    <tr><th>Estado socio</th><td>{{ $socio->estado_socio_id }}</td></tr>
                                     <tr><th>Nacionalidad</th><td>{{ $socio->nacionalidad_id }}</td></tr>
                             </tbody>
                         </table>                         
@@ -66,7 +66,7 @@
                                     @foreach($estudios as $s)
                                         <tr>
                                             <td class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="#"><span>@svg('editar')</span></a></td>
-                                            <td class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" href="#"><span>@svg('eliminar')</span></a></td>
+                                            <td class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estudio" href="#"><span>@svg('eliminar')</span></a></td>
                                             <td>{{ $s->estudio_realizado->grado_academico_id }}</td>
                                             <td>{{ $s->estudio_realizado->institucion_id }}</td>
                                             <td>{{ $s->estudio_realizado->estado_grado_academico_id }}</td>
@@ -99,8 +99,8 @@
                                 <tbody>
                                     @foreach($cargas as $c)
                                         <tr>
-                                            <td class="text-center" scope="row" title="Editar carga familiar"><a class="text-secondary" href="#"><span>@svg('editar')</a></td>
-                                            <td class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" href="#"><span>@svg('eliminar')</span></td>
+                                            <td class="text-center" scope="row" title="Editar carga familiar"><a class="text-secondary" href="{{ route('cargas.edit', $c->id) }}"><span>@svg('editar')</a></td>
+                                            <td class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" data-toggle="modal" data-target="#eliminar_carga" href="#"><span>@svg('eliminar')</span></td>
                                             <td>{{ $c->nombre1 }} {{ $c->nombre2 }} {{ $c->apellido1 }} {{ $c->apellido2 }}</td>
                                             <td class="text-center">{{ $c->rut }}</td>
                                             <td class="text-center">{{ $c->fecha_nac }}</td>
@@ -119,7 +119,7 @@
                     @else  
                         <h4 class="mt-4">Historial de prestamos</h4>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="tabla-prestamos-socio" class="table">
                                 <thead>
                                     <tr>
                                         <th class="text-center" scope="col">Fecha solicitud</th>
@@ -158,3 +158,5 @@
     </div>
 </div>
 @endsection
+@include('partials.modals.eliminar_carga')
+@include('partials.modals.eliminar_estudio')

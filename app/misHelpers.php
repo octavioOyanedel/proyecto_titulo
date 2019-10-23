@@ -3,6 +3,14 @@
     /**
      * formato fecha para busqueda
      */
+    function buscarTexto($cadena, $texto)
+    {
+        return strpos($cadena, $texto);
+    }
+
+    /**
+     * formato fecha para busqueda
+     */
     function obtenerFechaConciliacion($fecha)
     {
         return date('Y-m-d',strtotime($fecha));

@@ -14,7 +14,7 @@
                 @foreach($cuentas as $c)
                     <tr>                                                
                         <td class="text-center" scope="row" title="Editar cuenta"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
-                        <td class="text-center" scope="row" title="Eliminar cuenta"><a class="text-danger" data-toggle="modal" data-target="#exampleModal" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td class="text-center" scope="row" title="Eliminar cuenta"><a class="text-danger" data-toggle="modal" data-target="#eliminar_cuenta" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="text-center">{{ $c->tipo_cuenta_id }} N° {{ $c->numero }} - {{ $c->banco_id }}</td>
                     </tr>
                 @endforeach
