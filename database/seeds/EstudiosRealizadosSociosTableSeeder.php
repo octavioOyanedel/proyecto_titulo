@@ -18,7 +18,6 @@ class EstudiosRealizadosSociosTableSeeder extends Seeder
         App\EstudioRealizadoSocio::create([
             'socio_id' => 2,
             'estudio_realizado_id' => 2
-
         ]); 
         App\EstudioRealizadoSocio::create([
             'socio_id' => 2,

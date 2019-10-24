@@ -103,16 +103,9 @@ class EstudioRealizado extends Model
     /**
      * Relación 
      */
-    public function estudio_realizado_socio()
+    public function estudios_realizados_socios()
     {
-        return $this->BelongsTo('App\EstudioRealizadoSocio');
+        return $this->hasMany('App\EstudioRealizadoSocio');
     } 
 
-    /**
-     * Relación 
-     */
-    public function socio()
-    {
-        return $this->BelongsTo('App\Socio');
-    } 
 }

@@ -1,3 +1,4 @@
+
 <!-- formas de pago -->
 <div class="form-group row">
     <label for="forma_pago_id" class="col-md-4 col-form-label text-md-right">{{ __('Método de pago') }}</label>

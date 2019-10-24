@@ -3,6 +3,8 @@
 namespace App;
 
 use App\EstudioRealizado;
+use App\GradoAcademicoInstitucion;
+use App\GradoAcademicoTitulo;
 use Illuminate\Database\Eloquent\Model;
 
 class GradoAcademico extends Model
@@ -25,5 +27,21 @@ class GradoAcademico extends Model
     public function estudio_realizado()
     {
         return $this->belongsTo('App\EstudioRealizado');
+    }
+
+    /**
+     * Relación 
+     */
+    public function grados_academicos_instituciones()
+    {
+        return $this->hasMany('App\GradoAcademicoInstitucion');
+    }
+
+    /**
+     * Relación 
+     */
+    public function grados_academicos_titulos()
+    {
+        return $this->hasMany('App\GradoAcademicoTitulo');
     }
 }

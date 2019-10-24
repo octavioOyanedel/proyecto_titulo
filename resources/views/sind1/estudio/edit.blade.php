@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Nuevo Cargo</h3></div>
+                <div class="text-center card-header"><h3 class="mb-0">Editar Estudio Socio</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,13 +17,16 @@
                     <form method="POST" action="">
                         @csrf
 
-                        @include('partials.components.elementos.socio.nuevo_cargo')
+                        @include('partials.components.elementos.estudio.grado_academico')
+                        @include('partials.components.elementos.estudio.institucion')                    
+                        @include('partials.components.elementos.estudio.estado')
+                        @include('partials.components.elementos.estudio.titulo')                        
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Agregar') }}
+                                    {{ __('Editar') }}
                                 </button>
                             </div>
                         </div>

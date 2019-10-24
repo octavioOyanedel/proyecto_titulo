@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Socio;
+use App\Titulo;
 use Illuminate\Database\Eloquent\Model;
 
 class EstadoSocio extends Model
@@ -26,4 +27,12 @@ class EstadoSocio extends Model
     {
         return $this->belongsTo('App\Socio');
     }
+
+    /**
+     * Relación 
+     */
+    public function titulos()
+    {
+        return $this->hasMany('App\Titulo');
+    } 
 }

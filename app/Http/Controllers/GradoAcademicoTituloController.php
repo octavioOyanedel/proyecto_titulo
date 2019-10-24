@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\GradoAcademico;
-use App\EstudioRealizado;
+use App\GradoAcademicoTitulo;
 use Illuminate\Http\Request;
 
-class EstudioRealizadoController extends Controller
+class GradoAcademicoTituloController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,8 +24,7 @@ class EstudioRealizadoController extends Controller
      */
     public function create()
     {
-        $grados = GradoAcademico::orderBy('nombre','ASC')->get();
-        return view('sind1.estudio.create', compact('grados'));
+        //
     }
 
     /**
@@ -43,10 +41,10 @@ class EstudioRealizadoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\EstudioRealizado  $estudioRealizado
+     * @param  \App\GradoAcademicoTitulo  $gradoAcademicoTitulo
      * @return \Illuminate\Http\Response
      */
-    public function show(EstudioRealizado $estudioRealizado)
+    public function show(GradoAcademicoTitulo $gradoAcademicoTitulo)
     {
         //
     }
@@ -54,24 +52,22 @@ class EstudioRealizadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\EstudioRealizado  $estudioRealizado
+     * @param  \App\GradoAcademicoTitulo  $gradoAcademicoTitulo
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(GradoAcademicoTitulo $gradoAcademicoTitulo)
     {
-        $grados = GradoAcademico::orderBy('nombre','ASC')->get();
-        $estudio = EstudioRealizado::findOrFail($id);
-        return view('sind1.estudio.edit', compact('estudio', 'grados'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EstudioRealizado  $estudioRealizado
+     * @param  \App\GradoAcademicoTitulo  $gradoAcademicoTitulo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EstudioRealizado $estudioRealizado)
+    public function update(Request $request, GradoAcademicoTitulo $gradoAcademicoTitulo)
     {
         //
     }
@@ -79,10 +75,10 @@ class EstudioRealizadoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EstudioRealizado  $estudioRealizado
+     * @param  \App\GradoAcademicoTitulo  $gradoAcademicoTitulo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EstudioRealizado $estudioRealizado)
+    public function destroy(GradoAcademicoTitulo $gradoAcademicoTitulo)
     {
         //
     }

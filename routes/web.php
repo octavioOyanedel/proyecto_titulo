@@ -20,7 +20,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/socios', 'SocioController')->middleware('auth');
-Route::get('/busqueda', 'BuscarController@busquedaAvanzada')->name('buscar')->middleware('auth');
+Route::get('/filtro_socios', 'BuscarController@filtroSocios')->name('filtro_socios')->middleware('auth');
+Route::get('/filtro_prestamos', 'BuscarController@filtroPrestamos')->name('filtro_prestamos')->middleware('auth');
+Route::get('/filtro_contables', 'BuscarController@filtroContables')->name('filtro_contables')->middleware('auth');
+Route::get('/filtro_historial', 'BuscarController@filtroHistorial')->name('filtro_historial')->middleware('auth');
 
 Route::resource('/prestamos', 'PrestamoController')->middleware('auth');
 Route::resource('/contables', 'RegistroContableController')->middleware('auth');

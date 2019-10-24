@@ -40,7 +40,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('home') }}">Listar</a>
                     <a class="dropdown-item" href="{{ route('socios.create') }}">Incorporar</a>
-                    <a class="dropdown-item" href="{{ route('buscar') }}">Filtrar</a>
+                    <a class="dropdown-item" href="{{ route('filtro_socios') }}">Filtrar</a>
                 </div>
             </li>
 
@@ -52,6 +52,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('prestamos.create') }}">Solicitar</a>
                     <a class="dropdown-item" href="{{ route('prestamos.index') }}">Listar</a>
+                    <a class="dropdown-item" href="{{ route('filtro_prestamos') }}">Filtrar</a>
                 </div>
             </li>
 
@@ -63,6 +64,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('contables.create') }}">Registrar</a>
                     <a class="dropdown-item" href="{{ route('contables.index') }}">Listar</a>
+                    <a class="dropdown-item" href="{{ route('filtro_contables') }}">Filtrar</a>
                     <a class="dropdown-item" href="{{ route('crear_conciliacion') }}">Conciliación bancaria</a>
                 </div>
             </li>
@@ -87,7 +89,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('historial.index') }}">Listar</a>
-                    <a class="dropdown-item" href="#">Filtrar</a>
+                    <a class="dropdown-item" href="{{ route('filtro_historial') }}">Filtrar</a>
                 </div>
             </li>
 

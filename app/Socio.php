@@ -254,6 +254,7 @@ class Socio extends Model
     {
         return $this->hasManyThrough('App\EstudioRealizado', 'App\EstudioRealizadoSocio');
     }
+    
     /**
      * Relación 
      */
