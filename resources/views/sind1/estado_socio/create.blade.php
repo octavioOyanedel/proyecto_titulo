@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Nueva Situación Socio</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Nuevo Estado Socio</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,7 +17,7 @@
                     <form method="POST" action="">
                         @csrf
 
-                        @include('partials.components.elementos.nueva_situacion')
+                        @include('partials.components.elementos.socio.nueva_situacion')
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

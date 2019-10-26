@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Detalle Socio</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Detalle Socio</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -54,8 +54,8 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th width="48px" scope="col"></th>
-                                        <th width="48px" scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
                                         <th scope="col">Nivel educacional</th>
                                         <th scope="col">Institución</th>
                                         <th scope="col">Estado</th>
@@ -65,8 +65,8 @@
                                 <tbody>
                                     @foreach($estudios as $s)
                                         <tr>
-                                            <td class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="#"><span>@svg('editar')</span></a></td>
-                                            <td class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estudio" href="#"><span>@svg('eliminar')</span></a></td>
+                                            <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="#"><span>@svg('editar')</span></a></td>
+                                            <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estudio" href="#"><span>@svg('eliminar')</span></a></td>
                                             <td>{{ $s->estudio_realizado->grado_academico_id }}</td>
                                             <td>{{ $s->estudio_realizado->institucion_id }}</td>
                                             <td>{{ $s->estudio_realizado->estado_grado_academico_id }}</td>
@@ -88,8 +88,8 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th width="48px" scope="col"></th>
-                                        <th width="48px" scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
                                         <th scope="col">Nombre</th>
                                         <th class="text-center" scope="col">Rut</th>
                                         <th class="text-center" scope="col">Fecha de nacimiento</th>
@@ -99,8 +99,8 @@
                                 <tbody>
                                     @foreach($cargas as $c)
                                         <tr>
-                                            <td class="text-center" scope="row" title="Editar carga familiar"><a class="text-secondary" href="{{ route('cargas.edit', $c->id) }}"><span>@svg('editar')</a></td>
-                                            <td class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" data-toggle="modal" data-target="#eliminar_carga" href="#"><span>@svg('eliminar')</span></td>
+                                            <td width="50" class="text-center" scope="row" title="Editar carga familiar"><a class="text-secondary" href="{{ route('cargas.edit', $c->id) }}"><span>@svg('editar')</a></td>
+                                            <td width="50" class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" data-toggle="modal" data-target="#eliminar_carga" href="#"><span>@svg('eliminar')</span></td>
                                             <td>{{ $c->nombre1 }} {{ $c->nombre2 }} {{ $c->apellido1 }} {{ $c->apellido2 }}</td>
                                             <td class="text-center">{{ $c->rut }}</td>
                                             <td class="text-center">{{ $c->fecha_nac }}</td>

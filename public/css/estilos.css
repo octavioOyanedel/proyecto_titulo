@@ -77,6 +77,19 @@
     box-shadow: 0 0 0 0.2rem rgba(52,144,220,.25);
 }
 
+.margen-container-nav{
+    position: relative;
+    margin-top: 90px;
+}
+
+.enlace-activo{
+    text-decoration: true;
+}
+
+.sub-item:hover{
+    text-decoration: underline;
+}
+
 .no-sort::after { display: none!important; }
 
 .no-sort { pointer-events: none!important; cursor: default!important; }

@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-7">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Crear Conciliación Bancaria</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Crear Conciliación Bancaria</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))

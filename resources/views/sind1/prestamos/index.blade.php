@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Listado de préstamos</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Listado de préstamos</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -32,7 +32,7 @@
                             <tbody>
                                 @foreach($prestamos as $p)
                                     <tr>
-                                        <td class="text-center" scope="row" title="Ver detalle préstamo"><a class="text-secondary" href="{{ route('prestamos.show',$p) }}"><span>@svg('ver')</span></a></td>
+                                        <td width="50" class="text-center" scope="row" title="Ver detalle préstamo"><a class="text-primary" href="{{ route('prestamos.show',$p) }}"><span>@svg('ver')</span></a></td>
                                         <td class="text-center">{{ $p->socio->apellido1 }} {{ $p->socio->apellido2 }} {{ $p->socio->nombre1 }} {{ $p->socio->nombre2 }} </td>
                                         <td class="text-center">{{ $p->fecha_solicitud }}</td>
                                         <td class="text-center">{{ $p->numero_egreso }}</td>

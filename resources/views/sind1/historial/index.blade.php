@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Historial</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Historial</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    @if($registros->count() === 'algo')
+                    @if($registros->count() === 0)
                         <div class="alert alert-warning mt-4 text-center" role="alert">
                             <b>No existen registros.</b>
                         </div>

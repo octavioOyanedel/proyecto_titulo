@@ -1,6 +1,6 @@
 <!-- cuentas bancarias -->
 <div class="form-group row">
-    <label for="cuenta_id" class="col-md-4 col-form-label text-md-right">{{ __('Cuentas') }}</label>
+    <label for="cuenta_id" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Cuentas') }}</label>
     <div class="col-md-6">
         <select id="cuenta_id" class="default-selects form-control @error('cuenta_id') is-invalid @enderror" name="cuenta_id" required autocomplete="cuenta_id" autofocus>
             <option selected="true" value="">Seleccione...</option>

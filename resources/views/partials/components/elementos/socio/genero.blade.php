@@ -1,7 +1,7 @@
 @php isset($socio->genero) ? $genero = $socio->genero : $genero = '' @endphp
 <!-- Género -->
 <div class="form-group row">
-    <label for="genero" class="col-md-4 col-form-label text-md-right">{{ __('Género') }}</label>
+    <label for="genero" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Género') }}</label>
     <div class="col-md-6">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-outline-secondary {{ $genero == 'Dama' ? 'active focus' : ''}}">

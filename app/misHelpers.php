@@ -1,11 +1,15 @@
 <?php
 
     /**
-     * formato fecha para busqueda
+     * buscar cadena dentro de otra cadena
      */
-    function buscarTexto($cadena, $texto)
+    function esObligatorio($cadena)
     {
-        return strpos($cadena, $texto);
+        if(strpos($cadena, 'filtro') === FALSE){
+            return '*';
+        } else {
+            return '';
+        }       
     }
 
     /**

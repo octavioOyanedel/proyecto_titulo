@@ -11,22 +11,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/data_table.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_acentos.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_sedes.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_areas.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_cargos.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_estados.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_naciones.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_formas_pago.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_cuentas.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_conceptos.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_asociados.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_socios.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_usuarios.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_historial.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_prestamos.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_prestamos_socio.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -46,10 +30,27 @@
 
         @endif        
 
-        <main class="py-4">
+        <main class="py-4 margen-container-nav">
             @yield('content')
         </main>
     </div>
 
 </body>
+    <script src="{{ asset('js/data_table.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_acentos.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_sedes.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_areas.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_cargos.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_estados.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_naciones.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_formas_pago.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_cuentas.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_conceptos.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_asociados.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_socios.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_usuarios.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_historial.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_prestamos.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_prestamos_socio.js') }}" defer></script>
+    <script src="{{ asset('js/links_nav.js') }}" defer></script>
 </html>

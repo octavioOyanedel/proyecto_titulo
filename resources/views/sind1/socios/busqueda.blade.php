@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Búsqueda avanzada</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Búsqueda Filtrada Socios</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,11 +16,8 @@
                     <!-- Formulario -->
                     <form method="POST" action="">
                         @csrf
-                        <!-- Género -->
-                        @include('partials.components.elementos.socio.genero') 
-                        <hr>    
                         <!-- Fecha nacimiento inicio -->
-                        <p class="text-center">Fecha de nacimiento</p>
+                        <div class="text-center alert alert-secondary" role="alert">Fecha de nacimiento</div>
                         <div class="form-group row">
                             <label for="fecha_nac" class="col-md-4 col-form-label text-md-right">{{ __('Inicio') }}</label>
                             <div class="col-md-6">
@@ -44,21 +41,8 @@
                                 @enderror
                             </div>
                         </div>     
-                        <hr>                   
-                        <!-- Dirección -->
-                        <div class="form-group row">
-                            <label for="direccion" class="col-md-4 col-form-label text-md-right">{{ __('Dirección') }}</label>
-                            <div class="col-md-6">
-                                <input id="direccion" type="text" class="form-control @error('direccion') is-invalid @enderror" name="direccion" value="{{ old('direccion') }}" required autocomplete="direccion" autofocus>
-                                @error('direccion')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>  
                         <hr>    
-                        <p class="text-center">Fecha de ingreso a PUCV</p>
+                        <div class="text-center alert alert-secondary" role="alert">Fecha de ingreso a PUCV</div>
                         <!-- Fecha ingreso pucv inicio -->
                         <div class="form-group row">
                             <label for="fecha_pucv" class="col-md-4 col-form-label text-md-right">{{ __('Inicio') }}</label>
@@ -84,7 +68,7 @@
                             </div>
                         </div>  
                         <hr>
-                        <p class="text-center">Fecha de ingreso a SIND1</p>
+                        <div class="text-center alert alert-secondary" role="alert">Fecha de ingreso a SIND1</div>
                         <!-- Fecha ingreso sind1 inicio -->
                         <div class="form-group row">
                             <label for="fecha_sind1" class="col-md-4 col-form-label text-md-right">{{ __('Inicio') }}</label>
@@ -111,9 +95,13 @@
                         </div>                        
                         <hr>
 
+                        @include('partials.components.elementos.socio.genero')
+                        
                         @include('partials.components.elementos.socio.comuna') 
 
                         @include('partials.components.elementos.socio.ciudad')
+
+                        @include('partials.components.elementos.socio.direccion')
 
                         @include('partials.components.elementos.socio.sede')    
 
@@ -123,7 +111,7 @@
  
                         @include('partials.components.elementos.socio.situacion')
 
-                        @include('partials.components.elementos.socio.nacion')  
+                        @include('partials.components.elementos.socio.nacion')   
                                         
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><h3 class="mb-0">Listado de Socios</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Socios Incorporados</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,9 +17,9 @@
                         <table class="table table-hover" id="tabla-socios">
                             <thead>
                                 <tr>
-                                    <th width="50" class="text-center text-success" scope="col" title=""></th>
-                                    <th width="50" class="text-center text-success" scope="col" title=""></th>
-                                    <th width="50" class="text-center text-success" scope="col" title=""></th>
+                                    <th class="text-center text-success" scope="col" title=""></th>
+                                    <th class="text-center text-success" scope="col" title=""></th>
+                                    <th class="text-center text-success" scope="col" title=""></th>
                                     <th scope="col">Nombre</th>
                                     <th class="text-center" scope="col">Género</th>
                                     <th scope="col">Rut</th>
@@ -36,9 +36,9 @@
                             <tbody>
                                 @foreach($socios as $s)
                                     <tr>
-                                        <td class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('socios.show',$s) }}"><span>@svg('ver')</span></a></td>
-                                        <td class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href="{{ route('socios.edit',$s) }}"><span>@svg('editar')</span></a></td>
-                                        <td class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_socio" href="#"><span>@svg('eliminar')</span></a></td>
+                                        <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('socios.show',$s) }}"><span>@svg('ver')</span></a></td>
+                                        <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href="{{ route('socios.edit',$s) }}"><span>@svg('editar')</span></a></td>
+                                        <td width="50" class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_socio" href="#"><span>@svg('eliminar')</span></a></td>
                                         <td>{{ $s->apellido1 }} {{ $s->apellido2 }}, {{ $s->nombre1 }} {{ $s->nombre2 }}</td>
                                         <td class="text-center">{{ $s->genero }}</td>
                                         <td>{{ $s->rut }}</td>

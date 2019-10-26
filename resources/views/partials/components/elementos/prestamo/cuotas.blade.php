@@ -1,6 +1,6 @@
 <!-- cuotas -->
 <div class="form-group row">
-    <label for="cuotas_id" class="col-md-4 col-form-label text-md-right">{{ __('Cantidad de cuotas') }}</label>
+    <label for="cuotas_id" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Cantidad de cuotas') }}</label>
     <div class="col-md-6">
         <select id="cuotas_id" class="default-selects form-control @error('cuotas_id') is-invalid @enderror" name="cuotas_id" required autocomplete="cuotas_id" autofocus>
             <option selected="true" value="">Seleccione...</option>

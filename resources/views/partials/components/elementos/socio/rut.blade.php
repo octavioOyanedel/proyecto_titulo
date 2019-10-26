@@ -1,7 +1,7 @@
 @php isset($socio->rut) ? $rut = $socio->getOriginal('rut') : $rut = '' @endphp
 <!-- Rut -->
 <div class="form-group row">
-    <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>
+    <label for="rut" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Rut') }}</label>
     <div class="col-md-6">
         <input id="rut" type="text" class="form-control @error('rut') is-invalid @enderror" name="rut" value="{{ old('rut') == true ? old('rut') : $rut }}" required autocomplete="rut" autofocus>
         @error('rut')
