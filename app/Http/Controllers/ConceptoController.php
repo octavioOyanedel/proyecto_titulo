@@ -57,7 +57,7 @@ class ConceptoController extends Controller
      */
     public function edit(Concepto $concepto)
     {
-        //
+        return view('sind1.concepto.edit', compact('concepto'));
     }
 
     /**

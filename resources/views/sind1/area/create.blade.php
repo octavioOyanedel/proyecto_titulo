@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     <!-- fin form -->
-                    </form>                   
+                    </form>
                 </div>
             </div>
         </div>

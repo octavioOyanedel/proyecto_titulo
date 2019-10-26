@@ -24,7 +24,7 @@ class BancoController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.banco.create');
     }
 
     /**

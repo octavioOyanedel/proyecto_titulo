@@ -8,6 +8,7 @@ use App\Concepto;
 use App\Socio;
 use App\Asociado;
 use App\TipoRegistroContable;
+use App\Banco;
 use Illuminate\Http\Request;
 
 class RegistroContableController extends Controller

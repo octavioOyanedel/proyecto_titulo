@@ -5,17 +5,17 @@
         <table class="table table-hover" id="tabla-asociados">
             <thead>
                 <tr>
-                    <th width="50" class="text-center" scope="col" title=""></th>
-                    <th width="50" class="text-center" scope="col" title=""></th>
-                    <th class="text-center" scope="col">Asociado</th>
+                    <th class="text-center" scope="col" title=""></th>
+                    <th class="text-center" scope="col" title=""></th>
+                    <th class="" scope="col">Asociado</th>
                 </tr>
             </thead>   
             <tbody>
                 @foreach($asociados as $a)
                     <tr>                                                
-                        <td class="text-center" scope="row" title="Editar asociado"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
-                        <td class="text-center" scope="row" title="Eliminar asociado"><a class="text-danger" data-toggle="modal" data-target="#eliminar_asociado" href="#"><span>@svg('eliminar')</span></a></td>
-                        <td class="text-center">{{ $a->concepto }}, {{ $a->nombre }}</td>
+                        <td width="50" class="text-center" scope="row" title="Editar asociado"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
+                        <td width="50" class="text-center" scope="row" title="Eliminar asociado"><a class="text-danger" data-toggle="modal" data-target="#eliminar_asociado" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td class="">{{ $a->concepto }}, {{ $a->nombre }}</td>
                     </tr>
                 @endforeach
             </tbody>                                 

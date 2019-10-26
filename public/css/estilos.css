@@ -29,7 +29,9 @@
 #tabla-prestamos_filter input, 
 #tabla-prestamos_length select,
 #tabla-prestamos-socio_filter input, 
-#tabla-prestamos-socio_length select{
+#tabla-prestamos-socio_length select,
+#tabla-bancos_filter input, 
+#tabla-bancos_length select{
 	margin-top:  3px;
 	margin-right:  3px;
 	outline: none;
@@ -69,7 +71,9 @@
 #tabla-prestamos_filter input:focus, 
 #tabla-prestamos_length select:focus,
 #tabla-prestamos-socio_filter input:focus, 
-#tabla-prestamos-socio_length select:focus{
+#tabla-prestamos-socio_length select:focus,
+#tabla-bancos_filter input:focus, 
+#tabla-bancos_length select:focus{
     color: #495057;
     background-color: #fff;
     border-color: #a1cbef;

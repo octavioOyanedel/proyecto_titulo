@@ -5,20 +5,20 @@
         <table class="table table-hover" id="tabla-cuentas">
             <thead>
                 <tr>
-                    <th width="50" class="text-center" scope="col" title=""></th>
-                    <th width="50" class="text-center" scope="col" title=""></th>
-                    <th class="text-center" scope="col">Cuenta</th>
+                    <th class="text-center" scope="col" title=""></th>
+                    <th class="text-center" scope="col" title=""></th>
+                    <th class="" scope="col">Cuenta</th>
                 </tr>
             </thead>   
             <tbody>
                 @foreach($cuentas as $c)
                     <tr>                                                
-                        <td class="text-center" scope="row" title="Editar cuenta"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
-                        <td class="text-center" scope="row" title="Eliminar cuenta"><a class="text-danger" data-toggle="modal" data-target="#eliminar_cuenta" href="#"><span>@svg('eliminar')</span></a></td>
-                        <td class="text-center">{{ $c->tipo_cuenta_id }} N° {{ $c->numero }} - {{ $c->banco_id }}</td>
+                        <td width="50" class="text-center" scope="row" title="Editar cuenta"><a class="text-secondary" href="{{ route('cuentas.edit', $c) }}"><span>@svg('editar')</span></a></td>
+                        <td width="50" class="text-center" scope="row" title="Eliminar cuenta"><a class="text-danger" data-toggle="modal" data-target="#eliminar_cuenta" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td class="">{{ $c->tipo_cuenta_id }} N° {{ $c->numero }} - {{ $c->banco_id }}</td>
                     </tr>
                 @endforeach
-            </tbody>                                 
+            </tbody>
         </table>
-    </div>                                
+    </div>
 </div> 

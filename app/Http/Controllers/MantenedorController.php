@@ -13,6 +13,7 @@ use App\Concepto;
 use App\Asociado;
 use App\User;
 use App\Rol;
+use App\Banco;
 use Illuminate\Http\Request;
 
 class MantenedorController extends Controller
@@ -53,7 +54,8 @@ class MantenedorController extends Controller
         $cuentas = Cuenta::orderBy('numero', 'ASC')->get();
         $conceptos = Concepto::orderBy('nombre', 'ASC')->get();
         $asociados = Asociado::orderBy('nombre', 'ASC')->get();
-        return view('sind1.mantenedores.contables', compact('cuentas','conceptos','asociados'));
+        $bancos = Banco::orderBy('nombre', 'ASC')->get();
+        return view('sind1.mantenedores.contables', compact('cuentas','conceptos','asociados','bancos'));
     }
 
     /**

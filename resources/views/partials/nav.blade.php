@@ -69,6 +69,17 @@
                 </div>
             </li>
 
+            <!-- módulo ayuda -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span id="span-historial">Historial</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item sub-item" href="{{ route('historial.index') }}">Listar</a>
+                    <a class="dropdown-item sub-item" href="{{ route('filtro_historial') }}">Filtrar</a>
+                </div>
+            </li>
+
             <!-- módulo mantenedor -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,18 +92,7 @@
                     <a class="dropdown-item sub-item" href="{{ route('mantenedor_usuarios') }}">Usuarios</a>
                 </div>
             </li> 
-
-            <!-- módulo ayuda -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span id="span-historial">Historial</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item sub-item" href="{{ route('historial.index') }}">Listar</a>
-                    <a class="dropdown-item sub-item" href="{{ route('filtro_historial') }}">Filtrar</a>
-                </div>
-            </li>
-
+            
         </ul>
 
         <!-- formulario búsqueda -->

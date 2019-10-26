@@ -47,6 +47,7 @@
     <script src="{{ asset('js/data_table_cuentas.js') }}" defer></script>
     <script src="{{ asset('js/data_table_conceptos.js') }}" defer></script>
     <script src="{{ asset('js/data_table_asociados.js') }}" defer></script>
+    <script src="{{ asset('js/data_table_bancos.js') }}" defer></script>
     <script src="{{ asset('js/data_table_socios.js') }}" defer></script>
     <script src="{{ asset('js/data_table_usuarios.js') }}" defer></script>
     <script src="{{ asset('js/data_table_historial.js') }}" defer></script>

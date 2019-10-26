@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </form>
-                    <!-- fin form -->                        
+                    <!-- fin form -->
                 </div>
             </div>
         </div>

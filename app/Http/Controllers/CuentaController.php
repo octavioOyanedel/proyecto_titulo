@@ -61,7 +61,9 @@ class CuentaController extends Controller
      */
     public function edit(Cuenta $cuenta)
     {
-        //
+        $tipos_cuenta = TipoCuenta::orderBy('nombre','ASC')->get();
+        $bancos = Banco::orderBy('nombre','ASC')->get();
+        return view('sind1.cuentas.edit', compact('tipos_cuenta', 'bancos', 'cuenta'));
     }
 
     /**

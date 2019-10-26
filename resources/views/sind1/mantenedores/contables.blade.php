@@ -20,12 +20,14 @@
                             <a class="nav-item nav-link active" id="nav-cuenta-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-cuenta" aria-selected="true">Cuenta</a>
                             <a class="nav-item nav-link" id="nav-concepto-tab" data-toggle="tab" href="#nav-concepto" role="tab" aria-controls="nav-concepto" aria-selected="true">Concepto</a>
                             <a class="nav-item nav-link" id="nav-asociado-tab" data-toggle="tab" href="#nav-asociado" role="tab" aria-controls="nav-asociado" aria-selected="true">Asociado</a>
+                            <a class="nav-item nav-link" id="nav-banco-tab" data-toggle="tab" href="#nav-banco" role="tab" aria-controls="nav-banco" aria-selected="true">Banco</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         @include('partials.components.mantenedores.contables.cuenta')
                         @include('partials.components.mantenedores.contables.concepto')
                         @include('partials.components.mantenedores.contables.asociado')
+                        @include('partials.components.mantenedores.contables.banco')
                     </div>                
                 </div>
             </div>
@@ -36,3 +38,4 @@
 @include('partials.modals.eliminar_cuenta')
 @include('partials.modals.eliminar_concepto')
 @include('partials.modals.eliminar_asociado')
+@include('partials.modals.eliminar_banco')

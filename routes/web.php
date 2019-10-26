@@ -35,6 +35,7 @@ Route::resource('/nacionalidades', 'NacionalidadController')->middleware('auth')
 Route::resource('/formas_pago', 'FormaPagoController')->middleware('auth');
 Route::resource('/cuentas', 'CuentaController')->middleware('auth');
 Route::resource('/conceptos', 'ConceptoController')->middleware('auth');
+Route::resource('/bancos', 'BancoController')->middleware('auth');
 Route::resource('/asociados', 'AsociadoController')->middleware('auth');
 Route::resource('/historial', 'LogSistemaController')->middleware('auth');
 Route::resource('/usuarios', 'UsuarioController')->middleware('auth');
