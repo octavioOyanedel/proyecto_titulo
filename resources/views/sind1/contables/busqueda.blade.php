@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Búsqueda Filtrada Registros Contables</h3></div>
 
-                <div class="card-body">
+                <div class="card-body shadow-lg p-3 bg-white rounded">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -48,7 +48,7 @@
                         @include('partials.components.elementos.prestamo.monto')
                         @include('partials.components.elementos.contable.tipo_registro')
                         @include('partials.components.elementos.contable.cuentas')
-                        @include('partials.components.elementos.contable.conceptos')
+                        @include('partials.components.elementos.contable.concepto')
                         @include('partials.components.elementos.contable.socios')
                         @include('partials.components.elementos.contable.asociados')
                                        

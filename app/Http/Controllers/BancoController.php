@@ -57,7 +57,7 @@ class BancoController extends Controller
      */
     public function edit(Banco $banco)
     {
-        //
+        return view('sind1.banco.edit', compact('banco'));
     }
 
     /**

@@ -12,11 +12,9 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-color: #f5f5f5;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
-                height: 100vh;
                 margin: 0;
             }
 
@@ -65,31 +63,23 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+            
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">Inicio</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}">Ingresar</a>
 
                     @endauth
                 </div>
-            @endif
-
+            @endif  
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    @svg('logo_sin_texto')
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <h3>Sind1</h3>
+                <h4>Sistema de administración de socios del Sindicato Interempresas N° 1 de trabajadores PUCV.</h4>
             </div>
         </div>
     </body>

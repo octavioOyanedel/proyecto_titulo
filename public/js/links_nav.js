@@ -4,7 +4,7 @@ $(window).on('load',function(){
 
 	var ruta = window.location.pathname;
 
-	alert(ruta);
+	//alert(ruta);
 
 	if(ruta.localeCompare('/home') === 0 || ruta.localeCompare('/filtro_socios') === 0 || ruta.search('socios/') != -1){
 		$('#span-socios').addClass('font-weight-bold text-uppercase text-primary');
@@ -29,7 +29,9 @@ $(window).on('load',function(){
 		ruta.search('/nacionalidades') != -1 ||
 		ruta.search('/formas_pago') != -1 ||
 		ruta.search('/cuentas') != -1 ||
-		ruta.search('/bancos') != -1){
+		ruta.search('/bancos') != -1 ||
+		ruta.search('/conceptos') != -1 ||
+		ruta.search('/asociados') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 	}
 

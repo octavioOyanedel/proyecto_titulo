@@ -1,18 +1,13 @@
-@php isset($concepto) ? $concepto_id = $concepto->concepto_id : $concepto_id = '' @endphp
-<!-- Nueva concepto -->
+@php isset($concepto) ? $nombre = $concepto->nombre : $nombre = '' @endphp
+<!-- número cuenta -->
 <div class="form-group row">
-    <label for="concepto_id" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Conceptos') }}</label>
+    <label for="nombre" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Concepto') }}</label>
     <div class="col-md-6">
-        <select id="concepto_id" class="default-selects form-control @error('concepto_id') is-invalid @enderror" name="concepto_id" required autocomplete="concepto_id" autofocus>
-            <option selected="true" value="">Seleccione...</option>
-            @foreach($conceptos as $c)
-                <option value="{{ $c->id }}" {{ $concepto_id == $c->id ? 'selected' : ''}}>{{ $c->nombre }}</option>
-            @endforeach
-        </select>
-        @error('concepto_id')
+        <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') == true ? old('nombre') : $nombre }}" required autocomplete="nombre" autofocus>
+        @error('nombre')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
         @enderror
     </div>
-</div> 
+</div>

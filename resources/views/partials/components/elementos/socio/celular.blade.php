@@ -3,7 +3,7 @@
 <div class="form-group row">
     <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('Celular') }}</label>
     <div class="col-md-6">
-        <input id="celular" type="text" class="form-control @error('celular') is-invalid @enderror" name="celular" value="{{ old('celular') == true ? old('celular') : $celular }}" required autocomplete="celular" autofocus>
+        <input id="celular" type="text" class="form-control @error('celular') is-invalid @enderror" name="celular" value="{{ old('celular') == true ? old('celular') : $celular }}" required autocomplete="celular" autofocus placeholder="Ej. 971254626">
         @error('celular')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>

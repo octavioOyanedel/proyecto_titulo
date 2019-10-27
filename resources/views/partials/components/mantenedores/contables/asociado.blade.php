@@ -13,7 +13,7 @@
             <tbody>
                 @foreach($asociados as $a)
                     <tr>                                                
-                        <td width="50" class="text-center" scope="row" title="Editar asociado"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
+                        <td width="50" class="text-center" scope="row" title="Editar asociado"><a class="text-secondary" href="{{ route('asociados.edit', $a) }}"><span>@svg('editar')</span></a></td>
                         <td width="50" class="text-center" scope="row" title="Eliminar asociado"><a class="text-danger" data-toggle="modal" data-target="#eliminar_asociado" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="">{{ $a->concepto }}, {{ $a->nombre }}</td>
                     </tr>

@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
-            <div class="card">
+            <div class="card shadow-lg p-3 bg-white rounded">
                 <div class="card-header text-center"><h3 class="mb-0">Nuevo Banco</h3></div>
 
-                <div class="card-body">
+                <div class="card-body shadow-lg p-3 bg-white rounded">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -17,7 +17,7 @@
                     <form method="POST" action="">
                         @csrf
 
-                        @include('partials.components.elementos.contable.nuevo_banco')
+                        @include('partials.components.elementos.contable.banco')
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

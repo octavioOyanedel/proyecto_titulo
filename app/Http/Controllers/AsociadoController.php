@@ -57,7 +57,7 @@ class AsociadoController extends Controller
      */
     public function edit(Asociado $asociado)
     {
-        //
+        return view('sind1.asociado.edit', compact('asociado'));
     }
 
     /**
