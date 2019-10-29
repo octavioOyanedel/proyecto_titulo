@@ -13,41 +13,45 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="text-center text-success" scope="col" title=""></th>
-                                    <th class="text-center" scope="col">Fecha de solicitud</th>
-                                    <th class="text-center" scope="col">Tipo de registro</th>
-                                    <th class="text-center" scope="col">Concepto</th>
-                                    <th class="text-center" scope="col">Número de registro</th>
-                                    <th class="text-center" scope="col">Cheque</th>
-                                    <th class="text-center" scope="col">Monto</th>                                
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($registros as $r)
+
+                    @if($registros->count() === 0)
+                        <div class="alert alert-warning mt-4 text-center" role="alert">
+                            <b>No existen registros.</b>
+                        </div>
+                    @else 
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="tabla-contables">
+                                <thead>
                                     <tr>
-                                        <td class="text-center" scope="row" title="Ver detalle registro contable"><a class="text-primary" href="{{ route('contables.show',['id' => $r->id]) }}"><span>@svg('ver')</span></a></td>
-                                        <td class="text-center">{{ $r->fecha }}</td>
-                                        <td class="text-center">{{ $r->tipo_registro_contable_id }}</td>
-                                        <td class="text-center">
-                                            {{ $r->concepto_id }},
-                                            {{ $r->socio->nombre1 }} {{ $r->socio->apellido2 }}
-                                            {{ $r->asociado_id }}
-                                        </td>
-                                        <td class="text-center">{{ $r->numero_registro }}</td>
-                                        <td class="text-center">{{ $r->cheque }}</td>
-                                        <td class="text-center">{{ $r->monto }}</td>                                      
+                                        <th class="text-center text-success" scope="col" title=""></th>
+                                        <th class="text-center" scope="col">Fecha de solicitud</th>
+                                        <th class="text-center" scope="col">Tipo de registro</th>
+                                        <th class="" scope="col">Concepto</th>
+                                        <th class="text-center" scope="col">Número de registro</th>
+                                        <th class="text-center" scope="col">Cheque</th>
+                                        <th class="text-center" scope="col">Monto</th>                                
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>                      
-                    </div>
-                    <div class="mx-auto mt-4">
-                        {{ $registros->links() }}  
-                    </div> 
+                                </thead>
+                                <tbody>
+                                    @foreach($registros as $r)
+                                        <tr>
+                                            <td class="text-center" scope="row" title="Ver detalle registro contable"><a class="text-primary" href="{{ route('contables.show',['id' => $r->id]) }}"><span>@svg('ver')</span></a></td>
+                                            <td class="text-center">{{ $r->fecha }}</td>
+                                            <td class="text-center">{{ $r->tipo_registro_contable_id }}</td>
+                                            <td class="">
+                                                {{ $r->concepto_id }},
+                                                {{ $r->socio->nombre1 }} {{ $r->socio->apellido2 }}
+                                                {{ $r->asociado_id }}
+                                            </td>
+                                            <td class="text-center">{{ $r->numero_registro }}</td>
+                                            <td class="text-center">{{ $r->cheque }}</td>
+                                            <td class="text-center">{{ $r->monto }}</td>                                      
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>                      
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

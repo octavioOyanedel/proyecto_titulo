@@ -6,16 +6,20 @@ $(window).on('load',function(){
 
 	//alert(ruta);
 
+
 	if(ruta.localeCompare('/home') === 0 || ruta.localeCompare('/filtro_socios') === 0 || ruta.search('socios/') != -1){
 		$('#span-socios').addClass('font-weight-bold text-uppercase text-primary');
+		$('#buscador-socio').removeClass('d-none');
 	}
 
 	if(ruta.localeCompare('/filtro_prestamos') === 0 || ruta.search('/prestamos') != -1){
-		$('#span-prestamos').addClass('font-weight-bold text-uppercase text-primary');
+		$('#span-prestamos').addClass('font-weight-bold text-uppercase text-success');
+		$('#buscador-prestamo').removeClass('d-none');
 	}
 
 	if(ruta.localeCompare('/filtro_contables') === 0 || ruta.localeCompare('/crear-conciliacion') === 0 || ruta.search('/contables') != -1){
-		$('#span-contables').addClass('font-weight-bold text-uppercase text-primary');
+		$('#span-contables').addClass('font-weight-bold text-uppercase text-dark');
+		$('#buscador-contable').removeClass('d-none');
 	}
 
 	if(ruta.search('/mantenedor') != -1 || 
@@ -33,10 +37,12 @@ $(window).on('load',function(){
 		ruta.search('/conceptos') != -1 ||
 		ruta.search('/asociados') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
+		$('#buscador-socio').removeClass('d-none');
 	}
 
 	if(ruta.localeCompare('/filtro_historial') === 0 || ruta.localeCompare('/historial') === 0){
 		$('#span-historial').addClass('font-weight-bold text-uppercase text-primary');
+		$('#buscador-socio').removeClass('d-none');
 	}
 
 });

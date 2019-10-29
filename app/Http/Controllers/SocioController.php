@@ -99,8 +99,65 @@ class SocioController extends Controller
      * @param  \App\Socio  $socio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Socio $socio)
+    public function destroy(Socio $socio) 
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function verificarRut(Request $request) 
+    {
+        if ($request->ajax()) {
+            $socio = Socio::where('rut','=',$request->elemento)->get();
+            if(count($socio) != 0){
+                return response()->json(1); //si existe
+            }else{
+                return response()->json(0);
+            }
+            
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function verificarNumeroSocio(Request $request) 
+    {
+        if ($request->ajax()) {
+            $socio = Socio::where('numero_socio','=',$request->elemento)->get();
+            if(count($socio) != 0){
+                return response()->json(1); //si existe
+            }else{
+                return response()->json(0);
+            }
+            
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function verificarCorreo(Request $request) 
+    {
+        if ($request->ajax()) {
+            $socio = Socio::where('correo','=',$request->elemento)->get();
+            if(count($socio) != 0){
+                return response()->json(1); //si existe
+            }else{
+                return response()->json(0);
+            }
+            
+        }
     }
 }

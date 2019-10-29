@@ -18,9 +18,13 @@ class RegistroContableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $registros = RegistroContable::orderBy('fecha','DESC')->simplePaginate(10);
+        $campo = $request->get('buscar_registro');
+        $registros = RegistroContable::orderBy('fecha','DESC')
+        ->numeroRegistro($campo)
+        ->cheque($campo)
+        ->get();
         return view('sind1.contables.index', compact('registros'));       
     }
 

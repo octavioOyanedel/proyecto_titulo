@@ -7,6 +7,7 @@ use App\Cuota;
 use App\EstadoDeuda;
 use App\Interes;
 use App\FormaPago;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
 class Prestamo extends Model
@@ -19,6 +20,26 @@ class Prestamo extends Model
     protected $fillable = [
         'fecha_solicitud','numero_egreso','cheque','monto','numero_cuotas','rut','estado_deuda_id','interes_id','forma_pago_id',
     ];
+
+    /**
+     * scope busqueda por numero egreso
+     */
+    public function scopeNumeroEgreso($query, $numero_egreso)
+    {
+        if ($numero_egreso) {
+            return $query->orWhere('numero_egreso', 'LIKE', "%$numero_egreso%");
+        }
+    }
+
+    /**
+     * scope busqueda por numero de cheque
+     */
+    public function scopeCheque($query, $cheque)
+    {
+        if ($cheque) {
+            return $query->orWhere('cheque', 'LIKE', "%$cheque%");
+        }
+    }
 
     /**
      * Modificador de estado deuda
@@ -108,4 +129,20 @@ class Prestamo extends Model
     {
         return $this->hasOne('App\FormaPago');
     } 
+
+    /**
+     * Verificar si socio cuenta con préstamo activo 
+     */
+    static public function verificarPrestamoPendiente($id)
+    {
+        $prestamos = Prestamo::where([
+            ['socio_id','=',$id],
+            ['estado_deuda_id','=',1] // 1-pagada; 2-pendiente
+        ])->get();
+        if($prestamos->count() > 0){
+            return 1; // tiene prestamos
+        }else{
+            return 2; // no tiene prestamos
+        }
+    }
 }

@@ -26,6 +26,26 @@ class RegistroContable extends Model
     ];
 
     /**
+     * scope busqueda por numero de registro
+     */
+    public function scopeNumeroRegistro($query, $numero_registro)
+    {
+        if ($numero_registro) {
+            return $query->orWhere('numero_registro', 'LIKE', "%$numero_registro%");
+        }
+    }
+
+    /**
+     * scope busqueda por numero de cheque
+     */
+    public function scopeCheque($query, $cheque)
+    {
+        if ($cheque) {
+            return $query->orWhere('cheque', 'LIKE', "%$cheque%");
+        }
+    }
+
+    /**
      * Modificador de tipo de registro
      */
     public function getTipoRegistroContableIdAttribute($valor)

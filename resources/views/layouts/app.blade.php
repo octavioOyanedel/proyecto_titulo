@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="{{ asset('css/spinner.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/data_table.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
@@ -33,25 +34,19 @@
         <main class="py-4 margen-container-nav">
             @yield('content')
         </main>
+        {{ request()->path() }}
     </div>
 
 </body>
+
     <script src="{{ asset('js/data_table.js') }}" defer></script>
     <script src="{{ asset('js/data_table_acentos.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_sedes.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_areas.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_cargos.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_estados.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_naciones.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_formas_pago.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_cuentas.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_conceptos.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_asociados.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_bancos.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_socios.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_usuarios.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_historial.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_prestamos.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_prestamos_socio.js') }}" defer></script>
+
+    <!-- selector de js -->
+
+    @include('partials.components.elementos.socio.selector')
+    @include('partials.components.elementos.prestamo.selector')
+
+    <!-- fin selector de js -->
     <script src="{{ asset('js/links_nav.js') }}" defer></script>
 </html>

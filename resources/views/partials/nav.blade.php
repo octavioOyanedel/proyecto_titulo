@@ -95,14 +95,33 @@
             
         </ul>
 
-        <!-- formulario búsqueda -->
-        <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('home') }}">
-            <button type="button" class="btn btn-sm btn-outline-dark rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de socio/s por rut, nombre (primero o segundo), apellido (paterno o materno), celular, anexo, correo y dirección.">
-              ?
-            </button>
-            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Buscar socio/s" aria-label="Search">
-            <button class="btn btn-dark my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
+        <!-- formulario búsqueda socio-->
+        <div id="buscador-socio" class="d-none">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('home') }}">
+                <button type="button" class="btn btn-sm btn-outline-primary rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de socio(s) por medio de: rut, nombre (primero o segundo), apellido (paterno o materno), celular, anexo, correo y dirección.">?</button>
+                <input class="form-control mr-sm-2" type="search" name="buscar_socio" placeholder="Buscar socio(s)" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>            
+        </div>
+
+
+        <!-- formulario búsqueda prestamo-->
+        <div id="buscador-prestamo" class="d-none">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('prestamos.index') }}">
+                <button type="button" class="btn btn-sm btn-outline-success rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de prestamo(s) por medio de: número de egreso y cheque.">?</button>
+                <input class="form-control mr-sm-2" type="search" name="buscar_prestamo" placeholder="Buscar prestamo(s)" aria-label="Search">
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <!-- formulario búsqueda registros contables-->
+        <div id="buscador-contable" class="d-none">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('contables.index') }}">
+                <button type="button" class="btn btn-sm btn-outline-dark rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de registro(s) contable(s) por medio de: número de registro y cheque.">?</button>
+                <input class="form-control mr-sm-2" type="search" name="buscar_registro" placeholder="Buscar registro(s)" aria-label="Search">
+                <button class="btn btn-dark my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
 
     </div>
 </nav>

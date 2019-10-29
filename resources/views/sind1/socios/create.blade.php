@@ -3,8 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
+
                 <div class="card-header text-center"><h3 class="mb-0">Incorporar Socio</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
@@ -15,6 +16,7 @@
                     @endif
                     <!-- Formulario -->
                     <form method="POST" action="">
+
                         @csrf
 
                         @include('partials.components.elementos.socio.rut') 
@@ -37,8 +39,6 @@
   
                         @include('partials.components.elementos.socio.correo') 
 
-                        @include('partials.components.elementos.socio.direccion') 
-
                         @include('partials.components.elementos.socio.fecha_pucv') 
 
                         @include('partials.components.elementos.socio.anexo')                         
@@ -48,6 +48,8 @@
                         @include('partials.components.elementos.socio.comuna')
 
                         @include('partials.components.elementos.socio.ciudad')
+
+                        @include('partials.components.elementos.socio.direccion') 
                            
                         @include('partials.components.elementos.socio.sede')   
 
@@ -62,7 +64,7 @@
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="incorporar" type="submit" class="btn btn-primary" disabled="true">
                                     {{ __('Incorporar') }}
                                 </button>
                             </div>

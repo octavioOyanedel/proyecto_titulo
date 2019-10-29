@@ -19,6 +19,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//ajax
+Route::get('/verificar_rut', 'SocioController@verificarRut');
+Route::get('/verificar_numero_socio', 'SocioController@verificarNumeroSocio');
+Route::get('/verificar_correo', 'SocioController@verificarCorreo');
+
+Route::get('/verificar_rut_prestamo', 'PrestamoController@verificarRut');
+
+Route::get('/verificar_cheque', 'PrestamoController@verificarCheque');
+Route::get('/verificar_numero_egreso', 'PrestamoController@verificarNumeroEgreso');
+
 Route::resource('/socios', 'SocioController')->middleware('auth');
 Route::get('/filtro_socios', 'BuscarController@filtroSocios')->name('filtro_socios')->middleware('auth');
 Route::get('/filtro_prestamos', 'BuscarController@filtroPrestamos')->name('filtro_prestamos')->middleware('auth');

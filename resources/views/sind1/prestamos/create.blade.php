@@ -18,7 +18,7 @@
                         @csrf
 
                         @include('partials.components.elementos.prestamo.fecha_solicitud')
-                        @include('partials.components.elementos.socio.rut') 
+                        @include('partials.components.elementos.prestamo.rut') 
                         @include('partials.components.elementos.prestamo.numero_egreso')
                         @include('partials.components.elementos.prestamo.cheque')
                         @include('partials.components.elementos.prestamo.monto')
@@ -29,11 +29,11 @@
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="incorporar" type="submit" class="btn btn-primary" disabled="true">
                                     {{ __('Simular') }}
                                 </button>
                             </div>
-                        </div>                                                                                                                 <!-- fin form -->
+                        </div>
                     </form>
                 </div>
             </div>
