@@ -21,6 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/data_table.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -46,6 +47,9 @@
 
     @include('partials.components.elementos.socio.selector')
     @include('partials.components.elementos.prestamo.selector')
+    @include('partials.components.elementos.contable.selector')
+    @include('partials.components.elementos.usuario.selector')
+    @include('partials.components.elementos.carga.selector')
 
     <!-- fin selector de js -->
     <script src="{{ asset('js/links_nav.js') }}" defer></script>

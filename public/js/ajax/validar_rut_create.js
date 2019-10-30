@@ -35,7 +35,7 @@ $(window).on('load',function(){
 						if(validarRut(elemento.val()) === true){
 							ocultarSpin();
 							activarBoton();
-							ok.removeClass('d-none').append('Rut válido y no registrado.');
+							ok.removeClass('d-none').append('Rut válido.');
 						}else{
 							ocultarSpin();
 							desactivarBoton();

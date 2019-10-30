@@ -1,7 +1,7 @@
 <div class="tab-pane fade show active" id="nav-usuario" role="tabpanel" aria-labelledby="nav-usuario-tab">
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('register') }}">Nuevo Usuario</a> 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-asociados">
+        <table class="table table-hover" id="tabla-usuarios">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>

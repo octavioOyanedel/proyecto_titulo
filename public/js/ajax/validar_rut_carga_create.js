@@ -14,7 +14,7 @@ $(window).on('load',function(){
 			limpiarMensajes();		
 		}
 
-		if(elemento.val().length < 5){
+		if(elemento.val().length < 8){
 			ocultarSpin()
 		}
 
@@ -23,30 +23,24 @@ $(window).on('load',function(){
 			$.ajax({
 				method: 'GET',
 				dataType: 'json',
-				url: '/verificar_rut_prestamo',
+				url: '/verificar_rut_carga',
 				data: {elemento: elemento.val()},
 				success: function(respuesta){
 					limpiarMensajes();				
-					if(validarRut(elemento.val()) === true){
-						if(respuesta === 0){
-							ocultarSpin();
-							desactivarBoton();
-							error.removeClass('d-none').append('Rut no registrado.');				
-						}						
-						if(respuesta === 1){
-							ocultarSpin();
-							desactivarBoton();
-							error.removeClass('d-none').append('Socio presenta préstamo pendiente.');							
-						}
-						if(respuesta === 2){
+					if(respuesta === 1){
+						ocultarSpin()
+						desactivarBoton();
+						error.removeClass('d-none').append('Rut ya registrado.');				
+					}else{
+						if(validarRut(elemento.val()) === true){
 							ocultarSpin();
 							activarBoton();
-							ok.removeClass('d-none').append('Socio no presenta préstamo pendiente.');						
-						}
-					}else{
-						ocultarSpin();
-						desactivarBoton();
-						error.removeClass('d-none').append('Rut no válido.');
+							ok.removeClass('d-none').append('Rut válido.');
+						}else{
+							ocultarSpin();
+							desactivarBoton();
+							error.removeClass('d-none').append('Rut no válido.');
+						}						
 					}
 				},
 				error: function(respuesta){

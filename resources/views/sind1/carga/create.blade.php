@@ -17,17 +17,17 @@
                     <form method="POST" action="">
                         @csrf
 
-                        @include('partials.components.elementos.carga.nombre1')
+                        @include('partials.components.elementos.carga.rut')
                         @include('partials.components.elementos.carga.nombre1')
                         @include('partials.components.elementos.carga.apellido1')
                         @include('partials.components.elementos.carga.apellido2')
-                        @include('partials.components.elementos.carga.rut')
                         @include('partials.components.elementos.carga.fecha_nac')
-                        
+                        @include('partials.components.elementos.carga.parentesco')
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="incorporar" type="submit" class="btn btn-primary" disabled>
                                     {{ __('Agregar') }}
                                 </button>
                             </div>

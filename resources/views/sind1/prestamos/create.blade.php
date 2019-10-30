@@ -17,8 +17,8 @@
                     <form method="POST" action="">
                         @csrf
 
-                        @include('partials.components.elementos.prestamo.fecha_solicitud')
                         @include('partials.components.elementos.prestamo.rut') 
+                        @include('partials.components.elementos.prestamo.fecha_solicitud')
                         @include('partials.components.elementos.prestamo.numero_egreso')
                         @include('partials.components.elementos.prestamo.cheque')
                         @include('partials.components.elementos.prestamo.monto')

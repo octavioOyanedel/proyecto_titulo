@@ -13,3 +13,7 @@
 @if(request()->path() === 'filtro_prestamos')
     
 @endif
+
+@if(request()->path() === 'mantenedor-prestamos')
+ 	<script src="{{ asset('js/tablas/data_table_formas_pago.js') }}" defer></script>   
+@endif

@@ -1,46 +1,46 @@
 $(window).on('load',function(){
 
-	var elemento = $('#numero_egreso');
-	var error = $('#error-numero-egreso');
-	var spin = $('#comprobar-numero-egreso');
-	var ok = $('#numero-egreso-ok');
+	var elemento = $('#cheque');
+	var error = $('#error-cheque');
+	var spin = $('#comprobar-cheque');
+	var ok = $('#cheque-ok');
 	//var boton = $('#incorporar');
 
 	elemento.keyup( function(){
-		console.log(elemento.val().length);
+
 		limpiarMensajes();
 
 		if(elemento.val().length === 0){
 			limpiarMensajes();		
 		}
 
-		if(elemento.val().length < 4){
+		if(elemento.val().length < 7){
 			ocultarSpin()
 		}
 
-		if(elemento.val().length > 2 && elemento.val().length < 5){
+		if(elemento.val().length > 8 && elemento.val().length < 10){
 			mostrarSpin();
 			$.ajax({
 				method: 'GET',
 				dataType: 'json',
-				url: '/verificar_numero_egreso',
+				url: '/verificar_cheque_contable',
 				data: {elemento: elemento.val()},
 				success: function(respuesta){
 					limpiarMensajes();				
 					if(respuesta === 1){
 						ocultarSpin()
 						//desactivarBoton();
-						error.removeClass('d-none').append('Número de egreso ya registrado.');				
+						error.removeClass('d-none').append('Cheque ya registrado.');				
 					}else{
 						var patron = /^\d*$/;
 						if(!elemento.val().search(patron)){
 							ocultarSpin();
 							//activarBoton();
-							ok.removeClass('d-none').append('Número de egreso válido y no registrado.');
+							ok.removeClass('d-none').append('Cheque válido y no registrado.');
 						}else{
 							ocultarSpin();
 							//desactivarBoton();
-							error.removeClass('d-none').append('Número de egreso no válido.');
+							error.removeClass('d-none').append('Cheque no válido.');
 						}						
 					}
 				},

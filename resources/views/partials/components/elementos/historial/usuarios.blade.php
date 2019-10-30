@@ -5,7 +5,7 @@
         <select id="usuario_id" class="default-selects form-control @error('usuario_id') is-invalid @enderror" name="usuario_id" required autocomplete="usuario_id" autofocus>
             <option selected="true" value="">Seleccione...</option>
             @foreach($usuarios as $u)
-                <option value="{{ $u->id }}">{{ $u->nombre1 }}</option>
+                <option value="{{ $u->id }}">{{ $u->apellido1 }} {{ $u->apellido2 }}, {{ $u->nombre1 }} {{ $u->nombre2 }}</option>
             @endforeach
         </select>
         @error('usuario_id')

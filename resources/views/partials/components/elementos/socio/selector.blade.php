@@ -16,3 +16,11 @@
 @if(request()->path() === 'home')
     <script src="{{ asset('js/tablas/data_table_socios.js') }}" defer></script>
 @endif
+
+@if(request()->path() === 'mantenedor-socios')
+    <script src="{{ asset('js/tablas/data_table_sedes.js') }}" defer></script>
+    <script src="{{ asset('js/tablas/data_table_areas.js') }}" defer></script>
+    <script src="{{ asset('js/tablas/data_table_cargos.js') }}" defer></script>
+    <script src="{{ asset('js/tablas/data_table_estados.js') }}" defer></script>
+    <script src="{{ asset('js/tablas/data_table_naciones.js') }}" defer></script>    
+@endif

@@ -1,69 +1,76 @@
 $(window).on('load',function(){
 
-	var cheque = $('#cheque');
-	var echeque = $('#error-cheque');
-	var ccheque = $('#comprobar-cheque');
-	var chequeo = $('#cheque-ok');
+	var elemento = $('#cheque');
+	var error = $('#error-cheque');
+	var spin = $('#comprobar-cheque');
+	var ok = $('#cheque-ok');
+	//var boton = $('#incorporar');
 
-	cheque.focusout(function(){
-		if(cheque.val() === ''){
-			echeque.addClass('d-none').empty();
-			chequeo.addClass('d-none').empty();
+	elemento.keyup( function(){
+
+		limpiarMensajes();
+
+		if(elemento.val().length === 0){
+			limpiarMensajes();		
 		}
-	});
 
+		if(elemento.val().length < 7){
+			ocultarSpin()
+		}
 
-	cheque.keyup( function(){
-
-		if(cheque.val().length >= 7 && cheque.val().length <= 9){
-
-			ccheque.removeClass('d-none');
-			chequeo.addClass('d-none').empty();
-			echeque.addClass('d-none').empty();
-
+		if(elemento.val().length > 8 && elemento.val().length < 10){
+			mostrarSpin();
 			$.ajax({
 				method: 'GET',
 				dataType: 'json',
 				url: '/verificar_cheque',
-				data: {cheque: cheque.val()},
+				data: {elemento: elemento.val()},
 				success: function(respuesta){
-					ccheque.addClass('d-none');
-					chequeo.addClass('d-none').empty();
-					echeque.addClass('d-none').empty();
+					limpiarMensajes();				
 					if(respuesta === 1){
-						cheque_ok = 0;
-						echeque.removeClass('d-none').append('Ya existe este cheque.');													
+						ocultarSpin()
+						//desactivarBoton();
+						error.removeClass('d-none').append('Cheque ya registrado.');				
 					}else{
 						var patron = /^\d*$/;
-						if(!cheque.val().search(patron)){
-							cheque_ok = 1;
-							chequeo.removeClass('d-none').append('Cheque ok.');
+						if(!elemento.val().search(patron)){
+							ocultarSpin();
+							//activarBoton();
+							ok.removeClass('d-none').append('Cheque válido y no registrado.');
 						}else{
-							cheque_ok = 0;
-							echeque.removeClass('d-none').append('Cheque inválido.');
-						}
+							ocultarSpin();
+							//desactivarBoton();
+							error.removeClass('d-none').append('Cheque no válido.');
+						}						
 					}
 				},
 				error: function(respuesta){
 					console.log('ERROR: '+respuesta);
 				}
 			});	
-		}
+		}		
 	});
 
-	$('#cheque').focusout(function(){
-		if(egreso_ok === 1 && cheque_ok === 1){
-			$('#incorporar-prestamo').removeAttr('disabled');
-		}else{
-			$('#incorporar-prestamo').attr('selected','true');
-		}
-	});
 
-	$('#numero_egreso').focusout(function(){
-		if(egreso_ok === 1 && cheque_ok === 1){
-			$('#incorporar-prestamo').removeAttr('disabled');
-		}else{
-			$('#incorporar-prestamo').attr('selected','true');
-		}
-	});
+	function limpiarMensajes(){
+		error.addClass('d-none').empty();
+		ok.addClass('d-none').empty();
+	}
+
+	function ocultarSpin(){
+		spin.addClass('d-none');
+	}
+
+	function mostrarSpin(){
+		spin.removeClass('d-none');
+	}
+
+	function activarBoton(){
+		boton.removeAttr('disabled');
+	}
+
+	function desactivarBoton(){
+		boton.attr('disabled','true');
+	}
+
 });

@@ -137,7 +137,7 @@ class Prestamo extends Model
     {
         $prestamos = Prestamo::where([
             ['socio_id','=',$id],
-            ['estado_deuda_id','=',1] // 1-pagada; 2-pendiente
+            ['estado_deuda_id','=',2] // 1-pagada; 2-pendiente
         ])->get();
         if($prestamos->count() > 0){
             return 1; // tiene prestamos

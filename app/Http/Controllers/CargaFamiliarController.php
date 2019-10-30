@@ -86,4 +86,24 @@ class CargaFamiliarController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\CargaFamiliar  $carga
+     * @return \Illuminate\Http\Response
+     */
+    public function verificarRut(Request $request) 
+    {
+        if ($request->ajax()) {
+            $carga = CargaFamiliar::where('rut','=',$request->elemento)->get();
+            if(count($carga) != 0){
+                //si existe, buscar prestamo
+                return response()->json(1);
+            }else{
+                return response()->json(0); //no existe
+            }
+            
+        }
+    }
 }

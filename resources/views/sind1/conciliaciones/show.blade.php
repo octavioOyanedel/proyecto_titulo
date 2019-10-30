@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-7">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Conciliación Bancaria</h3></div>
 
@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h4 class="mt-4">{{ $cuenta->tipo_cuenta_id }} N° {{ $cuenta->numero }} {{ $cuenta->banco_id }}</h4>
+                    <h4 class="mt-4 text-center">{{ $cuenta->tipo_cuenta_id }} N° {{ $cuenta->numero }} {{ $cuenta->banco_id }}</h4>
                     <h5 class="mt-4"></h5>
                     <div class="table-responsive">
                         <table class="table">

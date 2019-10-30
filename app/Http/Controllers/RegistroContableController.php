@@ -99,4 +99,42 @@ class RegistroContableController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Registro  $registro
+     * @return \Illuminate\Http\Response
+     */
+    public function verificarCheque(Request $request) 
+    {
+        if ($request->ajax()) {
+            $registro = RegistroContable::where('cheque','=',$request->elemento)->get();
+            if(count($registro) != 0){
+                return response()->json(1); //si existe
+            }else{
+                return response()->json(0);
+            }
+            
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Registro  $registro
+     * @return \Illuminate\Http\Response
+     */
+    public function verificarNumero(Request $request) 
+    {
+        if ($request->ajax()) {
+            $registro = RegistroContable::where('numero_registro','=',$request->elemento)->get();
+            if(count($registro) != 0){
+                return response()->json(1); //si existe
+            }else{
+                return response()->json(0);
+            }
+            
+        }
+    }
 }

@@ -105,7 +105,7 @@ class PrestamoController extends Controller
     public function verificarCheque(Request $request) 
     {
         if ($request->ajax()) {
-            $prestamo = Prestamo::where('cheque','=',$request->cheque)->get();
+            $prestamo = Prestamo::where('cheque','=',$request->elemento)->get();
             if(count($prestamo) != 0){
                 return response()->json(1); //si existe
             }else{
@@ -124,7 +124,7 @@ class PrestamoController extends Controller
     public function verificarNumeroEgreso(Request $request) 
     {
         if ($request->ajax()) {
-            $prestamo = Prestamo::where('numero_egreso','=',$request->numero_egreso)->get();
+            $prestamo = Prestamo::where('numero_egreso','=',$request->elemento)->get();
             if(count($prestamo) != 0){
                 return response()->json(1); //si existe
             }else{
@@ -146,7 +146,7 @@ class PrestamoController extends Controller
             $socio = Socio::where('rut','=',$request->elemento)->get();
             if(count($socio) != 0){
                 //si existe, buscar prestamo
-                 return response()->json(Prestamo::verificarPrestamoPendiente($socio->id));
+                return response()->json(Prestamo::verificarPrestamoPendiente($socio[0]->id));
             }else{
                 return response()->json(0); //no existe
             }

@@ -1,13 +1,13 @@
 $(window).on('load',function(){
 
-	var elemento = $('#numero_egreso');
-	var error = $('#error-numero-egreso');
-	var spin = $('#comprobar-numero-egreso');
-	var ok = $('#numero-egreso-ok');
-	//var boton = $('#incorporar');
+	var elemento = $('#numero_registro');
+	var error = $('#error-numero');
+	var spin = $('#comprobar-numero');
+	var ok = $('#numero-ok');
+	var boton = $('#incorporar');
 
 	elemento.keyup( function(){
-		console.log(elemento.val().length);
+
 		limpiarMensajes();
 
 		if(elemento.val().length === 0){
@@ -23,24 +23,24 @@ $(window).on('load',function(){
 			$.ajax({
 				method: 'GET',
 				dataType: 'json',
-				url: '/verificar_numero_egreso',
+				url: '/verificar_numero_registro',
 				data: {elemento: elemento.val()},
 				success: function(respuesta){
 					limpiarMensajes();				
 					if(respuesta === 1){
 						ocultarSpin()
-						//desactivarBoton();
-						error.removeClass('d-none').append('Número de egreso ya registrado.');				
+						desactivarBoton();
+						error.removeClass('d-none').append('Número de ingreso/egreso ya registrado.');				
 					}else{
 						var patron = /^\d*$/;
 						if(!elemento.val().search(patron)){
 							ocultarSpin();
-							//activarBoton();
-							ok.removeClass('d-none').append('Número de egreso válido y no registrado.');
+							activarBoton();
+							ok.removeClass('d-none').append('Número de ingreso/egreso no registrado.');
 						}else{
 							ocultarSpin();
-							//desactivarBoton();
-							error.removeClass('d-none').append('Número de egreso no válido.');
+							desactivarBoton();
+							error.removeClass('d-none').append('Número de ingreso/egreso no válido.');
 						}						
 					}
 				},

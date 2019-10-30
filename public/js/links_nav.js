@@ -17,7 +17,7 @@ $(window).on('load',function(){
 		$('#buscador-prestamo').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/filtro_contables') === 0 || ruta.localeCompare('/crear-conciliacion') === 0 || ruta.search('/contables') != -1){
+	if(ruta.localeCompare('/filtro_contables') === 0 || ruta.localeCompare('/crear-conciliacion') === 0 || ruta.search('/contables') != -1 || ruta.localeCompare('/mostrar-conciliacion') === 0){
 		$('#span-contables').addClass('font-weight-bold text-uppercase text-dark');
 		$('#buscador-contable').removeClass('d-none');
 	}

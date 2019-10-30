@@ -33,7 +33,9 @@
 #tabla-bancos_filter input, 
 #tabla-bancos_length select,
 #tabla-contables_filter input, 
-#tabla-contables_length select{
+#tabla-contables_length select,
+#tabla-usuarios_filter input, 
+#tabla-usuarios_length select{
 	margin-top:  3px;
 	margin-right:  3px;
 	outline: none;
@@ -77,7 +79,9 @@
 #tabla-bancos_filter input:focus, 
 #tabla-bancos_length select:focus,
 #tabla-contables_filter input:focus, 
-#tabla-contables_length select:focus{
+#tabla-contables_length select:focus,
+#tabla-usuarios_filter input:focus, 
+#tabla-usuarios_length select:focus{
     color: #495057;
     background-color: #fff;
     border-color: #a1cbef;
