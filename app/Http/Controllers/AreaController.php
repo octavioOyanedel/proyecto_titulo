@@ -84,4 +84,12 @@ class AreaController extends Controller
     {
         //
     }
+
+    // obtener areas
+    public function obtenerAreas(Request $request){
+        if($request->ajax()){
+            $areas = Area::where('sede_id','=',$request->id)->get();
+            return response()->json($areas);
+        }
+    }   
 }

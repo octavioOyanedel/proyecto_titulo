@@ -35,4 +35,15 @@ class GradoAcademicoInstitucion extends Model
     {
         return $this->belongsTo('App\GradoAcademico');
     } 
+
+    /**
+     * Modificador de institucion
+     */
+    public function getInstitucionIdAttribute($valor)
+    {
+        $institucion_id = $valor;
+        $institucion = Institucion::findOrFail($institucion_id);
+        $valor = $institucion->nombre;
+        return $valor;
+    }    
 }

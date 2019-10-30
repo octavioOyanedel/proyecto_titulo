@@ -7,6 +7,8 @@
 	<script src="{{ asset('js/ajax/validar_rut_create.js') }}" defer></script>
 	<script src="{{ asset('js/ajax/validar_numero_socio_create.js') }}" defer></script>
 	<script src="{{ asset('js/ajax/validar_correo_create.js') }}" defer></script>
+    <script src="{{ asset('js/ajax/cargar_ciudades.js') }}" defer></script>
+    <script src="{{ asset('js/ajax/cargar_areas.js') }}" defer></script>
 @endif
 
 @if(request()->path() === 'filtro_socio')

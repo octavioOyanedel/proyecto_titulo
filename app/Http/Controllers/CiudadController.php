@@ -82,4 +82,12 @@ class CiudadController extends Controller
     {
         //
     }
+
+    // obtener ciudades
+    public function obtenerCiudades(Request $request){
+        if($request->ajax()){
+            $ciudades = Ciudad::where('comuna_id','=',$request->id)->get();
+            return response()->json($ciudades);
+        }
+    }   
 }

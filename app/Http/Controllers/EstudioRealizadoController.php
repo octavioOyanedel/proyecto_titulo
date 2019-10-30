@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GradoAcademico;
 use App\EstudioRealizado;
+use App\EstadoGradoAcademico;
 use Illuminate\Http\Request;
 
 class EstudioRealizadoController extends Controller
@@ -26,7 +27,8 @@ class EstudioRealizadoController extends Controller
     public function create()
     {
         $grados = GradoAcademico::orderBy('nombre','ASC')->get();
-        return view('sind1.estudio.create', compact('grados'));
+        $estados = EstadoGradoAcademico::orderBy('nombre','ASC')->get();
+        return view('sind1.estudio.create', compact('grados','estados'));
     }
 
     /**

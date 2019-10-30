@@ -50,6 +50,7 @@
     @include('partials.components.elementos.contable.selector')
     @include('partials.components.elementos.usuario.selector')
     @include('partials.components.elementos.carga.selector')
+    @include('partials.components.elementos.estudio.selector')
 
     <!-- fin selector de js -->
     <script src="{{ asset('js/links_nav.js') }}" defer></script>

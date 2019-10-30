@@ -23,6 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/verificar_rut', 'SocioController@verificarRut');
 Route::get('/verificar_numero_socio', 'SocioController@verificarNumeroSocio');
 Route::get('/verificar_correo', 'SocioController@verificarCorreo');
+Route::get('/cargar_ciudades', 'CiudadController@obtenerCiudades');
+Route::get('/cargar_areas', 'AreaController@obtenerAreas');
 
 //ajax prestamo
 Route::get('/verificar_rut_prestamo', 'PrestamoController@verificarRut');
@@ -33,8 +35,12 @@ Route::get('/verificar_numero_egreso', 'PrestamoController@verificarNumeroEgreso
 Route::get('/verificar_cheque_contable', 'RegistroContableController@verificarCheque');
 Route::get('/verificar_numero_registro', 'RegistroContableController@verificarNumero');
 
-//ajax carga
+//ajax carga familiar
 Route::get('/verificar_rut_carga', 'CargaFamiliarController@verificarRut');
+
+//ajax estudios
+Route::get('/cargar_instituciones', 'GradoAcademicoInstitucionController@obtenerInstituciones');
+Route::get('/cargar_titulos', 'InstitucionTituloController@obtenerTitulos');
 
 Route::resource('/socios', 'SocioController')->middleware('auth');
 Route::get('/filtro_socios', 'BuscarController@filtroSocios')->name('filtro_socios')->middleware('auth');
