@@ -7,7 +7,6 @@ $(window).on('load',function(){
 	//activar titulo
 	estado.change(function(){
 		var valor_estado = $('#estado_grado_academico_id option:selected').val();
-		console.log(valor_estado);
 		if(parseInt(valor_estado) === 4){
 			activarTitulo();
 		}else{
