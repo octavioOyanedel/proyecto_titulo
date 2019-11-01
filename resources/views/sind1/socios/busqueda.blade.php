@@ -17,7 +17,7 @@
                     <form method="POST" action="">
                         @csrf
                         <!-- Fecha nacimiento inicio -->
-                        <div class="text-center alert alert-secondary" role="alert">Fecha de nacimiento</div>
+                        <div class="text-center alert alert-secondary" role="alert"><b>Fecha de nacimiento</b></div>
                         <div class="form-group row">
                             <label for="fecha_nac" class="col-md-4 col-form-label text-md-right">{{ __('Inicio') }}</label>
                             <div class="col-md-6">
@@ -42,7 +42,7 @@
                             </div>
                         </div>     
                         <hr>    
-                        <div class="text-center alert alert-secondary" role="alert">Fecha de ingreso a PUCV</div>
+                        <div class="text-center alert alert-secondary" role="alert"><b>Fecha de ingreso a PUCV</b></div>
                         <!-- Fecha ingreso pucv inicio -->
                         <div class="form-group row">
                             <label for="fecha_pucv" class="col-md-4 col-form-label text-md-right">{{ __('Inicio') }}</label>
@@ -68,7 +68,7 @@
                             </div>
                         </div>  
                         <hr>
-                        <div class="text-center alert alert-secondary" role="alert">Fecha de ingreso a SIND1</div>
+                        <div class="text-center alert alert-secondary" role="alert"><b>Fecha de ingreso a SIND1</b></div>
                         <!-- Fecha ingreso sind1 inicio -->
                         <div class="form-group row">
                             <label for="fecha_sind1" class="col-md-4 col-form-label text-md-right">{{ __('Inicio') }}</label>

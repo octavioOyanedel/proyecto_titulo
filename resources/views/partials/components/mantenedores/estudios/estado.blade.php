@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('estados.create') }}">Nuevo estado nivel educacional</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-estados">
+        <table class="table table-hover data-tables" id="tabla-estados">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>

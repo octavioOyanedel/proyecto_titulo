@@ -15,10 +15,7 @@
 @switch(request()->path())
     {{-- mantenedor --}}
     @case('mantenedor-estudios')
-        <script src="{{ asset('js/tablas/data_table_niveles.js') }}" defer></script>
-        <script src="{{ asset('js/tablas/data_table_instituciones.js') }}" defer></script>
-        <script src="{{ asset('js/tablas/data_table_estados.js') }}" defer></script>  
-        <script src="{{ asset('js/tablas/data_table_titulos.js') }}" defer></script>  
+
     @break
     @default
 @endswitch

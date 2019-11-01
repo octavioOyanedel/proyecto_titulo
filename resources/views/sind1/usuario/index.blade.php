@@ -20,7 +20,7 @@
                         </div>
                     @else                     
                         <div class="table-responsive">
-                            <table class="table table-hover" id="tabla-usuarios">
+                            <table class="table table-hover data-tables" id="tabla-usuarios">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-success" scope="col" title=""></th>
@@ -39,7 +39,7 @@
                                             <td class="text-center" with="50" scope="row" title="Editar usuario"><a class="text-secondary" href="{{ route('usuarios.edit', $u) }}"><span>@svg('editar')</span></a></td>
                                             <td class="text-center" with="50" scope="row" title="Cambiar contraseña"><a class="text-warning" href="{{ route('usuarios.editPassword', $u) }}"><span>@svg('pass')</span></a></td>
                                             <td class="text-center" with="50" scope="row" title="Eliminar usuario"><a class="text-danger" data-toggle="modal" data-target="#eliminar_usuario" href="#"><span>@svg('eliminar')</span></a></td>
-                                            <td>{{ $u->nombre1 }} {{ $u->nombre2 }} {{ $u->apellido1 }} {{ $u->apellido2 }}</td>
+                                            <td>{{ $u->apellido1 }} {{ $u->apellido2 }}, {{ $u->nombre1 }} {{ $u->nombre2 }}</td>
                                             <td>{{ $u->email }}</td>
                                             <td>{{ $u->rol_id }}</td>
                                         </tr>

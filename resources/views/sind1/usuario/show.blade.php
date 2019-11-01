@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h4>Información personal</h4>
+                    <h4>Información Personal</h4>
                     <div class="table-responsive">                     
                         <table class="table table-hover">
                             <thead></thead>

@@ -17,7 +17,7 @@
                     <form method="POST" action="">   
                         @csrf
 
-                        @include('partials.components.elementos.contable.concepto')
+                        @include('partials.components.elementos.contable.nuevo_concepto')
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

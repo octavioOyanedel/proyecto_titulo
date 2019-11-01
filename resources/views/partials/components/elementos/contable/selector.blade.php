@@ -20,15 +20,11 @@
     @break
     {{-- mantenedor --}}
     @case('mantenedor-contables')
-        <script src="{{ asset('js/tablas/data_table_cuentas.js') }}" defer></script>
-        <script src="{{ asset('js/tablas/data_table_conceptos.js') }}" defer></script>
-        <script src="{{ asset('js/tablas/data_table_asociados.js') }}" defer></script>
-        <script src="{{ asset('js/tablas/data_table_bancos.js') }}" defer></script>
 
     @break
     {{-- listar --}}
     @case('contables')
-        <script src="{{ asset('js/tablas/data_table_contables.js') }}" defer></script>
+
     @break
     {{-- filtrar --}}
     @case('filtro_contables')

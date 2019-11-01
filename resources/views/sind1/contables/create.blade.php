@@ -31,7 +31,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button id="incorporar" type="submit" class="btn btn-primary" disabled>
-                                    {{ __('Registrar') }}
+                                    {{ __('Agregar') }}
                                 </button>
                             </div>
                         </div>                                                                                                                 <!-- fin form -->

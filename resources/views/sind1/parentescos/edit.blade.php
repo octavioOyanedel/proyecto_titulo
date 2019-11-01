@@ -16,7 +16,7 @@
                     <!-- Formulario -->
                     <form method="POST" action="">   
                         @csrf
-                        @include('partials.components.elementos.carga.parentesco')
+                        @include('partials.components.elementos.carga.nuevo_parentesco')
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('cargos.create') }}">Agregar nuevo cargo</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-cargos">
+        <table class="table table-hover data-tables" id="tabla-cargos">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>

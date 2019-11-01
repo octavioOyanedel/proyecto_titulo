@@ -2,7 +2,7 @@
 	<label for="password-confirm" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>* </b></span>{{ __('Confirmar contraseña') }}</label>
 
 	<div class="col-md-6">
-		<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+		<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" maxlength="15" minlength="8">
 
 		@error('password-confirm')
             <span class="invalid-feedback" role="alert">

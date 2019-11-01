@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('bancos.create') }}">Nuevo banco</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-bancos">
+        <table class="table table-hover data-tables" id="tabla-bancos">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>

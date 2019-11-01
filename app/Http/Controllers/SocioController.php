@@ -151,7 +151,7 @@ class SocioController extends Controller
     public function verificarCorreo(Request $request) 
     {
         if ($request->ajax()) {
-            $socio = Socio::where('correo','=',$request->elemento)->get();
+            $socio = Socio::where('correo','=',trim($request->elemento))->get();
             if(count($socio) != 0){
                 return response()->json(1); //si existe
             }else{

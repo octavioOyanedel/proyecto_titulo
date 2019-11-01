@@ -1,9 +1,9 @@
 $(window).on('load',function(){
 
-	var elemento = $('#correo');
-	var error = $('#error-correo');
-	var spin = $('#comprobar-correo');
-	var ok = $('#correo-ok');
+	var elemento = $('#email');
+	var error = $('#error-email');
+	var spin = $('#comprobar-email');
+	var ok = $('#email-ok');
 	//var boton = $('#incorporar');
 
 	var ruta = window.location.pathname;
@@ -25,7 +25,7 @@ $(window).on('load',function(){
 			$.ajax({
 				method: 'GET',
 				dataType: 'json',
-				url: '/verificar_correo',
+				url: '/verificar_correo_usuario',
 				data: {elemento: elemento.val()},
 				success: function(respuesta){
 					limpiarMensajes();	

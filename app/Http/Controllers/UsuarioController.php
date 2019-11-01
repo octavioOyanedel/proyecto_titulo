@@ -97,5 +97,24 @@ class UsuarioController extends Controller
     {
         return view('sind1.usuario.password', compact('usuario'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\User  $usuario
+     * @return \Illuminate\Http\Response
+     */
+    public function verificarCorreo(Request $request) 
+    {
+        if ($request->ajax()) {
+            $usuario = User::where('email','=',trim($request->elemento))->get();
+            if(count($usuario) != 0){
+                return response()->json(1); //si existe
+            }else{
+                return response()->json(0);
+            }
+            
+        }
+    }
 }
 

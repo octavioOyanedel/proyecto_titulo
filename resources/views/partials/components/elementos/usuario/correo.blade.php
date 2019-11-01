@@ -5,11 +5,12 @@
 
     <div class="col-md-6">
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') == true ? old('email') : $email }}" required autocomplete="email">
-
-        @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+		<small class="text-danger d-none" id="error-email" class="form-text text-muted"></small>
+		<small class="text-secundary d-none" id="comprobar-email" class="form-text text-muted">
+			<div class="spinner-border spinner-border-sm" role="status">
+				<span class="sr-only">Loading...</span>
+			</div> comprobando...		
+		</small>
+		<small class="text-success d-done" id="email-ok" class="form-text text-muted"></small>
     </div>
 </div>

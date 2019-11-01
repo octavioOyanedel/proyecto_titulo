@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h4>Información préstamo</h4>
+                    <h4>Información Préstamo</h4>
                     <div class="table-responsive">                       
                         <table class="table table-hover">
                             <thead></thead>
@@ -36,7 +36,7 @@
                         </table>
                     </div>
                 
-                    <h4>Información cuotas</h4>
+                    <h4>Información Cuotas</h4>
                     <div class="table-responsive">                       
                         <table class="table table-hover">
                             <thead>

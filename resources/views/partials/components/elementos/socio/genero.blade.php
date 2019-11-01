@@ -5,7 +5,7 @@
     <div class="col-md-6">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-outline-secondary {{ $genero == 'Dama' ? 'active focus' : ''}}">
-                <input type="radio" class="w-50" name="genero" id="option1" autocomplete="off" value="Dama"> Dama
+                <input type="radio" class="w-50" name="genero" id="option1" autocomplete="off" value="Dama" required> Dama
             </label>
             <label class="btn btn-outline-secondary {{ $genero == 'Varón' ? 'active focus' : ''}}">
                 <input type="radio" class="w-50" name="genero" id="option2" autocomplete="off" value="Varón"> Varón

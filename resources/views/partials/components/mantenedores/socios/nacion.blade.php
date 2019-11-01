@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('nacionalidades.create') }}">Nueva nacionalidad</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-nacionalidades">
+        <table class="table table-hover data-tables" id="tabla-nacionalidades">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>

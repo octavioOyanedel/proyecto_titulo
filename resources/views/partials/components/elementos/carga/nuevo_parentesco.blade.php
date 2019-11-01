@@ -1,4 +1,4 @@
-@php isset($parentesco) ? $nombre = $parentesco->numero : $nombre = '' @endphp
+@php isset($parentesco) ? $nombre = $parentesco->nombre : $nombre = '' @endphp
 <!-- número parentesco -->
 <div class="form-group row">
     <label for="nombre" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Parentesco') }}</label>

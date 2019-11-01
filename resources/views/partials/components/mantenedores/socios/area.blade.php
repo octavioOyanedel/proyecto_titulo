@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('areas.create') }}">Agregar nueva área</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-areas">
+        <table class="table table-hover data-tables" id="tabla-areas">
             <thead>
                 <tr>
                     <th width="50" class="text-center" scope="col" title=""></th>

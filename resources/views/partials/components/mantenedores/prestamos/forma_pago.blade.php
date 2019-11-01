@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('formas_pago.create') }}">Agregar nueva forma de pago</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-formas-pago">
+        <table class="table table-hover data-tables" id="tabla-formas-pago">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>

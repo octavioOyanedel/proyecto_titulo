@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('situaciones.create') }}">Agregar nuevo estado</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-estados">
+        <table class="table table-hover data-tables" id="tabla-estados">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>

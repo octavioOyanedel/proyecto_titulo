@@ -42,6 +42,9 @@ Route::get('/verificar_rut_carga', 'CargaFamiliarController@verificarRut');
 Route::get('/cargar_instituciones', 'GradoAcademicoInstitucionController@obtenerInstituciones');
 Route::get('/cargar_titulos', 'GradoAcademicoTituloController@obtenerTitulos');
 
+//ajax usuarios
+Route::get('/verificar_correo_usuario', 'UsuarioController@verificarCorreo');
+
 Route::resource('/socios', 'SocioController')->middleware('auth');
 Route::get('/filtro_socios', 'BuscarController@filtroSocios')->name('filtro_socios')->middleware('auth');
 Route::get('/filtro_prestamos', 'BuscarController@filtroPrestamos')->name('filtro_prestamos')->middleware('auth');

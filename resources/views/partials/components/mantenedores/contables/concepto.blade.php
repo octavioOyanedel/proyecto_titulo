@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('conceptos.create') }}">Nuevo concepto</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-conceptos">
+        <table class="table table-hover data-tables" id="tabla-conceptos">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>

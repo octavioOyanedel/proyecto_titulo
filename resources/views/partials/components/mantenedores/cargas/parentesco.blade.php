@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('parentescos.create') }}">Nuevo parentesco</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-parentescos">
+        <table class="table table-hover data-tables" id="tabla-parentescos">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>

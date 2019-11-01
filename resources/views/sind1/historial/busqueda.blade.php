@@ -17,7 +17,7 @@
                     <form method="POST" action="">
                         @csrf  
                         <!-- Fecha inicio -->
-                        <div class="text-center alert alert-secondary" role="alert">Fecha</div>
+                        <div class="text-center alert alert-secondary" role="alert"><b>Fecha</b></div>
                         <div class="form-group row">
                             <label for="fecha_ini" class="col-md-4 col-form-label text-md-right">{{ __('Inicio') }}</label>
                             <div class="col-md-6">

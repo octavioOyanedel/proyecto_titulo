@@ -21,11 +21,11 @@
     @break
     {{-- mantenedor --}}
     @case('mantenedor-prestamos')
-        <script src="{{ asset('js/tablas/data_table_formas_pago.js') }}" defer></script> 
+
     @break
     {{-- listar --}}
     @case('prestamos')
-        <script src="{{ asset('js/tablas/data_table_prestamos.js') }}" defer></script>
+
     @break
     {{-- filtrar --}}
     @case('filtro_prestamos')

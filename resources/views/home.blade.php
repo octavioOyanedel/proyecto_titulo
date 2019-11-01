@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="ml-5 mr-5">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -20,7 +20,7 @@
                         </div>
                     @else                     
                         <div class="table-responsive">
-                            <table class="table table-hover" id="tabla-socios">
+                            <table class="table table-hover data-tables" id="tabla-socios">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-success" scope="col" title=""></th>

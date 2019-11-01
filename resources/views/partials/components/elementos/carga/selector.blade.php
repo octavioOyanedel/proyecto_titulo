@@ -15,7 +15,6 @@
 @switch(request()->path())
     {{-- mantenedor --}}
     @case('mantenedor-cargas')
-        <script src="{{ asset('js/tablas/data_table_parentescos.js') }}" defer></script>
 
     @break
     @default

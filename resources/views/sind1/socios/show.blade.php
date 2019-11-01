@@ -15,7 +15,7 @@
                     @endif
 
                     <div class="table-responsive">
-                        <h4>Información personal</h4>
+                        <h4>Información Personal</h4>
                         <table class="table table-hover">
                             <thead></thead>
                             <tbody>
@@ -45,11 +45,12 @@
                     </div>
 
                     @if($estudios->count() === 0)
-                    <div class="alert alert-warning mt-4 text-center" role="alert">
-                        <b>Socio sin estudios registrados.</b>
-                    </div>
-                    @else 
-                        <h4 class="mt-4">Estudios realizados</h4>   
+                        <div class="alert alert-warning mt-4 text-center" role="alert">
+                            <b>Socio sin estudios registrados.</b>
+                        </div>
+                    @else     
+
+                        <h4 class="mt-4">Estudios Realizados <a href="{{ route('estudios.create') }}" class="btn btn-primary btn-sm d-rigth float-right">Agregar Estudio</a></h4>                      
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -83,7 +84,8 @@
                             <b>Socio sin cargas familiares registrados.</b>
                         </div>
                     @else
-                        <h4 class="mt-4">Cargas familiares</h4>
+
+                        <h4 class="mt-4">Cargas Familiares <a href="{{ route('cargas.create') }}" class="btn btn-primary btn-sm d-rigth float-right">Agregar Carga</a></h4>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -93,7 +95,7 @@
                                         <th scope="col">Nombre</th>
                                         <th class="text-center" scope="col">Rut</th>
                                         <th class="text-center" scope="col">Fecha de nacimiento</th>
-                                        <th class="text-center" scope="col">Parentezco</th>
+                                        <th class="text-center" scope="col">Parentesco</th>
                                     </tr>
                                 </thead>   
                                 <tbody>
@@ -101,7 +103,7 @@
                                         <tr>
                                             <td width="50" class="text-center" scope="row" title="Editar carga familiar"><a class="text-secondary" href="{{ route('cargas.edit', $c->id) }}"><span>@svg('editar')</a></td>
                                             <td width="50" class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" data-toggle="modal" data-target="#eliminar_carga" href="#"><span>@svg('eliminar')</span></td>
-                                            <td>{{ $c->nombre1 }} {{ $c->nombre2 }} {{ $c->apellido1 }} {{ $c->apellido2 }}</td>
+                                            <td>{{ $c->apellido1 }} {{ $c->apellido2 }}, {{ $c->nombre1 }} {{ $c->nombre2 }}</td>
                                             <td class="text-center">{{ $c->rut }}</td>
                                             <td class="text-center">{{ $c->fecha_nac }}</td>
                                             <td class="text-center">{{ $c->parentesco_id }}</td>
@@ -117,7 +119,7 @@
                             <b>Socio sin préstamos registrados.</b>
                         </div>
                     @else  
-                        <h4 class="mt-4">Historial de prestamos</h4>
+                        <h4 class="mt-4">Historial de Prestamos</h4>
                         <div class="table-responsive">
                             <table id="tabla-prestamos-socio" class="table">
                                 <thead>

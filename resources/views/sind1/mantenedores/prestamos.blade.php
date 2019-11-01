@@ -17,7 +17,7 @@
 
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-forma-pago-tab" data-toggle="tab" href="#nav-forma-pago" role="tab" aria-controls="nav-forma-pago" aria-selected="true">Forma de pago</a>
+                            <a class="nav-item nav-link active" id="nav-forma-pago-tab" data-toggle="tab" href="#nav-forma-pago" role="tab" aria-controls="nav-forma-pago" aria-selected="true">Forma de Pago</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">

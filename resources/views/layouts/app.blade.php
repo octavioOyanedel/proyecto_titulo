@@ -42,6 +42,7 @@
 
     <script src="{{ asset('js/data_table.js') }}" defer></script>
     <script src="{{ asset('js/data_table_acentos.js') }}" defer></script>
+    <script src="{{ asset('js/tablas/data_tables.js') }}" defer></script>
 
     <!-- selector de js -->
 

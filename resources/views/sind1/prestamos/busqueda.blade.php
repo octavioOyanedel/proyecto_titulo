@@ -17,7 +17,7 @@
                     <form method="POST" action="">
                         @csrf 
                         <!-- Fecha solicitud inicio -->
-                        <div class="text-center alert alert-secondary" role="alert">Fecha de solicitud</div>
+                        <div class="text-center alert alert-secondary" role="alert"><b>Fecha de solicitud</b></div>
                         <div class="form-group row">
                             <label for="fecha_solicitud_ini" class="col-md-4 col-form-label text-md-right">{{ __('Inicio') }}</label>
                             <div class="col-md-6">
@@ -46,9 +46,9 @@
                         @include('partials.components.elementos.socio.rut') 
 
                         <!-- monto inicio-->
-                        <div class="text-center alert alert-secondary" role="alert">Monto</div>
+                        <div class="text-center alert alert-secondary" role="alert"><b>Monto</b></div>
                         <div class="form-group row">
-                            <label for="monto_ini" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Inicio') }}</label>
+                            <label for="monto_ini" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Mínimo') }}</label>
                             <div class="col-md-6">
                                 <input id="monto_ini" type="text" class="form-control @error('monto_ini') is-invalid @enderror" name="monto_ini" value="{{ old('monto_ini') }}" required autocomplete="monto_ini" autofocus>
                                 @error('monto')
@@ -60,7 +60,7 @@
                         </div>
                         <!-- monto final-->
                         <div class="form-group row">
-                            <label for="monto_fin" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Término') }}</label>
+                            <label for="monto_fin" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Máximo') }}</label>
                             <div class="col-md-6">
                                 <input id="monto_fin" type="text" class="form-control @error('monto_fin') is-invalid @enderror" name="monto_fin" value="{{ old('monto_fin') }}" required autocomplete="monto_fin" autofocus>
                                 @error('monto_fin')

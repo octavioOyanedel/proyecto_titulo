@@ -2,7 +2,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('asociados.create') }}">Nuevo asociado</a> 
 
     <div class="table-responsive">
-        <table class="table table-hover" id="tabla-asociados">
+        <table class="table table-hover data-tables" id="tabla-asociados">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" title=""></th>
