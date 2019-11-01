@@ -24,7 +24,7 @@ class GradoAcademicoController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.nivel.create');
     }
 
     /**
@@ -55,9 +55,10 @@ class GradoAcademicoController extends Controller
      * @param  \App\GradoAcademico  $gradoAcademico
      * @return \Illuminate\Http\Response
      */
-    public function edit(GradoAcademico $gradoAcademico)
+    public function edit($id)
     {
-        //
+        $gradoAcademico = GradoAcademico::findOrFail($id);
+        return view('sind1.nivel.edit', compact('gradoAcademico'));
     }
 
     /**

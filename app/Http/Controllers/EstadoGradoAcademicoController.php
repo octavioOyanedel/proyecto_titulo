@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EstadoGradoAcademico;
+use App\GradoAcademico;
 use Illuminate\Http\Request;
 
 class EstadoGradoAcademicoController extends Controller
@@ -24,7 +25,7 @@ class EstadoGradoAcademicoController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.estado_nivel.create');
     }
 
     /**
@@ -55,9 +56,10 @@ class EstadoGradoAcademicoController extends Controller
      * @param  \App\EstadoGradoAcademico  $estadoGradoAcademico
      * @return \Illuminate\Http\Response
      */
-    public function edit(EstadoGradoAcademico $estadoGradoAcademico)
+    public function edit($id)
     {
-        //
+        $estadoGradoAcademico = EstadoGradoAcademico::findOrFail($id);
+        return view('sind1.estado_nivel.edit', compact('estadoGradoAcademico'));
     }
 
     /**

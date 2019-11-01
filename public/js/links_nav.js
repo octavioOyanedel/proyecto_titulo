@@ -6,7 +6,6 @@ $(window).on('load',function(){
 
 	//alert(ruta);
 
-
 	if(ruta.localeCompare('/home') === 0 || ruta.localeCompare('/filtro_socios') === 0 || ruta.search('socios/') != -1){
 		$('#span-socios').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-socio').removeClass('d-none');
@@ -22,10 +21,8 @@ $(window).on('load',function(){
 		$('#buscador-contable').removeClass('d-none');
 	}
 
-	if(ruta.search('/mantenedor') != -1 || 
-		ruta.search('/usuarios') != -1 || 
-		ruta.localeCompare('/cambiar_password') === 0 || 
-		ruta.localeCompare('/register') === 0 || 
+	if(ruta.search('/mantenedor') != -1 ||  
+		ruta.localeCompare('/cambiar_password') === 0 || 		
 		ruta.search('/sedes') != -1 || 
 		ruta.search('/areas') != -1 || 
 		ruta.search('/cargos') != -1 ||
@@ -35,7 +32,14 @@ $(window).on('load',function(){
 		ruta.search('/cuentas') != -1 ||
 		ruta.search('/bancos') != -1 ||
 		ruta.search('/conceptos') != -1 ||
-		ruta.search('/asociados') != -1){
+		ruta.search('/asociados') != -1 ||
+		ruta.search('/cargas') != -1 ||
+		ruta.search('/estudios') != -1 ||
+		ruta.search('/parentescos') != -1 ||
+		ruta.search('/niveles') != -1 ||
+		ruta.search('/instituciones') != -1 ||
+		ruta.search('/estados') != -1 ||
+		ruta.search('/titulos') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-socio').removeClass('d-none');
 	}
@@ -43,6 +47,11 @@ $(window).on('load',function(){
 	if(ruta.localeCompare('/filtro_historial') === 0 || ruta.localeCompare('/historial') === 0){
 		$('#span-historial').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-socio').removeClass('d-none');
+	}
+
+	if(ruta.localeCompare('/register') === 0 || ruta.search('/usuarios') != -1){
+		$('#span-usuarios').addClass('font-weight-bold text-uppercase text-danger');
+		$('#buscador-usuario').removeClass('d-none');
 	}
 
 });

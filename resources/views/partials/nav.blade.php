@@ -69,7 +69,7 @@
                 </div>
             </li>
 
-            <!-- módulo ayuda -->
+            <!-- módulo historial -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span id="span-historial">Historial</span>
@@ -80,6 +80,17 @@
                 </div>
             </li>
 
+            <!-- módulo usuarios -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span id="span-usuarios">Usuarios</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item sub-item" href="{{ route('register') }}">Agregar</a>
+                    <a class="dropdown-item sub-item" href="{{ route('usuarios.index') }}">Listar</a>
+                </div>
+            </li>
+
             <!-- módulo mantenedor -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,9 +98,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item sub-item" href="{{ route('mantenedor_socios') }}">Socios</a>
+                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_cargas') }}">Cargas Familiares</a>
+                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_estudios') }}">Estudios Realizados</a>
                     <a class="dropdown-item sub-item" href="{{ route('mantenedor_prestamos') }}">Préstamos</a>
                     <a class="dropdown-item sub-item" href="{{ route('mantenedor_contables') }}">Registro contable</a>
-                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_usuarios') }}">Usuarios</a>
                 </div>
             </li> 
             
@@ -123,5 +135,13 @@
             </form>
         </div>
 
+        <!-- formulario búsqueda usuarios-->
+        <div id="buscador-usuario" class="d-none">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="">
+                <button type="button" class="btn btn-sm btn-outline-danger rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de usuario(s) por medio de: primer o segundo nombre, apellido paterno o materno, correo o rol.">?</button>
+                <input class="form-control mr-sm-2" type="search" name="buscar_registro" placeholder="Buscar usuario(s)" aria-label="Search">
+                <button class="btn btn-danger my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
     </div>
 </nav>

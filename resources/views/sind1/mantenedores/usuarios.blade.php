@@ -17,11 +17,11 @@
 
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-usuario-tab" data-toggle="tab" href="#nav-usuario" role="tab" aria-controls="nav-usuario" aria-selected="true">Usuario</a>
+                            <a class="nav-item nav-link active" id="nav-usuario-tab" data-toggle="tab" href="#nav-usuario" role="tab" aria-controls="nav-usuario" aria-selected="true">Rol</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        @include('partials.components.mantenedores.usuarios.usuario')
+                        @include('partials.components.mantenedores.usuarios.rol')
                     </div>
                 </div>
             </div>

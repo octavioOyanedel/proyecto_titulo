@@ -82,4 +82,16 @@ class GradoAcademicoTituloController extends Controller
     {
         //
     }
+
+    // obtener titulos
+    public function obtenerTitulos(Request $request){
+        $coleccion = array();
+        if($request->ajax()){
+            $titulos = GradoAcademicoTitulo::where('titulo_id','=',$request->id)->get();
+            foreach ($titulos as $t) {
+                array_push($coleccion,array('id'=>$t->getOriginal('titulo_id'),'nombre'=>$t->titulo_id));
+            }
+            return response()->json($coleccion);
+        }
+    }  
 }

@@ -1,20 +1,38 @@
-@if(strpos(request()->path(), 'contables') >= 0)        
-    <script src="{{ asset('js/tablas/data_table_contables.js') }}" defer></script>
+@isset($registroContable)
+    @switch(request()->path())
+        {{-- editar --}}
+        @case('contables/'.$registroContable->id.'/edit')
 
-@endif
+        @break
+        {{-- mostrar --}}
+        @case('contables/'.$registroContable->id)
 
-@if(request()->path() === 'contables/create')
-    <script src="{{ asset('js/ajax/validar_cheque_contable_create.js') }}" defer></script>
-    <script src="{{ asset('js/ajax/validar_numero_registro_create.js') }}" defer></script>
-@endif
+        @break
+        @default
+    @endswitch
+@endisset
 
-@if(request()->path() === 'filtro_contables')
-    
-@endif
+@switch(request()->path())
+    {{-- crear --}}
+    @case('contables/create')
+        <script src="{{ asset('js/ajax/validar_cheque_contable_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/validar_numero_registro_create.js') }}" defer></script>
+    @break
+    {{-- mantenedor --}}
+    @case('mantenedor-contables')
+        <script src="{{ asset('js/tablas/data_table_cuentas.js') }}" defer></script>
+        <script src="{{ asset('js/tablas/data_table_conceptos.js') }}" defer></script>
+        <script src="{{ asset('js/tablas/data_table_asociados.js') }}" defer></script>
+        <script src="{{ asset('js/tablas/data_table_bancos.js') }}" defer></script>
 
-@if(request()->path() === 'mantenedor-contables')
-    <script src="{{ asset('js/tablas/data_table_cuentas.js') }}" defer></script>
-    <script src="{{ asset('js/tablas/data_table_conceptos.js') }}" defer></script>
-    <script src="{{ asset('js/tablas/data_table_asociados.js') }}" defer></script>
-    <script src="{{ asset('js/tablas/data_table_bancos.js') }}" defer></script>
-@endif
+    @break
+    {{-- listar --}}
+    @case('contables')
+        <script src="{{ asset('js/tablas/data_table_contables.js') }}" defer></script>
+    @break
+    {{-- filtrar --}}
+    @case('filtro_contables')
+
+    @break    
+    @default
+@endswitch

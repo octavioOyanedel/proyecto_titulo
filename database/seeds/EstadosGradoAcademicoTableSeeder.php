@@ -11,9 +11,10 @@ class EstadosGradoAcademicoTableSeeder extends Seeder
      */
     public function run()
     {
-        App\EstadoGradoAcademico::create(['nombre' => 'Egresado']);
-        App\EstadoGradoAcademico::create(['nombre' => 'Cursando']);
         App\EstadoGradoAcademico::create(['nombre' => 'Incompleto']);
+        App\EstadoGradoAcademico::create(['nombre' => 'Egresado']);
+        App\EstadoGradoAcademico::create(['nombre' => 'Graduado']);
+        App\EstadoGradoAcademico::create(['nombre' => 'Cursando']);
         App\EstadoGradoAcademico::create(['nombre' => 'Titulado']);
     }
 }

@@ -14,6 +14,11 @@ use App\Asociado;
 use App\User;
 use App\Rol;
 use App\Banco;
+use App\Parentesco;
+use App\GradoAcademico;
+use App\Institucion;
+use App\EstadoGradoAcademico;
+use App\Titulo;
 use Illuminate\Http\Request;
 
 class MantenedorController extends Controller
@@ -63,10 +68,24 @@ class MantenedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function usuarios()
+    public function cargas()
     {
-        $usuarios = User::orderBy('nombre1', 'ASC')->get();
-        return view('sind1.mantenedores.usuarios', compact('usuarios'));
+        $parentescos = Parentesco::orderBy('nombre', 'ASC')->get();
+        return view('sind1.mantenedores.cargas', compact('parentescos'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function estudios()
+    {
+        $grados = GradoAcademico::orderBy('nombre', 'ASC')->get();
+        $instituciones = Institucion::orderBy('nombre', 'ASC')->get();
+        $estados = EstadoGradoAcademico::orderBy('nombre', 'ASC')->get();
+        $titulos = Titulo::orderBy('nombre', 'ASC')->get();
+        return view('sind1.mantenedores.estudios', compact('grados', 'instituciones','estados', 'titulos'));
     }
 
 }

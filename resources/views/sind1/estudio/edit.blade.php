@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-7">
+        <div class="col-md-12">
             <div class="card">
                 <div class="text-center card-header"><h3 class="mb-0">Editar Estudio Realizado Socio</h3></div>
 
@@ -20,7 +20,7 @@
                         @include('partials.components.elementos.estudio.grado_academico')
                         @include('partials.components.elementos.estudio.institucion')                    
                         @include('partials.components.elementos.estudio.estado')
-                        @include('partials.components.elementos.estudio.titulo')                        
+                        @include('partials.components.elementos.estudio.titulo')                       
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

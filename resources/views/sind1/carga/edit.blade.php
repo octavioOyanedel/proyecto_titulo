@@ -17,12 +17,13 @@
                     <form method="POST" action="">
                         @csrf
 
+                        @include('partials.components.elementos.carga.rut')
                         @include('partials.components.elementos.carga.nombre1')
-                        @include('partials.components.elementos.carga.nombre1')
+                        @include('partials.components.elementos.carga.nombre2')
                         @include('partials.components.elementos.carga.apellido1')
                         @include('partials.components.elementos.carga.apellido2')
-                        @include('partials.components.elementos.carga.rut')
                         @include('partials.components.elementos.carga.fecha_nac')
+                        @include('partials.components.elementos.carga.parentesco')
                         
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

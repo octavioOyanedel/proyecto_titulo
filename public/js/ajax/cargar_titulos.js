@@ -1,21 +1,18 @@
 $(window).on('load',function(){
 
-	var estado = $('#estado_grado_academico_id');
+	var grado = $('#grado_academico_id');
 	var titulo = $('#titulo_id');
-	var institucion = $('#institucion_id');
 
-	//activar titulo
-	estado.change(function(){
-		var valor_estado = $('#estado_grado_academico_id option:selected').val();
-		if(parseInt(valor_estado) === 4){
-			activarTitulo();
+	grado.change(function(){
+		var id = $('#grado_academico_id option:selected').val();
+
+		if(parseInt(id) === 1){
+			ocultarTitulado();
+
 		}else{
-			desactivarTitulo();
+			mostrarTitulado();
 		}
-	});	
 
-	institucion.change(function(){
-		var id = $('#institucion_id option:selected').val();
 		$.ajax({
 			method: 'GET',
 			dataType: 'json',
@@ -34,12 +31,14 @@ $(window).on('load',function(){
 		});
 	});	
 
-	function activarTitulo(){
-		titulo.removeAttr('disabled');
+	function ocultarTitulado(){
+		$('#estado_grado_academico_id option:contains("Titulado")').hide();
+		$('#estado_grado_academico_id option:contains("Graduado")').show();
 	}
 
-	function desactivarTitulo(){
-		titulo.attr('disabled','true');
+	function mostrarTitulado(){
+		$('#estado_grado_academico_id option:contains("Titulado")').show();
+		$('#estado_grado_academico_id option:contains("Graduado")').hide();
 	}
 
 });

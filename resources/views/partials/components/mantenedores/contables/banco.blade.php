@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="nav-banco" role="tabpanel" aria-labelledby="nav-banco-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="{{ route('bancos.create') }}">Nuevo Banco</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('bancos.create') }}">Nuevo banco</a> 
 
     <div class="table-responsive">
         <table class="table table-hover" id="tabla-bancos">

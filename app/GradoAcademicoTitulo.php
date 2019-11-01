@@ -35,4 +35,15 @@ class GradoAcademicoTitulo extends Model
     {
         return $this->belongsTo('App\Titulo');
     } 
+
+    /**
+     * Modificador de titulo
+     */
+    public function getTituloIdAttribute($valor)
+    {
+        $titulo_id = $valor;
+        $titulo = Titulo::findOrFail($titulo_id);
+        $valor = $titulo->nombre;
+        return $valor;
+    }
 }

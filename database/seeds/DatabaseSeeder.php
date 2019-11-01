@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RegistrosContablesTableSeeder::class);
         $this->call(EstudiosRealizadosSociosTableSeeder::class);       
         $this->call(GradosAcademicosInstitucionesTableSeeder::class);
-        $this->call(InstitucionesTableSeeder::class);
+        $this->call(GradosAcademicosTitulosTableSeeder::class);
         $this->call(InstitucionesTitulosTableSeeder::class);
         // $this->call(UsersTableSeeder::class);
     }

@@ -15,7 +15,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Rol::orderBy('nombre','ASC')->get();
+        $usuarios = User::orderBy('apellido1','ASC')->get();
+        return view('sind1.usuario.index', compact('usuarios','roles'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Institucion;
+use App\GradoAcademico;
 use Illuminate\Http\Request;
 
 class InstitucionController extends Controller
@@ -24,7 +25,8 @@ class InstitucionController extends Controller
      */
     public function create()
     {
-        //
+        $grados = GradoAcademico::orderBy('nombre','ASC')->get();
+        return view('sind1.institucion.create', compact('grados'));
     }
 
     /**
@@ -55,9 +57,11 @@ class InstitucionController extends Controller
      * @param  \App\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Institucion $institucion)
+    public function edit($id)
     {
-        //
+        $grados = GradoAcademico::orderBy('nombre','ASC')->get();
+        $institucion = Institucion::findOrFail($id);
+        return view('sind1.institucion.edit', compact('institucion', 'grados'));
     }
 
     /**

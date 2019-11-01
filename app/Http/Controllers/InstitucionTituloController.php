@@ -83,15 +83,4 @@ class InstitucionTituloController extends Controller
         //
     }
 
-    // obtener titulos
-    public function obtenerTitulos(Request $request){
-        $coleccion = array();
-        if($request->ajax()){
-            $titulos = InstitucionTitulo::where('institucion_id','=',$request->id)->get();
-            foreach ($titulos as $t) {
-                array_push($coleccion,array('id'=>$t->getOriginal('titulo_id'),'nombre'=>$t->titulo_id));
-            }
-            return response()->json($coleccion);
-        }
-    }  
 }

@@ -40,7 +40,7 @@ Route::get('/verificar_rut_carga', 'CargaFamiliarController@verificarRut');
 
 //ajax estudios
 Route::get('/cargar_instituciones', 'GradoAcademicoInstitucionController@obtenerInstituciones');
-Route::get('/cargar_titulos', 'InstitucionTituloController@obtenerTitulos');
+Route::get('/cargar_titulos', 'GradoAcademicoTituloController@obtenerTitulos');
 
 Route::resource('/socios', 'SocioController')->middleware('auth');
 Route::get('/filtro_socios', 'BuscarController@filtroSocios')->name('filtro_socios')->middleware('auth');
@@ -62,11 +62,15 @@ Route::resource('/bancos', 'BancoController')->middleware('auth');
 Route::resource('/asociados', 'AsociadoController')->middleware('auth');
 Route::resource('/historial', 'LogSistemaController')->middleware('auth');
 Route::resource('/usuarios', 'UsuarioController')->middleware('auth');
+Route::resource('/cargas', 'CargaFamiliarController')->middleware('auth');
+Route::resource('/parentescos', 'ParentescoController')->middleware('auth');
+Route::resource('/estudios', 'EstudioRealizadoController')->middleware('auth');
+Route::resource('/niveles', 'GradoAcademicoController')->middleware('auth');
+Route::resource('/instituciones', 'InstitucionController')->middleware('auth');
+Route::resource('/estados', 'EstadoGradoAcademicoController')->middleware('auth');
+Route::resource('/titulos', 'TituloController')->middleware('auth');
 
 Route::get('/cambiar_password', 'UsuarioController@editPassword')->name('usuarios.editPassword')->middleware('auth');
-
-Route::resource('/cargas', 'CargaFamiliarController')->middleware('auth');
-Route::resource('/estudios', 'EstudioRealizadoController')->middleware('auth');
 
 Route::get('/crear-conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar-conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
@@ -74,4 +78,5 @@ Route::post('/mostrar-conciliacion', 'ConciliacionController@mostrar')->name('mo
 Route::get('/mantenedor-socios','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
 Route::get('/mantenedor-prestamos','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
 Route::get('/mantenedor-contables','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
-Route::get('/mantenedor-usuarios','MantenedorController@usuarios')->name('mantenedor_usuarios')->middleware('auth');
+Route::get('/mantenedor-cargas','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');
+Route::get('/mantenedor-estudios','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');

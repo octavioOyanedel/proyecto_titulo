@@ -24,7 +24,7 @@ class ParentescoController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.parentescos.create');
     }
 
     /**
@@ -57,7 +57,8 @@ class ParentescoController extends Controller
      */
     public function edit(Parentesco $parentesco)
     {
-        //
+        $parentescos = Parentesco::orderBy('nombre', 'ASC')->get();
+        return view('sind1.parentescos.edit', compact('parentesco', 'parentescos'));
     }
 
     /**

@@ -10,13 +10,6 @@ $(window).on('load',function(){
 		var id = $('#grado_academico_id option:selected').val();
 
 		limpiarEstado();
-
-		if(parseInt(id) === 1){
-			ocultarTitulo();
-			limpiarTitulo();
-		}else{
-			mostrarTitulo();
-		}
 		
 		$.ajax({
 			method: 'GET',
@@ -43,19 +36,5 @@ $(window).on('load',function(){
 			$('#estado_grado_academico_id option:eq(0)').attr('selected','selected');
 		}
 	}
-
-	function ocultarTitulo(){
-		$('#estado_grado_academico_id option:contains("Titulado")').hide();
-	}
-
-	function mostrarTitulo(){
-		$('#estado_grado_academico_id option:contains("Titulado")').show();
-	}
-
-	function limpiarTitulo(){
-		titulo.empty();
-		titulo.attr('disabled','true');
-		titulo.append('<option selected="true">Seleccione...</option>');		
-	}
-
+	
 });
