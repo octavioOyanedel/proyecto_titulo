@@ -30,14 +30,12 @@ $(window).on('load',function(){
 				url: '/verificar_rut',
 				data: {elemento: valor},
 				success: function(respuesta){						
-					if(comprobarRuta() === -1){
-						valido();
+					if(comprobarRuta() === -1 && respuesta === valor){
+						valido();					
+					}else if(respuesta === valor){
+						yaRegistrado();
 					}else{
-						if(respuesta === 1){
-							yaRegistrado();
-						}else{
-							valido();
-						}					
+						valido();
 					}
 				},
 				error: function(respuesta){

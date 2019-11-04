@@ -8,46 +8,26 @@ $(window).on('load',function(){
 	var valor = '';
 	var ok = $('#correo-ok');
 	var error = $('#error-correo');
+	var original = '';
 
 	//reset mensajes
 	limpiarMensajes();
 
+	//capturar valor original
+	original = formatearEntrada(elemento.val());
+
 	//capturar evento
 	elemento.focusout( function(){ //keyup - focusout
+
+		//formatear valor de entrada
+		valor = formatearEntrada(elemento.val());
 
 		limpiarMensajes();
 		mostrarSpin();	
 
-		//formatear valor de entrada
-		valor = formatearEntrada(elemento.val());	
-
 		//condiciones que se deben cumplir para llamar a funcion ajax
 		if(valor.length >= 5 && valor.length <= 50 && valor != '' &&  validarFormato() != null){
-			//comprobar si es form create o edit, si es -1 no hay match (edit)
-			if(comprobarRuta() === -1){ 	
-				valido();
-			}else{
-				$.ajax({
-					method: 'GET',
-					dataType: 'json',
-					url: '/verificar_correo',
-					data: {elemento: valor},
-					success: function(respuesta){						
-						if(comprobarRuta() === -1){
-							valido();
-						}else{
-							if(respuesta === 1){
-								yaRegistrado();
-							}else{
-								valido();
-							}					
-						}
-					},
-					error: function(respuesta){
-						console.log('ERROR: '+respuesta);
-					}
-				});	
-			}
+			
 		}else{
 			invalido();
 		}
