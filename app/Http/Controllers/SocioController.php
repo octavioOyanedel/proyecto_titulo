@@ -112,9 +112,10 @@ class SocioController extends Controller
      */
     public function verificarRut(Request $request) 
     {
+        $socio = null;
         if ($request->ajax()) {
-            $socio = Socio::where('rut','=',$request->elemento)->get();
-            if(count($socio) != 0){
+            $socios = Socio::where('rut','=',$request->elemento)->get();
+            if(count($socios) != 0){
                 return response()->json(1); //si existe
             }else{
                 return response()->json(0);
@@ -132,8 +133,8 @@ class SocioController extends Controller
     public function verificarNumeroSocio(Request $request) 
     {
         if ($request->ajax()) {
-            $socio = Socio::where('numero_socio','=',$request->elemento)->get();
-            if(count($socio) != 0){
+            $socios = Socio::where('numero_socio','=',$request->elemento)->get();
+            if(count($socios) != 0){
                 return response()->json(1); //si existe
             }else{
                 return response()->json(0);
@@ -151,8 +152,8 @@ class SocioController extends Controller
     public function verificarCorreo(Request $request) 
     {
         if ($request->ajax()) {
-            $socio = Socio::where('correo','=',trim($request->elemento))->get();
-            if(count($socio) != 0){
+            $socios = Socio::where('correo','=',trim($request->elemento))->get();
+            if(count($socios) != 0){
                 return response()->json(1); //si existe
             }else{
                 return response()->json(0);

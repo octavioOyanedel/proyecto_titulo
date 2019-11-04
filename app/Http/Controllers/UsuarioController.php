@@ -107,7 +107,7 @@ class UsuarioController extends Controller
     public function verificarCorreo(Request $request) 
     {
         if ($request->ajax()) {
-            $usuario = User::where('email','=',trim($request->elemento))->get();
+            $usuario = User::where('email','=',$request->elemento)->get();
             if(count($usuario) != 0){
                 return response()->json(1); //si existe
             }else{

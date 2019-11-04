@@ -1,88 +1,100 @@
 $(window).on('load',function(){
 
+	//variables
 	var elemento = $('#correo');
-	var error = $('#error-correo');
+	var patron = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 	var spin = $('#comprobar-correo');
-	var ok = $('#correo-ok');
-	//var boton = $('#incorporar');
-
 	var ruta = window.location.pathname;
+	var valor = '';
+	var ok = $('#correo-ok');
+	var error = $('#error-correo');
 
-	elemento.keyup( function(){
+	//reset mensajes
+	limpiarMensajes();
+
+	//capturar evento
+	elemento.focusout( function(){ //keyup - focusout
 
 		limpiarMensajes();
+		mostrarSpin();	
 
-		if(elemento.val().length === 0){
-			limpiarMensajes();		
-		}
+		//formatear valor de entrada
+		valor = formatearEntrada(elemento.val());	
 
-		if(elemento.val().length < 2){
-			ocultarSpin()
-		}
-
-		if(elemento.val().length > 4 && elemento.val().length < 50){
-			mostrarSpin();
-			$.ajax({
-				method: 'GET',
-				dataType: 'json',
-				url: '/verificar_correo',
-				data: {elemento: elemento.val()},
-				success: function(respuesta){
-					limpiarMensajes();	
-
-					if(ruta.search('edit') != -1){
-						validarCorreo();
-					}else{
-						if(respuesta === 1){
-							ocultarSpin()
-							//desactivarBoton();
-							error.removeClass('d-none').append('Correo ya registrado.');				
+		//condiciones que se deben cumplir para llamar a funcion ajax
+		if(valor.length >= 5 && valor.length <= 50 && valor != '' &&  validarFormato() != null){
+			//comprobar si es form create o edit, si es -1 no hay match (edit)
+			if(comprobarRuta() === -1){ 	
+				valido();
+			}else{
+				$.ajax({
+					method: 'GET',
+					dataType: 'json',
+					url: '/verificar_correo',
+					data: {elemento: valor},
+					success: function(respuesta){						
+						if(comprobarRuta() === -1){
+							valido();
 						}else{
-							validarCorreo();
-						}						
+							if(respuesta === 1){
+								yaRegistrado();
+							}else{
+								valido();
+							}					
+						}
+					},
+					error: function(respuesta){
+						console.log('ERROR: '+respuesta);
 					}
-
-				},
-				error: function(respuesta){
-					console.log('ERROR: '+respuesta);
-				}
-			});	
-		}		
+				});	
+			}
+		}else{
+			invalido();
+		}
+		
 	});
 
-
-	function limpiarMensajes(){
-		error.addClass('d-none').empty();
-		ok.addClass('d-none').empty();
+	function valido(){
+		limpiarMensajes();	
+		ok.removeClass('d-none').append('Correo válido.');
+		ocultarSpin();
 	}
 
-	function ocultarSpin(){
-		spin.addClass('d-none');
+	function invalido(){
+		limpiarMensajes();
+		error.removeClass('d-none').append('Correo no válido.');
+		ocultarSpin();
+	}
+
+	function yaRegistrado(){
+		limpiarMensajes();	
+		error.removeClass('d-none').append('Correo ya registrado.');
+		ocultarSpin();		
+	}
+
+	function comprobarRuta(){
+		return ruta.search('create');
+	}
+
+	function formatearEntrada(texto){
+		return texto.trim().toLowerCase();
+	}
+
+	function validarFormato(){
+		return valor.match(patron);
 	}
 
 	function mostrarSpin(){
 		spin.removeClass('d-none');
 	}
 
-	function activarBoton(){
-		boton.removeAttr('disabled');
+	function ocultarSpin(){
+		spin.addClass('d-none');
 	}
 
-	function desactivarBoton(){
-		boton.attr('disabled','true');
-	}
-
-	function validarCorreo(){
-		var patron = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-		if(!elemento.val().search(patron)){
-			ocultarSpin();
-			//activarBoton();
-			ok.removeClass('d-none').append('Correo válido.');
-		}else{
-			ocultarSpin();
-			//desactivarBoton();
-			error.removeClass('d-none').append('Correo no válido.');
-		}			
+	function limpiarMensajes(){
+		error.addClass('d-none').empty();
+		ok.addClass('d-none').empty();
 	}
 
 });

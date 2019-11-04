@@ -1,73 +1,108 @@
 $(window).on('load',function(){
 
+	//variables
 	var elemento = $('#rut');
-	var error = $('#error-rut');
+	var patron = '[1-9]{1,2}[0-9]{3}[0-9]{3}[0-9Kk]{1}';
 	var spin = $('#comprobar-rut');
+	var ruta = window.location.pathname;
+	var valor = '';
 	var ok = $('#rut-ok');
+	var error = $('#error-rut');
 	var boton = $('#incorporar');
 
-	elemento.keyup( function(){
+	//reset mensajes
+	limpiarMensajes();
+
+	//capturar evento
+	elemento.focusout( function(){ //keyup - focusout
 
 		limpiarMensajes();
+		mostrarSpin();	
 
-		if(elemento.val().length === 0){
-			limpiarMensajes();		
-		}
+		//formatear valor de entrada
+		valor = formatearEntrada(elemento.val());	
 
-		if(elemento.val().length < 5){
-			ocultarSpin()
-		}
-
-		if(elemento.val().length > 6 && elemento.val().length < 10){
-			mostrarSpin();
+		//condiciones que se deben cumplir para llamar a funcion ajax
+		if(valor.length >= 8 && valor.length <= 9 && valor != '' &&  validarFormato() != null && validarRut(valor) === true){
 			$.ajax({
 				method: 'GET',
 				dataType: 'json',
 				url: '/verificar_rut_prestamo',
-				data: {elemento: elemento.val()},
-				success: function(respuesta){
-					limpiarMensajes();				
-					if(validarRut(elemento.val()) === true){
-						if(respuesta === 0){
-							ocultarSpin();
-							desactivarBoton();
-							error.removeClass('d-none').append('Rut no registrado.');				
-						}						
-						if(respuesta === 1){
-							ocultarSpin();
-							desactivarBoton();
-							error.removeClass('d-none').append('Socio presenta préstamo pendiente.');							
-						}
-						if(respuesta === 2){
-							ocultarSpin();
-							activarBoton();
-							ok.removeClass('d-none').append('Socio no presenta préstamo pendiente.');						
-						}
+				data: {elemento: valor},
+				success: function(respuesta){						
+					if(comprobarRuta() === -1){
+						valido();
 					}else{
-						ocultarSpin();
-						desactivarBoton();
-						error.removeClass('d-none').append('Rut no válido.');
+						if(respuesta === 1){
+							prestamoPendiente();
+						}else if(respuesta === 2){
+							valido();
+						}else{
+							noRegistrado();
+						}					
 					}
 				},
 				error: function(respuesta){
 					console.log('ERROR: '+respuesta);
 				}
 			});	
-		}		
+		}else{
+			invalido();
+		}
+		
 	});
 
+	function valido(){
+		activarBoton();
+		limpiarMensajes();	
+		ok.removeClass('d-none').append('Socio no presenta préstamo pendiente.');
+		ocultarSpin();
+	}
 
-	function limpiarMensajes(){
-		error.addClass('d-none').empty();
-		ok.addClass('d-none').empty();
+	function invalido(){
+		desactivarBoton();
+		limpiarMensajes();
+		error.removeClass('d-none').append('Rut no válido.');
+		ocultarSpin();
+	}
+
+	function noRegistrado(){
+		desactivarBoton();
+		limpiarMensajes();
+		error.removeClass('d-none').append('Socio no registrado.');
+		ocultarSpin();
+	}
+
+	function prestamoPendiente(){
+		desactivarBoton();
+		limpiarMensajes();	
+		error.removeClass('d-none').append('Socio presenta préstamo pendiente.');
+		ocultarSpin();		
+	}
+
+	function comprobarRuta(){
+		return ruta.search('create');
+	}
+
+	function formatearEntrada(texto){
+		return texto.trim().toLowerCase();
+	}
+
+	function validarFormato(){
+		return valor.match(patron);
+	}
+
+	function mostrarSpin(){
+		spin.removeClass('d-none');
 	}
 
 	function ocultarSpin(){
 		spin.addClass('d-none');
 	}
 
-	function mostrarSpin(){
-		spin.removeClass('d-none');
+	function limpiarMensajes(){
+		error.addClass('d-none').empty();
+		ok.addClass('d-none').empty();
 	}
 
 	function activarBoton(){
@@ -79,10 +114,6 @@ $(window).on('load',function(){
 	}
 
 	function validarRut(rut){
-
-		var rut = rut.trim().toLowerCase();
-
-		var patron = '[1-9]{1,2}[0-9]{3}[0-9]{3}[0-9Kk]{1}';
 
 		if(rut.match(patron) != null || rut.match(patron) != rut){
 		    var dv = rut[rut.length-1];
@@ -121,5 +152,4 @@ $(window).on('load',function(){
 		    return false; 
 		}		
 	}
-
 });
