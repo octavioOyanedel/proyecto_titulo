@@ -27,7 +27,22 @@ $(window).on('load',function(){
 
 		//condiciones que se deben cumplir para llamar a funcion ajax
 		if(valor.length >= 5 && valor.length <= 50 && valor != '' &&  validarFormato() != null){
-			
+			//form editar
+			if(comprobarRuta() === -1){
+				//si vaslor original es distinto de vacío
+				if(original != ''){
+					//si campos no son iguales
+					if(original != valor){
+						
+					}else{
+
+					}
+				}
+			}
+			//form crear
+			else{
+
+			}
 		}else{
 			invalido();
 		}
