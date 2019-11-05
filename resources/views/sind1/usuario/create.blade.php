@@ -24,10 +24,11 @@
                         @include('partials.components.elementos.usuario.apellido1') 
                         @include('partials.components.elementos.usuario.apellido2') 
                         @include('partials.components.elementos.usuario.correo')
-                        @include('partials.components.elementos.usuario.roles')       
+                        <hr>
                         @include('partials.components.elementos.usuario.pass')  
-                        @include('partials.components.elementos.usuario.confirmar_pass')                     
-
+                        @include('partials.components.elementos.usuario.confirmar_pass')  
+                        <hr>
+                        @include('partials.components.elementos.usuario.roles')  
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

@@ -9,44 +9,64 @@ $(window).on('load',function(){
 	var ok = $('#rut-ok');
 	var error = $('#error-rut');
 	var boton = $('#incorporar');
+	var original = '';
 
 	//reset mensajes
 	limpiarMensajes();
 
+	//capturar valor original
+	original = formatearEntrada(elemento.val());
+
 	//capturar evento
 	elemento.focusout( function(){ //keyup - focusout
+
+		//formatear valor de entrada
+		valor = formatearEntrada(elemento.val());
 
 		limpiarMensajes();
 		mostrarSpin();	
 
-		//formatear valor de entrada
-		valor = formatearEntrada(elemento.val());	
-
 		//condiciones que se deben cumplir para llamar a funcion ajax
 		if(valor.length >= 8 && valor.length <= 9 && valor != '' &&  validarFormato() != null && validarRut(valor) === true){
-			$.ajax({
-				method: 'GET',
-				dataType: 'json',
-				url: '/verificar_rut',
-				data: {elemento: valor},
-				success: function(respuesta){						
-					if(comprobarRuta() === -1 && respuesta === valor){
-						valido();					
-					}else if(respuesta === valor){
-						yaRegistrado();
+			//form editar
+			if(comprobarRuta() === -1){
+				//si valor original es distinto de vacío
+				if(original != ''){
+					//si campos no son iguales
+					if(original != valor){
+						consultaAjax(valor);
 					}else{
 						valido();
 					}
-				},
-				error: function(respuesta){
-					console.log('ERROR: '+respuesta);
 				}
-			});	
+			}
+			//form crear
+			else{
+				consultaAjax(valor);
+			}
 		}else{
 			invalido();
 		}
-		
 	});
+
+	function consultaAjax(valor){
+		$.ajax({
+			method: 'GET',
+			dataType: 'json',
+			url: '/verificar_rut',
+			data: {elemento: valor},
+			success: function(respuesta){												
+				if(respuesta === 1){
+					yaRegistrado();
+				}else{
+					valido();
+				}
+			},
+			error: function(respuesta){
+				console.log('ERROR: '+respuesta);
+			}
+		});		
+	}
 
 	function valido(){
 		activarBoton();

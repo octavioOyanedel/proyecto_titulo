@@ -1,5 +1,5 @@
 <div class="tab-pane fade show active" id="nav-parentesco" role="tabpanel" aria-labelledby="nav-parentesco-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="{{ route('parentescos.create') }}">Nuevo parentesco</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('parentescos.create') }}">Agregar Parentesco</a> 
 
     <div class="table-responsive">
         <table class="table table-hover data-tables" id="tabla-parentescos">

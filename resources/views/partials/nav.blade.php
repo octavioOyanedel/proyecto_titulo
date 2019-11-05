@@ -38,8 +38,8 @@
                     <span id="span-socios">Socios</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item sub-item" href="{{ route('home') }}">Listar</a>
                     <a class="dropdown-item sub-item" href="{{ route('socios.create') }}">Incorporar</a>
+                    <a class="dropdown-item sub-item" href="{{ route('home') }}">Listar</a>
                     <a class="dropdown-item sub-item" href="{{ route('filtro_socios') }}">Filtrar</a>
                 </div>
             </li>
@@ -137,9 +137,9 @@
 
         <!-- formulario búsqueda usuarios-->
         <div id="buscador-usuario" class="d-none">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="">
-                <button type="button" class="btn btn-sm btn-outline-danger rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de usuario(s) por medio de: primer o segundo nombre, apellido paterno o materno, correo o rol.">?</button>
-                <input class="form-control mr-sm-2" type="search" name="buscar_registro" placeholder="Buscar usuario(s)" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('usuarios.index') }}">
+                <button type="button" class="btn btn-sm btn-outline-danger rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de usuario(s) por medio de: primer o segundo nombre, apellido paterno o materno y correo.">?</button>
+                <input class="form-control mr-sm-2" type="search" name="buscar_usuario" placeholder="Buscar usuario(s)" aria-label="Search">
                 <button class="btn btn-danger my-2 my-sm-0" type="submit">Buscar</button>
             </form>
         </div>

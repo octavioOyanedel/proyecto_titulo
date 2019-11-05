@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="nav-cargo" role="tabpanel" aria-labelledby="nav-cargo-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="{{ route('cargos.create') }}">Agregar nuevo cargo</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('cargos.create') }}">Agregar Cargo</a> 
 
     <div class="table-responsive">
         <table class="table table-hover data-tables" id="tabla-cargos">

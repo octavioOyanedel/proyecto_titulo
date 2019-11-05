@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="nav-concepto" role="tabpanel" aria-labelledby="nav-concepto-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="{{ route('conceptos.create') }}">Nuevo concepto</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('conceptos.create') }}">Agregar Concepto</a> 
 
     <div class="table-responsive">
         <table class="table table-hover data-tables" id="tabla-conceptos">

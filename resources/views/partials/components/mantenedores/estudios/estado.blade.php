@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="nav-estado" role="tabpanel" aria-labelledby="nav-estado-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="{{ route('estados.create') }}">Nuevo estado nivel educacional</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('estados.create') }}">Agregar Estado</a> 
 
     <div class="table-responsive">
         <table class="table table-hover data-tables" id="tabla-estados">

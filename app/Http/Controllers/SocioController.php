@@ -115,11 +115,8 @@ class SocioController extends Controller
         $socio = null;
         if ($request->ajax()) {
             $socios = Socio::where('rut','=',$request->elemento)->get();
-            foreach ($socios as $key) {
-                $socio = $key;
-            }
             if(count($socios) != 0){
-                return response()->json($socio->getOriginal('rut')); //si existe
+                return response()->json(1); //si existe
             }else{
                 return response()->json(0);
             }
@@ -137,11 +134,8 @@ class SocioController extends Controller
     {
         if ($request->ajax()) {
             $socios = Socio::where('numero_socio','=',$request->elemento)->get();
-            foreach ($socios as $key) {
-                $socio = $key;
-            }
             if(count($socios) != 0){
-                return response()->json($socio->getOriginal('numero_socio')); //si existe
+                return response()->json(1); //si existe
             }else{
                 return response()->json(0);
             }

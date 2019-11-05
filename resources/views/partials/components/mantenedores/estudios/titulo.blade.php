@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="nav-titulo" role="tabpanel" aria-labelledby="nav-titulo-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="{{ route('titulos.create') }}">Nuevo Título</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('titulos.create') }}">Agregar Título</a> 
 
     <div class="table-responsive">
         <table class="table table-hover data-tables" id="tabla-titulos">

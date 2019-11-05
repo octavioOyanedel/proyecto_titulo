@@ -29,25 +29,43 @@ $(window).on('load',function(){
 		if(valor.length >= 5 && valor.length <= 50 && valor != '' &&  validarFormato() != null){
 			//form editar
 			if(comprobarRuta() === -1){
-				//si vaslor original es distinto de vacío
+				//si valor original es distinto de vacío
 				if(original != ''){
 					//si campos no son iguales
 					if(original != valor){
-						
+						consultaAjax(valor);
 					}else{
-
+						valido();
 					}
 				}
 			}
 			//form crear
 			else{
-
+				consultaAjax(valor);
 			}
 		}else{
 			invalido();
 		}
-		
 	});
+
+	function consultaAjax(valor){
+		$.ajax({
+			method: 'GET',
+			dataType: 'json',
+			url: '/verificar_correo',
+			data: {elemento: valor},
+			success: function(respuesta){												
+				if(respuesta === 1){
+					yaRegistrado();
+				}else{
+					valido();
+				}
+			},
+			error: function(respuesta){
+				console.log('ERROR: '+respuesta);
+			}
+		});		
+	}
 
 	function valido(){
 		limpiarMensajes();	

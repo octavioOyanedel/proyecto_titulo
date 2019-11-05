@@ -9,79 +9,84 @@ $(window).on('load',function(){
 	var ok = $('#numero-ok');
 	var error = $('#error-numero');
 	var boton = $('#incorporar');
+	var original = '';
 
 	//reset mensajes
 	limpiarMensajes();
 
+	//capturar valor original
+	original = formatearEntrada(elemento.val());
+
 	//capturar evento
 	elemento.focusout( function(){ //keyup - focusout
 
-		limpiarMensajes();
-		mostrarSpin();	
-
 		//formatear valor de entrada
-		valor = formatearEntrada(elemento.val());	
+		valor = formatearEntrada(elemento.val());
+
+		limpiarMensajes();
+		mostrarSpin();		
 
 		//condiciones que se deben cumplir para llamar a funcion ajax
 		if(valor.length >= 1 && valor.length <= 4 && valor != '' &&  validarFormato() != null){
-			//comprobar si es form create o edit, si es -1 no hay match (edit)
-			if(comprobarRuta() === -1){ 	
-				valido();
-			}else{
-				$.ajax({
-					method: 'GET',
-					dataType: 'json',
-					url: '/verificar_numero_registro',
-					data: {elemento: valor},
-					success: function(respuesta){						
-						if(comprobarRuta() === -1){
-							valido();
-						}else{
-							if(respuesta === 1){
-								yaRegistrado();
-							}else{
-								valido();
-							}					
-						}
-					},
-					error: function(respuesta){
-						console.log('ERROR: '+respuesta);
+			//form editar
+			if(comprobarRuta() === -1){
+				//si valor original es distinto de vacío
+				if(original != ''){
+					//si campos no son iguales
+					if(original != valor){
+						consultaAjax(valor);
+					}else{
+						valido();
 					}
-				});	
+				}
+			}
+			//form crear
+			else{
+				consultaAjax(valor);
 			}
 		}else{
 			invalido();
-		}
-		
+		}			
 	});
+
+	function consultaAjax(valor){
+		$.ajax({
+			method: 'GET',
+			dataType: 'json',
+			url: '/verificar_numero_registro',
+			data: {elemento: valor},
+			success: function(respuesta){												
+				if(respuesta === 1){
+					yaRegistrado();
+				}else{
+					valido();
+				}
+			},
+			error: function(respuesta){
+				console.log('ERROR: '+respuesta);
+			}
+		});		
+	}
 
 	function valido(){
 		activarBoton();
 		limpiarMensajes();	
-		ok.removeClass('d-none').append('Número de registro válido.');
+		ok.removeClass('d-none').append('Número de registro contable válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
 		desactivarBoton();
 		limpiarMensajes();
-		error.removeClass('d-none').append('Número de registro no válido.');
+		error.removeClass('d-none').append('Número de registro contable no válido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
 		desactivarBoton();
 		limpiarMensajes();	
-		error.removeClass('d-none').append('Número de registro ya registrado.');
+		error.removeClass('d-none').append('Número de registro contable ya registrado.');
 		ocultarSpin();		
-	}
-
-	function activarBoton(){
-		boton.removeAttr('disabled');
-	}
-
-	function desactivarBoton(){
-		boton.attr('disabled','true');
 	}
 
 	function comprobarRuta(){
@@ -109,4 +114,11 @@ $(window).on('load',function(){
 		ok.addClass('d-none').empty();
 	}
 
+	function activarBoton(){
+		boton.removeAttr('disabled');
+	}
+
+	function desactivarBoton(){
+		boton.attr('disabled','true');
+	}
 });

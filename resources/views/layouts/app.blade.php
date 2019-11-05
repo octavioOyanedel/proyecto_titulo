@@ -35,7 +35,7 @@
         <main class="py-4 margen-container-nav">
             @yield('content')
         </main>
-        {{ request()->path() }}
+        
     </div>
 
 </body>

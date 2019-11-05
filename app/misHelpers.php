@@ -6,7 +6,7 @@
     function esObligatorio($cadena)
     {
         if(strpos($cadena, 'filtro') === FALSE){
-            return '*';
+            return '(*)';
         } else {
             return '';
         }       

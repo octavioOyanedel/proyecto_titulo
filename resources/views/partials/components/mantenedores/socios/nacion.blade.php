@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="nav-nacionalidad" role="tabpanel" aria-labelledby="nav-nacionalidad-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="{{ route('nacionalidades.create') }}">Nueva nacionalidad</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('nacionalidades.create') }}">Agregar Nacionalidad</a> 
 
     <div class="table-responsive">
         <table class="table table-hover data-tables" id="tabla-nacionalidades">

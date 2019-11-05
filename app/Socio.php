@@ -46,6 +46,7 @@ class Socio extends Model
             return $query->orWhere('rut', 'LIKE', "%$rut%");
         }
     }
+    
     /**
      * scope busqueda por nombre 1
      */

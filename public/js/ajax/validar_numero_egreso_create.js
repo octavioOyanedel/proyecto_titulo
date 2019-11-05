@@ -7,67 +7,80 @@ $(window).on('load',function(){
 	var valor = '';	
 	var ok = $('#numero-egreso-ok');
 	var error = $('#error-numero-egreso');
+	var original = '';
 
 	//reset mensajes
 	limpiarMensajes();
 
+	//capturar valor original
+	original = formatearEntrada(elemento.val());
+
 	//capturar evento
 	elemento.focusout( function(){ //keyup - focusout
 
-		limpiarMensajes();
-		mostrarSpin();	
-
 		//formatear valor de entrada
-		valor = formatearEntrada(elemento.val());	
+		valor = formatearEntrada(elemento.val());
+
+		limpiarMensajes();
+		mostrarSpin();		
 
 		//condiciones que se deben cumplir para llamar a funcion ajax
 		if(valor.length >= 1 && valor.length <= 4 && valor != '' &&  validarFormato() != null){
-			//comprobar si es form create o edit, si es -1 no hay match (edit)
-			if(comprobarRuta() === -1){ 	
-				valido();
-			}else{
-				$.ajax({
-					method: 'GET',
-					dataType: 'json',
-					url: '/verificar_numero_egreso',
-					data: {elemento: valor},
-					success: function(respuesta){						
-						if(comprobarRuta() === -1){
-							valido();
-						}else{
-							if(respuesta === 1){
-								yaRegistrado();
-							}else{
-								valido();
-							}					
-						}
-					},
-					error: function(respuesta){
-						console.log('ERROR: '+respuesta);
+			//form editar
+			if(comprobarRuta() === -1){
+				//si valor original es distinto de vacío
+				if(original != ''){
+					//si campos no son iguales
+					if(original != valor){
+						consultaAjax(valor);
+					}else{
+						valido();
 					}
-				});	
+				}
+			}
+			//form crear
+			else{
+				consultaAjax(valor);
 			}
 		}else{
 			invalido();
-		}
-		
+		}			
 	});
+
+	function consultaAjax(valor){
+		$.ajax({
+			method: 'GET',
+			dataType: 'json',
+			url: '/verificar_numero_egreso',
+			data: {elemento: valor},
+			success: function(respuesta){												
+				if(respuesta === 1){
+					yaRegistrado();
+				}else{
+					valido();
+				}
+			},
+			error: function(respuesta){
+				console.log('ERROR: '+respuesta);
+			}
+		});		
+	}
 
 	function valido(){
 		limpiarMensajes();	
-		ok.removeClass('d-none').append('Número de socio válido.');
+		ok.removeClass('d-none').append('Número de egreso válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
 		limpiarMensajes();
-		error.removeClass('d-none').append('Número de socio no válido.');
+		error.removeClass('d-none').append('Número de egreso no válido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
 		limpiarMensajes();	
-		error.removeClass('d-none').append('Número de socio ya registrado.');
+		error.removeClass('d-none').append('Número de egreso ya registrado.');
 		ocultarSpin();		
 	}
 

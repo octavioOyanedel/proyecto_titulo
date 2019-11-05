@@ -42,6 +42,53 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * scope busqueda por nombre 1
+     */
+    public function scopeNombre1($query, $nombre1)
+    {
+        if ($nombre1) {
+            return $query->orWhere('nombre1', 'LIKE', "%$nombre1%");
+        }
+    }
+    /**
+     * scope busqueda por nombre 2
+     */
+    public function scopeNombre2($query, $nombre2)
+    {
+        if ($nombre2) {
+            return $query->orWhere('nombre2', 'LIKE', "%$nombre2%");
+        }
+    }
+    /**
+     * scope busqueda por apellido 1
+     */
+    public function scopeApellido1($query, $apellido1)
+    {
+        if ($apellido1) {
+            return $query->orWhere('apellido1', 'LIKE', "%$apellido1%");
+        }
+    }
+
+    /**
+     * scope busqueda por apellido 2
+     */
+    public function scopeApellido2($query, $apellido2)
+    {
+        if ($apellido2) {
+            return $query->orWhere('apellido2', 'LIKE', "%$apellido2%");
+        }
+    }
+
+    /**
+     * scope busqueda por anexo
+     */
+    public function scopeEmail($query, $correo)
+    {
+        if ($correo) {
+            return $query->orWhere('email', 'LIKE', "%$correo%");
+        }
+    }
 
     /**
      * Relación 

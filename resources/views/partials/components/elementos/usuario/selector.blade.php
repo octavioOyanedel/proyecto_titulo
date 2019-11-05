@@ -16,6 +16,7 @@
     {{-- crear --}}
     @case('register')
     	<script src="{{ asset('js/ajax/validar_correo_usuarios_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/validar_password_create.js') }}" defer></script>
     @break
     {{-- mantenedor --}}
     @case('mantenedor-usuarios')

@@ -1,5 +1,5 @@
 <div class="tab-pane fade show active" id="nav-nivel" role="tabpanel" aria-labelledby="nav-nivel-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="{{ route('niveles.create') }}">Nuevo nivel educacional</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('niveles.create') }}">Agregar Nivel Educacional</a> 
 
     <div class="table-responsive">
         <table class="table table-hover data-tables" id="tabla-niveles">

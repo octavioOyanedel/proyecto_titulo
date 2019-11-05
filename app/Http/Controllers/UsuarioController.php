@@ -13,10 +13,17 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $roles = Rol::orderBy('nombre','ASC')->get();
-        $usuarios = User::orderBy('apellido1','ASC')->get();
+        $campo = $request->get('buscar_usuario');
+        $usuarios = User::orderBy('apellido1','ASC')
+        ->nombre1($campo)
+        ->nombre2($campo)
+        ->apellido1($campo)
+        ->apellido2($campo)
+        ->email($campo)
+        ->get();
         return view('sind1.usuario.index', compact('usuarios','roles'));
     }
 

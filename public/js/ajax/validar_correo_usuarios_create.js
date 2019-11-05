@@ -9,6 +9,7 @@ $(window).on('load',function(){
 	var ok = $('#email-ok');
 	var error = $('#error-email');
 	var boton = $('#incorporar');
+	var original = '';
 
 	if(comprobarRuta() === -1){
 		activarBoton();
@@ -17,70 +18,73 @@ $(window).on('load',function(){
 	//reset mensajes
 	limpiarMensajes();
 
+	//capturar valor original
+	original = formatearEntrada(elemento.val());
+
 	//capturar evento
 	elemento.focusout( function(){ //keyup - focusout
+
+		//formatear valor de entrada
+		valor = formatearEntrada(elemento.val());
 
 		limpiarMensajes();
 		mostrarSpin();	
 
-		//formatear valor de entrada
-		valor = formatearEntrada(elemento.val());	
-
 		//condiciones que se deben cumplir para llamar a funcion ajax
 		if(valor.length >= 5 && valor.length <= 50 && valor != '' &&  validarFormato() != null){
-			//comprobar si es form create o edit, si es -1 no hay match (edit)
-			if(comprobarRuta() === -1){ 	
-				valido();
-			}else{
-				$.ajax({
-					method: 'GET',
-					dataType: 'json',
-					url: '/verificar_correo_usuario',
-					data: {elemento: valor},
-					success: function(respuesta){						
-						if(comprobarRuta() === -1){
-							valido();
-						}else{
-							if(respuesta === 1){
-								yaRegistrado();
-							}else{
-								valido();
-							}					
-						}
-					},
-					error: function(respuesta){
-						console.log('ERROR: '+respuesta);
+			//form editar
+			if(comprobarRuta() === -1){
+				//si valor original es distinto de vacío
+				if(original != ''){
+					//si campos no son iguales
+					if(original != valor){
+						consultaAjax(valor);
+					}else{
+						valido();
 					}
-				});	
+				}
+			}
+			//form crear
+			else{
+				consultaAjax(valor);
 			}
 		}else{
 			invalido();
 		}
-		
 	});
 
+	function consultaAjax(valor){
+		$.ajax({
+			method: 'GET',
+			dataType: 'json',
+			url: '/verificar_correo_usuario',
+			data: {elemento: valor},
+			success: function(respuesta){												
+				if(respuesta === 1){
+					yaRegistrado();
+				}else{
+					valido();
+				}
+			},
+			error: function(respuesta){
+				console.log('ERROR: '+respuesta);
+			}
+		});		
+	}
+
 	function valido(){
-		if(comprobarRuta() === -1){
-			activarBoton();
-		}
 		limpiarMensajes();	
 		ok.removeClass('d-none').append('Correo válido.');
 		ocultarSpin();
 	}
 
-	function invalido(){	
-		if(comprobarRuta() === -1){
-			desactivarBoton();
-		}
+	function invalido(){
 		limpiarMensajes();
 		error.removeClass('d-none').append('Correo no válido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
-		if(comprobarRuta() === -1){
-			desactivarBoton();
-		}
 		limpiarMensajes();	
 		error.removeClass('d-none').append('Correo ya registrado.');
 		ocultarSpin();		
@@ -110,7 +114,7 @@ $(window).on('load',function(){
 		error.addClass('d-none').empty();
 		ok.addClass('d-none').empty();
 	}
-
+	
 	function activarBoton(){
 		boton.removeAttr('disabled');
 	}
@@ -118,5 +122,4 @@ $(window).on('load',function(){
 	function desactivarBoton(){
 		boton.attr('disabled','true');
 	}
-
 });

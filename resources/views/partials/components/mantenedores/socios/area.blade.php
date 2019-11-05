@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="nav-area" role="tabpanel" aria-labelledby="nav-area-tab">
-    <a class="btn btn-primary mt-4 mb-4" href="{{ route('areas.create') }}">Agregar nueva área</a> 
+    <a class="btn btn-primary mt-4 mb-4" href="{{ route('areas.create') }}">Agregar área</a> 
 
     <div class="table-responsive">
         <table class="table table-hover data-tables" id="tabla-areas">
