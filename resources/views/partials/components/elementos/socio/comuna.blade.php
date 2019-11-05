@@ -1,4 +1,12 @@
-@php isset($socio->comuna_id) ? $comuna_id = $socio->getOriginal('comuna_id') : $comuna_id = '' @endphp
+@if(isset($socio) && $socio->comuna_id != null)
+    @php
+        $comuna_id = $socio->getOriginal('comuna_id');
+    @endphp
+@else
+    @php
+        $comuna_id = '';
+    @endphp
+@endif
 
 <!-- Comuna -->
 <div class="form-group row">
@@ -16,4 +24,4 @@
     </span>
     @enderror
     </div>
-</div>   
+</div>  

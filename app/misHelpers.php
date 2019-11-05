@@ -117,10 +117,15 @@
     }
 
     /**
-     * Agrega puntos y guió n al rut
+     * Formatea fecha
      */
     function formatoFecha($valor)
     {
-        $bloque = explode('-', $valor);
-        return $nuevaFecha = $bloque[2] . '-' . $bloque[1] . '-' . $bloque[0];
+        if($valor != null && $valor != ''){
+            $bloque = explode('-', $valor);
+            return $nuevaFecha = $bloque[2] . '-' . $bloque[1] . '-' . $bloque[0];            
+        }else{
+            return '';
+        }
+
     }

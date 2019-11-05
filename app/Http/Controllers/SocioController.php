@@ -47,7 +47,8 @@ class SocioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Socio::create($request->all());
+        return redirect()->route('socios.index');
     }
 
     /**

@@ -15,7 +15,7 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('socios.store') }}">
 
                         @csrf
 

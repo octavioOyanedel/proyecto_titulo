@@ -130,10 +130,15 @@ class Socio extends Model
      */
     public function getComunaIdAttribute($valor)
     {
-        $comuna_id = $valor;
-        $comuna = Comuna::findOrFail($comuna_id);
-        $valor = $comuna->nombre;
-        return $valor;
+        if($valor != null){
+            $comuna_id = $valor;
+            $comuna = Comuna::findOrFail($comuna_id);
+            $valor = $comuna->nombre;
+            return $valor;        
+        }else{
+            return '';
+        }
+
     }
 
     /**
