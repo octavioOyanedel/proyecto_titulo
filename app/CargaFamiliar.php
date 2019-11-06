@@ -25,10 +25,14 @@ class CargaFamiliar extends Model
      */
     public function getParentescoIdAttribute($value)
     {
-        $parentesco_id = $value;
-        $parentesco = Parentesco::findOrFail($parentesco_id);
-        $value = $parentesco->nombre;
-        return $value;
+        if($value != null){
+            $parentesco_id = $value;
+            $parentesco = Parentesco::findOrFail($parentesco_id);
+            $value = $parentesco->nombre;
+            return $value;
+        }else{
+            return '';
+        }         
     }
 
     /**
@@ -52,7 +56,11 @@ class CargaFamiliar extends Model
      */
     public function getFechaNacAttribute($valor)
     {
-        return formatoFecha($valor);
+        if($valor != null){
+            return formatoFecha($valor);
+        }else{
+            return '';
+        }          
     }   
 
     /**
@@ -60,6 +68,10 @@ class CargaFamiliar extends Model
      */
     public function getRutAttribute($valor)
     {
-        return formatoRut($valor);
+        if($valor != null){
+            return formatoRut($valor);
+        }else{
+            return '';
+        }          
     }
 }

@@ -46,10 +46,14 @@ class Prestamo extends Model
      */
     public function getEstadoDeudaIdAttribute($valor)
     {
-        $estado_deuda_id = $valor;
-        $estado_deuda = EstadoDeuda::findOrFail($estado_deuda_id);
-        $valor = $estado_deuda->nombre;
-        return $valor;
+        if($valor != null){
+            $estado_deuda_id = $valor;
+            $estado_deuda = EstadoDeuda::findOrFail($estado_deuda_id);
+            $valor = $estado_deuda->nombre;
+            return $valor;
+        }else{
+            return '';
+        }            
     }
 
     /**
@@ -57,10 +61,14 @@ class Prestamo extends Model
      */
     public function getInteresIdAttribute($valor)
     {
-        $interes_id = $valor;
-        $interes = Interes::findOrFail($interes_id);
-        $valor = $interes->cantidad;
-        return formatoInteres($valor);
+        if($valor != null){
+            $interes_id = $valor;
+            $interes = Interes::findOrFail($interes_id);
+            $valor = $interes->cantidad;
+            return formatoInteres($valor);
+        }else{
+            return '';
+        }     
     }
 
     /**
@@ -68,10 +76,14 @@ class Prestamo extends Model
      */
     public function getFormaPagoIdAttribute($valor)
     {
-        $forma_pago_id = $valor;
-        $forma_pago = FormaPago::findOrFail($forma_pago_id);
-        $valor = $forma_pago->nombre;
-        return $valor;
+        if($valor != null){
+            $forma_pago_id = $valor;
+            $forma_pago = FormaPago::findOrFail($forma_pago_id);
+            $valor = $forma_pago->nombre;
+            return $valor;
+        }else{
+            return '';
+        }     
     }
 
     /**
@@ -79,7 +91,11 @@ class Prestamo extends Model
      */
     public function getMontoAttribute($valor)
     {
-        return formatoMoneda($valor);
+        if($valor != null){
+            return formatoMoneda($valor);
+        }else{
+            return '';
+        }            
     }
 
     /**
@@ -87,7 +103,11 @@ class Prestamo extends Model
      */
     public function getFechaSolicitudAttribute($valor)
     {
-        return formatoFecha($valor);
+        if($valor != null){
+            return formatoFecha($valor);
+        }else{
+            return '';
+        }         
     }
 
     /**

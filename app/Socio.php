@@ -146,10 +146,14 @@ class Socio extends Model
      */
     public function getCiudadIdAttribute($valor)
     {
-        $ciudad_id = $valor;
-        $ciudad = Ciudad::findOrFail($ciudad_id);
-        $valor = $ciudad->nombre;
-        return $valor;
+        if($valor != null){
+            $ciudad_id = $valor;
+            $ciudad = Ciudad::findOrFail($ciudad_id);
+            $valor = $ciudad->nombre;
+            return $valor;
+        }else{
+            return '';
+        }
     }
     
     /**
@@ -157,10 +161,14 @@ class Socio extends Model
      */
     public function getSedeIdAttribute($valor)
     {
-        $sede_id = $valor;
-        $sede = Sede::findOrFail($sede_id);
-        $valor = $sede->nombre;
-        return $valor;
+        if($valor != null){
+            $sede_id = $valor;
+            $sede = Sede::findOrFail($sede_id);
+            $valor = $sede->nombre;
+            return $valor;
+        }else{
+            return '';
+        }
     }
 
     /**
@@ -168,10 +176,15 @@ class Socio extends Model
      */
     public function getAreaIdAttribute($valor)
     {
-        $area_id = $valor;
-        $area = Area::findOrFail($area_id);
-        $valor = $area->nombre;
-        return $valor;
+        if($valor != null){
+            $area_id = $valor;
+            $area = Area::findOrFail($area_id);
+            $valor = $area->nombre;
+            return $valor;
+        }else{
+            return '';
+        }        
+
     }
 
     /**
@@ -179,30 +192,42 @@ class Socio extends Model
      */
     public function getCargoIdAttribute($valor)
     {
-        $cargo_id = $valor;
-        $cargo = Cargo::findOrFail($cargo_id);
-        $valor = $cargo->nombre;
-        return $valor;
+        if($valor != null){
+            $cargo_id = $valor;
+            $cargo = Cargo::findOrFail($cargo_id);
+            $valor = $cargo->nombre;
+            return $valor;
+        }else{
+            return '';
+        }        
     }
     /**
      * Modificador de estado socio
      */
     public function getEstadoSocioIdAttribute($valor)
     {
-        $estado_id = $valor;
-        $estado = EstadoSocio::findOrFail($estado_id);
-        $valor = $estado->nombre;
-        return $valor;
+        if($valor != null){
+            $estado_id = $valor;
+            $estado = EstadoSocio::findOrFail($estado_id);
+            $valor = $estado->nombre;
+            return $valor;
+        }else{
+            return '';
+        }        
     }
     /**
      * Modificador de nacionalidad
      */
     public function getNacionalidadIdAttribute($valor)
     {
-        $nacionalidad_id = $valor;
-        $nacionalidad = Nacionalidad::findOrFail($nacionalidad_id);
-        $valor = $nacionalidad->nombre;
-        return $valor;
+        if($valor != null){
+            $nacionalidad_id = $valor;
+            $nacionalidad = Nacionalidad::findOrFail($nacionalidad_id);
+            $valor = $nacionalidad->nombre;
+            return $valor;
+        }else{
+            return '';
+        }        
     }
 
     /**
@@ -210,7 +235,11 @@ class Socio extends Model
      */
     public function getRutAttribute($valor)
     {
-        return formatoRut($valor);
+        if($valor != null){
+            return formatoRut($valor);
+        }else{
+            return '';
+        }         
     }
 
     /**
@@ -218,7 +247,11 @@ class Socio extends Model
      */
     public function getFechaNacAttribute($valor)
     {
-        return formatoFecha($valor);
+        if($valor != null){
+            return formatoFecha($valor);
+        }else{
+            return '';
+        }         
     }
 
     /**
@@ -226,7 +259,11 @@ class Socio extends Model
      */
     public function getFechaPucvAttribute($valor)
     {
-        return formatoFecha($valor);
+        if($valor != null){
+            return formatoFecha($valor);
+        }else{
+            return '';
+        }         
     }
 
     /**
@@ -234,7 +271,11 @@ class Socio extends Model
      */
     public function getFechaSind1Attribute($valor)
     {
-        return formatoFecha($valor);
+        if($valor != null){
+            return formatoFecha($valor);
+        }else{
+            return '';
+        }         
     }
 
     /**

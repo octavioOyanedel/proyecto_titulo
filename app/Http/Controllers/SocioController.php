@@ -11,6 +11,7 @@ use App\Nacionalidad;
 use App\Prestamo;
 use App\CargaFamiliar;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarSocioRequest;
 
 class SocioController extends Controller
 {
@@ -45,10 +46,10 @@ class SocioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarSocioRequest $request)
     {
         Socio::create($request->all());
-        return redirect()->route('socios.index');
+        return redirect()->route('home');
     }
 
     /**

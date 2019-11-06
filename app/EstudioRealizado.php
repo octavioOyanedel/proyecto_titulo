@@ -29,10 +29,14 @@ class EstudioRealizado extends Model
      */
     public function getTituloIdAttribute($value)
     {
-        $titulo_id = $value;
-        $titulo = Titulo::findOrFail($titulo_id);
-        $value = $titulo->nombre;
-        return $value;
+        if($value != null){
+            $titulo_id = $value;
+            $titulo = Titulo::findOrFail($titulo_id);
+            $value = $titulo->nombre;
+            return $value;
+        }else{
+            return '';
+        }                
     }
 
     /**
@@ -40,10 +44,14 @@ class EstudioRealizado extends Model
      */
     public function getInstitucionIdAttribute($value)
     {
-        $institucion_id = $value;
-        $institucion = Institucion::findOrFail($institucion_id);
-        $value = $institucion->nombre;
-        return $value;
+        if($value != null){
+            $institucion_id = $value;
+            $institucion = Institucion::findOrFail($institucion_id);
+            $value = $institucion->nombre;
+            return $value;
+        }else{
+            return '';
+        }                
     }
 
     /**
@@ -51,10 +59,14 @@ class EstudioRealizado extends Model
      */
     public function getGradoAcademicoIdAttribute($value)
     {
-        $grado_academico_id = $value;
-        $grado_academico = GradoAcademico::findOrFail($grado_academico_id);
-        $value = $grado_academico->nombre;
-        return $value;
+        if($value != null){
+            $grado_academico_id = $value;
+            $grado_academico = GradoAcademico::findOrFail($grado_academico_id);
+            $value = $grado_academico->nombre;
+            return $value;
+        }else{
+            return '';
+        }                
     }
 
     /**
@@ -62,10 +74,14 @@ class EstudioRealizado extends Model
      */
     public function getEstadoGradoAcademicoIdAttribute($value)
     {
-        $estado_grado_academico_id = $value;
-        $estado_grado_academico = EstadoGradoAcademico::findOrFail($estado_grado_academico_id);
-        $value = $estado_grado_academico->nombre;
-        return $value;
+        if($value != null){
+            $estado_grado_academico_id = $value;
+            $estado_grado_academico = EstadoGradoAcademico::findOrFail($estado_grado_academico_id);
+            $value = $estado_grado_academico->nombre;
+            return $value;
+        }else{
+            return '';
+        }                
     }
 
     /**

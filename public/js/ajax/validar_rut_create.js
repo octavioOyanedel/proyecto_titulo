@@ -69,23 +69,26 @@ $(window).on('load',function(){
 	}
 
 	function valido(){
+		noEsInvalido();
 		activarBoton();
 		limpiarMensajes();	
-		ok.removeClass('d-none').append('Rut válido.');
+		ok.removeClass('d-none').append('El campo es válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
+		esInvalido();
 		desactivarBoton();
 		limpiarMensajes();
-		error.removeClass('d-none').append('Rut no válido.');
+		error.removeClass('d-none').append('El campo es inválido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
+		esInvalido();
 		desactivarBoton();
 		limpiarMensajes();	
-		error.removeClass('d-none').append('Rut ya registrado.');
+		error.removeClass('d-none').append('El valor de este campo ya ha sido registrado.');
 		ocultarSpin();		
 	}
 
@@ -109,6 +112,14 @@ $(window).on('load',function(){
 		spin.addClass('d-none');
 	}
 
+	function esInvalido(){
+		elemento.addClass('is-invalid');
+	}
+
+	function noEsInvalido(){
+		elemento.removeClass('is-invalid');
+	}
+	
 	function limpiarMensajes(){
 		error.addClass('d-none').empty();
 		ok.addClass('d-none').empty();

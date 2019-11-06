@@ -4,10 +4,9 @@
     <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('Celular') }}</label>
     <div class="col-md-6">
         <input id="celular" type="text" class="form-control @error('celular') is-invalid @enderror" name="celular" value="{{ old('celular') == true ? old('celular') : $celular }}" autocomplete="celular" autofocus placeholder="Ej. 971254626" maxlength="9">
-        @error('celular')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
+
+        {{-- validacion php --}}
+        <small class="form-text text-danger"><strong>@if($errors->has('celular')) {{ $errors->first('celular') }}@endif</strong></small>
+
     </div>
 </div>

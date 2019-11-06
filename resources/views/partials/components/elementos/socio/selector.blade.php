@@ -7,6 +7,7 @@
             <script src="{{ asset('js/ajax/validar_correo_create.js') }}" defer></script>
             <script src="{{ asset('js/ajax/cargar_ciudades.js') }}" defer></script>
             <script src="{{ asset('js/ajax/cargar_areas.js') }}" defer></script>
+            <script src="{{ asset('js/radio.js') }}" defer></script>
         @break
         {{-- mostrar --}}
         @case('socios/'.$socio->id)
@@ -28,6 +29,7 @@
         <script src="{{ asset('js/ajax/validar_correo_create.js') }}" defer></script>
         <script src="{{ asset('js/ajax/cargar_ciudades.js') }}" defer></script>
         <script src="{{ asset('js/ajax/cargar_areas.js') }}" defer></script>
+        <script src="{{ asset('js/radio.js') }}" defer></script>
     @break
     {{-- mantenedor --}}
     @case('mantenedor-socios')

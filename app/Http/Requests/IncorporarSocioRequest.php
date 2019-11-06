@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidarRutRule;
+
+class IncorporarSocioRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'rut' => ['required',new ValidarRutRule,'unique:socios,rut','max:9'],
+            'nombre1' => ['required','alpha','max:255'],
+            'nombre2' => ['nullable','alpha','max:255'],
+            'apellido1' => ['required','alpha','max:255'],
+            'apellido2' => ['nullable','alpha','max:255'],
+            'genero' => ['required'],
+            'fecha_nac' => ['nullable','date'],
+            'celular' => ['nullable','numeric','max:9'],
+            'correo' => ['nullable','email','unique:socios,correo','max:50'],
+            'direccion' => ['nullable','max:255'],
+            'fecha_pucv' => ['nullable','date'],
+            'anexo' => ['nullable','numeric','max:4'],
+            'numero_socio' => ['required','numeric','unique:socios,numero_socio','max:4'],
+            'fecha_sind1' => ['nullable','date'],
+            'comuna_id' => ['nullable','numeric'],
+            'ciudad_id' => ['nullable','numeric'],
+            'sede_id' => ['required','numeric'],
+            'area_id' => ['nullable','numeric'],
+            'cargo_id' => ['required','numeric'],
+            'estado_socio_id' => ['required','numeric'],
+            'nacionalidad_id' => ['required','numeric'],
+        ];
+    }
+}

@@ -68,23 +68,34 @@ $(window).on('load',function(){
 	}
 	
 	function valido(){
+		noEsInvalido();
 		limpiarMensajes();	
-		ok.removeClass('d-none').append('Número de socio válido.');
+		ok.removeClass('d-none').append('El campo es válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
+		esInvalido();
 		limpiarMensajes();
-		error.removeClass('d-none').append('Número de socio no válido.');
+		error.removeClass('d-none').append('El campo es inválido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
+		esInvalido();
 		limpiarMensajes();	
-		error.removeClass('d-none').append('Número de socio ya registrado.');
+		error.removeClass('d-none').append('El valor de este campo ya ha sido registrado.');
 		ocultarSpin();		
 	}
 
+	function esInvalido(){
+		elemento.addClass('is-invalid');
+	}
+
+	function noEsInvalido(){
+		elemento.removeClass('is-invalid');
+	}
+	
 	function comprobarRuta(){
 		return ruta.search('create');
 	}

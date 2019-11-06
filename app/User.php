@@ -119,9 +119,13 @@ class User extends Authenticatable
      */
     public function getRolIdAttribute($valor)
     {
-        $rol_id = $valor;
-        $rol = Rol::findOrFail($rol_id);
-        $valor = $rol->nombre;
-        return $valor;
+        if($valor != null){
+            $rol_id = $valor;
+            $rol = Rol::findOrFail($rol_id);
+            $valor = $rol->nombre;
+            return $valor;
+        }else{
+            return '';
+        }           
     }
 }

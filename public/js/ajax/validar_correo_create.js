@@ -68,21 +68,32 @@ $(window).on('load',function(){
 	}
 
 	function valido(){
+		noEsInvalido();
 		limpiarMensajes();	
-		ok.removeClass('d-none').append('Correo válido.');
+		ok.removeClass('d-none').append('El campo es válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
+		esInvalido();
 		limpiarMensajes();
-		error.removeClass('d-none').append('Correo no válido.');
+		error.removeClass('d-none').append('El campo es inválido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
+		esInvalido();
 		limpiarMensajes();	
-		error.removeClass('d-none').append('Correo ya registrado.');
+		error.removeClass('d-none').append('El valor de este campo ya ha sido registrado.');
 		ocultarSpin();		
+	}
+
+	function esInvalido(){
+		elemento.addClass('is-invalid');
+	}
+
+	function noEsInvalido(){
+		elemento.removeClass('is-invalid');
 	}
 
 	function comprobarRuta(){

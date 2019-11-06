@@ -28,7 +28,7 @@ class HomeController extends Controller
         $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
         
         $campo = $request->get('buscar_socio');
-        $socios = Socio::orderBy('fecha_sind1', 'DESC')
+        $socios = Socio::orderBy('created_at', 'DESC')
         ->rut($campo)
         ->nombre1($campo)
         ->nombre2($campo)

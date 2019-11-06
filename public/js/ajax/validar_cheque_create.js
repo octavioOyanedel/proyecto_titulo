@@ -68,23 +68,34 @@ $(window).on('load',function(){
 	}
 
 	function valido(){
+		noEsInvalido();
 		limpiarMensajes();	
 		ok.removeClass('d-none').append('Cheque válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
+		esInvalido();
 		limpiarMensajes();
 		error.removeClass('d-none').append('Cheque no válido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
+		esInvalido();
 		limpiarMensajes();	
 		error.removeClass('d-none').append('Cheque ya registrado.');
 		ocultarSpin();		
 	}
 
+	function esInvalido(){
+		elemento.addClass('is-invalid');
+	}
+
+	function noEsInvalido(){
+		elemento.removeClass('is-invalid');
+	}
+	
 	function comprobarRuta(){
 		return ruta.search('create');
 	}

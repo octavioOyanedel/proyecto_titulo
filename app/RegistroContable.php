@@ -50,10 +50,14 @@ class RegistroContable extends Model
      */
     public function getTipoRegistroContableIdAttribute($valor)
     {
-        $tipo_registro_contable_id = $valor;
-        $tipo_registro_contable = TipoRegistroContable::findOrFail($tipo_registro_contable_id);
-        $valor = $tipo_registro_contable->nombre;
-        return $valor;
+        if($valor != null){
+            $tipo_registro_contable_id = $valor;
+            $tipo_registro_contable = TipoRegistroContable::findOrFail($tipo_registro_contable_id);
+            $valor = $tipo_registro_contable->nombre;
+            return $valor;
+        }else{
+            return '';
+        }        
     }
 
     /**
@@ -61,10 +65,14 @@ class RegistroContable extends Model
      */
     public function getConceptoIdAttribute($valor)
     {
-        $concepto_id = $valor;
-        $concepto = Concepto::findOrFail($concepto_id);
-        $valor = $concepto->nombre;
-        return $valor;
+        if($valor != null){
+            $concepto_id = $valor;
+            $concepto = Concepto::findOrFail($concepto_id);
+            $valor = $concepto->nombre;
+            return $valor;
+        }else{
+            return '';
+        }        
     }
 
     /**
@@ -72,7 +80,11 @@ class RegistroContable extends Model
      */
     public function getFechaAttribute($valor)
     {
-        return formatoFecha($valor);
+        if($valor != null){
+            return formatoFecha($valor);
+        }else{
+            return '';
+        }            
     }
 
     /**
@@ -80,7 +92,11 @@ class RegistroContable extends Model
      */
     public function getMontoAttribute($valor)
     {
-        return formatoMoneda($valor);
+        if($valor != null){
+            return formatoMoneda($valor);
+        }else{
+            return '';
+        }            
     }
 
     /**
