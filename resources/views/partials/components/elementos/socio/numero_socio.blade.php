@@ -6,7 +6,7 @@
         <input id="numero_socio" type="text" class="form-control @error('numero_socio') is-invalid @enderror" name="numero_socio" value="{{ old('numero_socio') == true ? old('numero_socio') : $numero_socio }}" required autocomplete="numero_socio" autofocus maxlength="4">
 
         {{-- validacion php --}}
-        <small class="form-text text-danger"><strong>@if($errors->has('numero_socio')) {{ $errors->first('numero_socio') }}@endif</strong></small>
+        <small id="error-numero-php" class="form-text text-danger"><strong>@if($errors->has('numero_socio')) {{ $errors->first('numero_socio') }}@endif</strong></small>
         {{-- validacion javascript --}}
 		<small id="error-numero" class="d-none form-text text-danger font-weight-bold"></small>
 

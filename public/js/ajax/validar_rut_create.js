@@ -10,6 +10,7 @@ $(window).on('load',function(){
 	var error = $('#error-rut');
 	var boton = $('#incorporar');
 	var original = '';
+	var error_php = $('#error-rut-php');
 
 	//reset mensajes
 	limpiarMensajes();
@@ -69,6 +70,7 @@ $(window).on('load',function(){
 	}
 
 	function valido(){
+		ocultarErrorPhp();
 		noEsInvalido();
 		activarBoton();
 		limpiarMensajes();	
@@ -77,6 +79,7 @@ $(window).on('load',function(){
 	}
 
 	function invalido(){
+		ocultarErrorPhp();
 		esInvalido();
 		desactivarBoton();
 		limpiarMensajes();
@@ -85,11 +88,16 @@ $(window).on('load',function(){
 	}
 
 	function yaRegistrado(){
+		ocultarErrorPhp();
 		esInvalido();
 		desactivarBoton();
 		limpiarMensajes();	
 		error.removeClass('d-none').append('El valor de este campo ya ha sido registrado.');
 		ocultarSpin();		
+	}
+
+	function ocultarErrorPhp(){
+		error_php.addClass('d-none').empty();
 	}
 
 	function comprobarRuta(){

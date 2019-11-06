@@ -77,7 +77,7 @@ $(window).on('load',function(){
 	function invalido(){
 		esInvalido();
 		limpiarMensajes();
-		error.removeClass('d-none').append('El campo es inválido.');
+		error.removeClass('d-none').append('El campo no es un correo válido.');
 		ocultarSpin();
 	}
 

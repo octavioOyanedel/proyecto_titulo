@@ -74,19 +74,19 @@ $(window).on('load',function(){
 
 	function valido(){
 		limpiarMensajes();	
-		ok.removeClass('d-none').append('Correo válido.');
+		ok.removeClass('d-none').append('El campo es válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
 		limpiarMensajes();
-		error.removeClass('d-none').append('Correo no válido.');
+		error.removeClass('d-none').append('El campo no es un correo válido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
 		limpiarMensajes();	
-		error.removeClass('d-none').append('Correo ya registrado.');
+		error.removeClass('d-none').append('El valor de este campo ya ha sido registrado.');
 		ocultarSpin();		
 	}
 

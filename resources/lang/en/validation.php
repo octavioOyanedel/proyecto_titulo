@@ -32,7 +32,7 @@ return [
     'digits'               => 'El campo debe tener :digits dígitos.',
     'digits_between'       => 'El campo debe tener entre :min y :max dígitos.',
     'distinct'             => 'El campo contiene un valor duplicado.',
-    'email'                => 'El campo no es un correo válido',
+    'email'                => 'El campo no es un correo válido.',
     'exists'               => 'El campo es inválido.',
     'filled'               => 'El campo es obligatorio.',
     'image'                => 'El campo debe ser una imagen.',
