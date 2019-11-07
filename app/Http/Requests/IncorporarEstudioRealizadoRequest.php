@@ -24,7 +24,7 @@ class IncorporarEstudioRealizadoRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo_id' => ['required','numeric'],
+            'titulo_id' => ['nullable','numeric'],
             'institucion_id' => ['required','numeric'],
             'grado_academico_id' => ['required','numeric'],
             'estado_grado_acdemico_id' => ['required','numeric'],

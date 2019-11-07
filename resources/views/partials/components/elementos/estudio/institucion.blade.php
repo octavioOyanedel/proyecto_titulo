@@ -1,25 +1,25 @@
+@php
+    $id = 0;
+@endphp
 <!-- Institución -->
 <div class="form-group row">
         <label for="institucion_id" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Institución educacional') }}</label>
         <div class="col-md-6">
         <select id="institucion_id" class="default-selects form-control @error('institucion_id') is-invalid @enderror" name="institucion_id" required autocomplete="institucion_id" autofocus>
-            @if(isset($estudio))
-            <!-- EDITAR -->
-                <option selected="true" value="">Seleccione...</option>
-                @foreach($instituciones as $i)
-                    @if($estudio->getOriginal('grado_academico_id') === $i->getOriginal('grado_academico_id'))
-                        <option value="{{ $i->id }}" {{ $estudio->getOriginal('institucion_id') == $i->getOriginal('institucion_id') ? 'selected' : ''}}>{{ $i->institucion_id }}</option>
-                    @endif                   
-                @endforeach
-            @else
-            <!-- CREATE -->
-                <option selected="true" value="" selected>Seleccione...</option>
-            @endif
+            <option selected="true" value="">Seleccione...</option>
         </select>
-        @error('institucion_id')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
+
+        {{-- validacion php --}}
+        <small class="form-text text-danger"><strong>@if($errors->has('institucion_id')) {{ $errors->first('institucion_id') }}@endif</strong></small>  
+
+        {{-- captura valor old --}}
+        @if(old('institucion_id') != null)
+            @php 
+                $id = old('institucion_id');
+            @endphp
+        @endif    
+
+        <input id="old_institucion" type="hidden" value="{{ $id }}">  
+
     </div>
 </div>   

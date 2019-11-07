@@ -17,7 +17,8 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('estudios.store') }}">
+                        
                         @csrf
 
                         @include('partials.components.elementos.estudio.grado_academico')

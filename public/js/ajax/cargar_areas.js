@@ -16,6 +16,14 @@ $(window).on('load',function(){
 	});			
 
 	function ajaxNormal(id){
+
+
+		$.ajaxSetup({
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}}
+		);
+
 		$.ajax({
 			method: 'GET',
 			dataType: 'json',
@@ -36,6 +44,13 @@ $(window).on('load',function(){
 	}
 
 	function ajaxOld(id_sede, id_area){
+		
+		$.ajaxSetup({
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}}
+		);
+
 		$.ajax({
 			method: 'GET',
 			dataType: 'json',

@@ -49,6 +49,13 @@ $(window).on('load',function(){
 	});
 
 	function consultaAjax(valor){
+
+		$.ajaxSetup({
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}}
+		);	
+			
 		$.ajax({
 			method: 'GET',
 			dataType: 'json',
