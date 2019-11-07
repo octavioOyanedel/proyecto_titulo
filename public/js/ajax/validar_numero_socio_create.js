@@ -80,7 +80,7 @@ $(window).on('load',function(){
 		ocultarErrorPhp();
 		esInvalido();
 		limpiarMensajes();
-		error.removeClass('d-none').append('El campo es inválido.');
+		error.removeClass('d-none').append('El campo debe ser númerico.');
 		ocultarSpin();
 	}
 

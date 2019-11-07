@@ -124,4 +124,13 @@ class EstudioRealizado extends Model
         return $this->hasMany('App\EstudioRealizadoSocio');
     } 
 
+    /**
+     * Obtener ultimo registro creado 
+     */
+    static public function obtenerUltimoEstudioIngresado()
+    {
+        return EstudioRealizado::orderBy('created_at', 'DESC')->first();
+
+    }
+
 }

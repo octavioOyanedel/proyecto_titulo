@@ -17,5 +17,10 @@
     @case('mantenedor-estudios')
 
     @break
+    {{-- crear --}}
+    @case('estudios/create/'.request()->route()->id)
+        <script src="{{ asset('js/ajax/cargar_instituciones.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/cargar_titulos.js') }}" defer></script>
+    @break    
     @default
 @endswitch

@@ -373,4 +373,13 @@ class Socio extends Model
     {
         return $this->belongsToMany('App\RegistroContable');
     }
+
+    /**
+     * Obtener ultimo registro creado 
+     */
+    static public function obtenerUltimoSocioIngresado()
+    {
+        return Socio::orderBy('created_at', 'DESC')->first();
+
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CargaFamiliar;
 use App\Parentesco;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarCargaRequest;
 
 class CargaFamiliarController extends Controller
 {
@@ -35,9 +36,10 @@ class CargaFamiliarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarCargaRequest $request)
     {
-        //
+        CargaFamiliar::create($request->all());        
+        return redirect()->route('cargas.create',['id'=>$request->input('socio_id')])->with('agregar-carga','');
     }
 
     /**
@@ -98,7 +100,6 @@ class CargaFamiliarController extends Controller
         if ($request->ajax()) {
             $carga = CargaFamiliar::where('rut','=',$request->elemento)->get();
             if(count($carga) != 0){
-                //si existe, buscar prestamo
                 return response()->json(1);
             }else{
                 return response()->json(0); //no existe

@@ -50,7 +50,7 @@
                         </div>
                     @else     
 
-                        <h4 class="mt-4">Estudios Realizados <a href="{{ route('estudios.create') }}" class="btn btn-primary btn-sm d-rigth float-right">Agregar Estudio</a></h4>                      
+                        <h4 class="mt-4">Estudios Realizados <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm d-rigth float-right">Agregar Estudio</a></h4>                      
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -85,7 +85,7 @@
                         </div>
                     @else
 
-                        <h4 class="mt-4">Cargas Familiares <a href="{{ route('cargas.create') }}" class="btn btn-primary btn-sm d-rigth float-right">Agregar Carga</a></h4>
+                        <h4 class="mt-4">Cargas Familiares <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm d-rigth float-right">Agregar Carga</a></h4>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>

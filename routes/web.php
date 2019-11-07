@@ -65,9 +65,37 @@ Route::resource('/bancos', 'BancoController')->middleware('auth');
 Route::resource('/asociados', 'AsociadoController')->middleware('auth');
 Route::resource('/historial', 'LogSistemaController')->middleware('auth');
 Route::resource('/usuarios', 'UsuarioController')->middleware('auth');
-Route::resource('/cargas', 'CargaFamiliarController')->middleware('auth');
+
+//****************************************************************************************************
+//ruta carga continua de info cargas familiares
+Route::get('cargas/create/{id}', [
+    'as' => 'cargas.create',
+    'uses' => 'CargaFamiliarController@create'
+]);
+
+Route::get('cargas/create/', function () {
+    return redirect('home');
+});
+
+Route::resource('/cargas', 'CargaFamiliarController', ['except' => 'create'])->middleware('auth');
+//****************************************************************************************************
+
+//****************************************************************************************************
+//ruta carga continua de info estudios realizados
+Route::get('estudios/create/{id}', [
+    'as' => 'estudios.create',
+    'uses' => 'EstudioRealizadoController@create'
+]);
+
+Route::get('estudios/create/', function () {
+    return redirect('home');
+});
+
+Route::resource('/estudios', 'EstudioRealizadoController', ['except' => 'create'])->middleware('auth');
+Route::get('/estudios_socio', 'EstudioRealizadoSocioController@agregarEstudio')->name('estudios_socio')->middleware('auth');
+//****************************************************************************************************
+
 Route::resource('/parentescos', 'ParentescoController')->middleware('auth');
-Route::resource('/estudios', 'EstudioRealizadoController')->middleware('auth');
 Route::resource('/niveles', 'GradoAcademicoController')->middleware('auth');
 Route::resource('/instituciones', 'InstitucionController')->middleware('auth');
 Route::resource('/estados', 'EstadoGradoAcademicoController')->middleware('auth');

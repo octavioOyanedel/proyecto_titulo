@@ -9,6 +9,7 @@ use App\GradoAcademicoInstitucion;
 use App\GradoAcademicoTitulo;
 use App\Titulo;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarEstudioRealizadoRequest;
 
 class EstudioRealizadoController extends Controller
 {
@@ -40,9 +41,12 @@ class EstudioRealizadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarEstudioRealizadoRequest $request)
     {
-        //
+        EstudioRealizado::create($request->all());
+        $estudio = EstudioRealizado::obtenerUltimoEstudioIngresado();
+        route('estudios_socio',['socio'=>$socio->id, 'estudio'=>$estudio->id]);
+        return redirect()->route('estudios.create',['id'=>$request->input('socio_id')])->with('agregar-estudio','');
     }
 
     /**

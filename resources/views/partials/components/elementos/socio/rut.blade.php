@@ -1,4 +1,9 @@
-@php isset($socio->rut) ? $rut = $socio->getOriginal('rut') : $rut = '' @endphp
+@php $rut = '' @endphp
+@isset($socio)
+    @php 
+    	$rut = $socio->getOriginal('rut') 
+    @endphp
+@endisset
 <!-- Rut -->
 <div class="form-group row">
     <label for="rut" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Rut') }}</label>

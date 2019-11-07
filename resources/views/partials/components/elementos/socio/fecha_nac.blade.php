@@ -1,5 +1,15 @@
-@php isset($socio->fecha_nac) ? $fecha_nac = $socio->fecha_nac : $fecha_nac = '' @endphp
-@php isset($socio->fecha_nac) ? $original_fecha_nac = $socio->getOriginal('fecha_nac') : $original_fecha_nac = '' @endphp
+@php
+	$fecha_nac = '';
+	$original_fecha_nac = '';
+@endphp
+
+@isset($socio)
+	@php
+		$fecha_nac = $socio->fecha_nac;
+		$original_fecha_nac = $socio->getOriginal('fecha_nac');
+	@endphp
+@endisset
+
 <!-- Fecha nacimiento -->
 <div class="form-group row">
     <label for="fecha_nac" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de nacimiento') }}</label>

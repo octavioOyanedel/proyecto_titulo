@@ -1,10 +1,9 @@
+@php
+    $estado_socio_id = '';
+@endphp
 @if(isset($socio) && $socio->estado_socio_id != null)
     @php
         $estado_socio_id = $socio->getOriginal('estado_socio_id');
-    @endphp
-@else
-    @php
-        $estado_socio_id = '';
     @endphp
 @endif
 

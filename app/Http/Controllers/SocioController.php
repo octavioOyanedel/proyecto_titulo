@@ -49,7 +49,8 @@ class SocioController extends Controller
     public function store(IncorporarSocioRequest $request)
     {
         Socio::create($request->all());
-        return redirect()->route('home');
+        $socio = Socio::obtenerUltimoSocioIngresado();
+        return redirect()->route('cargas.create',['id'=>$socio->id])->with('agregar-socio','');
     }
 
     /**
