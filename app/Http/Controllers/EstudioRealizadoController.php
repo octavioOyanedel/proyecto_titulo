@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GradoAcademico;
 use App\EstudioRealizado;
+use App\EstudioRealizadoSocio;
 use App\EstadoGradoAcademico;
 use App\GradoAcademicoInstitucion;
 use App\GradoAcademicoTitulo;
@@ -45,7 +46,11 @@ class EstudioRealizadoController extends Controller
     {
         EstudioRealizado::create($request->all());
         $estudio = EstudioRealizado::obtenerUltimoEstudioIngresado();
-        route('estudios_socio',['socio'=>$socio->id, 'estudio'=>$estudio->id]);
+        //almacenar estudio socio en tabla pivote
+        $estudio_socio = new EstudioRealizadoSocio;
+        $estudio_socio->socio_id = $request->socio_id;
+        $estudio_socio->estudio_realizado_id = $estudio->id;
+        $estudio_socio->save();
         return redirect()->route('estudios.create',['id'=>$request->input('socio_id')])->with('agregar-estudio','');
     }
 

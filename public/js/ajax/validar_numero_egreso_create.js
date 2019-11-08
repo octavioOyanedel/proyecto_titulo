@@ -8,6 +8,7 @@ $(window).on('load',function(){
 	var ok = $('#numero-egreso-ok');
 	var error = $('#error-numero-egreso');
 	var original = '';
+	var error_php = $('#error-numero-php');
 
 	//reset mensajes
 	limpiarMensajes();
@@ -74,23 +75,41 @@ $(window).on('load',function(){
 	}
 
 	function valido(){
+		ocultarErrorPhp();
+		noEsInvalido();		
 		limpiarMensajes();	
 		ok.removeClass('d-none').append('Número de egreso válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
+		ocultarErrorPhp();
+		esInvalido();		
 		limpiarMensajes();
 		error.removeClass('d-none').append('Número de egreso no válido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
+		ocultarErrorPhp();
+		esInvalido();		
 		limpiarMensajes();	
-		error.removeClass('d-none').append('Número de egreso ya registrado.');
+		error.removeClass('d-none').append('El valor de este campo ya ha sido registrado.');
 		ocultarSpin();		
 	}
 
+	function ocultarErrorPhp(){
+		error_php.addClass('d-none').empty();
+	}
+
+	function esInvalido(){
+		elemento.addClass('is-invalid');
+	}
+
+	function noEsInvalido(){
+		elemento.removeClass('is-invalid');
+	}
+	
 	function comprobarRuta(){
 		return ruta.search('create');
 	}

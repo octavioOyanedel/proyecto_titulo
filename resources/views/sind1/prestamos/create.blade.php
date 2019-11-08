@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('simulacion') }}">
                         @csrf
 
                         @include('partials.components.elementos.prestamo.rut') 
@@ -24,12 +24,12 @@
                         @include('partials.components.elementos.prestamo.monto')
                         @include('partials.components.elementos.prestamo.cuotas')
                         @include('partials.components.elementos.prestamo.metodos_pago')
-
+                        <input id="socio_id" name="socio_id" type="hidden" value="">
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button id="incorporar" type="submit" class="btn btn-primary" disabled="true">
+                                <button id="incorporar" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-simular-prestamo">
                                     {{ __('Simular') }}
                                 </button>
                             </div>

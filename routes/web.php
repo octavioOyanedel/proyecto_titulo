@@ -30,6 +30,7 @@ Route::get('/cargar_areas', 'AreaController@obtenerAreas');
 Route::get('/verificar_rut_prestamo', 'PrestamoController@verificarRut');
 Route::get('/verificar_cheque', 'PrestamoController@verificarCheque');
 Route::get('/verificar_numero_egreso', 'PrestamoController@verificarNumeroEgreso');
+Route::get('/obtener_id_socio_con_rut', 'SocioController@obtenerIdSocioConRut');
 
 //ajax contable
 Route::get('/verificar_cheque_contable', 'RegistroContableController@verificarCheque');
@@ -52,6 +53,8 @@ Route::get('/filtro_contables', 'BuscarController@filtroContables')->name('filtr
 Route::get('/filtro_historial', 'BuscarController@filtroHistorial')->name('filtro_historial')->middleware('auth');
 
 Route::resource('/prestamos', 'PrestamoController')->middleware('auth');
+Route::post('/simulacion', 'PrestamoController@simulacion')->name('simulacion')->middleware('auth');
+
 Route::resource('/contables', 'RegistroContableController')->middleware('auth');
 Route::resource('/sedes', 'SedeController')->middleware('auth');
 Route::resource('/areas', 'AreaController')->middleware('auth');
@@ -103,11 +106,11 @@ Route::resource('/titulos', 'TituloController')->middleware('auth');
 
 Route::get('/cambiar_password', 'UsuarioController@editPassword')->name('usuarios.editPassword')->middleware('auth');
 
-Route::get('/crear-conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
-Route::post('/mostrar-conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
+Route::get('/crear_conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
+Route::post('/mostrar_conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
 
-Route::get('/mantenedor-socios','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
-Route::get('/mantenedor-prestamos','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
-Route::get('/mantenedor-contables','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
-Route::get('/mantenedor-cargas','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');
-Route::get('/mantenedor-estudios','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');
+Route::get('/mantenedor_socios','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
+Route::get('/mantenedor_prestamos','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
+Route::get('/mantenedor_contables','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
+Route::get('/mantenedor_cargas','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');
+Route::get('/mantenedor_estudios','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');

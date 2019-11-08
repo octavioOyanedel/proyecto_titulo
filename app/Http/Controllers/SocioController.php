@@ -163,4 +163,22 @@ class SocioController extends Controller
             }            
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function obtenerIdSocioConRut(Request $request) 
+    {
+        if ($request->ajax()) {
+            $socio = Socio::where('rut','=',trim($request->elemento))->first();
+            if($socio != null ){
+                return $socio->id;
+            }else{
+                return null;
+            }            
+        }
+    }
 }

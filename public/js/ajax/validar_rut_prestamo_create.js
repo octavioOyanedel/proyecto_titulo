@@ -10,6 +10,7 @@ $(window).on('load',function(){
 	var error = $('#error-rut');
 	var boton = $('#incorporar');
 	var original = '';
+	var error_php = $('#error-rut-php');
 
 	//reset mensajes
 	limpiarMensajes();
@@ -72,6 +73,7 @@ $(window).on('load',function(){
 						break;
 					case 2:
 						valido();
+						incorporarIdSocio(valor);
 						break;						
 					default:
 					// code block
@@ -84,13 +86,41 @@ $(window).on('load',function(){
 	}
 
 	function valido(){
+		ocultarErrorPhp();
+		noEsInvalido();
 		activarBoton();
 		limpiarMensajes();	
 		ok.removeClass('d-none').append('Socio no presenta préstamo pendiente.');
 		ocultarSpin();
 	}
 
+	function incorporarIdSocio(valor){
+
+		$.ajaxSetup({
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}}
+		);	
+
+		$.ajax({
+			method: 'GET',
+			dataType: 'json',
+			url: '/obtener_id_socio_con_rut',
+			data: {elemento: valor},
+			success: function(respuesta){												
+				if(respuesta != null){
+					$('#socio_id').val(respuesta);
+				}
+			},
+			error: function(respuesta){
+				console.log('ERROR: '+respuesta);
+			}
+		});						
+	}
+
 	function invalido(){
+		ocultarErrorPhp();
+		esInvalido();		
 		desactivarBoton();
 		limpiarMensajes();
 		error.removeClass('d-none').append('Rut no válido.');
@@ -98,6 +128,8 @@ $(window).on('load',function(){
 	}
 
 	function noRegistrado(){
+		ocultarErrorPhp();
+		esInvalido();		
 		desactivarBoton();
 		limpiarMensajes();
 		error.removeClass('d-none').append('Socio no registrado.');
@@ -109,6 +141,10 @@ $(window).on('load',function(){
 		limpiarMensajes();	
 		error.removeClass('d-none').append('Socio presenta préstamo pendiente.');
 		ocultarSpin();		
+	}
+
+	function ocultarErrorPhp(){
+		error_php.addClass('d-none').empty();
 	}
 
 	function comprobarRuta(){
@@ -142,6 +178,14 @@ $(window).on('load',function(){
 
 	function desactivarBoton(){
 		boton.attr('disabled','true');
+	}
+
+	function esInvalido(){
+		elemento.addClass('is-invalid');
+	}
+
+	function noEsInvalido(){
+		elemento.removeClass('is-invalid');
 	}
 
 	function validarRut(rut){

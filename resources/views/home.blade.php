@@ -20,7 +20,7 @@
                         </div>
                     @else                     
                         <div class="table-responsive">
-                            <table class="table table-hover data-tables" id="tabla-socios">
+                            <table class="table table-hover data-tables table-striped table-bordered" id="tabla-socios">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-success" scope="col" title=""></th>

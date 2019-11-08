@@ -6,7 +6,9 @@ use App\Prestamo;
 use App\FormaPago;
 use App\Interes;
 use App\Socio;
+use App\EstadoDeuda;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarPrestamoRequest;
 
 class PrestamoController extends Controller
 {
@@ -137,7 +139,7 @@ class PrestamoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Socio  $socio
+     * @param  \App\Prestamo  $prestamo
      * @return \Illuminate\Http\Response
      */
     public function verificarRut(Request $request) 
@@ -153,4 +155,22 @@ class PrestamoController extends Controller
             
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Prestamo  $prestamo
+     * @return \Illuminate\Http\Response
+     */
+    public function simulacion(IncorporarPrestamoRequest $request) 
+    {
+        if ($request['forma_pago_id'] != null) {
+            $request['forma_pago_id'] = FormaPago::findOrFail($request['forma_pago_id'])->nombre;
+        }
+        $socio = Socio::findOrFail($request->socio_id);
+        $estado = EstadoDeuda::findOrFail(2); //1 - pagada | 2 - pendiente
+        $interes = Interes::findOrFail(1); //unico interes
+        return view('sind1.prestamos.simulacion', compact('request', 'socio', 'estado', 'interes'));
+    }
+
 }

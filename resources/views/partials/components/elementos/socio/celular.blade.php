@@ -1,4 +1,12 @@
-@php isset($socio->celular) ? $celular = $socio->celular : $celular = '' @endphp
+@php 
+	$celular = '';
+@endphp
+@isset($socio)
+    @php 
+    	$celular = $socio->celular; 
+    @endphp
+@endisset
+
 <!-- Celular -->
 <div class="form-group row">
     <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('Celular') }}</label>

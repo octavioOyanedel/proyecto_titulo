@@ -27,7 +27,7 @@ class IncorporarEstudioRealizadoRequest extends FormRequest
             'titulo_id' => ['nullable','numeric'],
             'institucion_id' => ['required','numeric'],
             'grado_academico_id' => ['required','numeric'],
-            'estado_grado_acdemico_id' => ['required','numeric'],
+            'estado_grado_academico_id' => ['required','numeric'],
         ];
     }
 }

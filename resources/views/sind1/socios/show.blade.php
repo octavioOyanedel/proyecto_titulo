@@ -16,30 +16,27 @@
 
                     <div class="table-responsive">
                         <h4>Información Personal</h4>
-                        <table class="table table-hover">
+                        <table class="table table-hover table-striped table-bordered">
                             <thead></thead>
                             <tbody>
-                                <tr>
-                                    <th>Nombre</th><td>
-                                        {{ $socio->nombre1 }} {{ $socio->nombre2 }} {{ $socio->apellido1 }} {{ $socio->apellido2 }}
-                                    </td></tr> 
-                                    <tr><th>Rut</th><td>{{ $socio->rut }}</td></tr>
-                                    <tr><th>Género</th><td>{{ $socio->genero }}</td></tr>
-                                    <tr><th>Fecha nacimiento</th><td>{{ $socio->fecha_nac }}</td></tr>
-                                    <tr><th>Celular</th><td>{{ $socio->celular }}</td></tr>
-                                    <tr><th>Correo</th><td>{{ $socio->correo }}</td></tr>                                    
-                                    <tr><th>Fecha ingreso PUCV</th><td>{{ $socio->fecha_pucv }}</td></tr>
-                                    <tr><th>Anexo</th><td>{{ $socio->anexo }}</td></tr>
-                                    <tr><th>Número Socio</th><td>{{ $socio->numero_socio }}</td></tr>
-                                    <tr><th>Fecha ingreso Sind1</th><td>{{ $socio->fecha_sind1 }}</td></tr>
-                                    <tr><th>Comuna</th><td>{{ $socio->comuna_id }}</td></tr>
-                                    <tr><th>Ciudad</th><td>{{ $socio->ciudad_id }}</td></tr>
-                                    <tr><th>Dirección</th><td>{{ $socio->direccion }}</td></tr>
-                                    <tr><th>Sede</th><td>{{ $socio->sede_id }}</td></tr>
-                                    <tr><th>Área</th><td>{{ $socio->area_id }}</td></tr>
-                                    <tr><th>Cargo</th><td>{{ $socio->cargo_id }}</td></tr>
-                                    <tr><th>Estado socio</th><td>{{ $socio->estado_socio_id }}</td></tr>
-                                    <tr><th>Nacionalidad</th><td>{{ $socio->nacionalidad_id }}</td></tr>
+                                <tr><th>Nombre</th><td>{{ $socio->nombre1 }} {{ $socio->nombre2 }} {{ $socio->apellido1 }} {{ $socio->apellido2 }}</td></tr> 
+                                <tr><th>Rut</th><td>{{ $socio->rut }}</td></tr>
+                                <tr><th>Género</th><td>{{ $socio->genero }}</td></tr>
+                                <tr><th>Fecha nacimiento</th><td>{{ $socio->fecha_nac }}</td></tr>
+                                <tr><th>Celular</th><td>{{ $socio->celular }}</td></tr>
+                                <tr><th>Correo</th><td>{{ $socio->correo }}</td></tr>                                    
+                                <tr><th>Fecha ingreso PUCV</th><td>{{ $socio->fecha_pucv }}</td></tr>
+                                <tr><th>Anexo</th><td>{{ $socio->anexo }}</td></tr>
+                                <tr><th>Número Socio</th><td>{{ $socio->numero_socio }}</td></tr>
+                                <tr><th>Fecha ingreso Sind1</th><td>{{ $socio->fecha_sind1 }}</td></tr>
+                                <tr><th>Comuna</th><td>{{ $socio->comuna_id }}</td></tr>
+                                <tr><th>Ciudad</th><td>{{ $socio->ciudad_id }}</td></tr>
+                                <tr><th>Dirección</th><td>{{ $socio->direccion }}</td></tr>
+                                <tr><th>Sede</th><td>{{ $socio->sede_id }}</td></tr>
+                                <tr><th>Área</th><td>{{ $socio->area_id }}</td></tr>
+                                <tr><th>Cargo</th><td>{{ $socio->cargo_id }}</td></tr>
+                                <tr><th>Estado socio</th><td>{{ $socio->estado_socio_id }}</td></tr>
+                                <tr><th>Nacionalidad</th><td>{{ $socio->nacionalidad_id }}</td></tr>
                             </tbody>
                         </table>                         
                     </div>

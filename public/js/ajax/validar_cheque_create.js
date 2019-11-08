@@ -9,6 +9,7 @@ $(window).on('load',function(){
 	var ok = $('#cheque-ok');
 	var error = $('#error-cheque');
 	var original = '';
+	var error_php = $('#error-cheque-php');
 
 	//reset mensajes
 	limpiarMensajes();
@@ -75,6 +76,7 @@ $(window).on('load',function(){
 	}
 
 	function valido(){
+		ocultarErrorPhp();
 		noEsInvalido();
 		limpiarMensajes();	
 		ok.removeClass('d-none').append('Cheque válido.');
@@ -82,6 +84,7 @@ $(window).on('load',function(){
 	}
 
 	function invalido(){
+		ocultarErrorPhp();
 		esInvalido();
 		limpiarMensajes();
 		error.removeClass('d-none').append('Cheque no válido.');
@@ -89,10 +92,15 @@ $(window).on('load',function(){
 	}
 
 	function yaRegistrado(){
+		ocultarErrorPhp();
 		esInvalido();
 		limpiarMensajes();	
-		error.removeClass('d-none').append('Cheque ya registrado.');
+		error.removeClass('d-none').append('El valor de este campo ya ha sido registrado.');
 		ocultarSpin();		
+	}
+
+	function ocultarErrorPhp(){
+		error_php.addClass('d-none').empty();
 	}
 
 	function esInvalido(){

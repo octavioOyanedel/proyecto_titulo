@@ -1,4 +1,12 @@
-@php isset($socio->numero_socio) ? $numero_socio = $socio->numero_socio : $numero_socio = '' @endphp
+@php 
+	$numero_socio = '';
+@endphp
+@isset($socio)
+    @php 
+    	$numero_socio = $socio->numero_socio; 
+    @endphp
+@endisset
+
 <!-- Número socio -->
 <div class="form-group row">
     <label for="numero_socio" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Número de socio') }}</label>
@@ -7,6 +15,7 @@
 
         {{-- validacion php --}}
         <small id="error-numero-php" class="form-text text-danger"><strong>@if($errors->has('numero_socio')) {{ $errors->first('numero_socio') }}@endif</strong></small>
+        
         {{-- validacion javascript --}}
 		<small id="error-numero" class="d-none form-text text-danger font-weight-bold"></small>
 

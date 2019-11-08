@@ -15,13 +15,22 @@
 
             <option selected="true" value="">Seleccione...</option>
 
-            @foreach($grados as $g)
-                <option value="{{ $g->id }}" {{ $grado_academico_id == $g->id ? 'selected' : ''}}>{{ $g->nombre }}</option>
-            @endforeach            
+            @if(old('grado_academico_id') === null)
+                {{-- loop sin old --}}
+                @foreach($grados as $g)
+                    <option value="{{ $g->id }}" {{ $grado_academico_id == $g->id ? 'selected' : ''}}>{{ $g->nombre }}</option>
+                @endforeach 
+            @else
+                {{-- loop con old --}}
+                @foreach($grados as $g)     
+                    <option value="{{ $g->id }}" @if(old('grado_academico_id') == $g->id) {{ 'selected' }} @endif>{{ $g->nombre }}</option>
+                @endforeach
+            @endif
+
         </select>
 
         {{-- validacion php --}}
-        <small class="form-text text-danger"><strong>@if($errors->has('estado_socio_id')) {{ $errors->first('estado_socio_id') }}@endif</strong></small>
+        <small class="form-text text-danger"><strong>@if($errors->has('grado_academico_id')) {{ $errors->first('grado_academico_id') }}@endif</strong></small>
 
     </div>
 </div>   

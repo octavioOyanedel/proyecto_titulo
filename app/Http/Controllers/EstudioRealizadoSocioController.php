@@ -83,18 +83,4 @@ class EstudioRealizadoSocioController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\EstudioRealizadoSocio  $estudioRealizadoSocio
-     * @return \Illuminate\Http\Response
-     */
-    public function agregarEstudio($socio, $estudio)
-    {
-        $estudio = new EstudioRealizadoSocio;
-        $estudio->socio_id = $socio;
-        $estudio->estudio_realizado_id = $estudio;
-        $estudio->save();
-        return redirect()->route('estudios.create',['id'=>$socio])->with('agregar-estudio','');
-    }
 }
