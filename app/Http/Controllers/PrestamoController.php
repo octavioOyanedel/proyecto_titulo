@@ -49,7 +49,8 @@ class PrestamoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Prestamo::create($request->all());        
+        return redirect()->route('prestamos.create')->with('agregar-prestamo','');        
     }
 
     /**
@@ -164,13 +165,16 @@ class PrestamoController extends Controller
      */
     public function simulacion(IncorporarPrestamoRequest $request) 
     {
+        $forma_pago_original = $request['forma_pago_id'];
         if ($request['forma_pago_id'] != null) {
             $request['forma_pago_id'] = FormaPago::findOrFail($request['forma_pago_id'])->nombre;
         }
         $socio = Socio::findOrFail($request->socio_id);
         $estado = EstadoDeuda::findOrFail(2); //1 - pagada | 2 - pendiente
         $interes = Interes::findOrFail(1); //unico interes
-        return view('sind1.prestamos.simulacion', compact('request', 'socio', 'estado', 'interes'));
+        $cuotas = crearArregloCuotas($request->numero_cuotas, $request->fecha_solicitud, $request->monto);
+        $total = obtenerTotalPrestamo($cuotas);
+        return view('sind1.prestamos.simulacion', compact('forma_pago_original', 'request', 'socio', 'estado', 'interes', 'cuotas', 'total'));
     }
 
 }

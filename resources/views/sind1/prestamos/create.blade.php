@@ -5,6 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+
+                @include('partials.alertas')
+
                 <div class="card-header text-center"><h3 class="mb-0">Solicitar Préstamo</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
@@ -29,7 +32,7 @@
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button id="incorporar" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-simular-prestamo">
+                                <button id="incorporar" type="submit" class="btn btn-primary">
                                     {{ __('Simular') }}
                                 </button>
                             </div>
