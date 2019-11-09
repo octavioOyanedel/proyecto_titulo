@@ -13,5 +13,6 @@ class EstadosDeudaTableSeeder extends Seeder
     {
         App\EstadoDeuda::create(['nombre' => 'Pagada']);
         App\EstadoDeuda::create(['nombre' => 'Pendiente']);
+        App\EstadoDeuda::create(['nombre' => 'Atrasada']);
     }
 }

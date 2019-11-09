@@ -11,7 +11,7 @@ $(window).on('load',function(){
 		$('#buscador-socio').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/filtro_prestamos') === 0 || ruta.search('/prestamos') != -1){
+	if(ruta.localeCompare('/filtro_prestamos') === 0 || ruta.search('/prestamos') != -1 || ruta.localeCompare('/simulacion') === 0){
 		$('#span-prestamos').addClass('font-weight-bold text-uppercase text-success');
 		$('#buscador-prestamo').removeClass('d-none');
 	}

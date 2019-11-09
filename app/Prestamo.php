@@ -18,7 +18,7 @@ class Prestamo extends Model
     * @var array
     */
     protected $fillable = [
-        'fecha_solicitud','numero_egreso','cheque','monto','numero_cuotas','rut','estado_deuda_id','interes_id','forma_pago_id',
+        'fecha_solicitud','numero_egreso','cheque','deposito','fecha_pago_deposito','monto','numero_cuotas','socio_id','estado_deuda_id','interes_id','forma_pago_id',
     ];
 
     /**
@@ -65,7 +65,7 @@ class Prestamo extends Model
             $interes_id = $valor;
             $interes = Interes::findOrFail($interes_id);
             $valor = $interes->cantidad;
-            return formatoInteres($valor);
+            return $valor;
         }else{
             return '';
         }     
@@ -139,7 +139,7 @@ class Prestamo extends Model
      */
     public function interes()
     {
-        return $this->hasOne('App\Interes');
+        return $this->belongsTo('App\Interes');
     }
     
     /**

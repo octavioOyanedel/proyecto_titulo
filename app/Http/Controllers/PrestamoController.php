@@ -170,7 +170,7 @@ class PrestamoController extends Controller
             $request['forma_pago_id'] = FormaPago::findOrFail($request['forma_pago_id'])->nombre;
         }
         $socio = Socio::findOrFail($request->socio_id);
-        $estado = EstadoDeuda::findOrFail(2); //1 - pagada | 2 - pendiente
+        $estado = EstadoDeuda::findOrFail(2); //1 - pagada | 2 - pendiente |  - atrasada
         $interes = Interes::findOrFail(1); //unico interes
         $cuotas = crearArregloCuotas($request->numero_cuotas, $request->fecha_solicitud, $request->monto);
         $total = obtenerTotalPrestamo($cuotas);

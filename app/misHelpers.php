@@ -23,17 +23,17 @@
     /**
      * Formato moneda
      */
-    function calculoTotal($prestamo, $interes)
+    function calculoTotal($monto, $interes)
     {
-        return $prestamo + ($prestamo * ($interes / 100));
+        return $monto + ($monto * ($interes / 100));
     }
 
     /**
      * Formato moneda
      */
-    function calculoSaldo($prestamo, $interes)
+    function calculoSaldo($monto, $interes)
     {
-        return $prestamo * ($interes / 100);
+        return $monto * ($interes / 100);
     }
 
     /**

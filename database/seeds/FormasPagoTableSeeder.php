@@ -12,7 +12,6 @@ class FormasPagoTableSeeder extends Seeder
     public function run()
     {
         App\FormaPago::create(['nombre' => 'Descuento por planilla']);
-        App\FormaPago::create(['nombre' => 'Transferencia']);
         App\FormaPago::create(['nombre' => 'Depósito']);
     }
 }

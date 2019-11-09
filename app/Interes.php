@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Prestamo;
+use App\Interes;
 use Illuminate\Database\Eloquent\Model;
 
 class Interes extends Model
@@ -24,6 +25,7 @@ class Interes extends Model
      */
     public function prestamo()
     {
-        return $this->belongsTo('App\Prestamo');
+        return $this->hasMany('App\Prestamo');
     }
+
 }

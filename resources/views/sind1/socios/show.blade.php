@@ -46,34 +46,35 @@
                             <b>Socio sin estudios registrados.</b>
                         </div>
                     @else     
-
-                        <h4 class="mt-4">Estudios Realizados <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm d-rigth float-right">Agregar Estudio</a></h4>                      
                         <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                        <th scope="col">Nivel educacional</th>
-                                        <th scope="col">Institución</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Título obtenido</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($estudios as $s)
+                            <h4 class="mt-4">Estudios Realizados <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Estudio</a></h4>                      
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped table-bordered">
+                                    <thead>
                                         <tr>
-                                            <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="#"><span>@svg('editar')</span></a></td>
-                                            <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estudio" href="#"><span>@svg('eliminar')</span></a></td>
-                                            <td>{{ $s->estudio_realizado->grado_academico_id }}</td>
-                                            <td>{{ $s->estudio_realizado->institucion_id }}</td>
-                                            <td>{{ $s->estudio_realizado->estado_grado_academico_id }}</td>
-                                            <td>{{ $s->estudio_realizado->titulo_id }}</td>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col">Nivel educacional</th>
+                                            <th scope="col">Institución</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Título obtenido</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>                            
+                                    </thead>
+                                    <tbody>
+                                        @foreach($estudios as $s)
+                                            <tr>
+                                                <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="#"><span>@svg('editar')</span></a></td>
+                                                <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estudio" href="#"><span>@svg('eliminar')</span></a></td>
+                                                <td>{{ $s->estudio_realizado->grado_academico_id }}</td>
+                                                <td>{{ $s->estudio_realizado->institucion_id }}</td>
+                                                <td>{{ $s->estudio_realizado->estado_grado_academico_id }}</td>
+                                                <td>{{ $s->estudio_realizado->titulo_id }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div> 
+                        </div>                           
                     @endif  
 
                     @if($cargas->count() === 0)
@@ -81,10 +82,9 @@
                             <b>Socio sin cargas familiares registrados.</b>
                         </div>
                     @else
-
-                        <h4 class="mt-4">Cargas Familiares <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm d-rigth float-right">Agregar Carga</a></h4>
                         <div class="table-responsive">
-                            <table class="table">
+                            <h4 class="mt-4">Cargas Familiares <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Carga</a></h4>
+                            <table class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col"></th>
@@ -116,32 +116,42 @@
                             <b>Socio sin préstamos registrados.</b>
                         </div>
                     @else  
+                        <div class="table-responsive">                    
                         <h4 class="mt-4">Historial de Prestamos</h4>
-                        <div class="table-responsive">
-                            <table id="tabla-prestamos-socio" class="table">
+                            <table id="tabla-prestamos-socio" class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
+                                        <th class="text-center" scope="col" title=""></th>
+                                        <th class="text-center" scope="col" title=""></th>                                        
                                         <th class="text-center" scope="col">Fecha solicitud</th>
+                                        <th class="text-center" scope="col">Forma de pago</th>
                                         <th class="text-center" scope="col">Estado</th>
                                         <th class="text-center" scope="col">Número de egreso</th>
-                                        <th class="text-center" scope="col">Número de cheque</th>
+                                        <th class="text-center" scope="col">Fecha de pago depósito</th>
+                                        <th class="text-center" scope="col">Cheque</th>
                                         <th class="text-center" scope="col">Monto</th>
-                                        <th class="text-center" scope="col">Coutas</th>
                                         <th class="text-center" scope="col">Interés</th>
-                                        <th class="text-center" scope="col">Forma de pago</th>
+                                        <th class="text-center" scope="col">Saldo</th>                                        
+                                        <th class="text-center" scope="col">Total</th>
+                                        <th class="text-center" scope="col">Coutas</th>   
                                     </tr>
                                 </thead>  
                                 <tbody>
                                     @foreach($prestamos as $p)
                                     <tr>
+                                        <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href=""><span>@svg('ver')</span></a></td>
+                                        <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
                                         <td class="text-center">{{ $p->fecha_solicitud }}</td>
+                                        <td class="text-center">{{ $p->forma_pago_id }}</td>
                                         <td class="text-center">{{ $p->estado_deuda_id }}</td>
                                         <td class="text-center">{{ $p->numero_egreso }}</td>
+                                        <td class="text-center">{{ $p->fecha_pago_deposito }}</td>
                                         <td class="text-center">{{ $p->cheque }}</td>
                                         <td class="text-center">{{ $p->monto }}</td>
-                                        <td class="text-center">{{ $p->numero_cuotas }}</td>
-                                        <td class="text-center">{{ $p->interes_id }}</td>
-                                        <td class="text-center">{{ $p->forma_pago_id }}</td>
+                                        <td class="text-center">{{ formatoInteres($p->interes_id) }}</td>
+                                        <td class="text-center">{{ formatoMoneda(calculoSaldo($p->getOriginal('monto'), $p->interes_id)) }}</td>                                        
+                                        <td class="text-center">{{ formatoMoneda(calculoTotal($p->getOriginal('monto'), $p->interes_id)) }}</td>
+                                        <td class="text-center">{{ $p->numero_cuotas }}</td>                                       
                                     </tr>
                                     @endforeach
                                 </tbody>                                                        

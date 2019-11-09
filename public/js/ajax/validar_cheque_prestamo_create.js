@@ -10,6 +10,7 @@ $(window).on('load',function(){
 	var error = $('#error-cheque');
 	var original = '';
 	var error_php = $('#error-cheque-php');
+	var deposito = $('#deposito');
 
 	//reset mensajes
 	limpiarMensajes();
@@ -23,30 +24,32 @@ $(window).on('load',function(){
 		//formatear valor de entrada
 		valor = formatearEntrada(elemento.val());
 
-		limpiarMensajes();
-		mostrarSpin();		
+		limpiarMensajes();			
 
-		//condiciones que se deben cumplir para llamar a funcion ajax
-		if(valor.length >= 1 && valor.length <= 10 && valor != '' &&  validarFormato() != null){
-			//form editar
-			if(comprobarRuta() === -1){
-				//si valor original es distinto de vacío
-				if(original != ''){
-					//si campos no son iguales
-					if(original != valor){
-						consultaAjax(valor);
-					}else{
-						valido();
+		if(valor != ''){			
+			mostrarSpin();	
+			//condiciones que se deben cumplir para llamar a funcion ajax
+			if(valor.length >= 1 && valor.length <= 10 && validarFormato() != null){
+				//form editar
+				if(comprobarRuta() === -1){
+					//si valor original es distinto de vacío
+					if(original != ''){
+						//si campos no son iguales
+						if(original != valor){
+							consultaAjax(valor);
+						}else{
+							valido();
+						}
 					}
 				}
-			}
-			//form crear
-			else{
-				consultaAjax(valor);
-			}
-		}else{
-			invalido();
-		}			
+				//form crear
+				else{
+					consultaAjax(valor);
+				}
+			}else{
+				invalido();
+			}		
+		}
 	});
 
 	function consultaAjax(valor){
@@ -78,7 +81,8 @@ $(window).on('load',function(){
 	function valido(){
 		ocultarErrorPhp();
 		noEsInvalido();
-		limpiarMensajes();	
+		limpiarMensajes();
+		deposito.val(0);
 		ok.removeClass('d-none').append('Cheque válido.');
 		ocultarSpin();
 	}

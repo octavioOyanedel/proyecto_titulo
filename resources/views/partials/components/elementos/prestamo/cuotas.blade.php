@@ -18,7 +18,7 @@
             @if(old('numero_cuotas') === null)
                 {{-- loop sin old --}}
                 @for ($i = 1; $i <= 24; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
+                    <option value="{{ $i }}" class="opciones-cuotas">{{ $i }}</option>
                 @endfor
             @else
                 {{-- loop con old --}}

@@ -17,7 +17,8 @@
     @case('prestamos/create')
         <script src="{{ asset('js/ajax/validar_rut_prestamo_create.js') }}" defer></script>
         <script src="{{ asset('js/ajax/validar_numero_egreso_create.js') }}" defer></script>
-        <script src="{{ asset('js/ajax/validar_cheque_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/validar_cheque_prestamo_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/switch_pago_cheque.js') }}" defer></script>
     @break
     {{-- mantenedor --}}
     @case('mantenedor-prestamos')
