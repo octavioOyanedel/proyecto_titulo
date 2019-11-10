@@ -380,6 +380,5 @@ class Socio extends Model
     static public function obtenerUltimoSocioIngresado()
     {
         return Socio::orderBy('created_at', 'DESC')->first();
-
     }
 }

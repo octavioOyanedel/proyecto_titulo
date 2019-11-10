@@ -1,6 +1,78 @@
 <?php
 
     /**
+     * formato celda prestamo
+     */
+    function textoDeudaPrestamo($valor)
+    {
+        switch ($valor) {
+            case 1:
+                return 'Pagado';                
+                break;
+            case 2:
+                return 'Pendiente';
+                break;
+            case 3:
+                return 'Atrasado';
+                break;
+        } 
+    }  
+
+    /**
+     * formato celda cuota
+     */
+    function textoDeudaCuota($valor)
+    {
+        switch ($valor) {
+            case 1:
+                return 'Pagada';                
+                break;
+            case 2:
+                return 'Pendiente';
+                break;
+            case 3:
+                return 'Atrasada';
+                break;
+        } 
+    }  
+
+    /**
+     * formato celda 
+     */
+    function celdaCadena($valor)
+    {
+        if($valor === '' || $valor === null){
+            return '-';
+        }else{
+            return $valor;
+        }
+    }
+
+    /**
+     * formato celda cheque
+     */
+    function celdaCheque($valor)
+    {
+        if($valor === '' || $valor === null){
+            return '-';
+        }else{
+            return $valor;
+        }
+    }
+
+    /**
+     * formato celda deposito
+     */
+    function celdaDeposito($valor)
+    {
+        if($valor === 0){
+            return '-';
+        }else{
+            return 'Si';
+        }  
+    }
+
+    /**
      * buscar cadena dentro de otra cadena
      */
     function esObligatorio($cadena)

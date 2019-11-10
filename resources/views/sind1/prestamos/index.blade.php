@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="ml-5 mr-5">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -20,34 +20,34 @@
                         </div>
                     @else 
                         <div class="table-responsive">
-                            <table class="table table-hover data-tables" id="tabla-prestamos">
+                            <table class="table table-hover table-borderer table-striped data-tables" id="tabla-prestamos">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-success" scope="col" title=""></th>
+                                        <th></th>
                                         <th scope="col">Nombre socio</th>
+                                        <th class="text-center" scope="col">Rut</th>
                                         <th class="text-center" scope="col">Fecha de solicitud</th>
                                         <th class="text-center" scope="col">Número de egreso</th>
+                                        <th class="text-center" scope="col">Método de pago</th>
                                         <th class="text-center" scope="col">Cheque</th>
                                         <th class="text-center" scope="col">Monto</th>
-                                        <th class="text-center" scope="col">Número de cuotas</th>
                                         <th class="text-center" scope="col">Estado de préstamo</th>
-                                        <th class="text-center" scope="col">Interés</th>
-                                        <th class="text-center" scope="col">Método de pago</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($prestamos as $p)
                                         <tr>
                                             <td width="50" class="text-center" scope="row" title="Ver detalle préstamo"><a class="text-primary" href="{{ route('prestamos.show',$p) }}"><span>@svg('ver')</span></a></td>
-                                            <td class="text-center">{{ $p->socio->apellido1 }} {{ $p->socio->apellido2 }} {{ $p->socio->nombre1 }} {{ $p->socio->nombre2 }} </td>
+                                            <td class="">{{ $p->socio->apellido1 }} {{ $p->socio->apellido2 }} {{ $p->socio->nombre1 }} {{ $p->socio->nombre2 }} </td>
+                                            <td class="text-center">{{ $p->socio->rut }}</td>
                                             <td class="text-center">{{ $p->fecha_solicitud }}</td>
                                             <td class="text-center">{{ $p->numero_egreso }}</td>
-                                            <td class="text-center">{{ $p->cheque }}</td>
-                                            <td class="text-center">{{ $p->monto }}</td>
-                                            <td class="text-center">{{ $p->numero_cuotas }}</td>
-                                            <td class="text-center">{{ $p->estado_deuda_id }}</td>
-                                            <td class="text-center">{{ $p->interes_id }}</td>
                                             <td class="text-center">{{ $p->forma_pago_id }}</td>
+                                            <td class="text-center">{{ celdaCadena($p->cheque) }}</td>
+                                            <td class="text-center">{{ $p->monto }}</td>
+                                            <td class="text-center">
+                                                <span class="texto-deuda shadow-sm p-1 rounded">{{ textoDeudaPrestamo($p->getOriginal('estado_deuda_id')) }}</span>
+                                            </td>                                            
                                         </tr>
                                     @endforeach
                                 </tbody>

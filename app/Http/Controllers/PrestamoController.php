@@ -47,9 +47,11 @@ class PrestamoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarPrestamoRequest $request)
     {
-        Prestamo::create($request->all());        
+        Prestamo::create($request->all()); 
+        $prestamo = Prestamo::obtenerUltimoPrestamoIngresado();          
+        Prestamo::agregarCuotasPrestamo($prestamo);   
         return redirect()->route('prestamos.create')->with('agregar-prestamo','');        
     }
 
@@ -163,7 +165,7 @@ class PrestamoController extends Controller
      * @param  \App\Prestamo  $prestamo
      * @return \Illuminate\Http\Response
      */
-    public function simulacion(IncorporarPrestamoRequest $request) 
+    public function simulacion(Request $request) 
     {
         $forma_pago_original = $request['forma_pago_id'];
         if ($request['forma_pago_id'] != null) {

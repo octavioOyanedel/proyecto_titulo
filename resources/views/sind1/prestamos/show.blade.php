@@ -13,52 +13,64 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
                     <h4>Información Préstamo</h4>
                     <div class="table-responsive">                       
-                        <table class="table table-hover">
+                        <table class="table table-hover table-bordered table-striped">
                             <thead></thead>
                             <tbody>
-                                <th>Nombre</th><td>
+                                <tr><th>Nombre</th><td>
                                     {{ $prestamo->socio->nombre1 }} {{ $prestamo->socio->nombre2 }} {{ $prestamo->socio->apellido1 }} {{ $prestamo->socio->apellido2 }}
-                                </td>
+                                </td></tr>
                                 <tr><th>Rut</th><td>{{ $prestamo->socio->rut }}</td></tr>
                                 <tr><th>Fecha de solicitud</th><td>{{ $prestamo->fecha_solicitud }}</td></tr>
                                 <tr><th>Número de egreso</th><td>{{ $prestamo->numero_egreso }}</td></tr>
-                                <tr><th>Cheque</th><td>{{ $prestamo->cheque }}</td></tr>     
-                                <tr><th>Monto</th><td>{{ $prestamo->monto }}</td></tr>    
-                                <tr><th>Número de cuotas</th><td>{{ $prestamo->numero_cuotas }}</td></tr>
-                                <tr><th>Estado de préstamo</th><td>{{ $prestamo->estado_deuda_id }}</td></tr> 
-                                <tr><th>Interés</th><td>{{ $prestamo->interes_id }}</td></tr>
-                                <tr><th>Saldo</th><td>{{ formatoMoneda(calculoSaldo($prestamo->getOriginal('monto'),$interes->cantidad)) }}</td></tr>
-                                <tr><th>Total</th><td>{{ formatoMoneda(calculoTotal($prestamo->getOriginal('monto'),$interes->cantidad)) }}</td></tr>
-                                <tr><th>Método de pago</th><td>{{ $prestamo->forma_pago_id }}</td></tr>            
+                                <tr><th>Método de pago</th><td>{{ $prestamo->forma_pago_id }}</td></tr>
+                                @if($prestamo->getOriginal('forma_pago_id') === 1) 
+                                    <tr><th>Cheque</th><td>{{ $prestamo->cheque }}</td></tr>  
+                                @else
+                                    <tr><th>Fecha de pago depósito</th><td>{{ $prestamo->fecha_pago_deposito }}</td></tr>  
+                                @endif
+                                <tr><th>Monto</th><td>{{ $prestamo->monto }}</td></tr>   
+                                @if($prestamo->getOriginal('forma_pago_id') === 1)
+                                    <tr><th>Interés</th><td>{{ $prestamo->interes_id }}%</td></tr>
+                                    <tr><th>Saldo</th><td>{{ formatoMoneda(calculoSaldo($prestamo->getOriginal('monto'),$interes->cantidad)) }}</td></tr>
+                                    <tr><th>Total</th><td>{{ formatoMoneda(calculoTotal($prestamo->getOriginal('monto'),$interes->cantidad)) }}</td></tr>                                
+                                    <tr><th>Número de cuotas</th><td>{{ $prestamo->numero_cuotas }}</td></tr>
+                                @endif                                    
+                                <tr><th>Estado de préstamo</th><td>
+                                    <span class="texto-deuda shadow-sm p-1 rounded">{{ textoDeudaPrestamo($prestamo->getOriginal('estado_deuda_id')) }}</span>
+                                </td></tr>       
                             </tbody>
                         </table>
                     </div>
-                
-                    <h4>Información Cuotas</h4>
-                    <div class="table-responsive">                       
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">Número de cuota</th>
-                                    <th class="text-center">Fecha de pago</th>
-                                    <th class="text-center">Monto</th>
-                                    <th class="text-center">Estado de cuota</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($prestamo->cuotas as $c)  
+                    @if($prestamo->getOriginal('forma_pago_id') === 1) 
+                        <h4>Información Cuotas</h4>
+                        <div class="table-responsive">                       
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead>
                                     <tr>
-                                        <td class="text-center">{{ $c->numero_cuota }}</td>
-                                        <td class="text-center">{{ $c->fecha_pago }}</td>
-                                        <td class="text-center">{{ $c->monto }}</td>
-                                        <td class="text-center">{{ $c->estado_deuda_id }}</td>
+                                        <th class="text-center">Cuota N°</th>
+                                        <th class="text-center">Fecha de pago</th>
+                                        <th class="text-center">Monto</th>
+                                        <th class="text-center">Estado Cuota</th>
                                     </tr>
-                                @endforeach                                
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    @foreach($prestamo->cuotas as $p)  
+                                        <tr>
+                                            <td class="text-center">{{ $p->numero_cuota }}</td>
+                                            <td class="text-center">{{ $p->fecha_pago }}</td>
+                                            <td class="text-center">{{ $p->monto }}</td>
+                                            <td class="text-center">
+                                                <span class="texto-deuda shadow-sm p-1 rounded">{{ textoDeudaCuota($p->getOriginal('estado_deuda_id')) }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach                                
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

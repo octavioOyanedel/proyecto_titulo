@@ -165,4 +165,61 @@ class Prestamo extends Model
             return 2; // no tiene prestamos
         }
     }
+
+    static public function agregarCuotasPrestamo(Prestamo $prestamo)
+    {
+        $cuotas = $prestamo->numero_cuotas;
+        $fecha = $prestamo->fecha_solicitud;
+        $dia_pago = 25;
+        $year_inicio = 0;
+        $mes_inicio = 0;
+        $fecha_cuota = '';
+        $montoConInteres = ((2 / 100) * $prestamo->getOriginal('monto')) + $prestamo->getOriginal('monto');
+        $montoCouta = $montoConInteres / $prestamo->numero_cuotas;
+        //obtener año, mes y dia
+        $year = substr($fecha,0,-6);
+        $mes = substr($fecha,5,-3);
+        $dia = substr($fecha,8);
+        $year_pago = $year + 0; //casteo a entreo
+        //mes de inicio
+        if($dia < 15){
+            $mes_inicio = $mes + 0; //casteo a entero
+        }else{
+            //inicio mes siguiente
+            $mes_inicio = $mes + 1;
+            if($mes_inicio == 13){
+                $mes_inicio = 1;
+                $year_pago++; 
+            }      
+        }
+        $year_inicio = $year;
+        $mes_pago = $mes_inicio;
+        //loop cuotas
+        for($i = 0; $i < $cuotas; $i++){
+            if($mes_pago > 12){
+                $mes_pago = 1;
+                $year_pago++; 
+            }
+            if($mes_pago < 10){
+                $mes_pago = '0'.$mes_pago;
+            }      
+            $fecha_cuota = (string)$year_pago.'-'.$mes_pago.'-'.$dia_pago;
+            $cuota = new Cuota;
+            $cuota->fecha_pago = $fecha_cuota;
+            $cuota->numero_cuota = $i + 1;
+            $cuota->monto = $montoCouta;
+            $cuota->estado_deuda_id = 2;
+            $cuota->prestamo_id = $prestamo->id;
+            $cuota->save();
+            $mes_pago++;       
+        }
+    }
+
+    /**
+     * Obtener ultimo registro creado 
+     */
+    static public function obtenerUltimoPrestamoIngresado()
+    {
+        return Prestamo::orderBy('created_at', 'DESC')->first();
+    }
 }

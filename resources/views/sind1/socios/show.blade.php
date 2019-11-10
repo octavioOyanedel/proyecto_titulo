@@ -63,7 +63,7 @@
                                     <tbody>
                                         @foreach($estudios as $s)
                                             <tr>
-                                                <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="#"><span>@svg('editar')</span></a></td>
+                                                <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="{{ route('estudios.create', ['id'=>$socio->id]) }}"><span>@svg('editar')</span></a></td>
                                                 <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estudio" href="#"><span>@svg('eliminar')</span></a></td>
                                                 <td>{{ $s->estudio_realizado->grado_academico_id }}</td>
                                                 <td>{{ $s->estudio_realizado->institucion_id }}</td>
@@ -139,13 +139,13 @@
                                 <tbody>
                                     @foreach($prestamos as $p)
                                     <tr>
-                                        <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href=""><span>@svg('ver')</span></a></td>
+                                        <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('prestamos.show',$p) }}"><span>@svg('ver')</span></a></td>
                                         <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
                                         <td class="text-center">{{ $p->fecha_solicitud }}</td>
                                         <td class="text-center">{{ $p->forma_pago_id }}</td>
                                         <td class="text-center">{{ $p->estado_deuda_id }}</td>
                                         <td class="text-center">{{ $p->numero_egreso }}</td>
-                                        <td class="text-center">{{ $p->fecha_pago_deposito }}</td>
+                                        <td class="text-center">{{ celdaCadena($p->fecha_pago_deposito) }}</td>
                                         <td class="text-center">{{ $p->cheque }}</td>
                                         <td class="text-center">{{ $p->monto }}</td>
                                         <td class="text-center">{{ formatoInteres($p->interes_id) }}</td>

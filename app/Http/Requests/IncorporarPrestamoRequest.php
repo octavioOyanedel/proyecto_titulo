@@ -26,12 +26,14 @@ class IncorporarPrestamoRequest extends FormRequest
         return [
             'fecha_solicitud' => ['required','date'],
             'numero_egreso' => ['required','numeric','unique:prestamos,numero_egreso'],
-            'monto' => ['required','numeric'],
             'cheque' => ['nullable','numeric','unique:prestamos,cheque'],
             'deposito' => ['required','boolean'],
             'fecha_pago_deposito' => ['nullable','date'],
+            'monto' => ['required','numeric'],
             'numero_cuotas' => ['required','numeric'],
             'socio_id' => ['required','numeric'],
+            'estado_deuda_id' => ['required','numeric'],
+            'interes_id' => ['required','numeric'],
             'forma_pago_id' => ['required','numeric'],
         ];
     }
