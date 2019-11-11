@@ -25,6 +25,9 @@ Route::get('/verificar_numero_socio', 'SocioController@verificarNumeroSocio');
 Route::get('/verificar_correo', 'SocioController@verificarCorreo');
 Route::get('/cargar_ciudades', 'CiudadController@obtenerCiudades');
 Route::get('/cargar_areas', 'AreaController@obtenerAreas');
+route::get('/evaluar_fecha_prestamo', 'PrestamoController@cambiarEstadoDeposito');
+route::get('/pago_automatico_cuotas', 'PrestamoController@pagoAutomaticoCuotas');
+route::get('/saldar_prestamo', 'PrestamoController@saldarPrestamo');
 
 //ajax prestamo
 Route::get('/verificar_rut_prestamo', 'PrestamoController@verificarRut');
@@ -54,6 +57,7 @@ Route::get('/filtro_historial', 'BuscarController@filtroHistorial')->name('filtr
 
 Route::resource('/prestamos', 'PrestamoController')->middleware('auth');
 Route::post('/simulacion', 'PrestamoController@simulacion')->name('simulacion')->middleware('auth');
+Route::get('/cancelar_deposito/{id}', 'PrestamoController@cancelarDeposito')->name('cancelar_deposito')->middleware('auth');
 
 Route::resource('/contables', 'RegistroContableController')->middleware('auth');
 Route::resource('/sedes', 'SedeController')->middleware('auth');

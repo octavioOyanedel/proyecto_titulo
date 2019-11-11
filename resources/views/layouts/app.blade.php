@@ -43,7 +43,9 @@
     <script src="{{ asset('js/data_table.js') }}" defer></script>
     <script src="{{ asset('js/data_table_acentos.js') }}" defer></script>
     <script src="{{ asset('js/tablas/data_tables.js') }}" defer></script>
-
+    <script src="{{ asset('js/ajax/evaluar_fecha_prestamo.js') }}" defer></script>
+    <script src="{{ asset('js/ajax/pago_automatico.js') }}" defer></script>
+    <script src="{{ asset('js/ajax/saldar_prestamo.js') }}" defer></script>
     <!-- selector de js -->
 
     @include('partials.components.elementos.socio.selector')

@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+
+            @include('partials.alertas')
+
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Detalle Préstamo</h3></div>
 
@@ -15,7 +18,7 @@
                     @endif
 
                     <h4>Información Préstamo</h4>
-                    <div class="table-responsive">                       
+                    <div class="table-responsive">                    
                         <table class="table table-hover table-bordered table-striped">
                             <thead></thead>
                             <tbody>
@@ -34,8 +37,8 @@
                                 <tr><th>Monto</th><td>{{ $prestamo->monto }}</td></tr>   
                                 @if($prestamo->getOriginal('forma_pago_id') === 1)
                                     <tr><th>Interés</th><td>{{ $prestamo->interes_id }}%</td></tr>
-                                    <tr><th>Saldo</th><td>{{ formatoMoneda(calculoSaldo($prestamo->getOriginal('monto'),$interes->cantidad)) }}</td></tr>
-                                    <tr><th>Total</th><td>{{ formatoMoneda(calculoTotal($prestamo->getOriginal('monto'),$interes->cantidad)) }}</td></tr>                                
+                                    <tr><th>Saldo</th><td>{{ formatoMoneda(calculoSaldo($prestamo->getOriginal('monto'),$prestamo->interes_id)) }}</td></tr>
+                                    <tr><th>Total</th><td>{{ formatoMoneda(calculoTotal($prestamo->getOriginal('monto'),$prestamo->interes_id)) }}</td></tr>                                
                                     <tr><th>Número de cuotas</th><td>{{ $prestamo->numero_cuotas }}</td></tr>
                                 @endif                                    
                                 <tr><th>Estado de préstamo</th><td>
@@ -66,10 +69,18 @@
                                                 <span class="texto-deuda shadow-sm p-1 rounded">{{ textoDeudaCuota($p->getOriginal('estado_deuda_id')) }}</span>
                                             </td>
                                         </tr>
-                                    @endforeach                                
+                                    @endforeach
+                                        <tr>
+                                            <td class="text-right" colspan="2"><b>Total</b></td>
+                                            <td class="text-center"><b>{{ formatoMoneda(calculoTotal($prestamo->getOriginal('monto'),$prestamo->interes_id)) }}</b></td>
+                                            <td></td>
+                                        </tr>                                
                                 </tbody>
                             </table>
                         </div>
+                    @endif
+                    @if($prestamo->getOriginal('forma_pago_id') === 2 && ($prestamo->getOriginal('estado_deuda_id') === 2 || $prestamo->getOriginal('estado_deuda_id') === 3))
+                        <a class="btn btn-success float-right" href="{{ route('cancelar_deposito', ['id' => $prestamo->id]) }}" role="button">Cancelar Préstamo</a>
                     @endif
                 </div>
             </div>

@@ -23,9 +23,10 @@
                             <table class="table table-hover data-tables table-striped table-bordered" id="tabla-socios">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-success" scope="col" title=""></th>
-                                        <th class="text-center text-success" scope="col" title=""></th>
-                                        <th class="text-center text-success" scope="col" title=""></th>
+                                        <th class="text-center" scope="col">&nbsp;</th>
+                                        <th class="text-center" scope="col">&nbsp;</th>
+                                        <th class="text-center" scope="col">&nbsp;</th>
+                                        <th class="text-center" title="Estado préstamo solicitado" scope="col">Préstamo</th>
                                         <th scope="col">Nombre</th>
                                         <th class="text-center" scope="col">Género</th>
                                         <th scope="col">Rut</th>
@@ -45,11 +46,27 @@
                                             <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('socios.show',$s) }}"><span>@svg('ver')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href="{{ route('socios.edit',$s) }}"><span>@svg('editar')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_socio" href="#"><span>@svg('eliminar')</span></a></td>
+                                            @if(buscarDeudaActiva($s->prestamos) != null || buscarDeudaActiva($s->prestamos) != '')
+                                            <td class="text-center" scope="row">
+                                                <a class="text-decoration-none" href="{{ route('prestamos.show',buscarPrestamoConDeudaActiva($s->prestamos)) }}">
+                                                    <span class="texto-deuda shadow-sm p-1 rounded
+                                                        @if(buscarDeudaActiva($s->prestamos) === 'Pendiente')
+                                                            {{ 'bg-warning text-dark' }}
+                                                        @endif
+                                                        @if(buscarDeudaActiva($s->prestamos) === 'Atrasado')
+                                                            {{ 'bg-danger text-light' }}
+                                                        @endif                                                        
+                                                    ">{{ buscarDeudaActiva($s->prestamos) }}</span>
+                                                </a>
+                                            </td>
+                                            @else
+                                                <td class="text-center"> - </td>
+                                            @endif
                                             <td>{{ $s->apellido1 }} {{ $s->apellido2 }}, {{ $s->nombre1 }} {{ $s->nombre2 }}</td>
                                             <td class="text-center">{{ $s->genero }}</td>
                                             <td>{{ $s->rut }}</td>
                                             <td class="text-center">{{ $s->fecha_sind1 }}</td>
-                                            <td>{{ $s->numero_socio }}</td>
+                                            <td class="text-center">{{ $s->numero_socio }}</td>
                                             <td>{{ $s->correo }}</td>
                                             <td class="text-center">{{ $s->anexo }}</td>
                                             <td class="text-center">{{ $s->celular }}</td>

@@ -1,10 +1,8 @@
 $(window).on('load',function(){
 
 	var textos = $('.texto-deuda');
-	console.log(textos);
 	for(var i = 0; i < textos.length; i++){
 		texto = textos.eq(i).text();
-		//textos.eq(i).removeClass('d-none');
 		if(texto === 'Pagado' || texto === 'Pagada'){
 			textos.eq(i).addClass('bg-success');
 			textos.eq(i).addClass('text-light');

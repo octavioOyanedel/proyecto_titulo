@@ -79,7 +79,7 @@
                         <input name="numero_cuotas" type="hidden" value="{{ $request->numero_cuotas }}">
                         <input name="socio_id" type="hidden" value="{{ $socio->id }}">
                         <input name="estado_deuda_id" type="hidden" value="{{ $estado->id }}">
-                        <input name="interes_id" type="hidden" value="{{ $interes->id }}">
+                        <input name="interes_id" type="hidden" value="{{ ($interes != null)?$interes->id: null}}">
                         <input name="forma_pago_id" type="hidden" value="{{ $forma_pago_original }}">
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

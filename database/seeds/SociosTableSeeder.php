@@ -58,5 +58,28 @@ class SociosTableSeeder extends Seeder
             'estado_socio_id' => 1,
             'nacionalidad_id' => 3
         ]); 
+        App\Socio::create([
+            'rut' => '138816389',
+            'nombre1' => 'Octavio',
+            'nombre2' => 'Andrés',
+            'apellido1' => 'Oyanedel',
+            'apellido2' => 'Alarcón',        
+            'genero' => 'Varón',
+            'fecha_nac' => '1980-09-18',
+            'celular' => 971254626,
+            'correo' => 'octavio.oyanedel@gmail.com',
+            'direccion' => 'Beaucheff',
+            'fecha_pucv' => '2005-01-01',
+            'anexo' => 2092,
+            'numero_socio' => 7,
+            'fecha_sind1' => '2007-01-01',
+            'comuna_id' => 6,
+            'ciudad_id' => 32,
+            'sede_id' => 1,
+            'area_id' => 1,
+            'cargo_id' => 1,
+            'estado_socio_id' => 1,
+            'nacionalidad_id' => 3
+        ]); 
     }
 }

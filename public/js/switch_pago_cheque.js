@@ -7,7 +7,7 @@ $(window).on('load',function(){
 	var deposito = $('#deposito');
 	var campo_fecha_pago_deposito = $('#campo_fecha_pago_deposito');
 	var campo_cheque = $('#campo_cheque');
-	var opciones = opciones = $('.opciones-cuotas');
+	var campo_cuotas = $('#campo_numero_cuotas');
 
 	pago.change(function(){
 		cheque.val('');		
@@ -17,30 +17,24 @@ $(window).on('load',function(){
 		switch(forma_pago) {
 			case 'Descuento por planilla':
 				activarCheque();
-				activarOpciones(opciones);
+				activarOpciones();
 			break;
 			case 'Depósito':
 				desactivarCheque();
-				desactivarOpciones(opciones);
+				desactivarOpciones();
 			break;			
 			default:
 				desactivarPagoYCheque();
-				activarOpciones(opciones)
+				activarOpciones()
 		} 
 	});	
 
-	function activarOpciones(opciones){	
-		for(var i = 0; i < opciones.length; i++){
-		    opciones.eq(i).removeClass('d-none');
-		}
+	function activarOpciones(){	
+		campo_cuotas.removeClass('d-none');
 	}
 
-	function desactivarOpciones(opciones){	opciones.eq(i).removeClass('d-none');
-		for(var i = 0; i < opciones.length; i++){
-		    if(i != 0){
-		    	opciones.eq(i).addClass('d-none');
-		    }
-		}
+	function desactivarOpciones(){	
+		campo_cuotas.addClass('d-none');
 	}
 
 	function desactivarPagoYCheque(){

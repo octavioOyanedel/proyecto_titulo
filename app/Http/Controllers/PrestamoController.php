@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Prestamo;
+use App\Cuota;
 use App\FormaPago;
 use App\Interes;
 use App\Socio;
@@ -50,8 +51,10 @@ class PrestamoController extends Controller
     public function store(IncorporarPrestamoRequest $request)
     {
         Prestamo::create($request->all()); 
-        $prestamo = Prestamo::obtenerUltimoPrestamoIngresado();          
-        Prestamo::agregarCuotasPrestamo($prestamo);   
+        $prestamo = Prestamo::obtenerUltimoPrestamoIngresado();
+        if($request->deposito === '0'){
+            Prestamo::agregarCuotasPrestamo($prestamo);       
+        }           
         return redirect()->route('prestamos.create')->with('agregar-prestamo','');        
     }
 
@@ -63,7 +66,10 @@ class PrestamoController extends Controller
      */
     public function show(Prestamo $prestamo)
     {
-        $interes = Interes::findOrFail($prestamo->getOriginal('interes_id'));
+        $interes = null;
+        if($prestamo->forma_pago_id === '1'){
+            $interes = Interes::findOrFail($prestamo->getOriginal('interes_id'));
+        }
         return view('sind1.prestamos.show', compact('prestamo','interes'));        
     }
 
@@ -168,15 +174,112 @@ class PrestamoController extends Controller
     public function simulacion(Request $request) 
     {
         $forma_pago_original = $request['forma_pago_id'];
+        $interes = null;
+        $cuotas = null;
+        $total = null;
+
         if ($request['forma_pago_id'] != null) {
             $request['forma_pago_id'] = FormaPago::findOrFail($request['forma_pago_id'])->nombre;
         }
+
         $socio = Socio::findOrFail($request->socio_id);
         $estado = EstadoDeuda::findOrFail(2); //1 - pagada | 2 - pendiente |  - atrasada
-        $interes = Interes::findOrFail(1); //unico interes
-        $cuotas = crearArregloCuotas($request->numero_cuotas, $request->fecha_solicitud, $request->monto);
-        $total = obtenerTotalPrestamo($cuotas);
+
+        if($forma_pago_original === '1'){
+            $interes = Interes::findOrFail(1); //unico interes
+            $cuotas = crearArregloCuotas($request->numero_cuotas, $request->fecha_solicitud, $request->monto);     
+            $total = obtenerTotalPrestamo($cuotas);      
+        }     
+
         return view('sind1.prestamos.simulacion', compact('forma_pago_original', 'request', 'socio', 'estado', 'interes', 'cuotas', 'total'));
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cancelarDeposito($id)
+    {
+        $prestamo = Prestamo::findOrFail($id);
+        $interes = null;
+        if($prestamo->forma_pago_id === '1'){
+            $interes = Interes::findOrFail($prestamo->getOriginal('interes_id'));
+        }
+        $prestamo->estado_deuda_id = 1;
+        $prestamo->update();
+        return redirect()->route('prestamos.show', compact('prestamo','interes'))->with('cancelar-deposito','');    
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cambiarEstadoDeposito(Request $request)
+    {
+        $prestamos = null;
+        if ($request->ajax()) {
+            $prestamos = Prestamo::where([
+                ['forma_pago_id','=',2],
+                ['estado_deuda_id','=',2],
+                ['fecha_pago_deposito','<',date('Y-m-d')]
+            ])->get();   
+
+            foreach ($prestamos as $prestamo) {
+                $prestamo->estado_deuda_id = 3;
+                $prestamo->update();
+            }
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pagoAutomaticoCuotas(Request $request)
+    {
+        $cuotas = null;
+        if ($request->ajax()) {
+            $cuotas = Cuota::where([
+                ['fecha_pago','<=', date('Y-m-d')]
+            ])->get();   
+
+            foreach ($cuotas as $cuota) {
+                $cuota->estado_deuda_id = 1;
+                $cuota->update();
+            }
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saldarPrestamo(Request $request)
+    {
+        $prestamos = null;
+        if ($request->ajax()) {
+            $prestamos = Prestamo::where([
+                ['forma_pago_id','=',1],
+                ['estado_deuda_id','=',2]
+            ])->get();   
+
+            foreach ($prestamos as $prestamo) {
+                $pagadas = 0;
+                foreach ($prestamo->cuotas as $cuota) {
+                    if($cuota->estado_deuda_id === 2){
+                        $pagadas ++;
+                    }
+                }
+                return ($pagadas.' - '.$prestamo->numero_cuotas);
+                if($pagadas == $prestamo->numero_cuotas){
+                    $prestamo->estado_deuda_id = 1; //1 - pagada
+                    $prestamo->update();
+                }
+            }
+        }
+    }    
 }

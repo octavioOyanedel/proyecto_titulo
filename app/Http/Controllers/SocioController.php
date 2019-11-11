@@ -10,6 +10,7 @@ use App\EstadoSocio;
 use App\Nacionalidad;
 use App\Prestamo;
 use App\CargaFamiliar;
+use App\Interes;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarSocioRequest;
 
@@ -61,7 +62,6 @@ class SocioController extends Controller
      */
     public function show(Socio $socio)
     {
-
         $prestamos = $socio->prestamos()->simplePaginate(10);
         $estudios = $socio->estudios_realizados_socios;
         $cargas = $socio->cargas_familiares;

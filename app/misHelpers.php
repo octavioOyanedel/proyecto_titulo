@@ -1,6 +1,36 @@
 <?php
 
     /**
+     * buscar prestamos pendientes o atrasados 
+     */
+    function buscarPrestamoConDeudaActiva($coleccion)
+    {
+        foreach ($coleccion as $item) {    
+            if($item->getOriginal('estado_deuda_id') === 2 || $item->getOriginal('estado_deuda_id') === 3){
+                return $item;
+            }    
+        }
+    }
+
+    /**
+     * buscar prestamos pendientes o atrasados 
+     */
+    function buscarDeudaActiva($coleccion)
+    {
+        foreach ($coleccion as $item) {
+            switch ($item->getOriginal('estado_deuda_id')) {
+                case 2:
+                    return 'Pendiente';
+                    break;
+                case 3:
+                    return 'Atrasado';
+                    break;
+
+            }                 
+        }
+    }
+
+    /**
      * formato celda prestamo
      */
     function textoDeudaPrestamo($valor)
@@ -97,7 +127,7 @@
      */
     function calculoTotal($monto, $interes)
     {
-        return $monto + ($monto * ($interes / 100));
+        return (int)$monto + ((int)$monto * ((int)$interes / 100));
     }
 
     /**
@@ -105,7 +135,7 @@
      */
     function calculoSaldo($monto, $interes)
     {
-        return $monto * ($interes / 100);
+        return (int)$monto * ((int)$interes / 100);
     }
 
     /**
@@ -213,6 +243,8 @@
         $year_inicio = 0;
         $mes_inicio = 0;
         $fecha_cuota = '';
+        $array_fecha_cuota = array();
+        $mes_pago = '';
         $montoConInteres = ((2 / 100) * $monto) + $monto;
         $montoCouta = $montoConInteres / $cuotas;
         $coleccion = array();   
@@ -233,20 +265,21 @@
             }      
         }
         $year_inicio = $year;
-        $mes_pago = $mes_inicio;
+        $mes_pago = (string)$mes_inicio;
         //loop cuotas     
         for($i = 0; $i < $cuotas; $i++){
             if($mes_pago > 12){
                 $mes_pago = 1;
                 $year_pago++; 
             }
+
             if($mes_pago < 10){
                 $mes_pago = '0'.$mes_pago;
-            }      
-            $fecha_cuota = (string)$year_pago.'-'.$mes_pago.'-'.$dia_pago;
-
+            }    
+            
+            array_push($array_fecha_cuota,$year_pago,$mes_pago,$dia_pago);
+            $fecha_cuota = implode('-',$array_fecha_cuota);
             array_push($coleccion,array('numero' => $i + 1, 'fecha' => formatoFecha($fecha_cuota), 'monto' => $montoCouta));
-
 
             $mes_pago++;       
         }

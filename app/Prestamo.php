@@ -18,7 +18,7 @@ class Prestamo extends Model
     * @var array
     */
     protected $fillable = [
-        'fecha_solicitud','numero_egreso','cheque','deposito','fecha_pago_deposito','monto','numero_cuotas','socio_id','estado_deuda_id','interes_id','forma_pago_id',
+        'fecha_solicitud','numero_egreso','cheque','fecha_pago_deposito','monto','numero_cuotas','socio_id','estado_deuda_id','interes_id','forma_pago_id',
     ];
 
     /**
@@ -99,9 +99,21 @@ class Prestamo extends Model
     }
 
     /**
-     * Modificador de fecha de nacimiento
+     * Modificador de solicitud
      */
     public function getFechaSolicitudAttribute($valor)
+    {
+        if($valor != null){
+            return formatoFecha($valor);
+        }else{
+            return '';
+        }         
+    }
+
+    /**
+     * Modificador de fecha pago deposito
+     */
+    public function getFechaPagoDepositoAttribute($valor)
     {
         if($valor != null){
             return formatoFecha($valor);
@@ -169,21 +181,27 @@ class Prestamo extends Model
     static public function agregarCuotasPrestamo(Prestamo $prestamo)
     {
         $cuotas = $prestamo->numero_cuotas;
-        $fecha = $prestamo->fecha_solicitud;
+        $fecha = $prestamo->getOriginal('fecha_solicitud');
+        $monto = $prestamo->getOriginal('monto');
         $dia_pago = 25;
+        $year_pago = 0;
         $year_inicio = 0;
         $mes_inicio = 0;
         $fecha_cuota = '';
-        $montoConInteres = ((2 / 100) * $prestamo->getOriginal('monto')) + $prestamo->getOriginal('monto');
-        $montoCouta = $montoConInteres / $prestamo->numero_cuotas;
+        $array_fecha_cuota = array();
+        $montoConInteres = ((2 / 100) * $monto) + $monto;
+        $montoCouta = $montoConInteres / $cuotas;
+
         //obtener año, mes y dia
         $year = substr($fecha,0,-6);
         $mes = substr($fecha,5,-3);
         $dia = substr($fecha,8);
-        $year_pago = $year + 0; //casteo a entreo
+
+        $year_pago = $year;
+
         //mes de inicio
         if($dia < 15){
-            $mes_inicio = $mes + 0; //casteo a entero
+            $mes_inicio = $mes; 
         }else{
             //inicio mes siguiente
             $mes_inicio = $mes + 1;
@@ -192,18 +210,20 @@ class Prestamo extends Model
                 $year_pago++; 
             }      
         }
+
         $year_inicio = $year;
         $mes_pago = $mes_inicio;
+
         //loop cuotas
         for($i = 0; $i < $cuotas; $i++){
+
             if($mes_pago > 12){
                 $mes_pago = 1;
                 $year_pago++; 
             }
-            if($mes_pago < 10){
-                $mes_pago = '0'.$mes_pago;
-            }      
+
             $fecha_cuota = (string)$year_pago.'-'.$mes_pago.'-'.$dia_pago;
+
             $cuota = new Cuota;
             $cuota->fecha_pago = $fecha_cuota;
             $cuota->numero_cuota = $i + 1;
@@ -219,6 +239,14 @@ class Prestamo extends Model
      * Obtener ultimo registro creado 
      */
     static public function obtenerUltimoPrestamoIngresado()
+    {
+        return Prestamo::orderBy('created_at', 'DESC')->first();
+    }
+
+    /**
+     * buscar prestamos pendientes o atrasados 
+     */
+    static public function buscarDeudaActiva()
     {
         return Prestamo::orderBy('created_at', 'DESC')->first();
     }

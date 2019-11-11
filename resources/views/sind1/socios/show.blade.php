@@ -138,6 +138,7 @@
                                 </thead>  
                                 <tbody>
                                     @foreach($prestamos as $p)
+
                                     <tr>
                                         <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('prestamos.show',$p) }}"><span>@svg('ver')</span></a></td>
                                         <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
@@ -148,9 +149,13 @@
                                         <td class="text-center">{{ celdaCadena($p->fecha_pago_deposito) }}</td>
                                         <td class="text-center">{{ $p->cheque }}</td>
                                         <td class="text-center">{{ $p->monto }}</td>
-                                        <td class="text-center">{{ formatoInteres($p->interes_id) }}</td>
-                                        <td class="text-center">{{ formatoMoneda(calculoSaldo($p->getOriginal('monto'), $p->interes_id)) }}</td>                                        
-                                        <td class="text-center">{{ formatoMoneda(calculoTotal($p->getOriginal('monto'), $p->interes_id)) }}</td>
+                                        <td class="text-center">{{$p->interes_id }}%</td>
+                                        <td class="text-center">
+                                            {{ celdaCadena(formatoMoneda(calculoSaldo($p->getOriginal('monto'),$p->interes_id))) }}
+                                        </td>                                        
+                                        <td class="text-center">
+                                            {{ celdaCadena(formatoMoneda(calculoTotal($p->getOriginal('monto'),$p->interes_id))) }}
+                                        </td>
                                         <td class="text-center">{{ $p->numero_cuotas }}</td>                                       
                                     </tr>
                                     @endforeach
