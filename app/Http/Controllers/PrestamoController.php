@@ -270,16 +270,37 @@ class PrestamoController extends Controller
             foreach ($prestamos as $prestamo) {
                 $pagadas = 0;
                 foreach ($prestamo->cuotas as $cuota) {
-                    if($cuota->estado_deuda_id === 2){
-                        $pagadas ++;
+                    if($cuota->getOriginal('estado_deuda_id') === 1){
+                        $pagadas++;
                     }
                 }
-                return ($pagadas.' - '.$prestamo->numero_cuotas);
                 if($pagadas == $prestamo->numero_cuotas){
                     $prestamo->estado_deuda_id = 1; //1 - pagada
                     $prestamo->update();
                 }
+            }                          
+        }
+    } 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pagoCuota(Request $request)
+    {
+        $cuotas = null;
+        if ($request->ajax()) {
+            $cuotas = Cuota::where([
+                ['estado_deuda_id','=',2]
+            ])->get();   
+
+            foreach ($cuotas as $cuota) {
+                if($cuota->getOriginal('fecha_pago') === date('Y-m-d')){
+                    $cuota->estado_deuda_id = 1; //1 - pagada
+                    $cuota->update();
+                }
             }
         }
-    }    
+    }   
 }

@@ -25,15 +25,18 @@ Route::get('/verificar_numero_socio', 'SocioController@verificarNumeroSocio');
 Route::get('/verificar_correo', 'SocioController@verificarCorreo');
 Route::get('/cargar_ciudades', 'CiudadController@obtenerCiudades');
 Route::get('/cargar_areas', 'AreaController@obtenerAreas');
-route::get('/evaluar_fecha_prestamo', 'PrestamoController@cambiarEstadoDeposito');
-route::get('/pago_automatico_cuotas', 'PrestamoController@pagoAutomaticoCuotas');
-route::get('/saldar_prestamo', 'PrestamoController@saldarPrestamo');
 
 //ajax prestamo
 Route::get('/verificar_rut_prestamo', 'PrestamoController@verificarRut');
 Route::get('/verificar_cheque', 'PrestamoController@verificarCheque');
 Route::get('/verificar_numero_egreso', 'PrestamoController@verificarNumeroEgreso');
 Route::get('/obtener_id_socio_con_rut', 'SocioController@obtenerIdSocioConRut');
+
+//ajax pagos automaticos
+route::get('/cambio_estado_deposito', 'PrestamoController@cambiarEstadoDeposito');
+route::get('/pago_cuotas_atrasadas', 'PrestamoController@pagoAutomaticoCuotas');
+route::get('/saldar_prestamo', 'PrestamoController@saldarPrestamo');
+route::get('/pago_cuota', 'PrestamoController@pagoCuota');
 
 //ajax contable
 Route::get('/verificar_cheque_contable', 'RegistroContableController@verificarCheque');

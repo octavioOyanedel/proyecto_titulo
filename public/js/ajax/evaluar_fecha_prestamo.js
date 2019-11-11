@@ -2,7 +2,7 @@ $(window).on('load',function(){
 	$.ajax({
 		method: 'GET',
 		dataType: 'json',
-		url: '/evaluar_fecha_prestamo',
+		url: '/cambio_estado_deposito',
 		data: {id: 0},
 		success: function(respuesta){
 

@@ -144,7 +144,9 @@
                                         <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
                                         <td class="text-center">{{ $p->fecha_solicitud }}</td>
                                         <td class="text-center">{{ $p->forma_pago_id }}</td>
-                                        <td class="text-center">{{ $p->estado_deuda_id }}</td>
+                                        <td class="text-center">
+                                            <span class="texto-deuda shadow-sm p-1 rounded">{{ textoDeudaPrestamo($p->getOriginal('estado_deuda_id')) }}</span>
+                                        </td>
                                         <td class="text-center">{{ $p->numero_egreso }}</td>
                                         <td class="text-center">{{ celdaCadena($p->fecha_pago_deposito) }}</td>
                                         <td class="text-center">{{ $p->cheque }}</td>

@@ -11,7 +11,7 @@
         @break
         {{-- mostrar --}}
         @case('socios/'.$socio->id)
-
+            <script src="{{ asset('js/switch_estado_deuda.js') }}" defer></script>
         @break
         @default
     @endswitch

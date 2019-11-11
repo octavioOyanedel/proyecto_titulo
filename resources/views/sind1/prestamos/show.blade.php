@@ -38,7 +38,7 @@
                                 @if($prestamo->getOriginal('forma_pago_id') === 1)
                                     <tr><th>Interés</th><td>{{ $prestamo->interes_id }}%</td></tr>
                                     <tr><th>Saldo</th><td>{{ formatoMoneda(calculoSaldo($prestamo->getOriginal('monto'),$prestamo->interes_id)) }}</td></tr>
-                                    <tr><th>Total</th><td>{{ formatoMoneda(calculoTotal($prestamo->getOriginal('monto'),$prestamo->interes_id)) }}</td></tr>                                
+                                    <tr><th>Total</th><td>{{ formatoMoneda(calculoTotal($prestamo->getOriginal('monto'),$prestamo->interes_id)) }}</td></tr>
                                     <tr><th>Número de cuotas</th><td>{{ $prestamo->numero_cuotas }}</td></tr>
                                 @endif                                    
                                 <tr><th>Estado de préstamo</th><td>

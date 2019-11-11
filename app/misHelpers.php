@@ -20,7 +20,7 @@
         foreach ($coleccion as $item) {
             switch ($item->getOriginal('estado_deuda_id')) {
                 case 2:
-                    return 'Pendiente';
+                    return 'Vigente';
                     break;
                 case 3:
                     return 'Atrasado';
@@ -40,7 +40,7 @@
                 return 'Pagado';                
                 break;
             case 2:
-                return 'Pendiente';
+                return 'Vigente';
                 break;
             case 3:
                 return 'Atrasado';
@@ -58,7 +58,7 @@
                 return 'Pagada';                
                 break;
             case 2:
-                return 'Pendiente';
+                return 'Vigente';
                 break;
             case 3:
                 return 'Atrasada';

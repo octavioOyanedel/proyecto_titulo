@@ -50,7 +50,7 @@
                                             <td class="text-center" scope="row">
                                                 <a class="text-decoration-none" href="{{ route('prestamos.show',buscarPrestamoConDeudaActiva($s->prestamos)) }}">
                                                     <span class="texto-deuda shadow-sm p-1 rounded
-                                                        @if(buscarDeudaActiva($s->prestamos) === 'Pendiente')
+                                                        @if(buscarDeudaActiva($s->prestamos) === 'Vigente')
                                                             {{ 'bg-warning text-dark' }}
                                                         @endif
                                                         @if(buscarDeudaActiva($s->prestamos) === 'Atrasado')

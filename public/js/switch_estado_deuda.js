@@ -7,7 +7,7 @@ $(window).on('load',function(){
 			textos.eq(i).addClass('bg-success');
 			textos.eq(i).addClass('text-light');
 		}
-		if(texto === 'Pendiente'){
+		if(texto === 'Vigente'){
 			textos.eq(i).addClass('bg-warning');
 			textos.eq(i).addClass('text-dark');
 		}
