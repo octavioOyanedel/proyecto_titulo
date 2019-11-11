@@ -7,6 +7,7 @@ use App\Cuota;
 use App\EstadoDeuda;
 use App\Interes;
 use App\FormaPago;
+use App\Cuenta;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +19,7 @@ class Prestamo extends Model
     * @var array
     */
     protected $fillable = [
-        'fecha_solicitud','numero_egreso','cheque','fecha_pago_deposito','monto','numero_cuotas','socio_id','estado_deuda_id','interes_id','forma_pago_id',
+        'fecha_solicitud','numero_egreso','cuenta_id','cheque','fecha_pago_deposito','monto','numero_cuotas','socio_id','estado_deuda_id','interes_id','forma_pago_id',
     ];
 
     /**
@@ -39,6 +40,21 @@ class Prestamo extends Model
         if ($cheque) {
             return $query->orWhere('cheque', 'LIKE', "%$cheque%");
         }
+    }
+
+    /**
+     * Modificador de monto
+     */
+    public function getCuentaIdAttribute($valor)
+    {
+        if($valor != null){
+            $cuenta_id = $valor;
+            $cuenta = Cuenta::findOrFail($cuenta_id);
+            $valor = $cuenta->tipo_cuenta_id.' - '.$cuenta->banco_id.' - '.$cuenta->numero;
+            return $valor;
+        }else{
+            return '';
+        }            
     }
 
     /**
@@ -160,6 +176,14 @@ class Prestamo extends Model
     public function forma_pago()
     {
         return $this->hasOne('App\FormaPago');
+    } 
+
+    /**
+     * Relación 
+     */
+    public function cuenta()
+    {
+        return $this->hasOne('App\Cuenta');
     } 
 
     /**

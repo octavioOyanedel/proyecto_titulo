@@ -18,7 +18,7 @@ class CreateConceptosTable extends Migration
             $table->collation = 'utf8mb4_spanish_ci';
             $table->increments('id');
             $table->string('nombre');
-            $table->string('detalle');
+            $table->unsignedInteger('tipo_registro_id');
             $table->timestamps();
         });
     }

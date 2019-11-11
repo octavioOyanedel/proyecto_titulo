@@ -24,6 +24,7 @@
                         @include('partials.components.elementos.prestamo.rut') 
                         @include('partials.components.elementos.prestamo.fecha_solicitud')
                         @include('partials.components.elementos.prestamo.numero_egreso')
+                        @include('partials.components.elementos.prestamo.cuenta')
                         @include('partials.components.elementos.prestamo.metodos_pago')
                         @include('partials.components.elementos.prestamo.cheque')
                         @include('partials.components.elementos.prestamo.fecha_pago_deposito')

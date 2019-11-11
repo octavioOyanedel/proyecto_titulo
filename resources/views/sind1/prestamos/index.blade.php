@@ -23,11 +23,12 @@
                             <table class="table table-hover table-borderer table-striped data-tables" id="tabla-prestamos">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        <th>&nbsp;</th>
                                         <th scope="col">Nombre socio</th>
                                         <th class="text-center" scope="col">Rut</th>
                                         <th class="text-center" scope="col">Fecha de solicitud</th>
                                         <th class="text-center" scope="col">Número de egreso</th>
+                                        <th class="text-center" scope="col">Cuenta</th>
                                         <th class="text-center" scope="col">Método de pago</th>
                                         <th class="text-center" scope="col">Cheque</th>
                                         <th class="text-center" scope="col">Monto</th>
@@ -42,6 +43,7 @@
                                             <td class="text-center">{{ $p->socio->rut }}</td>
                                             <td class="text-center">{{ $p->fecha_solicitud }}</td>
                                             <td class="text-center">{{ $p->numero_egreso }}</td>
+                                            <td class="text-center">{{ $p->cuenta_id }}</td>
                                             <td class="text-center">{{ $p->forma_pago_id }}</td>
                                             <td class="text-center">{{ celdaCadena($p->cheque) }}</td>
                                             <td class="text-center">{{ $p->monto }}</td>

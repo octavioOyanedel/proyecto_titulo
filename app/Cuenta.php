@@ -5,6 +5,7 @@ namespace App;
 use App\TipoCuenta;
 use App\Banco;
 use App\RegistroContable;
+use App\Prestamo;
 use Illuminate\Database\Eloquent\Model;
 
 class Cuenta extends Model
@@ -62,5 +63,13 @@ class Cuenta extends Model
     public function registro_contable()
     {
         return $this->hasOne('App\RegistroContable');
+    }
+
+    /**
+     * Relación 
+     */
+    public function prestamos()
+    {
+        return $this->belongTo('App\Prestamo');
     }
 }

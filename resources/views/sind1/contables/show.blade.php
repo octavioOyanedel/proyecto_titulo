@@ -15,7 +15,7 @@
                     @endif
                     <h4>Información registro contable</h4>
                     <div class="table-responsive">                     
-                        <table class="table table-hover">
+                        <table class="table table-hover table-bordered table-stripred">
                             <thead></thead>
                             <tbody>
                                 <tr><th>Registrado por</th>
@@ -23,6 +23,7 @@
                                 <tr><th>Fecha de solicitud</th><td>{{ $registroContable->fecha }}</td></tr>
                                 <tr><th>Tipo de registro</th><td>{{ $registroContable->tipo_registro_contable_id }}</td></tr>
                                 <tr><th>Concepto</th><td>{{ $registroContable->concepto_id }}, {{ $registroContable->socio->nombre1 }} {{ $registroContable->socio->apellido2 }} {{ $registroContable->asociado_id }}</td></tr>
+                                <tr><th>Detalle</th><td>{{ $registroContable->detalle }}</td></tr>
                                 <tr><th>Número de registro</th><td>{{ $registroContable->numero_registro }}</td></tr>
                                 <tr><th>Cheque</th><td>{{ $registroContable->cheque }}</td></tr>
                                 <tr><th>Monto</th><td>{{ $registroContable->monto }}</td></tr>

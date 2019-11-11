@@ -18,6 +18,7 @@ class KeysPrestamosTable extends Migration
             $table->foreign('estado_deuda_id')->references('id')->on('estados_deuda')->onDelete('cascade');
             $table->foreign('interes_id')->references('id')->on('intereses')->onDelete('cascade');
             $table->foreign('forma_pago_id')->references('id')->on('formas_pago')->onDelete('cascade');
+            $table->foreign('cuenta_id')->references('id')->on('cuentas')->onDelete('cascade');
         });
     }
 

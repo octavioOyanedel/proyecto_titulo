@@ -24,9 +24,9 @@ class TipoRegistroContable extends Model
     /**
      * Relación 
      */
-    public function concepto()
+    public function conceptos()
     {
-        return $this->belongsTo('App\Concepto');
+        return $this->BelongsToMany('App\Concepto');
     }
 
     /**
@@ -36,4 +36,5 @@ class TipoRegistroContable extends Model
     {
         return $this->belongsTo('App\RegistroContable');
     }
+
 }

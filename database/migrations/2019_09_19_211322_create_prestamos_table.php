@@ -19,6 +19,7 @@ class CreatePrestamosTable extends Migration
             $table->increments('id');
             $table->date('fecha_solicitud');
             $table->unsignedInteger('numero_egreso')->unique();
+            $table->unsignedInteger('cuenta_id');
             $table->unsignedInteger('cheque')->nullable()->unique();
             $table->date('fecha_pago_deposito')->nullable();
             $table->unsignedInteger('monto');

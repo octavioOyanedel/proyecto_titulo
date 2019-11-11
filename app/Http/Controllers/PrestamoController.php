@@ -8,6 +8,8 @@ use App\FormaPago;
 use App\Interes;
 use App\Socio;
 use App\EstadoDeuda;
+use App\RegistroContable;
+use App\Cuenta;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarPrestamoRequest;
 
@@ -38,8 +40,9 @@ class PrestamoController extends Controller
      */
     public function create()
     {
+        $cuentas = Cuenta::all();
         $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
-        return view('sind1.prestamos.create', compact('formas_pago'));
+        return view('sind1.prestamos.create', compact('formas_pago','cuentas'));
     }
 
     /**
@@ -54,7 +57,20 @@ class PrestamoController extends Controller
         $prestamo = Prestamo::obtenerUltimoPrestamoIngresado();
         if($request->deposito === '0'){
             Prestamo::agregarCuotasPrestamo($prestamo);       
-        }           
+        }   
+        $registro = new RegistroContable;  
+        $registro->fecha = $prestamo->fecha_solicitud;
+        $registro->numero_registro = $prestamo->numero_egreso;
+        $registro->cheque = $prestamo->cheque;
+        $registro->monto = $prestamo->monto;
+        $registro->concepto_id = 57; //57 préstamo
+        $registro->detalle = null;
+        $registro->tipo_registro_contable_id = 1;
+        $registro->cuenta_id = 2;
+        $registro->asociado_id = null;
+        $registro->usuario_id = Auth::user()->id;
+        $registro->socio_id = $prestamo->socio_id;
+        $prestamo->save();
         return redirect()->route('prestamos.create')->with('agregar-prestamo','');        
     }
 
@@ -116,7 +132,7 @@ class PrestamoController extends Controller
     public function verificarCheque(Request $request) 
     {
         if ($request->ajax()) {
-            $prestamo = Prestamo::where('cheque','=',$request->elemento)->get();
+            $prestamo = RegistroContable::where('cheque','=',$request->elemento)->get();
             if(count($prestamo) != 0){
                 return response()->json(1); //si existe
             }else{
@@ -135,7 +151,10 @@ class PrestamoController extends Controller
     public function verificarNumeroEgreso(Request $request) 
     {
         if ($request->ajax()) {
-            $prestamo = Prestamo::where('numero_egreso','=',$request->elemento)->get();
+            $prestamo = RegistroContable::where([
+                ['numero_registro','=',$request->elemento],
+                ['tipo_registro_contable_id','=',1]
+            ])->get();
             if(count($prestamo) != 0){
                 return response()->json(1); //si existe
             }else{

@@ -2,8 +2,9 @@
 
 namespace App;
 
-use App\DetalleConcepto;
+use App\Concepto;
 use App\RegistroContable;
+use App\TipoRegistroContable;
 use Illuminate\Database\Eloquent\Model;
 
 class Concepto extends Model
@@ -14,7 +15,7 @@ class Concepto extends Model
     * @var array
     */
     protected $fillable = [
-        'nombre','detalle',
+        'nombre','tipo_registro_id',
     ];
 
     /**
@@ -23,5 +24,29 @@ class Concepto extends Model
     public function registros_contables()
     {
         return $this->BelongsToMany('App\RegistroContable');
+    }
+
+    /**
+     * Relación 
+     */
+    public function concepto()
+    {
+        return $this->hasOne('App\Concepto');
+    }
+
+    /**
+     * Modificador de tipo registro
+     */
+    public function getTipoRegistroIdAttribute($valor)
+    {
+        if($valor != null){
+            $tipo_id = $valor;
+            $tipo = TipoRegistroContable::findOrFail($tipo_id);
+            $valor = $tipo->nombre;
+            return $valor;        
+        }else{
+            return '';
+        }
+
     }
 }

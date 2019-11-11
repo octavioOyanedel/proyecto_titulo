@@ -22,7 +22,7 @@ class RegistroContable extends Model
     * @var array
     */
     protected $fillable = [
-        'fecha','numero_registro','forma_pago','monto','concepto_id','tipo_registro_contable_id','cuenta_id','asociado_id','socio_id','usuario_id',
+        'fecha','numero_registro','forma_pago','monto','concepto_id','detalle','tipo_registro_contable_id','cuenta_id','asociado_id','socio_id','usuario_id',
     ];
 
     /**

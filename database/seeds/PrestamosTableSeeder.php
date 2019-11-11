@@ -14,6 +14,7 @@ class PrestamosTableSeeder extends Seeder
         App\Prestamo::create([
             'fecha_solicitud' => '2010-01-01',
             'numero_egreso' => 300,
+            'cuenta_id' => 2,
             'cheque' => 123456789,
             'fecha_pago_deposito' => null,
             'monto' => 50000,
@@ -27,6 +28,7 @@ class PrestamosTableSeeder extends Seeder
         App\Prestamo::create([
             'fecha_solicitud' => '2015-11-20',
             'numero_egreso' => 450,
+            'cuenta_id' => 2,
             'cheque' => 987654321,
             'fecha_pago_deposito' => null,
             'monto' => 60000,

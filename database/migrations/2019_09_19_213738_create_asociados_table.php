@@ -18,7 +18,7 @@ class CreateAsociadosTable extends Migration
             $table->collation = 'utf8mb4_spanish_ci';
             $table->increments('id');
             $table->string('concepto');
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
             $table->timestamps();
         });
     }
