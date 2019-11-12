@@ -47,6 +47,6 @@ class Concepto extends Model
         }else{
             return '';
         }
-
     }
+
 }

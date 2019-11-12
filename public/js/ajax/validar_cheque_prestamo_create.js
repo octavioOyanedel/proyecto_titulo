@@ -10,7 +10,6 @@ $(window).on('load',function(){
 	var error = $('#error-cheque');
 	var original = '';
 	var error_php = $('#error-cheque-php');
-	var deposito = $('#deposito');
 
 	//reset mensajes
 	limpiarMensajes();
@@ -82,7 +81,6 @@ $(window).on('load',function(){
 		ocultarErrorPhp();
 		noEsInvalido();
 		limpiarMensajes();
-		deposito.val(0);
 		ok.removeClass('d-none').append('Cheque válido.');
 		ocultarSpin();
 	}

@@ -41,6 +41,7 @@ route::get('/pago_cuota', 'PrestamoController@pagoCuota');
 //ajax contable
 Route::get('/verificar_cheque_contable', 'RegistroContableController@verificarCheque');
 Route::get('/verificar_numero_registro', 'RegistroContableController@verificarNumero');
+Route::get('/cargar_conceptos', 'RegistroContableController@obtenerConceptos');
 
 //ajax carga familiar
 Route::get('/verificar_rut_carga', 'CargaFamiliarController@verificarRut');

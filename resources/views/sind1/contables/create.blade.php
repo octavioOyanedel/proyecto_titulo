@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
+
+            @include('partials.alertas')
+
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Registrar Egreso - Ingreso</h3></div>
 
@@ -14,7 +17,7 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('contables.store') }}">
                         @csrf
 
                         @include('partials.components.elementos.contable.fecha_solicitud')
@@ -24,9 +27,10 @@
                         @include('partials.components.elementos.contable.tipo_registro')
                         @include('partials.components.elementos.contable.cuentas')
                         @include('partials.components.elementos.contable.concepto')
+                        @include('partials.components.elementos.contable.detalle')
                         @include('partials.components.elementos.contable.socios')
                         @include('partials.components.elementos.contable.asociados')
-
+                        <input id="usuario_id" name="usuario_id" type="hidden" value="{{ Auth::user()->id }}">
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -34,7 +38,8 @@
                                     {{ __('Agregar') }}
                                 </button>
                             </div>
-                        </div>                                                                                                                 <!-- fin form -->
+                        </div> 
+                        <!-- fin form -->
                     </form>
                 </div>
             </div>

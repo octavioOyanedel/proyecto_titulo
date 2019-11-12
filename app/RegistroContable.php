@@ -111,7 +111,7 @@ class RegistroContable extends Model
      */
     public function asociado()
     {
-        return $this->hasOne('App\Asociado');
+        return $this->belongsTo('App\Asociado');
     }
 
     /**

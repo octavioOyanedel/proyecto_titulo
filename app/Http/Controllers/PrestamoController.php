@@ -10,6 +10,7 @@ use App\Socio;
 use App\EstadoDeuda;
 use App\RegistroContable;
 use App\Cuenta;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarPrestamoRequest;
 
@@ -59,10 +60,10 @@ class PrestamoController extends Controller
             Prestamo::agregarCuotasPrestamo($prestamo);       
         }   
         $registro = new RegistroContable;  
-        $registro->fecha = $prestamo->fecha_solicitud;
+        $registro->fecha = $prestamo->getOriginal('fecha_solicitud');
         $registro->numero_registro = $prestamo->numero_egreso;
         $registro->cheque = $prestamo->cheque;
-        $registro->monto = $prestamo->monto;
+        $registro->monto = $prestamo->getOriginal('monto');
         $registro->concepto_id = 57; //57 préstamo
         $registro->detalle = null;
         $registro->tipo_registro_contable_id = 1;
@@ -70,7 +71,7 @@ class PrestamoController extends Controller
         $registro->asociado_id = null;
         $registro->usuario_id = Auth::user()->id;
         $registro->socio_id = $prestamo->socio_id;
-        $prestamo->save();
+        $registro->save();
         return redirect()->route('prestamos.create')->with('agregar-prestamo','');        
     }
 

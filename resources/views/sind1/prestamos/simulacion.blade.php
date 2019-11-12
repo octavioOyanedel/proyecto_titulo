@@ -72,6 +72,7 @@
                         @csrf
                         <input name="fecha_solicitud" type="hidden" value="{{ $request->fecha_solicitud }}">
                         <input name="numero_egreso" type="hidden" value="{{ $request->numero_egreso }}">
+                        <input name="cuenta_id" type="hidden" value="{{ $request->cuenta_id }}">
                         <input name="cheque" type="hidden" value="{{ $request->cheque }}">
                         <input name="deposito" type="hidden" value="{{ $request->deposito }}">
                         <input name="fecha_pago_deposito" type="hidden" value="{{ $request->fecha_pago_deposito }}">

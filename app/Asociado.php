@@ -21,6 +21,6 @@ class Asociado extends Model
      */
     public function registro_contable()
     {
-        return $this->belongsTo('App\RegistroContable');
+        return $this->hasOne('App\RegistroContable');
     }  
 }

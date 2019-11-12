@@ -27,6 +27,7 @@
                                         <th class="text-center" scope="col">Fecha de solicitud</th>
                                         <th class="text-center" scope="col">Tipo de registro</th>
                                         <th class="" scope="col">Concepto</th>
+                                        <th class="" scope="col">Detalle</th>
                                         <th class="text-center" scope="col">Número de registro</th>
                                         <th class="text-center" scope="col">Cheque</th>
                                         <th class="text-center" scope="col">Monto</th>                                
@@ -39,10 +40,10 @@
                                             <td class="text-center">{{ $r->fecha }}</td>
                                             <td class="text-center">{{ $r->tipo_registro_contable_id }}</td>
                                             <td class="">
-                                                {{ $r->concepto_id }},
-                                                {{ $r->socio->nombre1 }} {{ $r->socio->apellido2 }}
-                                                {{ $r->asociado_id }}
+                                                <b>{{ $r->concepto_id }}</b>, @if($r->socio != null){{ $r->socio->apellido1 }} {{ $r->socio->apellido2 }}, {{ $r->socio->nombre1 }} {{ $r->socio->nombre12 }}@endif
+                                                @if($r->asociado != null){{ $r->asociado->concepto }}@endif
                                             </td>
+                                            <td class="">{{ $r->detalle }}</td>
                                             <td class="text-center">{{ $r->numero_registro }}</td>
                                             <td class="text-center">{{ $r->cheque }}</td>
                                             <td class="text-center">{{ $r->monto }}</td>                                      

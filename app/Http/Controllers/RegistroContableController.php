@@ -10,6 +10,7 @@ use App\Asociado;
 use App\TipoRegistroContable;
 use App\Banco;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarRegistroContableRequest;
 
 class RegistroContableController extends Controller
 {
@@ -37,7 +38,7 @@ class RegistroContableController extends Controller
     {
         $socios = Socio::orderBy('apellido1')->get();
         $cuentas = Cuenta::all();
-        $conceptos = Concepto::where('id','<>',3)->orderBy('nombre')->get();
+        $conceptos = Concepto::where('id','<>',57)->orderBy('nombre')->get();
         $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
         $asociados = Asociado::orderBy('concepto')->get();
         return view('sind1.contables.create', compact('tipos_registro','cuentas','conceptos','socios','asociados'));
@@ -49,9 +50,15 @@ class RegistroContableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarRegistroContableRequest $request) //IncorporarRegistroContableRequest
     {
-        //
+        RegistroContable::create($request->all());
+        $socios = Socio::orderBy('apellido1')->get();
+        $cuentas = Cuenta::all();
+        $conceptos = Concepto::where('id','<>',57)->orderBy('nombre')->get();
+        $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
+        $asociados = Asociado::orderBy('concepto')->get();
+        return redirect()->route('contables.create', compact('tipos_registro','cuentas','conceptos','socios','asociados'))->with('agregar-registro','');  
     }
 
     /**
@@ -137,4 +144,16 @@ class RegistroContableController extends Controller
             
         }
     }
+
+    // obtener conceptos
+    public function obtenerConceptos(Request $request){
+        $coleccion = array();
+        if($request->ajax()){
+            $conceptos = Concepto::where('tipo_registro_id','=',$request->id)->get();
+            foreach ($conceptos as $c) {
+                array_push($coleccion,array('id'=>$c->id,'nombre'=>$c->nombre));
+            }
+            return response()->json($coleccion);
+        }
+    }   
 }

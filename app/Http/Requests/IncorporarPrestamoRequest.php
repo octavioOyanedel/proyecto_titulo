@@ -25,9 +25,9 @@ class IncorporarPrestamoRequest extends FormRequest
     {
         return [
             'fecha_solicitud' => ['required','date'],
-            'numero_egreso' => ['required','numeric','unique:prestamos,numero_egreso'],
+            'numero_egreso' => ['required','numeric','unique:registros_contables,numero_registro'],
             'cuenta_id' => ['required','numeric'],
-            'cheque' => ['nullable','numeric','unique:prestamos,cheque'],
+            'cheque' => ['nullable','numeric','unique:registros_contables,cheque'],
             'fecha_pago_deposito' => ['nullable','date'],
             'monto' => ['required','numeric'],
             'numero_cuotas' => ['nullable','numeric'],

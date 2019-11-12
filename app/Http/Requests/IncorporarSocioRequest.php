@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidarRutRule;
 
+
 class IncorporarSocioRequest extends FormRequest
 {
     /**
