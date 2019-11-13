@@ -22,7 +22,7 @@
                                 <td>{{ $registroContable->usuario->nombre1 }} {{ $registroContable->usuario->nombre2 }} {{ $registroContable->usuario->apellido1 }} {{ $registroContable->usuario->apellido1 }}</td></tr>
                                 <tr><th>Fecha de solicitud</th><td>{{ $registroContable->fecha }}</td></tr>
                                 <tr><th>Tipo de registro</th><td>{{ $registroContable->tipo_registro_contable_id }}</td></tr>
-                                <tr><th>Concepto</th><td>{{ $registroContable->concepto_id }}, @if($registroContable->socio != null){{ $registroContable->socio->apellido1 }} {{ $registroContable->socio->apellido2 }}, {{ $registroContable->socio->nombre1 }} {{ $registroContable->socio->nombre12 }}@endif @if($registroContable->asociado != null){{ $registroContable->asociado->concepto }}@endif</td></tr>
+                                <tr><th>Concepto</th><td>{{ $registroContable->concepto_id }}, @if($registroContable->socio != null){{ $registroContable->socio->apellido1 }} {{ $registroContable->socio->apellido2 }}, {{ $registroContable->socio->nombre1 }} {{ $registroContable->socio->nombre12 }}@endif @if($registroContable->asociado != null){{ $registroContable->asociado->concepto }} - {{ $registroContable->asociado->nombre }}@endif</td></tr>
                                 <tr><th>Detalle</th><td>{{ $registroContable->detalle }}</td></tr>
                                 <tr><th>Número de registro</th><td>{{ $registroContable->numero_registro }}</td></tr>
                                 <tr><th>Cheque</th><td>{{ $registroContable->cheque }}</td></tr>

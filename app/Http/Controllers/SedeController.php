@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Sede;
+use App\Area;
+use App\Cargo;
+use App\EstadoSocio;
+use App\Nacionalidad;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarSedeRequest;
 
 class SedeController extends Controller
 {
@@ -33,9 +38,15 @@ class SedeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarSedeRequest $request)
     {
-        //
+        Sede::create($request->all());
+        $sedes = Sede::orderBy('nombre', 'ASC')->get();
+        $areas = Area::orderBy('sede_id', 'ASC')->get();
+        $cargos = Cargo::orderBy('nombre', 'ASC')->get();
+        $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
+        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();        
+        return redirect()->route('mantenedor_socios', compact('sedes','areas','cargos','estados','nacionalidades'))->with('agregar-sede','');
     }
 
     /**
@@ -67,9 +78,18 @@ class SedeController extends Controller
      * @param  \App\Sede  $sede
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sede $sede)
+    public function update(IncorporarSedeRequest $request, Sede $sede)
     {
-        //
+        $modificar = Sede::findOrFail($sede->id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();
+        //reenvio
+        $sedes = Sede::orderBy('nombre', 'ASC')->get();
+        $areas = Area::orderBy('sede_id', 'ASC')->get();
+        $cargos = Cargo::orderBy('nombre', 'ASC')->get();
+        $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
+        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();        
+        return redirect()->route('mantenedor_socios', compact('sedes','areas','cargos','estados','nacionalidades'))->with('editar-sede','');
     }
 
     /**
@@ -78,8 +98,10 @@ class SedeController extends Controller
      * @param  \App\Sede  $sede
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sede $sede)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return Sede::destroy($request->id);   
+        }        
     }
 }

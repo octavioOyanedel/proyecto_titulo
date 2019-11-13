@@ -22,9 +22,9 @@
 
                         @include('partials.components.elementos.contable.fecha_solicitud')
                         @include('partials.components.elementos.contable.numero_registro')
-                        @include('partials.components.elementos.prestamo.cheque')
-                        @include('partials.components.elementos.prestamo.monto')
                         @include('partials.components.elementos.contable.tipo_registro')
+                        @include('partials.components.elementos.contable.cheque')
+                        @include('partials.components.elementos.contable.monto')
                         @include('partials.components.elementos.contable.cuentas')
                         @include('partials.components.elementos.contable.concepto')
                         @include('partials.components.elementos.contable.detalle')

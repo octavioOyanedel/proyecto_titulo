@@ -2,6 +2,7 @@
 @isset($socio)
     @php $nombre1 = $socio->nombre1 @endphp
 @endisset
+
 <!-- Nombre -->
 <div class="form-group row">
     <label for="nombre1" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Primer nombre') }}</label>

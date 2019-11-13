@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="ml-5 mr-5">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -23,14 +23,15 @@
                             <table class="table table-hover data-tables" id="tabla-contables">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-success" scope="col" title=""></th>
+                                        <th class="text-center text-success" scope="col" title="">&nbsp;</th>
                                         <th class="text-center" scope="col">Fecha de solicitud</th>
                                         <th class="text-center" scope="col">Tipo de registro</th>
-                                        <th class="" scope="col">Concepto</th>
-                                        <th class="" scope="col">Detalle</th>
                                         <th class="text-center" scope="col">Número de registro</th>
                                         <th class="text-center" scope="col">Cheque</th>
-                                        <th class="text-center" scope="col">Monto</th>                                
+                                        <th class="text-center" scope="col">Monto</th>                                          
+                                        <th class="" scope="col">Concepto</th>
+                                        <th class="" scope="col">Detalle</th>
+                              
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,14 +40,14 @@
                                             <td class="text-center" scope="row" title="Ver detalle registro contable"><a class="text-primary" href="{{ route('contables.show',['id' => $r->id]) }}"><span>@svg('ver')</span></a></td>
                                             <td class="text-center">{{ $r->fecha }}</td>
                                             <td class="text-center">{{ $r->tipo_registro_contable_id }}</td>
-                                            <td class="">
-                                                <b>{{ $r->concepto_id }}</b>, @if($r->socio != null){{ $r->socio->apellido1 }} {{ $r->socio->apellido2 }}, {{ $r->socio->nombre1 }} {{ $r->socio->nombre12 }}@endif
-                                                @if($r->asociado != null){{ $r->asociado->concepto }}@endif
-                                            </td>
-                                            <td class="">{{ $r->detalle }}</td>
                                             <td class="text-center">{{ $r->numero_registro }}</td>
                                             <td class="text-center">{{ $r->cheque }}</td>
-                                            <td class="text-center">{{ $r->monto }}</td>                                      
+                                            <td class="text-center">{{ $r->monto }}</td>                                              
+                                            <td class="">
+                                                <b>{{ $r->concepto_id }}</b>@if($r->socio != null) - {{ $r->socio->apellido1 }} {{ $r->socio->apellido2 }}, {{ $r->socio->nombre1 }} {{ $r->socio->nombre2 }}@endif
+                                                @if($r->asociado != null){{ $r->asociado->concepto }} - {{ $r->asociado->nombre }}@endif
+                                            </td>
+                                            <td class="">{{ $r->detalle }}</td>                                    
                                         </tr>
                                     @endforeach
                                 </tbody>

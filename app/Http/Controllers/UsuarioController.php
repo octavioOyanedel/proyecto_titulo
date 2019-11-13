@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Rol;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarUsuarioRequest;
 
 class UsuarioController extends Controller
 {
@@ -43,9 +45,19 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarUsuarioRequest $request) //Hash::make($data['password'])
     {
-        //
+        $usuario = new User;
+        $usuario->nombre1 = $request->nombre1;
+        $usuario->nombre2 = $request->nombre2;
+        $usuario->apellido1 = $request->apellido1;
+        $usuario->apellido2 = $request->apellido2;
+        $usuario->email = $request->email;
+        $usuario->password = Hash::make($request->password);
+        $usuario->rol_id = $request->rol_id;
+        $usuario->save();
+        $roles = Rol::orderBy('nombre','ASC')->get();
+        return redirect()->route('register', compact('roles'))->with('agregar-usuario','');  
     }
 
     /**

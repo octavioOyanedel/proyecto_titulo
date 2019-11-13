@@ -32,7 +32,6 @@
                         @include('partials.components.elementos.prestamo.cuotas')
 
                         <input id="socio_id" name="socio_id" type="hidden" value="">
-                        <input id="deposito" name="deposito" type="hidden" value="">
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

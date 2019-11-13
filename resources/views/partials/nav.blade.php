@@ -21,7 +21,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item sub-item" href="{{ route('usuarios.edit', Auth::user()) }}">Actualizar datos</a>
                     <a class="dropdown-item sub-item" href="{{ route('usuarios.editPassword', Auth::user()) }}">Cambiar contraseña</a>
-                    <a class="dropdown-item sub-item" href="{{ route('logout') }}"
+                    <a class="dropdown-item sub-item" href=""
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                         {{ __('Salir') }}

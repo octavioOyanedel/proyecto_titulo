@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
+
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Nueva Sede</h3></div>
 
@@ -14,7 +15,7 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('sedes.store') }}">
                         @csrf
 
                         @include('partials.components.elementos.socio.nueva_sede')
@@ -26,9 +27,9 @@
                                     {{ __('Agregar') }}
                                 </button>
                             </div>
-                        </div>                                                                                                                 <!-- fin form -->
+                        </div>
                     </form>
-                    
+                    <!-- fin form -->
                 </div>
             </div>
         </div>

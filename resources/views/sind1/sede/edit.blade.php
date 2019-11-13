@@ -14,8 +14,11 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">   
+                    <form method="POST" action="{{ route('sedes.update', $sede) }}">  
+
                         @csrf
+                        @method('PUT')
+
                         @include('partials.components.elementos.socio.nueva_sede')
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

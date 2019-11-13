@@ -20,4 +20,16 @@
 			
     </div>
 
+		@php
+		    $rut = '';
+		@endphp
+        {{-- captura valor old --}}
+        @if(old('rut') != null)
+            @php 
+                $rut = old('rut');
+            @endphp
+        @endif
+
+        <input id="old_rut" type="hidden" value="{{ $rut }}">  
+        
 </div>

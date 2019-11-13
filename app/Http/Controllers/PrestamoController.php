@@ -13,6 +13,7 @@ use App\Cuenta;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarPrestamoRequest;
+use App\Http\Requests\SimularPrestamoRequest;
 
 class PrestamoController extends Controller
 {
@@ -191,7 +192,7 @@ class PrestamoController extends Controller
      * @param  \App\Prestamo  $prestamo
      * @return \Illuminate\Http\Response
      */
-    public function simulacion(Request $request) 
+    public function simulacion(SimularPrestamoRequest $request)
     {
         $forma_pago_original = $request['forma_pago_id'];
         $interes = null;

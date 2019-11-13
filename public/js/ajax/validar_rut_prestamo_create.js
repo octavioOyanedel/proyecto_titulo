@@ -12,6 +12,12 @@ $(window).on('load',function(){
 	var original = '';
 	var error_php = $('#error-rut-php');
 
+	//activar boton con valor old
+	var rut = $('#old_rut').val();
+	if(rut != ''){
+		activarBoton();
+	}
+	
 	//reset mensajes
 	limpiarMensajes();
 

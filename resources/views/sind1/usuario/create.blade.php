@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
+
+            @include('partials.alertas')
+
             <div class="card">
                 <div class="card-header text-center">
                     <h3 class="mb-0">Nuevo Usuario</h3>
@@ -16,7 +19,7 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('usuarios.store') }}">
                         @csrf
                         
                         @include('partials.components.elementos.usuario.nombre1') 

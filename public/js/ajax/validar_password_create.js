@@ -1,14 +1,12 @@
 $(window).on('load',function(){
-
-	//variables
 	var pass = $('#password');
-	var confirmar = $('#password-confirm');
+	var confirmar = $('#password_confirm');
 	var patron = /^[0-9a-zA-Z]*$/;
-	var spin = $('#comprobar-confirmar');
+	var spin = $('#comprobar-password_confirm');
 	var pass_actual = '';
 	var confirmar_actual = '';
-	var ok = $('#confirmar-ok');
-	var error = $('#error-confirmar');
+	var ok = $('#password_confirm-ok');
+	var error = $('#error-password_confirm');
 	var boton = $('#incorporar');
 
 	//reset mensajes
@@ -20,26 +18,27 @@ $(window).on('load',function(){
 		confirmar_actual = formatearEntrada(confirmar.val());
 
 		limpiarMensajes();
-		mostrarSpin();	
-
+			
 		if(pass_actual != '' && confirmar_actual != ''){
-			if(pass_actual.length >= 8 && confirmar_actual.length <= 15){
-				if(pass_actual.match(patron) != null && confirmar_actual.match(patron) != null){
-					if(pass_actual === confirmar_actual){
-						iguales();
+			mostrarSpin();
+			if(pass_actual != '' && confirmar_actual != ''){
+				if(pass_actual.length >= 8 && confirmar_actual.length <= 15){
+					if(pass_actual.match(patron) != null && confirmar_actual.match(patron) != null){
+						if(pass_actual === confirmar_actual){
+							iguales();
+						}else{
+							distintas();
+						}
 					}else{
-						distintas();
+						alfanumericos();
 					}
 				}else{
-					alfanumericos();
+					largos();
 				}
 			}else{
-				largos();
+				vacios();
 			}
-		}else{
-			vacios();
 		}
-
 	});
 
 	function vacios(){
@@ -99,5 +98,5 @@ $(window).on('load',function(){
 
 	function ocultarSpin(){
 		spin.addClass('d-none');
-	}
+	}	
 });

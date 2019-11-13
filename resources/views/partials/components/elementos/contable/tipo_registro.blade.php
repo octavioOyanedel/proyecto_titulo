@@ -15,7 +15,7 @@
 
             <option selected="true" value="">Seleccione...</option>
 
-            @if(old('estado_socio_id') === null)
+            @if(old('tipo_registro_contable_id') === null)
                 {{-- loop sin old --}}
                 @foreach($tipos_registro as $t)
                     <option value="{{ $t->id }}">{{ $t->nombre }}</option>

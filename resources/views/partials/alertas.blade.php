@@ -51,3 +51,39 @@
         </button>
     </div>
 @endif
+
+@if(session()->has('agregar-usuario'))
+    <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
+        <strong class="icono-alerta">Usuario registrado con éxito.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+@if(session()->has('agregar-sede'))
+    <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
+        <strong class="icono-alerta">Sede registrada con éxito.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+@if(session()->has('editar-sede'))
+    <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
+        <strong class="icono-alerta">Sede editada con éxito.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+@if(session()->has('eliminar-sede'))
+    <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
+        <strong class="icono-alerta">Sede eliminada con éxito.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif

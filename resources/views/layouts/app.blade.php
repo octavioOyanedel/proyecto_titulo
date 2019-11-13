@@ -37,7 +37,7 @@
         </main>
         
     </div>
-
+{{ request()->path() }}
 </body>
 
     <script src="{{ asset('js/data_table.js') }}" defer></script>
@@ -47,6 +47,7 @@
     <script src="{{ asset('js/ajax/pago_automatico.js') }}" defer></script>
     <script src="{{ asset('js/ajax/saldar_prestamo.js') }}" defer></script>
     <script src="{{ asset('js/ajax/pago_cuota.js') }}" defer></script>
+    <script src="{{ asset('js/modal/eliminar_sede.js') }}" defer></script>
     <!-- selector de js -->
 
     @include('partials.components.elementos.socio.selector')

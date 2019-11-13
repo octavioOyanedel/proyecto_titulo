@@ -122,3 +122,6 @@ Route::get('/mantenedor_prestamos','MantenedorController@prestamos')->name('mant
 Route::get('/mantenedor_contables','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
 Route::get('/mantenedor_cargas','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');
 Route::get('/mantenedor_estudios','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');
+
+//eliminar
+Route::post('/eliminar_sede','SedeController@destroy')->name('eliminar_sede')->middleware('auth');

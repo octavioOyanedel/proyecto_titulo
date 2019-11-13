@@ -2,21 +2,56 @@ $(window).on('load',function(){
 
 	var tipo = $('#tipo_registro_contable_id');
 	var concepto = $('#concepto_id');
+	var boton = $('#incorporar');
+	var campo_cheque = $('#campo_cheque');
+	var cheque = $('#cheque');
 
 	var id_concepto = parseInt($('#old_concepto').val());
 
 	if(id_concepto != 0){
-		var id_tipo = parseInt($('#tipo_registro_contable_id option:selected').val());
+		var id_tipo = parseInt($('#tipo_registro_contable_id option:selected').val());	
 		ajaxOld(id_tipo, id_concepto);
+		activarBoton();
 	}
 
 	tipo.change(function(){
 		var id = parseInt($('#tipo_registro_contable_id option:selected').val());
 		ajaxNormal(id);
-	});			
+		if(id === 1){
+			activarCheque();
+			siRequired();
+
+		}else{
+			desactivarCheque();
+			noRequired();
+		}		
+	});
+
+	function activarCheque(){
+		campo_cheque.removeClass('d-none');
+	}			
+
+	function desactivarCheque(){
+		campo_cheque.addClass('d-none');
+	}
+
+	function noRequired(){
+		cheque.removeAttr('required');
+	}
+
+	function siRequired(){
+		cheque.attr('required','true');
+	}
+
+	function activarBoton(){
+		boton.removeAttr('disabled');
+	}
+
+	function desactivarBoton(){
+		boton.attr('disabled','true');
+	}
 
 	function ajaxNormal(id){
-console.log(id);
 		$.ajaxSetup({
 			headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -43,7 +78,6 @@ console.log(id);
 	}
 
 	function ajaxOld(id_tipo, id_concepto){
-		console.log('ajaxOld '+id_tipo+' - '.id_concepto);
 		$.ajaxSetup({
 			headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

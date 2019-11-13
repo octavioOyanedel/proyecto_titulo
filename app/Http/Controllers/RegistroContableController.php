@@ -52,7 +52,19 @@ class RegistroContableController extends Controller
      */
     public function store(IncorporarRegistroContableRequest $request) //IncorporarRegistroContableRequest
     {
-        RegistroContable::create($request->all());
+        $registro = new RegistroContable;
+        $registro->fecha = $request->fecha;
+        $registro->numero_registro = $request->numero_registro;
+        $registro->cheque = $request->cheque;
+        $registro->monto = $request->monto;
+        $registro->concepto_id = $request->concepto_id;
+        $registro->detalle = $request->detalle;
+        $registro->tipo_registro_contable_id = $request->tipo_registro_contable_id;
+        $registro->cuenta_id = $request->cuenta_id;
+        $registro->asociado_id = $request->asociado_id;
+        $registro->usuario_id = $request->usuario_id;
+        $registro->socio_id = $request->socio_id;
+        $registro->save();
         $socios = Socio::orderBy('apellido1')->get();
         $cuentas = Cuenta::all();
         $conceptos = Concepto::where('id','<>',57)->orderBy('nombre')->get();
@@ -121,8 +133,7 @@ class RegistroContableController extends Controller
                 return response()->json(1); //si existe
             }else{
                 return response()->json(0);
-            }
-            
+            }           
         }
     }
 
@@ -140,8 +151,7 @@ class RegistroContableController extends Controller
                 return response()->json(1); //si existe
             }else{
                 return response()->json(0);
-            }
-            
+            }            
         }
     }
 
