@@ -44,7 +44,7 @@ class IncorporarSocioRequest extends FormRequest
             'comuna_id' => ['nullable','numeric'],
             'ciudad_id' => ['nullable','numeric'],
             'sede_id' => ['required','numeric'],
-            'area_id' => ['nullable'],
+            'area_id' => ['nullable','numeric'],
             'cargo_id' => ['required','numeric'],
             'estado_socio_id' => ['required','numeric'],
             'nacionalidad_id' => ['required','numeric'],

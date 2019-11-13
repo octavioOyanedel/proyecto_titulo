@@ -39,7 +39,8 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_contables', compact('e'))->with('agregar-cuenta','');
     }
 
     /**
@@ -61,9 +62,10 @@ class CuentaController extends Controller
      */
     public function edit(Cuenta $cuenta)
     {
+        $e = '';
         $tipos_cuenta = TipoCuenta::orderBy('nombre','ASC')->get();
         $bancos = Banco::orderBy('nombre','ASC')->get();
-        return view('sind1.cuentas.edit', compact('tipos_cuenta', 'bancos', 'cuenta'));
+        return view('sind1.cuentas.edit', compact('tipos_cuenta','bancos','cuenta','e'));
     }
 
     /**
@@ -75,7 +77,8 @@ class CuentaController extends Controller
      */
     public function update(Request $request, Cuenta $cuenta)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_contables', compact('e'))->with('editar-cuenta','');
     }
 
     /**
@@ -86,6 +89,8 @@ class CuentaController extends Controller
      */
     public function destroy(Cuenta $cuenta)
     {
-        //
+        if ($request->ajax()) {
+            return Cuenta::destroy($request->id);   
+        }  
     }
 }

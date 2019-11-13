@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="eliminar_estado" tabindex="-1" role="dialog" aria-labelledby="eliminar_estado_label" aria-hidden="true">
+<div class="modal fade" id="eliminar_estado_socio" tabindex="-1" role="dialog" aria-labelledby="eliminar_estado_label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,11 +13,11 @@
                 <div class="text-center alert alert-warning" role="alert">
                     <b>¿Desea confirmar la eliminación de este estado de socio?</b>
                 </div>
-
+                <input id="eliminar_oculto" type="hidden" value="">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger">Aceptar</button>
+                <button type="button" class="btn btn-danger aceptar">Aceptar</button>
             </div>
         </div>
     </div>

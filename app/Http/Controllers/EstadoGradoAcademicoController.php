@@ -36,7 +36,8 @@ class EstadoGradoAcademicoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_estudios', compact('e'))->with('agregar-estado-nivel-educacional','');
     }
 
     /**
@@ -58,8 +59,9 @@ class EstadoGradoAcademicoController extends Controller
      */
     public function edit($id)
     {
+        $e = '';
         $estadoGradoAcademico = EstadoGradoAcademico::findOrFail($id);
-        return view('sind1.estado_nivel.edit', compact('estadoGradoAcademico'));
+        return view('sind1.estado_nivel.edit', compact('estadoGradoAcademico','e'));
     }
 
     /**
@@ -71,7 +73,8 @@ class EstadoGradoAcademicoController extends Controller
      */
     public function update(Request $request, EstadoGradoAcademico $estadoGradoAcademico)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_estudios', compact('e'))->with('editar-estado-nivel-educacional','');
     }
 
     /**
@@ -82,6 +85,8 @@ class EstadoGradoAcademicoController extends Controller
      */
     public function destroy(EstadoGradoAcademico $estadoGradoAcademico)
     {
-        //
+        if ($request->ajax()) {
+            return EstadoGradoAcademico::destroy($request->id);   
+        }  
     }
 }

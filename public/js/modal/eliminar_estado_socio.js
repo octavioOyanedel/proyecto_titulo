@@ -1,6 +1,6 @@
 $(window).on('load',function(){
 
-	var ventana_modal = $('#modal_eliminar_sede');
+	var ventana_modal = $('#modal_eliminar_estado_socio');
 	var aceptar = $('.aceptar');
 	var id = 0;
 
@@ -21,11 +21,11 @@ $(window).on('load',function(){
 			$.ajax({
 				method: 'POST',
 				dataType: 'json',			
-			    url: '/eliminar_sede',
+			    url: '/eliminar_estado_socio',
 			    data: {id: id},
 			    success: function(respuesta){
 			    	if(respuesta === 1){
-			    		$('#eliminar_sede').modal('hide');
+			    		$('#eliminar_estado_socio').modal('hide');
 			    		location.href = '/mantenedor_socios?e='+respuesta;
 			    	}
 			    },

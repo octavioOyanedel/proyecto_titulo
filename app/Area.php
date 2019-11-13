@@ -43,4 +43,12 @@ class Area extends Model
     {
         return $this->belongsTo('App\Sede');
     }
+
+    /**
+     * mutator nombre 
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = formatoNombres($value);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\Sede;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarAreaRequest;
 
 class AreaController extends Controller
 {
@@ -37,7 +38,10 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        Area::create($request->all());
+        $sedes = Sede::orderBy('nombre','ASC')->get();
+        return redirect()->route('mantenedor_socios', compact('sedes','e'))->with('agregar-area','');        
     }
 
     /**
@@ -59,7 +63,9 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        return view('sind1.area.edit', compact('area'));
+        $e = '';
+        $sedes = Sede::orderBy('nombre','ASC')->get();
+        return view('sind1.area.edit', compact('area','sedes','e'));
     }
 
     /**
@@ -71,7 +77,8 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_socios', compact('e'))->with('editar-area',''); 
     }
 
     /**
@@ -82,7 +89,9 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
-        //
+        if ($request->ajax()) {
+            return Area::destroy($request->id);   
+        }       
     }
 
     // obtener areas

@@ -35,7 +35,8 @@ class CargoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_socios', compact('e'))->with('agregar-cargo',''); 
     }
 
     /**
@@ -57,7 +58,8 @@ class CargoController extends Controller
      */
     public function edit(Cargo $cargo)
     {
-        return view('sind1.cargo.edit', compact('cargo'));
+        $e = '';
+        return view('sind1.cargo.edit', compact('cargo','e'));
     }
 
     /**
@@ -69,7 +71,8 @@ class CargoController extends Controller
      */
     public function update(Request $request, Cargo $cargo)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_socios', compact('e'))->with('editar-cargo',''); 
     }
 
     /**
@@ -80,6 +83,8 @@ class CargoController extends Controller
      */
     public function destroy(Cargo $cargo)
     {
-        //
+        if ($request->ajax()) {
+            return Cargo::destroy($request->id);   
+        }       
     }
 }

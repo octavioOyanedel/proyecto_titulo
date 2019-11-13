@@ -36,7 +36,8 @@ class FormaPagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_prestamos', compact('e'))->with('agregar-forma-pago','');
     }
 
     /**
@@ -58,8 +59,9 @@ class FormaPagoController extends Controller
      */
     public function edit($id)
     {
+        $e = '';
         $formaPago = FormaPago::findOrFail($id);
-        return view('sind1.forma_pago.edit', compact('formaPago'));
+        return view('sind1.forma_pago.edit', compact('formaPago','e'));
     }
 
     /**
@@ -71,7 +73,8 @@ class FormaPagoController extends Controller
      */
     public function update(Request $request, FormaPago $formaPago)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_prestamos', compact('e'))->with('editar-forma-pago','');
     }
 
     /**
@@ -82,6 +85,8 @@ class FormaPagoController extends Controller
      */
     public function destroy(FormaPago $formaPago)
     {
-        //
+        if ($request->ajax()) {
+            return FormaPago::destroy($request->id);   
+        }  
     }
 }

@@ -15,7 +15,7 @@
                 @foreach($conceptos as $c)
                     <tr>                                                
                         <td width="50" class="text-center" scope="row" title="Editar concepto"><a class="text-secondary" href="{{ route('conceptos.edit', $c) }}"><span>@svg('editar')</span></a></td>
-                        <td width="50" class="text-center" scope="row" title="Eliminar concepto"><a class="text-danger" data-toggle="modal" data-target="#eliminar_concepto" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td width="50" class="text-center" scope="row" title="Eliminar concepto"><a id="modal_eliminar_concepto" class="text-danger" data-toggle="modal" data-target="#eliminar_concepto" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="">{{ $c->nombre }}</td>
                         <td class="text-center">{{ $c->tipo_registro_id }}</td>
                     </tr>

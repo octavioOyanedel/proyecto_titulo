@@ -35,7 +35,8 @@ class ConceptoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_contables', compact('e'))->with('agregar-concepto','');
     }
 
     /**
@@ -57,7 +58,8 @@ class ConceptoController extends Controller
      */
     public function edit(Concepto $concepto)
     {
-        return view('sind1.concepto.edit', compact('concepto'));
+        $e = '';
+        return view('sind1.concepto.edit', compact('concepto','e'));
     }
 
     /**
@@ -69,7 +71,8 @@ class ConceptoController extends Controller
      */
     public function update(Request $request, Concepto $concepto)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_contables', compact('e'))->with('editar-concepto','');
     }
 
     /**
@@ -80,6 +83,8 @@ class ConceptoController extends Controller
      */
     public function destroy(Concepto $concepto)
     {
-        //
+        if ($request->ajax()) {
+            return Concepto::destroy($request->id);   
+        } 
     }
 }

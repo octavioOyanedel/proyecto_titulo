@@ -35,7 +35,8 @@ class EstadoSocioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_socios', compact('e'))->with('agregar-estado-socio',''); 
     }
 
     /**
@@ -57,8 +58,9 @@ class EstadoSocioController extends Controller
      */
     public function edit($id)
     {   
+        $e = '';
         $estadoSocio = EstadoSocio::findOrFail($id);
-        return view('sind1.estado_socio.edit', compact('estadoSocio'));
+        return view('sind1.estado_socio.edit', compact('estadoSocio','e'));
     }
 
     /**
@@ -70,7 +72,8 @@ class EstadoSocioController extends Controller
      */
     public function update(Request $request, EstadoSocio $estadoSocio)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_socios', compact('e'))->with('editar-estado-socio',''); 
     }
 
     /**
@@ -81,6 +84,8 @@ class EstadoSocioController extends Controller
      */
     public function destroy(EstadoSocio $estadoSocio)
     {
-        //
+        if ($request->ajax()) {
+            return EstadoSocio::destroy($request->id);   
+        }       
     }
 }

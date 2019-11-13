@@ -117,11 +117,25 @@ Route::get('/cambiar_password', 'UsuarioController@editPassword')->name('usuario
 Route::get('/crear_conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar_conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
 
-Route::get('/mantenedor_socios','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
-Route::get('/mantenedor_prestamos','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
-Route::get('/mantenedor_contables','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
-Route::get('/mantenedor_cargas','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');
-Route::get('/mantenedor_estudios','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');
+Route::get('/mantenedor_socios/{e?}','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
+Route::get('/mantenedor_prestamos/{e?}','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
+Route::get('/mantenedor_contables/{e?}','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
+Route::get('/mantenedor_cargas/{e?}','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');
+Route::get('/mantenedor_estudios/{e?}','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');
 
 //eliminar
 Route::post('/eliminar_sede','SedeController@destroy')->name('eliminar_sede')->middleware('auth');
+Route::post('/eliminar_area','AreaController@destroy')->name('eliminar_area')->middleware('auth');
+Route::post('/eliminar_cargo','CargoController@destroy')->name('eliminar_cargo')->middleware('auth');
+Route::post('/eliminar_estado_socio','EstadoSocioController@destroy')->name('eliminar_estado_socio')->middleware('auth');
+Route::post('/eliminar_nacionalidad','NacionalidadController@destroy')->name('eliminar_nacionalidad')->middleware('auth');
+Route::post('/eliminar_parentesco','ParentescoController@destroy')->name('eliminar_parentesco')->middleware('auth');
+Route::post('/eliminar_nivel_educacional','GradoAcademicoController@destroy')->name('eliminar_nivel_educacional')->middleware('auth');
+Route::post('/eliminar_institucion','InstitucionController@destroy')->name('eliminar_institucion')->middleware('auth');
+Route::post('/eliminar_estado_academico','EstadoGradoAcademicoController@destroy')->name('eliminar_estado_academico')->middleware('auth');
+Route::post('/eliminar_titulo','TituloController@destroy')->name('eliminar_titulo')->middleware('auth');
+Route::post('/eliminar_forma_pago','FormaPagoController@destroy')->name('eliminar_forma_pago')->middleware('auth');
+Route::post('/eliminar_cuenta','CuentaController@destroy')->name('eliminar_cuenta')->middleware('auth');
+Route::post('/eliminar_concepto','ConceptoController@destroy')->name('eliminar_concepto')->middleware('auth');
+Route::post('/eliminar_asociado','AsociadoController@destroy')->name('eliminar_asociado')->middleware('auth');
+Route::post('/eliminar_banco','BancoController@destroy')->name('eliminar_banco')->middleware('auth');

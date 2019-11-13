@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('areas.store') }}">
                         @csrf
 
                         @include('partials.components.elementos.socio.sede')

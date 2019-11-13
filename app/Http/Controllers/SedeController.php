@@ -40,13 +40,14 @@ class SedeController extends Controller
      */
     public function store(IncorporarSedeRequest $request)
     {
+        $e = '';
         Sede::create($request->all());
         $sedes = Sede::orderBy('nombre', 'ASC')->get();
         $areas = Area::orderBy('sede_id', 'ASC')->get();
         $cargos = Cargo::orderBy('nombre', 'ASC')->get();
         $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
         $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();        
-        return redirect()->route('mantenedor_socios', compact('sedes','areas','cargos','estados','nacionalidades'))->with('agregar-sede','');
+        return redirect()->route('mantenedor_socios', compact('sedes','areas','cargos','estados','nacionalidades','e'))->with('agregar-sede','');
     }
 
     /**
@@ -68,7 +69,8 @@ class SedeController extends Controller
      */
     public function edit(Sede $sede)
     {
-        return view('sind1.sede.edit', compact('sede'));
+        $e = '';
+        return view('sind1.sede.edit', compact('sede','e'));
     }
 
     /**
@@ -80,6 +82,7 @@ class SedeController extends Controller
      */
     public function update(IncorporarSedeRequest $request, Sede $sede)
     {
+        $e = '';
         $modificar = Sede::findOrFail($sede->id);
         $modificar->nombre = $request->nombre;
         $modificar->update();
@@ -89,7 +92,7 @@ class SedeController extends Controller
         $cargos = Cargo::orderBy('nombre', 'ASC')->get();
         $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
         $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();        
-        return redirect()->route('mantenedor_socios', compact('sedes','areas','cargos','estados','nacionalidades'))->with('editar-sede','');
+        return redirect()->route('mantenedor_socios', compact('sedes','areas','cargos','estados','nacionalidades','e'))->with('editar-sede','');
     }
 
     /**

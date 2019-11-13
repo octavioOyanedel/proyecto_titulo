@@ -14,7 +14,7 @@
                 @foreach($parentescos as $p)
                     <tr>                                                
                         <td width="50" class="text-center" scope="row" title="Editar parentesco"><a class="text-secondary" href="{{ route('parentescos.edit', $p) }}"><span>@svg('editar')</span></a></td>
-                        <td width="50" class="text-center" scope="row" title="Eliminar parentesco"><a class="text-danger" data-toggle="modal" data-target="#eliminar_parentesco" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td width="50" class="text-center" scope="row" title="Eliminar parentesco"><a id="modal_eliminar_parentesco" class="text-danger" data-toggle="modal" data-target="#eliminar_parentesco" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="">{{ $p->nombre }}</td>
                     </tr>
                 @endforeach

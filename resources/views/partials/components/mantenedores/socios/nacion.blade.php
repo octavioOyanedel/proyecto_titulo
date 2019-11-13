@@ -14,7 +14,7 @@
                 @foreach($nacionalidades as $n)
                     <tr>                                                
                         <td width="50" class="text-center" scope="row" title="Editar nacionalidad"><a class="text-secondary" href="{{ route('nacionalidades.edit',$n) }}"><span>@svg('editar')</span></a></td>
-                        <td width="50" class="text-center" scope="row" title="Eliminar nacionalidad"><a class="text-danger" data-toggle="modal" data-target="#eliminar_nacionalidad" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td width="50" class="text-center" scope="row" title="Eliminar nacionalidad"><a id="modal_eliminar_nacionalidad" class="text-danger" data-toggle="modal" data-target="#eliminar_nacionalidad" href="#"><span>@svg('eliminar')</span></a></td>
                         <td class="">{{ $n->nombre }}</td>
                     </tr>
                 @endforeach

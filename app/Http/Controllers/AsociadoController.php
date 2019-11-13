@@ -35,7 +35,8 @@ class AsociadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_contables', compact('e'))->with('agregar-asociado','');
     }
 
     /**
@@ -57,7 +58,8 @@ class AsociadoController extends Controller
      */
     public function edit(Asociado $asociado)
     {
-        return view('sind1.asociado.edit', compact('asociado'));
+        $e = '';
+        return view('sind1.asociado.edit', compact('asociado','e'));
     }
 
     /**
@@ -69,7 +71,8 @@ class AsociadoController extends Controller
      */
     public function update(Request $request, Asociado $asociado)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_contables', compact('e'))->with('editar-asociado','');
     }
 
     /**
@@ -80,6 +83,8 @@ class AsociadoController extends Controller
      */
     public function destroy(Asociado $asociado)
     {
-        //
+        if ($request->ajax()) {
+            return Asociado::destroy($request->id);   
+        } 
     }
 }

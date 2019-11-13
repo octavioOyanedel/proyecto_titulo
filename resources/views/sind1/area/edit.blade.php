@@ -16,7 +16,10 @@
                     <!-- Formulario -->
                     <form method="POST" action="">   
                         @csrf
+
+                        @include('partials.components.elementos.socio.sede')
                         @include('partials.components.elementos.socio.nueva_area')
+                        
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

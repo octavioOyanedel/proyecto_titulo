@@ -37,7 +37,8 @@ class TituloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_estudios', compact('e'))->with('agregar-titulo','');
     }
 
     /**
@@ -59,9 +60,10 @@ class TituloController extends Controller
      */
     public function edit($id)
     {
+        $e = '';
         $grados = GradoAcademico::orderBy('nombre','ASC')->get();
         $titulo = Titulo::findOrFail($id);
-        return view('sind1.titulo.edit', compact('titulo', 'grados'));
+        return view('sind1.titulo.edit', compact('titulo','grados','e'));
     }
 
     /**
@@ -73,7 +75,8 @@ class TituloController extends Controller
      */
     public function update(Request $request, Titulo $titulo)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_estudios', compact('e'))->with('editar-titulo','');
     }
 
     /**
@@ -84,6 +87,8 @@ class TituloController extends Controller
      */
     public function destroy(Titulo $titulo)
     {
-        //
+        if ($request->ajax()) {
+            return Titulo::destroy($request->id);   
+        }  
     }
 }

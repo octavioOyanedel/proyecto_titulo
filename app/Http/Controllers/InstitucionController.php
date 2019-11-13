@@ -37,7 +37,8 @@ class InstitucionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_estudios', compact('e'))->with('agregar-institucion','');
     }
 
     /**
@@ -59,9 +60,10 @@ class InstitucionController extends Controller
      */
     public function edit($id)
     {
+        $e = '';
         $grados = GradoAcademico::orderBy('nombre','ASC')->get();
         $institucion = Institucion::findOrFail($id);
-        return view('sind1.institucion.edit', compact('institucion', 'grados'));
+        return view('sind1.institucion.edit', compact('institucion','grados','e'));
     }
 
     /**
@@ -73,7 +75,8 @@ class InstitucionController extends Controller
      */
     public function update(Request $request, Institucion $institucion)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_estudios', compact('e'))->with('editar-institucion','');
     }
 
     /**
@@ -84,6 +87,8 @@ class InstitucionController extends Controller
      */
     public function destroy(Institucion $institucion)
     {
-        //
+        if ($request->ajax()) {
+            return Institucion::destroy($request->id);   
+        }  
     }
 }

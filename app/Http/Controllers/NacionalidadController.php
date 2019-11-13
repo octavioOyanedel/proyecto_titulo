@@ -35,7 +35,8 @@ class NacionalidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_socios', compact('e'))->with('agregar-nacionalidad',''); 
     }
 
     /**
@@ -57,8 +58,9 @@ class NacionalidadController extends Controller
      */
     public function edit($id)
     {
+        $e = '';
         $nacionalidad = Nacionalidad::findOrFail($id);
-        return view('sind1.nacionalidades.edit', compact('nacionalidad'));
+        return view('sind1.nacionalidades.edit', compact('nacionalidad','e'));
     }
 
     /**
@@ -70,7 +72,8 @@ class NacionalidadController extends Controller
      */
     public function update(Request $request, Nacionalidad $nacionalidad)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_socios', compact('e'))->with('editar-nacionalidad',''); 
     }
 
     /**
@@ -81,6 +84,8 @@ class NacionalidadController extends Controller
      */
     public function destroy(Nacionalidad $nacionalidad)
     {
-        //
+        if ($request->ajax()) {
+            return Nacionalidad::destroy($request->id);   
+        }  
     }
 }

@@ -35,7 +35,8 @@ class BancoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_contables', compact('e'))->with('agregar-banco','');
     }
 
     /**
@@ -57,7 +58,8 @@ class BancoController extends Controller
      */
     public function edit(Banco $banco)
     {
-        return view('sind1.banco.edit', compact('banco'));
+        $e = '';
+        return view('sind1.banco.edit', compact('banco','e'));
     }
 
     /**
@@ -69,7 +71,8 @@ class BancoController extends Controller
      */
     public function update(Request $request, Banco $banco)
     {
-        //
+        $e = '';
+        return redirect()->route('mantenedor_contables', compact('e'))->with('editar-banco','');
     }
 
     /**

@@ -18,8 +18,13 @@
 
             @if(old('sede_id') === null)
                 {{-- loop sin old --}}
-                @foreach($sedes as $s)        
-                    <option value="{{ $s->id }}" {{ $sede_id == $s->id ? 'selected' : ''}}>{{ $s->nombre }}</option>
+                @foreach($sedes as $s) 
+                    @if(isset($area))
+                        {{-- si existe area -editar- --}}
+                        <option value="{{ $s->id }}" {{ $area->getOriginal('sede_id') == $s->id ? 'selected' : ''}}>{{ $s->nombre }}</option>
+                    @else
+                        <option value="{{ $s->id }}" {{ $sede_id == $s->id ? 'selected' : ''}}>{{ $s->nombre }}</option>
+                    @endif
                 @endforeach
             @else
                 {{-- loop con old --}}
