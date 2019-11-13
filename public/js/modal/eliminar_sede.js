@@ -27,7 +27,7 @@ $(window).on('load',function(){
 			    	if(respuesta === 1){
 			    		$('#eliminar_sede').modal('hide');
 			    		//location.reload(false);
-			    		 window.location.href = window.location.href + "eliminar";
+			    		 window.location.href = window.location.href + "eliminar=1";
 			    	}
 			    },
 				error: function(respuesta){
