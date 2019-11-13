@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidarRutRule;
+use App\Rules\ValidarFormatoNombre;
 
 class IncorporarCargaRequest extends FormRequest
 {
@@ -26,10 +27,10 @@ class IncorporarCargaRequest extends FormRequest
     {
         return [
             'rut' => ['required',new ValidarRutRule,'unique:cargas_familiares,rut','max:9'],
-            'nombre1' => ['required','alpha','max:255'],
-            'nombre2' => ['nullable','alpha','max:255'],
-            'apellido1' => ['required','alpha','max:255'],
-            'apellido2' => ['nullable','alpha','max:255'],
+            'nombre1' => ['required',new ValidarFormatoNombre,'max:255'],
+            'nombre2' => ['nullable',new ValidarFormatoNombre,'max:255'],
+            'apellido1' => ['required',new ValidarFormatoNombre,'max:255'],
+            'apellido2' => ['nullable',new ValidarFormatoNombre,'max:255'],
             'fecha_nac' => ['nullable','date'],
             'socio_id' => ['required','numeric'],
             'parentesco_id' => ['required','numeric'],

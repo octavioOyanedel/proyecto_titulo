@@ -32,4 +32,12 @@ class Sede extends Model
     {
         return $this->hasMany('App\Area');
     }
+
+    /**
+     * mutator nombre 
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = formatoNombres($value);
+    }
 }

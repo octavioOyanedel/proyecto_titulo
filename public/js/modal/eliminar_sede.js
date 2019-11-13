@@ -26,9 +26,9 @@ $(window).on('load',function(){
 			    success: function(respuesta){
 			    	if(respuesta === 1){
 			    		$('#eliminar_sede').modal('hide');
-			    		location.reload(true);
+			    		//location.reload(false);
+			    		 window.location.href = window.location.href + "eliminar";
 			    	}
-
 			    },
 				error: function(respuesta){
 					
@@ -37,7 +37,4 @@ $(window).on('load',function(){
 		}
 	});
 
-	function cargarPagina(){
-
-	}
 });

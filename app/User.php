@@ -128,4 +128,36 @@ class User extends Authenticatable
             return '';
         }           
     }
+    
+    /**
+     * mutator nombre 
+     */
+    public function setNombre1Attribute($value)
+    {
+        $this->attributes['nombre1'] = formatoNombres($value);
+    }
+
+    /**
+     * mutator nombre 
+     */
+    public function setNombre2Attribute($value)
+    {
+        $this->attributes['nombre2'] = formatoNombres($value);
+    }
+
+    /**
+     * mutator nombre 
+     */
+    public function setApellido1Attribute($value)
+    {
+        $this->attributes['apellido1'] = formatoNombres($value);
+    }
+
+    /**
+     * mutator nombre 
+     */
+    public function setApellido2Attribute($value)
+    {
+        $this->attributes['apellido2'] = formatoNombres($value);
+    }
 }

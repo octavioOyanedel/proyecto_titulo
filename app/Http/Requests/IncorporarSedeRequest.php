@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidarFormatoNombre;
 
 class IncorporarSedeRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class IncorporarSedeRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required','alpha','max:255'],
+            'nombre' => ['required',new ValidarFormatoNombre,'unique:sedes,nombre','max:255'],
         ];
     }
 }

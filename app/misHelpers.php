@@ -296,3 +296,18 @@
         }
         return formatoMoneda($suma);
     }
+
+    /**
+     * formato nombres
+     */   
+    function formatoNombres($cadena) {
+        $nombreFormateado = strtolower($cadena);
+        $nombreFormateado = ucwords($nombreFormateado);
+        $nombreFormateado = str_replace(" De ", " de ", $nombreFormateado);
+        $nombreFormateado = str_replace(" Del ", " del ", $nombreFormateado);
+        $nombreFormateado = str_replace(" La ", " la ", $nombreFormateado);
+        $nombreFormateado = str_replace(" Las ", " las ", $nombreFormateado);
+        $nombreFormateado = str_replace(" Lo ", " lo ", $nombreFormateado);
+        $nombreFormateado = str_replace(" Los ", " los ", $nombreFormateado);
+        return $nombreFormateado;
+    }
