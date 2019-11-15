@@ -22,10 +22,15 @@ class Area extends Model
      */
     public function getSedeIdAttribute($valor)
     {
-        $sede_id = $valor;
-        $sede = Sede::findOrFail($sede_id);
-        $valor = $sede->nombre;
-        return $valor;
+        if($valor != null){
+            $sede_id = $valor;
+            $sede = Sede::findOrFail($sede_id);
+            $valor = $sede->nombre;
+            return $valor;           
+        }else{
+            return '';
+        }
+
     }
 
     /**

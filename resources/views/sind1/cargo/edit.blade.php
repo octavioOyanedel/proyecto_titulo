@@ -14,8 +14,10 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('cargos.update', $cargo) }}">
+                        
                         @csrf
+                        @method('PUT')
 
                         @include('partials.components.elementos.socio.nuevo_cargo')
 

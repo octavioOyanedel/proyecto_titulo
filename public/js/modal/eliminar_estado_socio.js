@@ -1,39 +1,43 @@
 $(window).on('load',function(){
 
-	var ventana_modal = $('#modal_eliminar_estado_socio');
-	var aceptar = $('.aceptar');
+	var ventana_modal = $('#eliminar_estado_socio'); //ventana modal
+	var link_eliminar = $('.enlace_eliminar'); //listado
+	var boton_aceptar = $('.aceptar_estado_socio'); //modal
 	var id = 0;
 
-	ventana_modal.click(function(){
+	link_eliminar.click(function(){
 		id = $(this).data('id');
-    	$(".modal-body #eliminar_oculto").val(id);
-	});
-
-	aceptar.click(function(){
 		if(id != 0){
-
-			$.ajaxSetup({
-				headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}}
-			);	
-
-			$.ajax({
-				method: 'POST',
-				dataType: 'json',			
-			    url: '/eliminar_estado_socio',
-			    data: {id: id},
-			    success: function(respuesta){
-			    	if(respuesta === 1){
-			    		$('#eliminar_estado_socio').modal('hide');
-			    		location.href = '/mantenedor_socios?e='+respuesta;
-			    	}
-			    },
-				error: function(respuesta){
-					
-				}
-			});	
+			boton_aceptar.click(function(){
+				eliminar(id);
+			});
 		}
 	});
 
+	function eliminar(id){
+
+		$.ajaxSetup({
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}}
+		);	
+
+		$.ajax({
+			method: 'POST',
+			dataType: 'json',			
+		    url: '/eliminar_estado_socio',
+		    data: {id: id},
+		    success: function(respuesta){
+		    	if(respuesta === 1){
+		    		ventana_modal.modal('hide');
+		    		location.href = '/mantenedor_socios?e=4';
+		    	}else{
+		    		console.log('no');
+		    	}
+
+		    },
+			error: function(respuesta){
+			}
+		});			
+	}	
 });

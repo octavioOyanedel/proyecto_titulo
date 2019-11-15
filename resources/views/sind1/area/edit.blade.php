@@ -14,8 +14,9 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="">   
+                    <form method="POST" action="{{ route('areas.update', $area) }}">   
                         @csrf
+                        @method('PUT')
 
                         @include('partials.components.elementos.socio.sede')
                         @include('partials.components.elementos.socio.nueva_area')

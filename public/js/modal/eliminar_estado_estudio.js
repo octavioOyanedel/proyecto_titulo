@@ -26,7 +26,7 @@ $(window).on('load',function(){
 			    success: function(respuesta){
 			    	if(respuesta === 1){
 			    		$('#eliminar_titulo').modal('hide');
-			    		location.href = '/mantenedor_estudios?e='+respuesta;
+			    		location.href = '/mantenedor_estudios?e='+9;
 			    	}
 			    },
 				error: function(respuesta){

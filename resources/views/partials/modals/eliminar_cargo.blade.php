@@ -13,11 +13,10 @@
                 <div class="text-center alert alert-warning" role="alert">
                     <b>¿Desea confirmar la eliminación de este cargo?</b>
                 </div>
-                <input id="eliminar_oculto" type="hidden" value="">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger aceptar">Aceptar</button>
+                <button type="button" class="btn btn-danger aceptar_cargo">Aceptar</button>
             </div>
         </div>
     </div>

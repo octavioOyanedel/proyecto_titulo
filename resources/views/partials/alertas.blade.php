@@ -81,9 +81,9 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-sede') || app('request')->input('e') === '1')
+@if(session()->has('eliminar'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
-        <strong class="icono-alerta">Sede eliminada con éxito.</strong>
+        <strong class="icono-alerta">{{ session('eliminar') }}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -108,7 +108,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-area') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-area'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Área eliminada con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -135,7 +135,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-cargo') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-cargo'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Cargo eliminado con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -162,7 +162,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-estado-socio') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-estado-socio'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Estado socio eliminado con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -189,7 +189,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-nacionalidad') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-nacionalidad'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Nacionalidad eliminada con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -216,7 +216,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-parentesco') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-parentesco'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Parentesco eliminado con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -243,7 +243,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-nivel-educacional') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-nivel-educacional'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Nivel educacional eliminado con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -270,7 +270,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-institucion') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-institucion'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Institución eliminada con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -297,7 +297,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-estado-nivel-educacional') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-estado-nivel-educacional'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Estado nivel educacional eliminado con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -324,7 +324,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-titulo') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-titulo'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Título eliminado con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -351,7 +351,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-forma-pago') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-forma-pago'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Forma de pago eliminada con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -378,7 +378,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-cuenta') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-cuenta'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Cuenta eliminada con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -405,7 +405,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-concepto') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-concepto'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Concepto eliminado con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -432,7 +432,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-asociado') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-asociado'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Asociado eliminado con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -459,7 +459,7 @@
     </div>
 @endif
 
-@if(session()->has('eliminar-banco') || app('request')->input('e') === '1')
+@if(session()->has('eliminar-banco'))
     <div class="alertas alert alert-success alert-dismissible fade show" role="alert">
         <strong class="icono-alerta">Banco eliminado con éxito.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

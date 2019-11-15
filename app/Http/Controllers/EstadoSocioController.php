@@ -82,7 +82,7 @@ class EstadoSocioController extends Controller
      * @param  \App\EstadoSocio  $estadoSocio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EstadoSocio $estadoSocio)
+    public function destroy(Request $request)
     {
         if ($request->ajax()) {
             return EstadoSocio::destroy($request->id);   

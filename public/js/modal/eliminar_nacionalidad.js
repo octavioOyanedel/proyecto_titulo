@@ -26,7 +26,7 @@ $(window).on('load',function(){
 			    success: function(respuesta){
 			    	if(respuesta === 1){
 			    		$('#eliminar_nacionalidad').modal('hide');
-			    		location.href = '/mantenedor_socios?e='+respuesta;
+			    		location.href = '/mantenedor_socios?e='+5;
 			    	}
 			    },
 				error: function(respuesta){

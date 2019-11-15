@@ -75,9 +75,13 @@ class AreaController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Area $area)
+    public function update(IncorporarAreaRequest $request, Area $area)
     {
         $e = '';
+        $modificar = Area::findOrFail($area->id);
+        $modificar->nombre = $request->nombre;
+        $modificar->sede_id = $request->sede_id;
+        $modificar->update();
         return redirect()->route('mantenedor_socios', compact('e'))->with('editar-area',''); 
     }
 
@@ -87,7 +91,7 @@ class AreaController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Area $area)
+    public function destroy(Request $request)
     {
         if ($request->ajax()) {
             return Area::destroy($request->id);   

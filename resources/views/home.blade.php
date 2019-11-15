@@ -8,11 +8,7 @@
                 <div class="card-header text-center"><h3 class="mb-0">Socios Incorporados</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
 
                     @if($socios->count() === 0)
                         <div class="alert alert-warning mt-4 text-center" role="alert">
@@ -70,7 +66,7 @@
                                             <td>{{ $s->correo }}</td>
                                             <td class="text-center">{{ $s->anexo }}</td>
                                             <td class="text-center">{{ $s->celular }}</td>
-                                            <td>{{ $s->sede_id }}</td>
+                                            <td class="{{ ($s->sede_id === '') ? 'text-center' : '' }}">{{ celdaCadena($s->sede_id) }}</td>
                                             <td>{{ $s->area_id }}</td>
                                             <td>{{ $s->cargo_id }}</td>
                                         </tr>

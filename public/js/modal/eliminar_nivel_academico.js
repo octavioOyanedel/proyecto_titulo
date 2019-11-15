@@ -26,7 +26,7 @@ $(window).on('load',function(){
 			    success: function(respuesta){
 			    	if(respuesta === 1){
 			    		$('#eliminar_nivel').modal('hide');
-			    		location.href = '/mantenedor_estudios?e='+respuesta;
+			    		location.href = '/mantenedor_estudios?e='+7;
 			    	}
 			    },
 				error: function(respuesta){

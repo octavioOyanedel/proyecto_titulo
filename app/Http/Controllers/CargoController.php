@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cargo;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarCargoRequest;
 
 class CargoController extends Controller
 {
@@ -33,9 +34,10 @@ class CargoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarCargoRequest $request)
     {
         $e = '';
+        Cargo::create($request->all());
         return redirect()->route('mantenedor_socios', compact('e'))->with('agregar-cargo',''); 
     }
 
@@ -69,9 +71,12 @@ class CargoController extends Controller
      * @param  \App\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cargo $cargo)
+    public function update(IncorporarCargoRequest $request, Cargo $cargo)
     {
         $e = '';
+        $modificar = Cargo::findOrFail($cargo->id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();
         return redirect()->route('mantenedor_socios', compact('e'))->with('editar-cargo',''); 
     }
 
@@ -81,7 +86,7 @@ class CargoController extends Controller
      * @param  \App\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cargo $cargo)
+    public function destroy(Request $request)
     {
         if ($request->ajax()) {
             return Cargo::destroy($request->id);   

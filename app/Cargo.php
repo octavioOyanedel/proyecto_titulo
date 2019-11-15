@@ -23,4 +23,12 @@ class Cargo extends Model
     {
         return $this->belongsTo('App\Socio');
     }
+
+    /**
+     * mutator nombre 
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = formatoNombres($value);
+    }
 }

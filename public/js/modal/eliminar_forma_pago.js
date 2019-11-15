@@ -26,7 +26,7 @@ $(window).on('load',function(){
 			    success: function(respuesta){
 			    	if(respuesta === 1){
 			    		$('#eliminar_forma_pago').modal('hide');
-			    		location.href = '/mantenedor_prestamos?e='+respuesta;
+			    		location.href = '/mantenedor_prestamos?e='+11;
 			    	}
 			    },
 				error: function(respuesta){

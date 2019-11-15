@@ -14,7 +14,7 @@ class KeysAreasTable extends Migration
     public function up()
     {
         Schema::table('areas', function (Blueprint $table) {
-            $table->foreign('sede_id')->references('id')->on('sedes')->onDelete('cascade');
+            $table->foreign('sede_id')->references('id')->on('sedes')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

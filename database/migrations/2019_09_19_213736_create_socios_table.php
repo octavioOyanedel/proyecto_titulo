@@ -33,11 +33,11 @@ class CreateSociosTable extends Migration
             $table->date('fecha_sind1')->nullable();
             $table->unsignedInteger('comuna_id')->nullable();
             $table->unsignedInteger('ciudad_id')->nullable();
-            $table->unsignedInteger('sede_id');
+            $table->unsignedInteger('sede_id')->nullable();
             $table->unsignedInteger('area_id')->nullable();
-            $table->unsignedInteger('cargo_id');
-            $table->unsignedInteger('estado_socio_id');
-            $table->unsignedInteger('nacionalidad_id');
+            $table->unsignedInteger('cargo_id')->nullable();
+            $table->unsignedInteger('estado_socio_id')->nullable();
+            $table->unsignedInteger('nacionalidad_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

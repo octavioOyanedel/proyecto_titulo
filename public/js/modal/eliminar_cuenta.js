@@ -26,7 +26,7 @@ $(window).on('load',function(){
 			    success: function(respuesta){
 			    	if(respuesta === 1){
 			    		$('#eliminar_cuenta').modal('hide');
-			    		location.href = '/mantenedor_contables?e='+respuesta;
+			    		location.href = '/mantenedor_contables?e='+12;
 			    	}
 			    },
 				error: function(respuesta){

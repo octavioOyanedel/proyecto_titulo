@@ -17,7 +17,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger aceptar">Aceptar</button>
+                <button type="button" class="btn btn-danger aceptar_estado_socio">Aceptar</button>
             </div>
         </div>
     </div>

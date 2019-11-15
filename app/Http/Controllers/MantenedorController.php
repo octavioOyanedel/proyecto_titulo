@@ -93,4 +93,16 @@ class MantenedorController extends Controller
         return view('sind1.mantenedores.estudios', compact('grados','instituciones','estados','titulos','e'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cerrarAlerta(Request $request)
+    {
+        if($request->ajax()){
+            session()->forget('eliminar');
+        }
+    }
+
 }

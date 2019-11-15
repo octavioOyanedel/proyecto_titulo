@@ -32,8 +32,8 @@
         <script src="{{ asset('js/radio.js') }}" defer></script>
     @break
     {{-- mantenedor --}}
-    @case('mantenedor-socios')
-
+    @case('mantenedor_socios')
+                <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     {{-- filtro socios --}}
     @case('filtro_socios')

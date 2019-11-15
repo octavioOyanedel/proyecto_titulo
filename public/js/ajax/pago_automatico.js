@@ -6,7 +6,6 @@ $(window).on('load',function(){
 		success: function(respuesta){
 		},
 		error: function(respuesta){
-			//console.log(respuesta);
 		}
 	});
 });

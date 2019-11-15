@@ -117,11 +117,11 @@ Route::get('/cambiar_password', 'UsuarioController@editPassword')->name('usuario
 Route::get('/crear_conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar_conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
 
-Route::get('/mantenedor_socios/{e?}','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
-Route::get('/mantenedor_prestamos/{e?}','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
-Route::get('/mantenedor_contables/{e?}','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
-Route::get('/mantenedor_cargas/{e?}','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');
-Route::get('/mantenedor_estudios/{e?}','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');
+Route::get('/mantenedor_socios','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
+Route::get('/mantenedor_prestamos','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
+Route::get('/mantenedor_contables','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
+Route::get('/mantenedor_cargas','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');
+Route::get('/mantenedor_estudios','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');
 
 //eliminar
 Route::post('/eliminar_sede','SedeController@destroy')->name('eliminar_sede')->middleware('auth');
@@ -139,3 +139,5 @@ Route::post('/eliminar_cuenta','CuentaController@destroy')->name('eliminar_cuent
 Route::post('/eliminar_concepto','ConceptoController@destroy')->name('eliminar_concepto')->middleware('auth');
 Route::post('/eliminar_asociado','AsociadoController@destroy')->name('eliminar_asociado')->middleware('auth');
 Route::post('/eliminar_banco','BancoController@destroy')->name('eliminar_banco')->middleware('auth');
+
+Route::get('/cerrar_alerta','MantenedorController@cerrarAlerta')->name('cerrar_alerta')->middleware('auth');
