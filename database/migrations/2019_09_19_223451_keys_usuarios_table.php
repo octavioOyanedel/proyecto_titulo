@@ -14,7 +14,7 @@ class KeysUsuariosTable extends Migration
     public function up()
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->foreign('rol_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('rol_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

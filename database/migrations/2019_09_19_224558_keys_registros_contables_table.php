@@ -14,12 +14,12 @@ class KeysRegistrosContablesTable extends Migration
     public function up()
     {
         Schema::table('registros_contables', function (Blueprint $table) {
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->foreign('socio_id')->references('id')->on('socios')->onDelete('cascade');
-            $table->foreign('concepto_id')->references('id')->on('conceptos')->onDelete('cascade');
-            $table->foreign('tipo_registro_contable_id')->references('id')->on('tipos_registro_contable')->onDelete('cascade');
-            $table->foreign('cuenta_id')->references('id')->on('cuentas')->onDelete('cascade');
-            $table->foreign('asociado_id')->references('id')->on('asociados')->onDelete('cascade');
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('socio_id')->references('id')->on('socios')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('concepto_id')->references('id')->on('conceptos')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('tipo_registro_contable_id')->references('id')->on('tipos_registro_contable')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('cuenta_id')->references('id')->on('cuentas')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('asociado_id')->references('id')->on('asociados')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

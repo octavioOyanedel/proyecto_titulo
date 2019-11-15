@@ -19,15 +19,15 @@ class CreatePrestamosTable extends Migration
             $table->increments('id');
             $table->date('fecha_solicitud');
             $table->unsignedInteger('numero_egreso')->unique();
-            $table->unsignedInteger('cuenta_id');
+            $table->unsignedInteger('cuenta_id')->nullable();
             $table->unsignedInteger('cheque')->nullable()->unique();
             $table->date('fecha_pago_deposito')->nullable();
             $table->unsignedInteger('monto');
             $table->unsignedInteger('numero_cuotas')->nullable();
-            $table->unsignedInteger('socio_id');
-            $table->unsignedInteger('estado_deuda_id');
+            $table->unsignedInteger('socio_id')->nullable();
+            $table->unsignedInteger('estado_deuda_id')->nullable();
             $table->unsignedInteger('interes_id')->nullable();
-            $table->unsignedInteger('forma_pago_id');
+            $table->unsignedInteger('forma_pago_id')->nullable();
             $table->timestamps();
         });
     }

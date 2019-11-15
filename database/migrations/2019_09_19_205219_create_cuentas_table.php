@@ -18,8 +18,8 @@ class CreateCuentasTable extends Migration
             $table->collation = 'utf8mb4_spanish_ci';
             $table->increments('id');
             $table->string('numero');
-            $table->unsignedInteger('tipo_cuenta_id');
-            $table->unsignedInteger('banco_id');
+            $table->unsignedInteger('tipo_cuenta_id')->nullable();
+            $table->unsignedInteger('banco_id')->nullable();
             $table->timestamps();
         });
     }

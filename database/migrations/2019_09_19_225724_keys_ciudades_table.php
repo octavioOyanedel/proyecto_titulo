@@ -14,7 +14,7 @@ class KeysCiudadesTable extends Migration
     public function up()
     {
         Schema::table('ciudades', function (Blueprint $table) {
-            $table->foreign('comuna_id')->references('id')->on('comunas')->onDelete('cascade');
+            $table->foreign('comuna_id')->references('id')->on('comunas')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

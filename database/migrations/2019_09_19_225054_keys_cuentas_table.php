@@ -14,8 +14,8 @@ class KeysCuentasTable extends Migration
     public function up()
     {
         Schema::table('cuentas', function (Blueprint $table) {
-            $table->foreign('tipo_cuenta_id')->references('id')->on('tipos_cuenta')->onDelete('cascade');
-            $table->foreign('banco_id')->references('id')->on('bancos')->onDelete('cascade');
+            $table->foreign('tipo_cuenta_id')->references('id')->on('tipos_cuenta')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('banco_id')->references('id')->on('bancos')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

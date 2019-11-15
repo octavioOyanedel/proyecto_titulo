@@ -18,7 +18,7 @@ class CreateCiudadsTable extends Migration
             $table->collation = 'utf8mb4_spanish_ci';
             $table->increments('id');
             $table->string('nombre');
-            $table->unsignedInteger('comuna_id');
+            $table->unsignedInteger('comuna_id')->nullable();
             $table->timestamps();
         });
     }

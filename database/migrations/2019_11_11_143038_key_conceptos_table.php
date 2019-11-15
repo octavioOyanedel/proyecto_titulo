@@ -14,7 +14,7 @@ class KeyConceptosTable extends Migration
     public function up()
     {
         Schema::table('conceptos', function (Blueprint $table) {
-            $table->foreign('tipo_registro_id')->references('id')->on('tipos_registro_contable')->onDelete('cascade');
+            $table->foreign('tipo_registro_id')->references('id')->on('tipos_registro_contable')->onUpdate('cascade')->onDelete('set null');
         });
     }
 
