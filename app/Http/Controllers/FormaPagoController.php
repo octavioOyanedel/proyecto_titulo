@@ -48,7 +48,7 @@ class FormaPagoController extends Controller
      */
     public function show(FormaPago $formaPago)
     {
-        //
+        return view('sind1.forma_pago.show', compact('formaPago'));
     }
 
     /**
@@ -85,8 +85,8 @@ class FormaPagoController extends Controller
      */
     public function destroy(FormaPago $formaPago)
     {
-        if ($request->ajax()) {
-            return FormaPago::destroy($request->id);   
-        }  
+        FormaPago::destroy($formaPago->id);
+        session(['mensaje' => 'Forma de pago eliminada con éxito.']);        
+        return redirect()->route('mantenedor_prestamos'); 
     }
 }

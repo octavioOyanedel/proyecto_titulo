@@ -35,7 +35,3 @@
     </div>
 </div>
 @endsection
-@include('partials.modals.eliminar_cuenta')
-@include('partials.modals.eliminar_concepto')
-@include('partials.modals.eliminar_asociado')
-@include('partials.modals.eliminar_banco')

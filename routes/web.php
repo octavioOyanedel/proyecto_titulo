@@ -63,19 +63,25 @@ Route::resource('/prestamos', 'PrestamoController')->middleware('auth');
 Route::post('/simulacion', 'PrestamoController@simulacion')->name('simulacion')->middleware('auth');
 Route::get('/cancelar_deposito/{id}', 'PrestamoController@cancelarDeposito')->name('cancelar_deposito')->middleware('auth');
 
-Route::resource('/contables', 'RegistroContableController')->middleware('auth');
+
 Route::resource('/sedes', 'SedeController')->middleware('auth');
 Route::resource('/areas', 'AreaController')->middleware('auth');
 Route::resource('/cargos', 'CargoController')->middleware('auth');
-Route::resource('/situaciones', 'EstadoSocioController')->middleware('auth');
+Route::resource('/estado_socios', 'EstadoSocioController')->middleware('auth');
 Route::resource('/nacionalidades', 'NacionalidadController')->middleware('auth');
+
 Route::resource('/formas_pago', 'FormaPagoController')->middleware('auth');
+
 Route::resource('/cuentas', 'CuentaController')->middleware('auth');
 Route::resource('/conceptos', 'ConceptoController')->middleware('auth');
 Route::resource('/bancos', 'BancoController')->middleware('auth');
 Route::resource('/asociados', 'AsociadoController')->middleware('auth');
+
 Route::resource('/historial', 'LogSistemaController')->middleware('auth');
+
 Route::resource('/usuarios', 'UsuarioController')->middleware('auth');
+
+Route::resource('/contables', 'RegistroContableController')->middleware('auth');
 
 //****************************************************************************************************
 //ruta carga continua de info cargas familiares
@@ -107,9 +113,10 @@ Route::get('/estudios_socio', 'EstudioRealizadoSocioController@agregarEstudio')-
 //****************************************************************************************************
 
 Route::resource('/parentescos', 'ParentescoController')->middleware('auth');
+
 Route::resource('/niveles', 'GradoAcademicoController')->middleware('auth');
 Route::resource('/instituciones', 'InstitucionController')->middleware('auth');
-Route::resource('/estados', 'EstadoGradoAcademicoController')->middleware('auth');
+Route::resource('/estados_nivel', 'EstadoGradoAcademicoController')->middleware('auth');
 Route::resource('/titulos', 'TituloController')->middleware('auth');
 
 Route::get('/cambiar_password', 'UsuarioController@editPassword')->name('usuarios.editPassword')->middleware('auth');

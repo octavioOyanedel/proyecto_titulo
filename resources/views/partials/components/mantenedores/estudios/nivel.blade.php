@@ -14,7 +14,7 @@
                 @foreach($grados as $g)
                     <tr>                                                
                         <td width="50" class="text-center" scope="row" title="Editar nivel educacional"><a class="text-secondary" href="{{ route('niveles.edit', $g->id) }}"><span>@svg('editar')</span></a></td>
-                        <td width="50" class="text-center" scope="row" title="Eliminar nivel educacional"><a id="modal_eliminar_nivel_academico" class="text-danger" data-toggle="modal" data-target="#eliminar_nivel" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td width="50" class="text-center" scope="row" title="Eliminar nivel educacional"><a class="text-danger" href="{{ route('niveles.show', $g->id) }}"><span>@svg('eliminar')</span></a></td>
                         <td class="">{{ $g->nombre }}</td>
                     </tr>
                 @endforeach

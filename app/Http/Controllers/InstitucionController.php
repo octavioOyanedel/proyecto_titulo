@@ -49,7 +49,7 @@ class InstitucionController extends Controller
      */
     public function show(Institucion $institucion)
     {
-        //
+        return view('sind1.institucion.show', compact('institucion'));
     }
 
     /**
@@ -87,8 +87,8 @@ class InstitucionController extends Controller
      */
     public function destroy(Institucion $institucion)
     {
-        if ($request->ajax()) {
-            return Institucion::destroy($request->id);   
-        }  
+        Institucion::destroy($institucion->id);
+        session(['mensaje' => 'Institución educacional eliminada con éxito.']);        
+        return redirect()->route('mantenedor_estudios');  
     }
 }

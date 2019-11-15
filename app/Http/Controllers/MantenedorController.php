@@ -101,7 +101,7 @@ class MantenedorController extends Controller
     public function cerrarAlerta(Request $request)
     {
         if($request->ajax()){
-            session()->forget('eliminar');
+            session()->forget('mensaje');
         }
     }
 

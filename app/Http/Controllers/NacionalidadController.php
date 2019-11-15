@@ -24,7 +24,7 @@ class NacionalidadController extends Controller
      */
     public function create()
     {
-        return view('sind1.nacionalidades.create');
+        return view('sind1.nacionalidad.create');
     }
 
     /**
@@ -45,9 +45,10 @@ class NacionalidadController extends Controller
      * @param  \App\Nacionalidad  $nacionalidad
      * @return \Illuminate\Http\Response
      */
-    public function show(Nacionalidad $nacionalidad)
+    public function show($id)
     {
-        //
+        $nacionalidad = Nacionalidad::findOrFail($id);
+        return view('sind1.nacionalidad.show', compact('nacionalidad'));
     }
 
     /**
@@ -60,7 +61,7 @@ class NacionalidadController extends Controller
     {
         $e = '';
         $nacionalidad = Nacionalidad::findOrFail($id);
-        return view('sind1.nacionalidades.edit', compact('nacionalidad','e'));
+        return view('sind1.nacionalidad.edit', compact('nacionalidad','e'));
     }
 
     /**
@@ -82,10 +83,10 @@ class NacionalidadController extends Controller
      * @param  \App\Nacionalidad  $nacionalidad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nacionalidad $nacionalidad)
+    public function destroy($id)
     {
-        if ($request->ajax()) {
-            return Nacionalidad::destroy($request->id);   
-        }  
+        Nacionalidad::destroy($id);
+        session(['mensaje' => 'Nacionalidad eliminada con éxito.']);        
+        return redirect()->route('mantenedor_socios');  
     }
 }

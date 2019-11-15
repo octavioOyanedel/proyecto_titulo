@@ -81,6 +81,4 @@
     </div>
 </div>
 
-@include('partials.modals.eliminar_socio') 
-
 @endsection

@@ -37,7 +37,3 @@
     </div>
 </div>
 @endsection
-@include('partials.modals.eliminar_nivel')
-@include('partials.modals.eliminar_institucion')
-@include('partials.modals.eliminar_estado_nivel')
-@include('partials.modals.eliminar_titulo')

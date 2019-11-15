@@ -38,7 +38,6 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        $e = '';
         Area::create($request->all());
         $sedes = Sede::orderBy('nombre','ASC')->get();
         return redirect()->route('mantenedor_socios', compact('sedes','e'))->with('agregar-area','');        
@@ -52,7 +51,7 @@ class AreaController extends Controller
      */
     public function show(Area $area)
     {
-        //
+        return view('sind1.area.show', compact('area'));
     }
 
     /**
@@ -63,9 +62,8 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        $e = '';
         $sedes = Sede::orderBy('nombre','ASC')->get();
-        return view('sind1.area.edit', compact('area','sedes','e'));
+        return view('sind1.area.edit', compact('area','sedes'));
     }
 
     /**
@@ -91,11 +89,12 @@ class AreaController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Area $area)
     {
-        if ($request->ajax()) {
-            return Area::destroy($request->id);   
-        }       
+        Area::destroy($area->id);
+        $sedes = Sede::orderBy('nombre','ASC')->get();
+        session(['mensaje' => 'Área eliminada con éxito.']);        
+        return redirect()->route('mantenedor_socios', compact('sedes'));          
     }
 
     // obtener areas

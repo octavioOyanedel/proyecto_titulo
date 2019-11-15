@@ -106,7 +106,7 @@ class SedeController extends Controller
         $cargos = Cargo::orderBy('nombre', 'ASC')->get();
         $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
         $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();        
-        session(['eliminar' => 'Sede eliminada con éxito.']);
+        session(['mensaje' => 'Sede eliminada con éxito.']);
         return redirect()->route('mantenedor_socios', compact('sedes','areas','cargos','estados','nacionalidades'));    
     }
 }

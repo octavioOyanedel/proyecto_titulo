@@ -24,7 +24,7 @@ class ParentescoController extends Controller
      */
     public function create()
     {
-        return view('sind1.parentescos.create');
+        return view('sind1.parentesco.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class ParentescoController extends Controller
      */
     public function show(Parentesco $parentesco)
     {
-        //
+        return view('sind1.parentesco.show', compact('parentesco'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ParentescoController extends Controller
     {
         $e = '';
         $parentescos = Parentesco::orderBy('nombre', 'ASC')->get();
-        return view('sind1.parentescos.edit', compact('parentesco', 'parentescos','e'));
+        return view('sind1.parentesco.edit', compact('parentesco', 'parentescos','e'));
     }
 
     /**
@@ -84,8 +84,8 @@ class ParentescoController extends Controller
      */
     public function destroy(Parentesco $parentesco)
     {
-        if ($request->ajax()) {
-            return Parentesco::destroy($request->id);   
-        }  
+        Parentesco::destroy($parentesco->id);
+        session(['mensaje' => 'Parentesco eliminado con éxito.']);        
+        return redirect()->route('mantenedor_cargas');  
     }
 }

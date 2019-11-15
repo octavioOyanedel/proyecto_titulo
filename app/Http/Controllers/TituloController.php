@@ -49,7 +49,7 @@ class TituloController extends Controller
      */
     public function show(Titulo $titulo)
     {
-        //
+        return view('sind1.titulo.show', compact('titulo'));
     }
 
     /**
@@ -87,8 +87,8 @@ class TituloController extends Controller
      */
     public function destroy(Titulo $titulo)
     {
-        if ($request->ajax()) {
-            return Titulo::destroy($request->id);   
-        }  
+        Titulo::destroy($titulo->id);
+        session(['mensaje' => 'Título eliminado con éxito.']);        
+        return redirect()->route('mantenedor_estudios');  
     }
 }

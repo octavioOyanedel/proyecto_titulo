@@ -36,9 +36,8 @@ class CargoController extends Controller
      */
     public function store(IncorporarCargoRequest $request)
     {
-        $e = '';
         Cargo::create($request->all());
-        return redirect()->route('mantenedor_socios', compact('e'))->with('agregar-cargo',''); 
+        return redirect()->route('mantenedor_socios'); 
     }
 
     /**
@@ -49,7 +48,7 @@ class CargoController extends Controller
      */
     public function show(Cargo $cargo)
     {
-        //
+        return view('sind1.cargo.show', compact('cargo'));
     }
 
     /**
@@ -86,10 +85,10 @@ class CargoController extends Controller
      * @param  \App\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Cargo $cargo)
     {
-        if ($request->ajax()) {
-            return Cargo::destroy($request->id);   
-        }       
+        Cargo::destroy($cargo->id);
+        session(['mensaje' => 'Cargo eliminado con éxito.']);        
+        return redirect()->route('mantenedor_socios'); 
     }
 }

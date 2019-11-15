@@ -16,7 +16,7 @@
                 @foreach($areas as $a)
                     <tr>                                                
                         <td class="text-center" scope="row" title="Editar área"><a class="text-secondary" href="{{ route('areas.edit',$a) }}"><span>@svg('editar')</span></a></td>
-                        <td class="text-center" scope="row" title="Eliminar área"><a data-id="{{ $a->id }}" class="enlace_eliminar text-danger" data-toggle="modal" data-target="#eliminar_area" href="#"><span>@svg('eliminar')</span></a></td>
+                        <td class="text-center" scope="row" title="Eliminar área"><a class="text-danger" href="{{ route('areas.destroy',$a) }}"><span>@svg('eliminar')</span></a></td>
                         <td title="{{ ($a->sede_id === '') ? 'Sin registro.' : '' }}" class="{{ ($a->sede_id === '') ? 'text-center' : '' }}">{{ celdaCadena($a->sede_id) }}</td>
                         <td>{{ $a->nombre }}</td>
                     </tr>

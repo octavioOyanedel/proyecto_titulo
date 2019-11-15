@@ -47,7 +47,7 @@ class GradoAcademicoController extends Controller
      */
     public function show(GradoAcademico $gradoAcademico)
     {
-        //
+        return view('sind1.nivel.show', compact('gradoAcademico'));
     }
 
     /**
@@ -84,8 +84,8 @@ class GradoAcademicoController extends Controller
      */
     public function destroy(GradoAcademico $gradoAcademico)
     {
-        if ($request->ajax()) {
-            return GradoAcademico::destroy($request->id);   
-        }  
+        GradoAcademico::destroy($gradoAcademico->id);
+        session(['mensaje' => 'Nivel educacional eliminado con éxito.']);        
+        return redirect()->route('mantenedor_estudios');  
     }
 }

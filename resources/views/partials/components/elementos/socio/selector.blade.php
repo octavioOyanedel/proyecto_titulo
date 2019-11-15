@@ -33,7 +33,7 @@
     @break
     {{-- mantenedor --}}
     @case('mantenedor_socios')
-                <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     {{-- filtro socios --}}
     @case('filtro_socios')

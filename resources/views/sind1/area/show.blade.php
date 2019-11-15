@@ -6,7 +6,7 @@
         <div class="col-md-7">
 
             <div class="card">
-                <div class="card-header text-center"><h3 class="mb-0">Eliminar Sede</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Eliminar Área</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
                     
@@ -14,9 +14,9 @@
                         <h4>Información Importante</h4>
                         <strong class="icono-alerta">Si elimina este registro no estará visible en ninguna de las tablas del modulo de socios, asimismo no estará disponible para la incorporación o edición de socios.</strong>
                     </div>
-                    <p class="text-center">¿Desea continuar con la eliminación de sede <b>{{ $sede->nombre }}</b>?</p>
+                    <p class="text-center">¿Desea continuar con la eliminación de área <b>{{ $area->nombre }}</b>?</p>
                     <!-- Formulario -->
-                    <form class="text-center" method="POST" action="{{ route('sedes.destroy', $sede) }}">
+                    <form class="text-center" method="POST" action="{{ route('areas.destroy', $area) }}">
                         
                         @csrf
                         @method('DELETE')                   

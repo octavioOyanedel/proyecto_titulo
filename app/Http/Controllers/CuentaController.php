@@ -28,7 +28,7 @@ class CuentaController extends Controller
     {
         $tipos_cuenta = TipoCuenta::orderBy('nombre','ASC')->get();
         $bancos = Banco::orderBy('nombre','ASC')->get();
-        return view('sind1.cuentas.create', compact('tipos_cuenta', 'bancos'));
+        return view('sind1.cuenta.create', compact('tipos_cuenta', 'bancos'));
     }
 
     /**
@@ -51,7 +51,7 @@ class CuentaController extends Controller
      */
     public function show(Cuenta $cuenta)
     {
-        //
+        return view('sind1.cuenta.show', compact('cuenta'));
     }
 
     /**
@@ -65,7 +65,7 @@ class CuentaController extends Controller
         $e = '';
         $tipos_cuenta = TipoCuenta::orderBy('nombre','ASC')->get();
         $bancos = Banco::orderBy('nombre','ASC')->get();
-        return view('sind1.cuentas.edit', compact('tipos_cuenta','bancos','cuenta','e'));
+        return view('sind1.cuenta.edit', compact('tipos_cuenta','bancos','cuenta','e'));
     }
 
     /**
@@ -89,8 +89,8 @@ class CuentaController extends Controller
      */
     public function destroy(Cuenta $cuenta)
     {
-        if ($request->ajax()) {
-            return Cuenta::destroy($request->id);   
-        }  
+        Cuenta::destroy($cuenta->id);
+        session(['mensaje' => 'Cuenta eliminada con éxito.']);        
+        return redirect()->route('mantenedor_contables'); 
     }
 }

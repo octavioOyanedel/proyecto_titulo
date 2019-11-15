@@ -47,7 +47,7 @@ class EstadoSocioController extends Controller
      */
     public function show(EstadoSocio $estadoSocio)
     {
-        //
+        return view('sind1.estado_socio.show', compact('estadoSocio'));
     }
 
     /**
@@ -82,10 +82,10 @@ class EstadoSocioController extends Controller
      * @param  \App\EstadoSocio  $estadoSocio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(EstadoSocio $estadoSocio)
     {
-        if ($request->ajax()) {
-            return EstadoSocio::destroy($request->id);   
-        }       
+        EstadoSocio::destroy($estadoSocio->id);
+        session(['mensaje' => 'Estado socio eliminado con éxito.']);        
+        return redirect()->route('mantenedor_socios');   
     }
 }

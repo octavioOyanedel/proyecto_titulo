@@ -4,15 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            @include('partials.alertas')
+
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Mantenedor Cargas Familiares</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
                     <h4 class="mt-4"></h4>
 
                     <nav>

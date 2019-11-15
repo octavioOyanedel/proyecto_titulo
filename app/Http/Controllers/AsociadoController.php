@@ -47,7 +47,7 @@ class AsociadoController extends Controller
      */
     public function show(Asociado $asociado)
     {
-        //
+        return view('sind1.asociado.show', compact('asociado'));
     }
 
     /**
@@ -83,8 +83,8 @@ class AsociadoController extends Controller
      */
     public function destroy(Asociado $asociado)
     {
-        if ($request->ajax()) {
-            return Asociado::destroy($request->id);   
-        } 
+        Asociado::destroy($asociado->id);
+        session(['mensaje' => 'Asociado eliminado con éxito.']);        
+        return redirect()->route('mantenedor_contables'); 
     }
 }

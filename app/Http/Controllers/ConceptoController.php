@@ -47,7 +47,7 @@ class ConceptoController extends Controller
      */
     public function show(Concepto $concepto)
     {
-        //
+        return view('sind1.concepto.show', compact('concepto'));
     }
 
     /**
@@ -58,8 +58,7 @@ class ConceptoController extends Controller
      */
     public function edit(Concepto $concepto)
     {
-        $e = '';
-        return view('sind1.concepto.edit', compact('concepto','e'));
+        return view('sind1.concepto.edit', compact('concepto'));
     }
 
     /**
@@ -83,8 +82,8 @@ class ConceptoController extends Controller
      */
     public function destroy(Concepto $concepto)
     {
-        if ($request->ajax()) {
-            return Concepto::destroy($request->id);   
-        } 
+        Concepto::destroy($concepto->id);
+        session(['mensaje' => 'Concepto eliminado con éxito.']);        
+        return redirect()->route('mantenedor_contables'); 
     }
 }

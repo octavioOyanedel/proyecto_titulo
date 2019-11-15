@@ -47,7 +47,7 @@ class BancoController extends Controller
      */
     public function show(Banco $banco)
     {
-        //
+        return view('sind1.banco.show', compact('banco'));
     }
 
     /**
@@ -83,6 +83,8 @@ class BancoController extends Controller
      */
     public function destroy(Banco $banco)
     {
-        //
+        Banco::destroy($banco->id);
+        session(['mensaje' => 'Banco eliminado con éxito.']);        
+        return redirect()->route('mantenedor_contables'); 
     }
 }

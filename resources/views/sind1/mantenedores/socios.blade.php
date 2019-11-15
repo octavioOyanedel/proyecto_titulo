@@ -37,8 +37,3 @@
 
 </div>
 @endsection
-@include('partials.modals.eliminar_sede')
-@include('partials.modals.eliminar_area')
-@include('partials.modals.eliminar_cargo')
-@include('partials.modals.eliminar_estado_socio')
-@include('partials.modals.eliminar_nacionalidad')
