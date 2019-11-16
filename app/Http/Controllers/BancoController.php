@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Banco;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarBancoRequest;
 
 class BancoController extends Controller
 {
@@ -33,10 +34,11 @@ class BancoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarBancoRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_contables', compact('e'))->with('agregar-banco','');
+        Banco::create($request->all());
+        session(['mensaje' => 'Banco agregado con éxito.']);
+        return redirect()->route('mantenedor_contables');
     }
 
     /**

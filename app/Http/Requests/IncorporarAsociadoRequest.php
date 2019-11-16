@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidarFormatoNombreRule;
 
 class IncorporarAsociadoRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class IncorporarAsociadoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,8 @@ class IncorporarAsociadoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'concepto' => ['required',new ValidarFormatoNombreRule,'unique:asociados,concepto','max:255'],
+            'nombre' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
         ];
     }
 }

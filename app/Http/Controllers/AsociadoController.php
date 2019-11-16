@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Asociado;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarAsociadoRequest;
 
 class AsociadoController extends Controller
 {
@@ -33,10 +34,11 @@ class AsociadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarAsociadoRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_contables', compact('e'))->with('agregar-asociado','');
+        Asociado::create($request->all());         
+        session(['mensaje' => 'Asociado agregado con éxito.']);        
+        return redirect()->route('mantenedor_contables');
     }
 
     /**
@@ -45,8 +47,9 @@ class AsociadoController extends Controller
      * @param  \App\Asociado  $asociado
      * @return \Illuminate\Http\Response
      */
-    public function show(Asociado $asociado)
+    public function show($id)
     {
+        $asociado = Asociado::findOrfail($id);
         return view('sind1.asociado.show', compact('asociado'));
     }
 

@@ -8,17 +8,13 @@
                 <div class="card-header text-center"><h3 class="mb-0">Nueva Cuenta Bancaria</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('cuentas.store') }}">
                         @csrf
 
                         @include('partials.components.elementos.contable.numero_cuenta')
-                        @include('partials.components.elementos.contable.tipos_cuentas')
+                        @include('partials.components.elementos.contable.tipos_cuenta')
                         @include('partials.components.elementos.contable.bancos')
 
                         <!-- Botón submit -->

@@ -14,9 +14,9 @@
                         <h4>Información Importante</h4>
                         <strong class="icono-alerta">Si elimina este registro no estará visible en ninguna de las tablas del modulo de estudios realizados, asimismo no estará disponible para la incorporación o edición de estudios realizados.</strong>
                     </div>
-                    <p class="text-center">¿Desea continuar con la eliminación de este nivel educacional <b>{{ $gradoAcademico->nombre }}</b>?</p>
+                    <p class="text-center">¿Desea continuar con la eliminación de este nivel educacional <b>{{ $estudioRealizado->nombre }}</b>?</p>
                     <!-- Formulario -->
-                    <form class="text-center" method="POST" action="{{ route('estudios.destroy', $gradoAcademico) }}">
+                    <form class="text-center" method="POST" action="{{ route('estudios.destroy', $estudioRealizado) }}">
                         
                         @csrf
                         @method('DELETE')                   

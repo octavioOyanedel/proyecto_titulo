@@ -8,13 +8,9 @@
                 <div class="card-header text-center"><h3 class="mb-0">Nuevo Asociado</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('asociados.store') }}">
                         @csrf
 
                         @include('partials.components.elementos.contable.asociado_concepto')

@@ -37,6 +37,7 @@ class CargoController extends Controller
     public function store(IncorporarCargoRequest $request)
     {
         Cargo::create($request->all());
+        session(['mensaje' => 'Cargo agregado con éxito.']);     
         return redirect()->route('mantenedor_socios'); 
     }
 

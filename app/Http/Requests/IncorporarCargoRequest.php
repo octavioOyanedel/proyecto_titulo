@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\ValidarFormatoNombre;
+use App\Rules\ValidarFormatoNombreRule;
 
 class IncorporarCargoRequest extends FormRequest
 {
@@ -25,7 +25,7 @@ class IncorporarCargoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required',new ValidarFormatoNombre,'unique:cargos,nombre','max:255'],
+            'nombre' => ['required',new ValidarFormatoNombreRule,'unique:cargos,nombre','max:255'],
         ];
     }
 }

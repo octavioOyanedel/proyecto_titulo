@@ -14,9 +14,9 @@
                         <h4>Información Importante</h4>
                         <strong class="icono-alerta">Si elimina este registro no estará visible en ninguna de las tablas del modulo de registros contables, asimismo no estará disponible para la incorporación o edición de registros contables.</strong>
                     </div>
-                    <p class="text-center">¿Desea continuar con la eliminación de esta forma de pago<b>{{ $registroContable->nombre }}</b>?</p>
+                    <p class="text-center">¿Desea continuar con la eliminación de esta cuenta <b>{{ $cuenta->tipo_cuenta_id }} N° {{ $cuenta->numero }} - {{ $cuenta->banco_id }}</b>?</p>
                     <!-- Formulario -->
-                    <form class="text-center" method="POST" action="{{ route('contables.destroy', $registroContable) }}">
+                    <form class="text-center" method="POST" action="{{ route('cuentas.destroy', $cuenta) }}">
                         
                         @csrf
                         @method('DELETE')                   

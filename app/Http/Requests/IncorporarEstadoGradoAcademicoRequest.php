@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidarFormatoNombreRule;
 
 class IncorporarEstadoGradoAcademicoRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class IncorporarEstadoGradoAcademicoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,7 @@ class IncorporarEstadoGradoAcademicoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => ['required',new ValidarFormatoNombreRule,'unique:estados_grado_academico,nombre','max:255'],            
         ];
     }
 }

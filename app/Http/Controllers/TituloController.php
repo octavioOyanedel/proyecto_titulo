@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Titulo;
 use App\GradoAcademico;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarTituloRequest;
 
 class TituloController extends Controller
 {
@@ -35,10 +36,11 @@ class TituloController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarTituloRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_estudios', compact('e'))->with('agregar-titulo','');
+        Titulo::create($request->all());
+        session(['mensaje' => 'Título agregado con éxito.']);
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**

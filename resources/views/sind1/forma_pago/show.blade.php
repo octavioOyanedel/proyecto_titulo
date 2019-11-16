@@ -14,9 +14,9 @@
                         <h4>Información Importante</h4>
                         <strong class="icono-alerta">Si elimina este registro no estará visible en ninguna de las tablas del modulo de préstamos, asimismo no estará disponible para la incorporación o edición de préstamos.</strong>
                     </div>
-                    <p class="text-center">¿Desea continuar con la eliminación de esta forma de pago<b>{{ $formaPago->nombre }}</b>?</p>
+                    <p class="text-center">¿Desea continuar con la eliminación de esta forma de pago <b>{{ $formaPago->nombre }}</b>?</p>
                     <!-- Formulario -->
-                    <form class="text-center" method="POST" action="{{ route('formas_pago.destroy', $formaPago) }}">
+                    <form class="text-center" method="POST" action="{{ route('formas_pago.destroy', $formaPago->id) }}">
                         
                         @csrf
                         @method('DELETE')                   

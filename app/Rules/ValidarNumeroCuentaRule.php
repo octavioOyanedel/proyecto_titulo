@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class ValidarFormatoNombre implements Rule
+class ValidarNumeroCuentaRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,7 @@ class ValidarFormatoNombre implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/^[a-zA-Z áéíóúÁÉÍÓÚñÑ \-]*$/",$value);
+        return preg_match("/^[0-9\-]*$/",$value);
     }
 
     /**

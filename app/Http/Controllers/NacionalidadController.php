@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Nacionalidad;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarNacionalidadRequest;
 
 class NacionalidadController extends Controller
 {
@@ -33,10 +34,11 @@ class NacionalidadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarNacionalidadRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_socios', compact('e'))->with('agregar-nacionalidad',''); 
+        Nacionalidad::create($request->all());
+        session(['mensaje' => 'Nacionalidad agregada con éxito.']);
+        return redirect()->route('mantenedor_socios'); 
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\EstadoGradoAcademico;
 use App\GradoAcademico;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarEstadoGradoAcademicoRequest;
 
 class EstadoGradoAcademicoController extends Controller
 {
@@ -34,10 +35,11 @@ class EstadoGradoAcademicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarEstadoGradoAcademicoRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_estudios', compact('e'))->with('agregar-estado-nivel-educacional','');
+        EstadoGradoAcademico::create($request->all());
+        session(['mensaje' => 'Estado nivel agregado con éxito.']);
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**
@@ -46,8 +48,9 @@ class EstadoGradoAcademicoController extends Controller
      * @param  \App\EstadoGradoAcademico  $estadoGradoAcademico
      * @return \Illuminate\Http\Response
      */
-    public function show(EstadoGradoAcademico $estadoGradoAcademico)
+    public function show($id)
     {
+        $estadoGradoAcademico = EstadoGradoAcademico::findOrFail($id);
         return view('sind1.estado_nivel.show', compact('estadoGradoAcademico'));
     }
 
@@ -83,9 +86,9 @@ class EstadoGradoAcademicoController extends Controller
      * @param  \App\EstadoGradoAcademico  $estadoGradoAcademico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EstadoGradoAcademico $estadoGradoAcademico)
+    public function destroy($id)
     {
-        EstadoGradoAcademico::destroy($estadoGradoAcademico->id);
+        EstadoGradoAcademico::destroy($id);
         session(['mensaje' => 'Estado nivel educacional eliminado con éxito.']);        
         return redirect()->route('mantenedor_estudios');  
     }

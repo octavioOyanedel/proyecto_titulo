@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidarFormatoNombreRule;
 
 class IncorporarInstitucionRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class IncorporarInstitucionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,7 @@ class IncorporarInstitucionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => ['required',new ValidarFormatoNombreRule,'unique:instituciones,nombre','max:255'],
         ];
     }
 }

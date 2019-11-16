@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidarRutRule;
-use App\Rules\ValidarFormatoNombre;
+use App\Rules\ValidarFormatoNombreRule;
 
 
 class IncorporarSocioRequest extends FormRequest
@@ -28,10 +28,10 @@ class IncorporarSocioRequest extends FormRequest
     {
         return [
             'rut' => ['required',new ValidarRutRule,'unique:socios,rut','max:9'],
-            'nombre1' => ['required',new ValidarFormatoNombre,'max:255'],
-            'nombre2' => ['nullable',new ValidarFormatoNombre,'max:255'],
-            'apellido1' => ['required',new ValidarFormatoNombre,'max:255'],
-            'apellido2' => ['nullable',new ValidarFormatoNombre,'max:255'],
+            'nombre1' => ['required',new ValidarFormatoNombreRule,'max:255'],
+            'nombre2' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
+            'apellido1' => ['required',new ValidarFormatoNombreRule,'max:255'],
+            'apellido2' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
             'genero' => ['required'],
             'fecha_nac' => ['nullable','date'],
             'celular' => ['nullable','numeric'],

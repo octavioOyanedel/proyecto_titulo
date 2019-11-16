@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Concepto;
+use App\TipoRegistroContable;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarConceptoRequest;
 
 class ConceptoController extends Controller
 {
@@ -24,7 +26,8 @@ class ConceptoController extends Controller
      */
     public function create()
     {
-        return view('sind1.concepto.create');
+        $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
+        return view('sind1.concepto.create', compact('tipos_registro'));
     }
 
     /**
@@ -33,10 +36,11 @@ class ConceptoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarConceptoRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_contables', compact('e'))->with('agregar-concepto','');
+        Concepto::create($request->all());
+        session(['mensaje' => 'Concepto agregado con éxito.']);
+        return redirect()->route('mantenedor_contables');
     }
 
     /**

@@ -16,11 +16,10 @@
                     </div>
                     <p class="text-center">¿Desea continuar con la eliminación de este estado de nivel educacional <b>{{ $estadoGradoAcademico->nombre }}</b>?</p>
                     <!-- Formulario -->
-                    <form class="text-center" method="POST" action="{{ route('estados_nivel.destroy', $estadoGradoAcademico) }}">
+                    <form class="text-center" method="POST" action="{{ route('estados_nivel.destroy', $estadoGradoAcademico->id) }}">
                         
                         @csrf
                         @method('DELETE')                   
-
 
                         <a class="btn btn-secondary" href="{{ route('mantenedor_estudios') }}" role="button">Cancelar</a>
                         <button type="submit" class="btn btn-danger">Aceptar</button>      

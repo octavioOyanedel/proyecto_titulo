@@ -6,6 +6,7 @@ use App\Banco;
 use App\Cuenta;
 use App\TipoCuenta;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarCuentaRequest;
 
 class CuentaController extends Controller
 {
@@ -39,8 +40,9 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_contables', compact('e'))->with('agregar-cuenta','');
+        Cuenta::create($request->all());
+        session(['mensaje' => 'Cuenta agregada con éxito.']);
+        return redirect()->route('mantenedor_contables');
     }
 
     /**
@@ -49,8 +51,9 @@ class CuentaController extends Controller
      * @param  \App\Cuenta  $cuenta
      * @return \Illuminate\Http\Response
      */
-    public function show(Cuenta $cuenta)
+    public function show($id)
     {
+        $cuenta = Cuenta::findOrFail($id);
         return view('sind1.cuenta.show', compact('cuenta'));
     }
 
@@ -62,10 +65,9 @@ class CuentaController extends Controller
      */
     public function edit(Cuenta $cuenta)
     {
-        $e = '';
         $tipos_cuenta = TipoCuenta::orderBy('nombre','ASC')->get();
         $bancos = Banco::orderBy('nombre','ASC')->get();
-        return view('sind1.cuenta.edit', compact('tipos_cuenta','bancos','cuenta','e'));
+        return view('sind1.cuenta.edit', compact('tipos_cuenta','bancos','cuenta'));
     }
 
     /**

@@ -1,4 +1,13 @@
-@php isset($cuenta->banco_id) ? $banco_id = $cuenta->getOriginal('banco_id') : $banco_id = '' @endphp
+@if(isset($cuenta) && $cuenta->banco_id != null)
+    @php
+        $banco_id = $cuenta->getOriginal('banco_id');
+    @endphp
+@else
+    @php
+        $banco_id = '';
+    @endphp
+@endif
+
 <!-- bancos -->
 <div class="form-group row">
     <label for="banco_id" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span></span>{{ __('Bancos') }}</label>
@@ -16,3 +25,4 @@
         @enderror
     </div>
 </div> 
+

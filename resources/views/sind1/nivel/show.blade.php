@@ -14,15 +14,16 @@
                         <h4>Información Importante</h4>
                         <strong class="icono-alerta">Si elimina este registro no estará visible en ninguna de las tablas del modulo de estudios realizados, asimismo no estará disponible para la incorporación o edición de estudios realizados.</strong>
                     </div>
-                    <p class="text-center">¿Desea continuar con la eliminación de este nivel educacional  <b>{{ $estudioRealizado->nombre }}</b>?</p>
+
+                    <p class="text-center">¿Desea continuar con la eliminación de este nivel educacional  <b>{{ $gradoAcademico->nombre }}</b>?</p>
                     <!-- Formulario -->
-                    <form class="text-center" method="POST" action="{{ route('estudios.destroy', $estudioRealizado) }}">
+                    <form class="text-center" method="POST" action="{{ route('niveles.destroy', $gradoAcademico->id) }}">
                         
                         @csrf
                         @method('DELETE')                   
 
 
-                        <a class="btn btn-secondary" href="{{ route('mantenedor_socios') }}" role="button">Cancelar</a>
+                        <a class="btn btn-secondary" href="{{ route('mantenedor_estudios') }}" role="button">Cancelar</a>
                         <button type="submit" class="btn btn-danger">Aceptar</button>      
                     </form>   
                 </div>

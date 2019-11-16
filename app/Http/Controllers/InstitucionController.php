@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Institucion;
 use App\GradoAcademico;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarInstitucionRequest;
+
 
 class InstitucionController extends Controller
 {
@@ -24,7 +26,7 @@ class InstitucionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {    
         $grados = GradoAcademico::orderBy('nombre','ASC')->get();
         return view('sind1.institucion.create', compact('grados'));
     }
@@ -35,10 +37,11 @@ class InstitucionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarInstitucionRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_estudios', compact('e'))->with('agregar-institucion','');
+        Institucion::create($request->all()); 
+        session(['mensaje' => 'Institución agregada con éxito.']);
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**
@@ -47,8 +50,9 @@ class InstitucionController extends Controller
      * @param  \App\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function show(Institucion $institucion)
+    public function show($id)
     {
+        $institucion = Institucion::findOrFail($id);
         return view('sind1.institucion.show', compact('institucion'));
     }
 
@@ -85,9 +89,9 @@ class InstitucionController extends Controller
      * @param  \App\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Institucion $institucion)
+    public function destroy($id)
     {
-        Institucion::destroy($institucion->id);
+        Institucion::destroy($id);
         session(['mensaje' => 'Institución educacional eliminada con éxito.']);        
         return redirect()->route('mantenedor_estudios');  
     }

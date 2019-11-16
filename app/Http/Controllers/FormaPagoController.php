@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\FormaPago;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarFormaPagoRequest;
 
 class FormaPagoController extends Controller
 {
@@ -34,10 +35,11 @@ class FormaPagoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarFormaPagoRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_prestamos', compact('e'))->with('agregar-forma-pago','');
+        FormaPago::create($request->all());
+        session(['mensaje' => 'Forma de pago agregada con éxito.']);
+        return redirect()->route('mantenedor_prestamos');
     }
 
     /**
@@ -46,8 +48,9 @@ class FormaPagoController extends Controller
      * @param  \App\FormaPago  $formaPago
      * @return \Illuminate\Http\Response
      */
-    public function show(FormaPago $formaPago)
+    public function show($id)
     {
+        $formaPago = FormaPago::findOrFail($id);
         return view('sind1.forma_pago.show', compact('formaPago'));
     }
 
@@ -83,9 +86,9 @@ class FormaPagoController extends Controller
      * @param  \App\FormaPago  $formaPago
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FormaPago $formaPago)
+    public function destroy($id)
     {
-        FormaPago::destroy($formaPago->id);
+        FormaPago::destroy($id);
         session(['mensaje' => 'Forma de pago eliminada con éxito.']);        
         return redirect()->route('mantenedor_prestamos'); 
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GradoAcademico;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarGradoAcademicoRequest;
 
 class GradoAcademicoController extends Controller
 {
@@ -33,10 +34,11 @@ class GradoAcademicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarGradoAcademicoRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_estudios', compact('e'))->with('agregar-nivel-educacional','');
+        GradoAcademico::create($request->all());         
+        session(['mensaje' => 'Nivel educacional agregado con éxito.']);
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**
@@ -45,8 +47,9 @@ class GradoAcademicoController extends Controller
      * @param  \App\GradoAcademico  $gradoAcademico
      * @return \Illuminate\Http\Response
      */
-    public function show(GradoAcademico $gradoAcademico)
+    public function show($id)
     {
+        $gradoAcademico = GradoAcademico::findOrFail($id);
         return view('sind1.nivel.show', compact('gradoAcademico'));
     }
 
@@ -58,9 +61,8 @@ class GradoAcademicoController extends Controller
      */
     public function edit($id)
     {
-        $e = '';
         $gradoAcademico = GradoAcademico::findOrFail($id);
-        return view('sind1.nivel.edit', compact('gradoAcademico','e'));
+        return view('sind1.nivel.edit', compact('gradoAcademico'));
     }
 
     /**
@@ -82,9 +84,10 @@ class GradoAcademicoController extends Controller
      * @param  \App\GradoAcademico  $gradoAcademico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GradoAcademico $gradoAcademico)
+    public function destroy($id)
     {
-        GradoAcademico::destroy($gradoAcademico->id);
+
+        GradoAcademico::destroy($id);
         session(['mensaje' => 'Nivel educacional eliminado con éxito.']);        
         return redirect()->route('mantenedor_estudios');  
     }

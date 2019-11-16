@@ -36,11 +36,12 @@ class AreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarAreaRequest $request)
     {
         Area::create($request->all());
         $sedes = Sede::orderBy('nombre','ASC')->get();
-        return redirect()->route('mantenedor_socios', compact('sedes','e'))->with('agregar-area','');        
+        session(['mensaje' => 'Área agregada con éxito.']);     
+        return redirect()->route('mantenedor_socios', compact('sedes'));        
     }
 
     /**

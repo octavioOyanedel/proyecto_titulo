@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Parentesco;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarParentescoRequest;
 
 class ParentescoController extends Controller
 {
@@ -33,10 +34,11 @@ class ParentescoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarParentescoRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_cargas', compact('e'))->with('agregar-parentesco',''); 
+        Parentesco::create($request->all());        
+        session(['mensaje' => 'Parentesco agregado con éxito.']);
+        return redirect()->route('mantenedor_cargas'); 
     }
 
     /**

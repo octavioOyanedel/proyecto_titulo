@@ -62,7 +62,7 @@ class EstudioRealizadoController extends Controller
      */
     public function show(EstudioRealizado $estudioRealizado)
     {
-        //
+        return view('sind1.estudio.show', compact('estudioRealizado'));
     }
 
     /**

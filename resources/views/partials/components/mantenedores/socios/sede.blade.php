@@ -1,11 +1,11 @@
 <div class="tab-pane fade show active" id="nav-sede" role="tabpanel" aria-labelledby="nav-sede-tab">
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('sedes.create') }}">Agregar Sede</a> 
 
-     @if($sedes->count() === 0)
+    @if($sedes->count() === 0)
         <div class="alert alert-warning mt-4 text-center" role="alert">
             <b>No existen registros.</b>
         </div>
-     @else
+    @else
         <div class="table-responsive">
             <table class="table table-hover data-tables table-striped table-bordered" id="tabla-sedes">
                 <thead>

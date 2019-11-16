@@ -14,7 +14,7 @@
                         <h4>Información Importante</h4>
                         <strong class="icono-alerta">Si elimina este registro no estará visible en ninguna de las tablas del modulo de registros contables, asimismo no estará disponible para la incorporación o edición de registros contables.</strong>
                     </div>
-                    <p class="text-center">¿Desea continuar con la eliminación de esta forma de pago<b>{{ $concepto->nombre }}</b>?</p>
+                    <p class="text-center">¿Desea continuar con la eliminación de esta forma de pago <b>{{ $concepto->nombre }}</b>?</p>
                     <!-- Formulario -->
                     <form class="text-center" method="POST" action="{{ route('conceptos.destroy', $concepto) }}">
                         

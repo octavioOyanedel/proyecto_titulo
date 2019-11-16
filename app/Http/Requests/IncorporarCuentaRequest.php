@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidarNumeroCuentaRule;
 
 class IncorporarCuentaRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class IncorporarCuentaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,9 @@ class IncorporarCuentaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'numero' => ['required',new ValidarNumeroCuentaRule,'unique:cuentas,numero'],
+            'tipo_cuenta_id' => ['required','numeric'],
+            'banco_id' => ['required','numeric'],
         ];
     }
 }

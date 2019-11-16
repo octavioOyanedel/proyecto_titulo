@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\EstadoSocio;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarEstadoSocioRequest;
 
 class EstadoSocioController extends Controller
 {
@@ -23,7 +24,7 @@ class EstadoSocioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {    
         return view('sind1.estado_socio.create');
     }
 
@@ -33,10 +34,11 @@ class EstadoSocioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarEstadoSocioRequest $request)
     {
-        $e = '';
-        return redirect()->route('mantenedor_socios', compact('e'))->with('agregar-estado-socio',''); 
+        EstadoSocio::create($request->all());
+        session(['mensaje' => 'Estado socio agregado con éxito.']); 
+        return redirect()->route('mantenedor_socios'); 
     }
 
     /**

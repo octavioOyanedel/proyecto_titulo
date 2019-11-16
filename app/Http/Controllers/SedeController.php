@@ -45,8 +45,9 @@ class SedeController extends Controller
         $areas = Area::orderBy('sede_id', 'ASC')->get();
         $cargos = Cargo::orderBy('nombre', 'ASC')->get();
         $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
-        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();        
-        return redirect()->route('mantenedor_socios', compact('sedes','areas','cargos','estados','nacionalidades'))->with('agregar-sede','');
+        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();   
+        session(['mensaje' => 'Sede agregada con éxito.']);     
+        return redirect()->route('mantenedor_socios', compact('sedes','areas','cargos','estados','nacionalidades'));
     }
 
     /**

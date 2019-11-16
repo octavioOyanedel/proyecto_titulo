@@ -20,8 +20,8 @@
         <script src="{{ asset('js/ajax/cargar_conceptos.js') }}" defer></script>
     @break
     {{-- mantenedor --}}
-    @case('mantenedor-contables')
-
+    @case('mantenedor_contables')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     {{-- listar --}}
     @case('contables')
