@@ -8,11 +8,6 @@
                 <div class="card-header text-center"><h3 class="mb-0">Listado Registros Contables</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     @if($registros->count() === 0)
                         <div class="alert alert-warning mt-4 text-center" role="alert">
@@ -20,7 +15,7 @@
                         </div>
                     @else 
                         <div class="table-responsive">
-                            <table class="table table-hover data-tables" id="tabla-contables">
+                            <table class="table table-hover table-bordered table-striped data-tables" id="tabla-contables">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-success" scope="col" title="">&nbsp;</th>
@@ -41,13 +36,13 @@
                                             <td class="text-center">{{ $r->fecha }}</td>
                                             <td class="text-center">{{ $r->tipo_registro_contable_id }}</td>
                                             <td class="text-center">{{ $r->numero_registro }}</td>
-                                            <td class="text-center">{{ $r->cheque }}</td>
+                                            <td class="text-center" title="@if($r->cheque != null) {{ '' }} @else {{ 'Ingreso sin cheque asociado.' }} @endif">@if($r->cheque != null) {{ $r->cheque }} @else {{ '-' }} @endif</td>
                                             <td class="text-center">{{ $r->monto }}</td>                                              
                                             <td class="">
                                                 <b>{{ $r->concepto_id }}</b>@if($r->socio != null) - {{ $r->socio->apellido1 }} {{ $r->socio->apellido2 }}, {{ $r->socio->nombre1 }} {{ $r->socio->nombre2 }}@endif
                                                 @if($r->asociado != null){{ $r->asociado->concepto }} - {{ $r->asociado->nombre }}@endif
                                             </td>
-                                            <td class="">{{ $r->detalle }}</td>                                    
+                                            <td title="@if($r->detalle != null) {{ '' }} @else {{ 'Sin detalle asociado.' }} @endif">@if($r->detalle != null) {{ $r->detalle }} @else {{ '-' }} @endif</td>                                    
                                         </tr>
                                     @endforeach
                                 </tbody>

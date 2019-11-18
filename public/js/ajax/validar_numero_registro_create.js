@@ -10,12 +10,18 @@ $(window).on('load',function(){
 	var error = $('#error-numero');
 	var boton = $('#incorporar');
 	var original = '';
+	var tipo = '';
 
 	//reset mensajes
 	limpiarMensajes();
 
 	//capturar valor original
 	original = formatearEntrada(elemento.val());
+
+	//captura de tipo de registro
+	$('#tipo_registro_contable_id').change(function(){
+		tipo = $(this).val();
+	});
 
 	//capturar evento
 	elemento.focusout( function(){ //keyup - focusout
@@ -35,7 +41,7 @@ $(window).on('load',function(){
 					if(original != ''){
 						//si campos no son iguales
 						if(original != valor){
-							consultaAjax(valor);
+							consultaAjax(valor, tipo);
 						}else{
 							valido();
 						}
@@ -43,27 +49,29 @@ $(window).on('load',function(){
 				}
 				//form crear
 				else{
-					consultaAjax(valor);
+					consultaAjax(valor, tipo);
 				}
 			}else{
 				invalido();
 			}
+		}else{
+			desactivarBoton();
 		}			
 	});
 
-	function consultaAjax(valor){
+	function consultaAjax(valor, tipo){
 
 		$.ajaxSetup({
 			headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}}
 		);		
-		
+
 		$.ajax({
 			method: 'GET',
 			dataType: 'json',
 			url: '/verificar_numero_registro',
-			data: {elemento: valor},
+			data: {elemento: valor, tipo: tipo},
 			success: function(respuesta){												
 				if(respuesta === 1){
 					yaRegistrado();

@@ -8,11 +8,6 @@
                 <div class="card-header text-center"><h3 class="mb-0">Detalle Socio</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     <div class="table-responsive">
                         <h4>Información Personal</h4>
@@ -42,8 +37,8 @@
                     </div>
 
                     @if($estudios->count() === 0)
-                        <div class="alert alert-warning mt-4 text-center" role="alert">
-                            <b>Socio sin estudios registrados.</b>
+                        <div class="alert alert-warning mt-4" role="alert">
+                            <b>Socio sin estudios registrados. <a class="btn btn-sm btn-primary float-right" href="{{ route('estudios.create', ['id'=>$socio->id]) }}">Agregar Estudio</a></b>
                         </div>
                     @else     
                         <div class="table-responsive">
@@ -78,12 +73,12 @@
                     @endif  
 
                     @if($cargas->count() === 0)
-                        <div class="alert alert-warning mt-4 text-center" role="alert">
-                            <b>Socio sin cargas familiares registrados.</b>
+                        <div class="alert alert-warning mt-4" role="alert">
+                            <b>Socio sin cargas familiares registrados. <a class="btn btn-sm btn-primary float-right" href="{{ route('cargas.create', ['id'=>$socio->id]) }}">Agregar Carga familiar</a></b>
                         </div>
                     @else
                         <div class="table-responsive">
-                            <h4 class="mt-4">Cargas Familiares <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Carga</a></h4>
+                            <h4 class="mt-4">Cargas Familiares <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Carga Familiar</a></h4>
                             <table class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -112,7 +107,7 @@
                     @endif 
 
                     @if($prestamos->count() === 0)
-                        <div class="alert alert-warning mt-4 text-center" role="alert">
+                        <div class="alert alert-warning mt-4" role="alert">
                             <b>Socio sin préstamos registrados.</b>
                         </div>
                     @else  

@@ -8,11 +8,6 @@
                 <div class="card-header text-center"><h3 class="mb-0">Listado de Préstamos</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     @if($prestamos->count() === 0)
                         <div class="alert alert-warning mt-4 text-center" role="alert">
@@ -20,7 +15,7 @@
                         </div>
                     @else 
                         <div class="table-responsive">
-                            <table class="table table-hover table-borderer table-striped data-tables" id="tabla-prestamos">
+                            <table class="table table-hover table-bordered table-striped data-tables" id="tabla-prestamos">
                                 <thead>
                                     <tr>
                                         <th>&nbsp;</th>
@@ -28,7 +23,7 @@
                                         <th class="text-center" scope="col">Rut</th>
                                         <th class="text-center" scope="col">Fecha de solicitud</th>
                                         <th class="text-center" scope="col">Número de egreso</th>
-                                        <th class="text-center" scope="col">Cuenta</th>
+                                        <th scope="col">Cuenta</th>
                                         <th class="text-center" scope="col">Método de pago</th>
                                         <th class="text-center" scope="col">Cheque</th>
                                         <th class="text-center" scope="col">Monto</th>
@@ -43,7 +38,7 @@
                                             <td class="text-center">{{ $p->socio->rut }}</td>
                                             <td class="text-center">{{ $p->fecha_solicitud }}</td>
                                             <td class="text-center">{{ $p->numero_egreso }}</td>
-                                            <td class="text-center">{{ $p->cuenta_id }}</td>
+                                            <td>{{ $p->cuenta_id }}</td>
                                             <td class="text-center">{{ $p->forma_pago_id }}</td>
                                             <td class="text-center">{{ celdaCadena($p->cheque) }}</td>
                                             <td class="text-center">{{ $p->monto }}</td>

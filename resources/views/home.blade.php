@@ -25,7 +25,7 @@
                                         <th class="text-center" title="Estado préstamo solicitado" scope="col">Préstamo</th>
                                         <th scope="col">Nombre</th>
                                         <th class="text-center" scope="col">Género</th>
-                                        <th scope="col">Rut</th>
+                                        <th class="text-center" scope="col">Rut</th>
                                         <th class="text-center" scope="col">Fecha ingreso Sind1</th>
                                         <th scope="col">Número Socio</th>
                                         <th scope="col">Correo</th>

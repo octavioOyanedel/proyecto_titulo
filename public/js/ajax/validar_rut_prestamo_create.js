@@ -55,6 +55,8 @@ $(window).on('load',function(){
 			}else{
 				invalido();
 			}
+		}else{
+			desactivarBoton();
 		}		
 	});
 

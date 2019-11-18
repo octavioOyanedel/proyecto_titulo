@@ -23,28 +23,30 @@ $(window).on('load',function(){
 		valor = formatearEntrada(elemento.val());
 
 		limpiarMensajes();
-		mostrarSpin();	
 
-		//condiciones que se deben cumplir para llamar a funcion ajax
-		if(valor.length >= 5 && valor.length <= 50 && valor != '' &&  validarFormato() != null){
-			//form editar
-			if(comprobarRuta() === -1){
-				//si valor original es distinto de vacío
-				if(original != ''){
-					//si campos no son iguales
-					if(original != valor){
-						consultaAjax(valor);
-					}else{
-						valido();
+		if(valor != ''){
+			mostrarSpin();	
+			//condiciones que se deben cumplir para llamar a funcion ajax
+			if(valor.length >= 5 && valor.length <= 50 && valor != '' &&  validarFormato() != null){
+				//form editar
+				if(comprobarRuta() === -1){
+					//si valor original es distinto de vacío
+					if(original != ''){
+						//si campos no son iguales
+						if(original != valor){
+							consultaAjax(valor);
+						}else{
+							valido();
+						}
 					}
 				}
+				//form crear
+				else{
+					consultaAjax(valor);
+				}
+			}else{
+				invalido();
 			}
-			//form crear
-			else{
-				consultaAjax(valor);
-			}
-		}else{
-			invalido();
 		}
 	});
 

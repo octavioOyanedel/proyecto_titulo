@@ -3,9 +3,9 @@
 @endphp
 <!-- Área -->
 <div class="form-group row">
-    <label for="area_id" class="col-md-4 col-form-label text-md-right">{{ __('Área') }}</label>
+    <label for="area_id" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Área') }}</label>
     <div class="col-md-6">
-	    <select id="area_id" class="default-selects form-control @error('area_id') is-invalid @enderror" name="area_id" autocomplete="area_id" autofocus>
+	    <select id="area_id" class="default-selects form-control @error('area_id') is-invalid @enderror" name="area_id" autocomplete="area_id" autofocus required>
 	        <option selected="true" value="">Seleccione...</option>
 	    </select>
 

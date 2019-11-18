@@ -20,6 +20,7 @@
     {{-- crear --}}
     @case('cargas/create/'.request()->route()->id)
         <script src="{{ asset('js/ajax/validar_rut_carga_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     @default
 @endswitch

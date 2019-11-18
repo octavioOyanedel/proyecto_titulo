@@ -70,7 +70,8 @@ class RegistroContableController extends Controller
         $conceptos = Concepto::where('id','<>',57)->orderBy('nombre')->get();
         $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
         $asociados = Asociado::orderBy('concepto')->get();
-        return redirect()->route('contables.create', compact('tipos_registro','cuentas','conceptos','socios','asociados'))->with('agregar-registro','');  
+        session(['mensaje' => 'Registro contable agregado con éxito.']);
+        return redirect()->route('contables.create', compact('tipos_registro','cuentas','conceptos','socios','asociados'));  
     }
 
     /**
@@ -146,11 +147,15 @@ class RegistroContableController extends Controller
     public function verificarNumero(Request $request) 
     {
         if ($request->ajax()) {
-            $registro = RegistroContable::where('numero_registro','=',$request->elemento)->get();
-            if(count($registro) != 0){
-                return response()->json(1); //si existe
+            $registro = RegistroContable::where([
+                ['numero_registro','=',$request->elemento],
+                ['tipo_registro_contable_id','=',$request->tipo]
+            ]);
+
+            if($registro->count() > 0){     
+                return response()->json(1); //si existe        
             }else{
-                return response()->json(0);
+                return response()->json(0);                   
             }            
         }
     }

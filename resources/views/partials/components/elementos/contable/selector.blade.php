@@ -31,6 +31,7 @@
     @case('contables/create')
         <script src="{{ asset('js/ajax/validar_cheque_contable_create.js') }}" defer></script>
         <script src="{{ asset('js/ajax/validar_numero_registro_create.js') }}" defer></script>
+        <script src="{{ asset('js/switch_numero_registro.js') }}" defer></script>
         <script src="{{ asset('js/ajax/cargar_conceptos.js') }}" defer></script>
     @break
     {{-- mantenedor --}}

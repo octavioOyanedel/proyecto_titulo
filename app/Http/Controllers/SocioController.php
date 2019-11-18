@@ -51,7 +51,8 @@ class SocioController extends Controller
     {
         Socio::create($request->all());
         $socio = Socio::obtenerUltimoSocioIngresado();
-        return redirect()->route('cargas.create',['id'=>$socio->id])->with('agregar-socio','');
+        session(['mensaje' => 'Socio incorporado con éxito.']); 
+        return redirect()->route('cargas.create',['id'=>$socio->id]);
     }
 
     /**

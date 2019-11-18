@@ -57,7 +57,7 @@ class PrestamoController extends Controller
     {
         Prestamo::create($request->all()); 
         $prestamo = Prestamo::obtenerUltimoPrestamoIngresado();
-        if($request->deposito === '0'){
+        if($prestamo->getoriginal('forma_pago_id') === 1){
             Prestamo::agregarCuotasPrestamo($prestamo);       
         }   
         $registro = new RegistroContable;  
@@ -73,7 +73,8 @@ class PrestamoController extends Controller
         $registro->usuario_id = Auth::user()->id;
         $registro->socio_id = $prestamo->socio_id;
         $registro->save();
-        return redirect()->route('prestamos.create')->with('agregar-prestamo','');        
+        session(['mensaje' => 'Préstamo agregado con éxito.']);
+        return redirect()->route('prestamos.create');        
     }
 
     /**

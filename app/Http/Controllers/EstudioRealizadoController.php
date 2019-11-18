@@ -51,7 +51,8 @@ class EstudioRealizadoController extends Controller
         $estudio_socio->socio_id = $request->socio_id;
         $estudio_socio->estudio_realizado_id = $estudio->id;
         $estudio_socio->save();
-        return redirect()->route('estudios.create',['id'=>$request->input('socio_id')])->with('agregar-estudio','');
+        session(['mensaje' => 'Estudio realizado agregado con éxito.']); 
+        return redirect()->route('estudios.create',['id'=>$request->input('socio_id')]);
     }
 
     /**

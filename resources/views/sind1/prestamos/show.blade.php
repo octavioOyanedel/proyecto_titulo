@@ -11,11 +11,6 @@
                 <div class="card-header text-center"><h3 class="mb-0">Detalle Préstamo</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     <h4>Información Préstamo</h4>
                     <div class="table-responsive">                    
@@ -48,6 +43,7 @@
                         </table>
                     </div>
                     @if($prestamo->getOriginal('forma_pago_id') === 1) 
+                        {{ dd($prestamo->cuotas) }}
                         <h4>Información Cuotas</h4>
                         <div class="table-responsive">                       
                             <table class="table table-hover table-bordered table-striped">
@@ -60,7 +56,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($prestamo->cuotas as $p)  
+                                    @foreach($prestamo->cuotas as $p) 
                                         <tr>
                                             <td class="text-center">{{ $p->numero_cuota }}</td>
                                             <td class="text-center">{{ $p->fecha_pago }}</td>

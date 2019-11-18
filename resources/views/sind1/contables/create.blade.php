@@ -11,18 +11,14 @@
                 <div class="card-header text-center"><h3 class="mb-0">Registrar Egreso - Ingreso</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
                     <!-- Formulario -->
                     <form method="POST" action="{{ route('contables.store') }}">
                         @csrf
 
                         @include('partials.components.elementos.contable.fecha_solicitud')
-                        @include('partials.components.elementos.contable.numero_registro')
                         @include('partials.components.elementos.contable.tipo_registro')
+                        @include('partials.components.elementos.contable.numero_registro')
                         @include('partials.components.elementos.contable.cheque')
                         @include('partials.components.elementos.contable.monto')
                         @include('partials.components.elementos.contable.cuentas')

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidarNumeroRegistroUnicoRule;
 
 class IncorporarRegistroContableRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class IncorporarRegistroContableRequest extends FormRequest
     {
         return [
             'fecha' => ['required','date'],
-            'numero_registro' => ['required','numeric','unique:registros_contables,numero_registro'],
+            'numero_registro' => ['required','numeric',new ValidarNumeroRegistroUnicoRule(Request()->tipo_registro_contable_id)],
             'cheque' => ['nullable','numeric','unique:registros_contables,cheque'],
             'monto' => ['required','numeric'],
             'concepto_id' => ['required','numeric'],

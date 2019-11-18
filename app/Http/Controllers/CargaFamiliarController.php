@@ -38,8 +38,9 @@ class CargaFamiliarController extends Controller
      */
     public function store(IncorporarCargaRequest $request)
     {
-        CargaFamiliar::create($request->all());        
-        return redirect()->route('cargas.create',['id'=>$request->input('socio_id')])->with('agregar-carga','');
+        CargaFamiliar::create($request->all()); 
+        session(['mensaje' => 'Carga familiar incorporada con éxito.']);        
+        return redirect()->route('cargas.create',['id'=>$request->input('socio_id')]);
     }
 
     /**

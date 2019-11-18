@@ -57,7 +57,8 @@ class UsuarioController extends Controller
         $usuario->rol_id = $request->rol_id;
         $usuario->save();
         $roles = Rol::orderBy('nombre','ASC')->get();
-        return redirect()->route('register', compact('roles'))->with('agregar-usuario','');  
+        session(['mensaje' => 'Usuario agregado con éxito.']);
+        return redirect()->route('register', compact('roles'));  
     }
 
     /**

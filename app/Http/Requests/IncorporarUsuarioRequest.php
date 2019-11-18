@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidarContrasenasIgualesRule;
-use App\Rules\ValidarFormatoNombre;
+use App\Rules\ValidarFormatoNombreRule;
 
 class IncorporarUsuarioRequest extends FormRequest
 {
@@ -26,10 +26,10 @@ class IncorporarUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre1' => ['required',new ValidarFormatoNombre,'max:255'],
-            'nombre2' => ['nullable',new ValidarFormatoNombre,'max:255'],
-            'apellido1' => ['required',new ValidarFormatoNombre,'max:255'],
-            'apellido2' => ['nullable',new ValidarFormatoNombre,'max:255'],
+            'nombre1' => ['required',new ValidarFormatoNombreRule,'max:255'],
+            'nombre2' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
+            'apellido1' => ['required',new ValidarFormatoNombreRule,'max:255'],
+            'apellido2' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
             'email' => ['required','email'],
             'password' => ['required','alpha_num',new ValidarContrasenasIgualesRule(Request()->password_confirm),'min:8','max:15'],
             'password_confirm' => ['required','alpha_num',new ValidarContrasenasIgualesRule(Request()->password),'min:8','max:15'],

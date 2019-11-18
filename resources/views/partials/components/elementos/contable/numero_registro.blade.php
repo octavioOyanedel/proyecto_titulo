@@ -9,9 +9,9 @@
 
 <!-- número de registro -->
 <div class="form-group row">
-    <label for="numero_registro" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Número de registro') }}</label>
+    <label for="numero_registro" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><button type="button" class="btn btn-sm btn-outline-dark rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Debe seleccionar el tipo de registro antes de ingresar el número de registro.">?</button><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Número de registro') }}</label>
     <div class="col-md-6">
-        <input id="numero_registro" type="number" class="form-control @error('numero_registro') is-invalid @enderror" name="numero_registro" value="{{ old('numero_registro') }}" required autocomplete="numero_registro" autofocus min="1" max="999999">
+        <input id="numero_registro" type="number" class="form-control @error('numero_registro') is-invalid @enderror" name="numero_registro" value="{{ old('numero_registro') }}" required autocomplete="numero_registro" autofocus min="1" max="999999" disabled>
 
         {{-- validacion php --}}
         <small id="error-numero-php" class="form-text text-danger"><strong>@if($errors->has('numero_registro')) {{ $errors->first('numero_registro') }}@endif</strong></small>

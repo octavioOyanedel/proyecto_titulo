@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidarEgresoUnicoRule;
+use App\Rules\ValidarChequeEgresoUnicoRule;
 
 class IncorporarPrestamoRequest extends FormRequest
 {
@@ -25,9 +27,9 @@ class IncorporarPrestamoRequest extends FormRequest
     {
         return [
             'fecha_solicitud' => ['required','date'],
-            'numero_egreso' => ['required','numeric','unique:registros_contables,numero_registro'],
+            'numero_egreso' => ['required','numeric',new ValidarEgresoUnicoRule],
             'cuenta_id' => ['required','numeric'],
-            'cheque' => ['nullable','numeric','unique:registros_contables,cheque'],
+            'cheque' => ['nullable','numeric',new ValidarChequeEgresoUnicoRule],
             'fecha_pago_deposito' => ['nullable','date'],
             'monto' => ['required','numeric'],
             'numero_cuotas' => ['nullable','numeric'],

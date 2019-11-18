@@ -50,7 +50,7 @@ class Prestamo extends Model
         if($valor != null){
             $cuenta_id = $valor;
             $cuenta = Cuenta::findOrFail($cuenta_id);
-            $valor = $cuenta->tipo_cuenta_id.' - '.$cuenta->banco_id.' - '.$cuenta->numero;
+            $valor = $cuenta->tipo_cuenta_id.' N° '.$cuenta->numero.' - '.$cuenta->banco_id;
             return $valor;
         }else{
             return '';
