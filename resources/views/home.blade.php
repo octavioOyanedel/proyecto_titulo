@@ -56,19 +56,19 @@
                                                 </a>
                                             </td>
                                             @else
-                                                <td class="text-center"> - </td>
+                                                <td class="text-center" title="Sin préstamo."> - </td>
                                             @endif
-                                            <td>{{ $s->apellido1 }} {{ $s->apellido2 }}, {{ $s->nombre1 }} {{ $s->nombre2 }}</td>
+                                            <td>@if($s->apellido2 != null) {{ $s->apellido1 }} {{ $s->apellido2 }}, @else {{ $s->apellido1 }}, @endif {{ $s->nombre1 }} {{ $s->nombre2 }}</td>
                                             <td class="text-center">{{ $s->genero }}</td>
                                             <td>{{ $s->rut }}</td>
-                                            <td class="text-center">{{ $s->fecha_sind1 }}</td>
-                                            <td class="text-center">{{ $s->numero_socio }}</td>
-                                            <td>{{ $s->correo }}</td>
-                                            <td class="text-center">{{ $s->anexo }}</td>
-                                            <td class="text-center">{{ $s->celular }}</td>
-                                            <td class="{{ ($s->sede_id === '') ? 'text-center' : '' }}">{{ celdaCadena($s->sede_id) }}</td>
-                                            <td>{{ $s->area_id }}</td>
-                                            <td>{{ $s->cargo_id }}</td>
+                                            <td class="text-center" title="{{ ($s->fecha_sind1 === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->fecha_sind1) }}</td>
+                                            <td class="text-center" title="{{ ($s->numero_socio === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->numero_socio) }}</td>
+                                            <td title="{{ ($s->correo === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->correo) }}</td>
+                                            <td class="text-center" title="{{ ($s->anexo === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->anexo) }}</td>
+                                            <td class="text-center" title="{{ ($s->celular === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->celular) }}</td>
+                                            <td title="{{ ($s->sede_id === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->sede_id) }}</td>
+                                            <td title="{{ ($s->area_id === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->area_id) }}</td>
+                                            <td title="{{ ($s->cargo_id === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->cargo_id) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
