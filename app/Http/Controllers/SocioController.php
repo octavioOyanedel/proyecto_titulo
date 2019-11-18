@@ -92,9 +92,33 @@ class SocioController extends Controller
      * @param  \App\Socio  $socio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Socio $socio)
+    public function update(EditarSocioRequest $request, Socio $socio)
     {
-        //
+        $modificar = Socio::findOrFail($socio->id);
+        $modificar->nombre1 = $request->nombre1;
+        $modificar->nombre2 = $request->nombre2;
+        $modificar->apellido1 = $request->apellido1;
+        $modificar->apellido2 = $request->apellido2;
+        $modificar->rut = $request->rut;
+        $modificar->genero = $request->genero;
+        $modificar->fecha_nac = $request->fecha_nac;
+        $modificar->celular = $request->celular;
+        $modificar->correo = $request->correo;
+        $modificar->direccion = $request->direccion;
+        $modificar->fecha_pucv = $request->fecha_pucv;
+        $modificar->anexo = $request->anexo;
+        $modificar->numero_socio = $request->numero_socio;
+        $modificar->fecha_sind1 = $request->fecha_sind1;
+        $modificar->comuna_id = $request->comuna_id;
+        $modificar->ciudad_id = $request->ciudad_id;
+        $modificar->sede_id = $request->sede_id;
+        $modificar->area_id = $request->area_id;        
+        $modificar->cargo_id = $request->cargo_id;
+        $modificar->estado_socio_id = $request->estado_socio_id;
+        $modificar->nacionalidad_id = $request->nacionalidad_id;
+        $modificar->update(); 
+        session(['mensaje' => 'Socio editado con éxito.']); 
+        return redirect()->route('home');        
     }
 
     /**

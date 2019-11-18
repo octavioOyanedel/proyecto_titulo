@@ -8,14 +8,12 @@
                 <div class="card-header text-center"><h3 class="mb-0">Editar Datos Socio</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('socios.update', $socio) }}">
+
                         @csrf
+                        @method('PUT')
 
                         @include('partials.components.elementos.socio.rut')
 
@@ -57,7 +55,13 @@
 
                         @include('partials.components.elementos.socio.situacion')
                                                 
-                        @include('partials.components.elementos.socio.nacion')              
+                        @include('partials.components.elementos.socio.nacion')
+
+                        <input type="hidden" name="rut_original" value="{{ $socio->getOriginal('rut') }}">
+
+                        <input type="hidden" name="numero_socio_original" value="{{ $socio->numero_socio }}">
+
+                        <input type="hidden" name="correo_original" value="{{ $socio->correo }}">
      
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

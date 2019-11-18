@@ -4,6 +4,9 @@
 <div class="ml-5 mr-5">
     <div class="row justify-content-center">
         <div class="col-md-12">
+
+            @include('partials.alertas')
+            
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Socios Incorporados</h3></div>
 

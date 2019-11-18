@@ -20,7 +20,7 @@
 @switch(request()->path())
     {{-- home --}}
     @case('home')
-
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     {{-- crear --}}
     @case('socios/create')
