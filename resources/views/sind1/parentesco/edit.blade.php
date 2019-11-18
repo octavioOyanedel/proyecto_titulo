@@ -8,14 +8,13 @@
                 <div class="card-header text-center"><h3 class="mb-0">Editar Parentesco</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
                     <!-- Formulario -->
-                    <form method="POST" action="">   
+                    <form method="POST" action="{{ route('parentescos.update',$parentesco) }}">   
+
                         @csrf
+                        @method('PUT')
+                        
                         @include('partials.components.elementos.carga.nuevo_parentesco')
 
                         <!-- Botón submit -->

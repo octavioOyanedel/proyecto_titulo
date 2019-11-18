@@ -14,8 +14,8 @@ class KeysEstudiosRealizadosSociosTable extends Migration
     public function up()
     {
         Schema::table('estudios_realizados_socios', function (Blueprint $table) {
-            $table->foreign('socio_id')->references('id')->on('socios')->onDelete('cascade');
-            $table->foreign('estudio_realizado_id')->references('id')->on('estudios_realizados')->onDelete('cascade');
+            $table->foreign('socio_id')->references('id')->on('socios')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('estudio_realizado_id')->references('id')->on('estudios_realizados')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

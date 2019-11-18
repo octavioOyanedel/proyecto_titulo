@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\GradoAcademicoInstitucion;
+use App\Institucion;
+use App\GradoAcademico;
 use Illuminate\Http\Request;
 
 class GradoAcademicoInstitucionController extends Controller
@@ -24,7 +26,9 @@ class GradoAcademicoInstitucionController extends Controller
      */
     public function create()
     {
-        //
+        Institucion::create($request->all()); 
+        session(['mensaje' => 'Institución agregada con éxito.']);
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**
@@ -35,7 +39,9 @@ class GradoAcademicoInstitucionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Titulo::create($request->all());
+        session(['mensaje' => 'Título agregado con éxito.']);
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**
@@ -46,7 +52,8 @@ class GradoAcademicoInstitucionController extends Controller
      */
     public function show(GradoAcademicoInstitucion $gradoAcademicoInstitucion)
     {
-        //
+        $institucion = Institucion::findOrFail($id);
+        return view('sind1.institucion.show', compact('institucion'));
     }
 
     /**
@@ -57,7 +64,9 @@ class GradoAcademicoInstitucionController extends Controller
      */
     public function edit(GradoAcademicoInstitucion $gradoAcademicoInstitucion)
     {
-        //
+        $grados = GradoAcademico::orderBy('nombre','ASC')->get();
+        $institucion = Institucion::findOrFail($id);
+        return view('sind1.institucion.edit', compact('institucion','grados'));
     }
 
     /**
@@ -69,7 +78,11 @@ class GradoAcademicoInstitucionController extends Controller
      */
     public function update(Request $request, GradoAcademicoInstitucion $gradoAcademicoInstitucion)
     {
-        //
+        $modificar = Institucion::findOrFail($id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();     
+        session(['mensaje' => 'Institución educacional editada con éxito.']);     
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**
@@ -80,7 +93,9 @@ class GradoAcademicoInstitucionController extends Controller
      */
     public function destroy(GradoAcademicoInstitucion $gradoAcademicoInstitucion)
     {
-        //
+        Institucion::destroy($id);
+        session(['mensaje' => 'Institución educacional eliminada con éxito.']);        
+        return redirect()->route('mantenedor_estudios');  
     }
 
     // obtener instituciones

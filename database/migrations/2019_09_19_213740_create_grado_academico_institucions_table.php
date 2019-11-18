@@ -17,8 +17,8 @@ class CreateGradoAcademicoInstitucionsTable extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->increments('id');
-            $table->unsignedInteger('grado_academico_id');
-            $table->unsignedInteger('institucion_id');
+            $table->unsignedInteger('grado_academico_id')->nullable();
+            $table->unsignedInteger('institucion_id')->nullable();
             $table->timestamps();
         });
     }

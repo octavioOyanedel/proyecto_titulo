@@ -62,7 +62,8 @@ class ConceptoController extends Controller
      */
     public function edit(Concepto $concepto)
     {
-        return view('sind1.concepto.edit', compact('concepto'));
+        $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();        
+        return view('sind1.concepto.edit', compact('concepto','tipos_registro'));
     }
 
     /**
@@ -72,10 +73,14 @@ class ConceptoController extends Controller
      * @param  \App\Concepto  $concepto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Concepto $concepto)
+    public function update(IncorporarConceptoRequest $request, Concepto $concepto)
     {
-        $e = '';
-        return redirect()->route('mantenedor_contables', compact('e'))->with('editar-concepto','');
+        $modificar = Concepto::findOrFail($concepto->id);
+        $modificar->nombre = $request->nombre;
+        $modificar->nombre = $request->nombre;
+        $modificar->update();             
+        session(['mensaje' => 'Concepto editado con éxito.']);
+        return redirect()->route('mantenedor_contables');
     }
 
     /**

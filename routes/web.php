@@ -31,6 +31,7 @@ Route::get('/verificar_rut_prestamo', 'PrestamoController@verificarRut');
 Route::get('/verificar_cheque', 'PrestamoController@verificarCheque');
 Route::get('/verificar_numero_egreso', 'PrestamoController@verificarNumeroEgreso');
 Route::get('/obtener_id_socio_con_rut', 'SocioController@obtenerIdSocioConRut');
+Route::get('/verificar_numero_cuenta', 'CuentaController@verificarNumeroCuenta');
 
 //ajax pagos automaticos
 route::get('/cambio_estado_deposito', 'PrestamoController@cambiarEstadoDeposito');
@@ -73,6 +74,7 @@ Route::resource('/nacionalidades', 'NacionalidadController')->middleware('auth')
 Route::resource('/formas_pago', 'FormaPagoController')->middleware('auth');
 
 Route::resource('/cuentas', 'CuentaController')->middleware('auth');
+Route::resource('/tipos_cuentas', 'TipoCuentaController')->middleware('auth');
 Route::resource('/conceptos', 'ConceptoController')->middleware('auth');
 Route::resource('/bancos', 'BancoController')->middleware('auth');
 Route::resource('/asociados', 'AsociadoController')->middleware('auth');

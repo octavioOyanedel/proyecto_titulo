@@ -54,6 +54,6 @@ class Area extends Model
      */
     public function setNombreAttribute($value)
     {
-        $this->attributes['nombre'] = formatoNombres($value);
+        $this->attributes['nombre'] = ucfirst($value);
     }
 }

@@ -12,6 +12,20 @@
     @endswitch
 @endisset
 
+@isset($cuenta)
+    @switch(request()->path())
+        {{-- editar --}}
+        @case('cuentas/'.$cuenta->id.'/edit')
+            <script src="{{ asset('js/ajax/validar_numero_cuenta_create.js') }}" defer></script>
+        @break
+        {{-- mostrar --}}
+        @case('cuentas/'.$cuenta->id)
+
+        @break
+        @default
+    @endswitch
+@endisset
+
 @switch(request()->path())
     {{-- crear --}}
     @case('contables/create')
@@ -31,5 +45,9 @@
     @case('filtro_contables')
 
     @break    
+    {{-- crear --}}
+    @case('cuentas/create')
+        <script src="{{ asset('js/ajax/validar_numero_cuenta_create.js') }}" defer></script>
+    @break  
     @default
 @endswitch

@@ -72,10 +72,13 @@ class GradoAcademicoController extends Controller
      * @param  \App\GradoAcademico  $gradoAcademico
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GradoAcademico $gradoAcademico)
+    public function update(IncorporarGradoAcademicoRequest $request, $id)
     {
-        $e = '';
-        return redirect()->route('mantenedor_estudios', compact('e'))->with('editar-nivel-educacional','');
+        $modificar = GradoAcademico::findOrFail($id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();     
+        session(['mensaje' => 'Nivel educacional editado con éxito.']);   
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**

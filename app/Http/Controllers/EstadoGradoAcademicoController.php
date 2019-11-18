@@ -62,9 +62,9 @@ class EstadoGradoAcademicoController extends Controller
      */
     public function edit($id)
     {
-        $e = '';
+
         $estadoGradoAcademico = EstadoGradoAcademico::findOrFail($id);
-        return view('sind1.estado_nivel.edit', compact('estadoGradoAcademico','e'));
+        return view('sind1.estado_nivel.edit', compact('estadoGradoAcademico'));
     }
 
     /**
@@ -74,10 +74,13 @@ class EstadoGradoAcademicoController extends Controller
      * @param  \App\EstadoGradoAcademico  $estadoGradoAcademico
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EstadoGradoAcademico $estadoGradoAcademico)
+    public function update(IncorporarEstadoGradoAcademicoRequest $request, $id)
     {
-        $e = '';
-        return redirect()->route('mantenedor_estudios', compact('e'))->with('editar-estado-nivel-educacional','');
+        $modificar = EstadoGradoAcademico::findOrFail($id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();             
+        session(['mensaje' => 'Estado nivel educacional editado con éxito.']); 
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**

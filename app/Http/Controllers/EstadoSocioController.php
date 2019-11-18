@@ -60,9 +60,8 @@ class EstadoSocioController extends Controller
      */
     public function edit($id)
     {   
-        $e = '';
         $estadoSocio = EstadoSocio::findOrFail($id);
-        return view('sind1.estado_socio.edit', compact('estadoSocio','e'));
+        return view('sind1.estado_socio.edit', compact('estadoSocio'));
     }
 
     /**
@@ -72,10 +71,13 @@ class EstadoSocioController extends Controller
      * @param  \App\EstadoSocio  $estadoSocio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EstadoSocio $estadoSocio)
+    public function update(IncorporarEstadoSocioRequest $request, EstadoSocio $estadoSocio)
     {
-        $e = '';
-        return redirect()->route('mantenedor_socios', compact('e'))->with('editar-estado-socio',''); 
+        $modificar = EstadoSocio::findOrFail($estadoSocio->id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();      
+        session(['mensaje' => 'Estado socio editado con éxito.']);    
+        return redirect()->route('mantenedor_socios'); 
     }
 
     /**

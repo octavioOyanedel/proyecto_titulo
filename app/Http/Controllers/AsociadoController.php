@@ -61,8 +61,7 @@ class AsociadoController extends Controller
      */
     public function edit(Asociado $asociado)
     {
-        $e = '';
-        return view('sind1.asociado.edit', compact('asociado','e'));
+        return view('sind1.asociado.edit', compact('asociado'));
     }
 
     /**
@@ -72,10 +71,14 @@ class AsociadoController extends Controller
      * @param  \App\Asociado  $asociado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Asociado $asociado)
+    public function update(IncorporarAsociadoRequest $request, Asociado $asociado)
     {
-        $e = '';
-        return redirect()->route('mantenedor_contables', compact('e'))->with('editar-asociado','');
+        $modificar = Asociado::findOrFail($asociado->id);
+        $modificar->concepto = $request->concepto;
+        $modificar->nombre = $request->nombre;
+        $modificar->update();             
+        session(['mensaje' => 'Asociado editado con éxito.']);
+        return redirect()->route('mantenedor_contables');
     }
 
     /**

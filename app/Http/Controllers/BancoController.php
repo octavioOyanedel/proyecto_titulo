@@ -60,8 +60,8 @@ class BancoController extends Controller
      */
     public function edit(Banco $banco)
     {
-        $e = '';
-        return view('sind1.banco.edit', compact('banco','e'));
+
+        return view('sind1.banco.edit', compact('banco'));
     }
 
     /**
@@ -71,10 +71,13 @@ class BancoController extends Controller
      * @param  \App\Banco  $banco
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Banco $banco)
+    public function update(IncorporarBancoRequest $request, Banco $banco)
     {
-        $e = '';
-        return redirect()->route('mantenedor_contables', compact('e'))->with('editar-banco','');
+        $modificar = Banco::findOrFail($banco->id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update(); 
+        session(['mensaje' => 'Banco editado con éxito.']); 
+        return redirect()->route('mantenedor_contables');
     }
 
     /**

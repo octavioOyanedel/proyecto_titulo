@@ -26,4 +26,12 @@ class TipoCuenta extends Model
     {
         return $this->belongsTo('App\Cuenta');
     }
+
+    /**
+     * mutator nombre  
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = formatoNombres($value);
+    }
 }

@@ -10,7 +10,7 @@
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
                     
-                    <div class="text-center alertas alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="text-center alertas alert alert-danger" role="alert">
                         <h4>Información Importante</h4>
                         <strong class="icono-alerta">Si elimina este registro no estará visible en ninguna de las tablas del modulo de cargas familiares, asimismo no estará disponible para la incorporación o edición de cargas familiares.</strong>
                     </div>

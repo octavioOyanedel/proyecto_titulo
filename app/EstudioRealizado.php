@@ -130,7 +130,6 @@ class EstudioRealizado extends Model
     static public function obtenerUltimoEstudioIngresado()
     {
         return EstudioRealizado::orderBy('created_at', 'DESC')->first();
-
     }
 
 }

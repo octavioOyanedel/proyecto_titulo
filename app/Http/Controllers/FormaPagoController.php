@@ -62,9 +62,9 @@ class FormaPagoController extends Controller
      */
     public function edit($id)
     {
-        $e = '';
+
         $formaPago = FormaPago::findOrFail($id);
-        return view('sind1.forma_pago.edit', compact('formaPago','e'));
+        return view('sind1.forma_pago.edit', compact('formaPago'));
     }
 
     /**
@@ -74,10 +74,13 @@ class FormaPagoController extends Controller
      * @param  \App\FormaPago  $formaPago
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FormaPago $formaPago)
+    public function update(IncorporarFormaPagoRequest $request, $id)
     {
-        $e = '';
-        return redirect()->route('mantenedor_prestamos', compact('e'))->with('editar-forma-pago','');
+        $modificar = FormaPago::findOrFail($id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();             
+        session(['mensaje' => 'Forma de pago editada con éxito.']); 
+        return redirect()->route('mantenedor_prestamos');
     }
 
     /**

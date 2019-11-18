@@ -8,11 +8,11 @@
         </div>
     @else
         <div class="table-responsive">
-            <table class="table table-hover data-tables" id="tabla-areas">
+            <table class="table table-hover data-tables table-striped table-bordered" id="tabla-areas">
                 <thead>
                     <tr>
-                        <th width="50" class="text-center" scope="col" title=""></th>
-                        <th width="50" class="text-center" scope="col" title=""></th>
+                        <th width="50" class="text-center" scope="col" title="">&nbsp;</th>
+                        <th width="50" class="text-center" scope="col" title="">&nbsp;</th>
                         <th scope="col">Sede</th>
                         <th scope="col">Área</th>
                     </tr>

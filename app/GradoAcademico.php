@@ -44,4 +44,6 @@ class GradoAcademico extends Model
     {
         return $this->hasMany('App\GradoAcademicoTitulo');
     }
+
+
 }

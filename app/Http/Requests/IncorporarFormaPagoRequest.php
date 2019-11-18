@@ -25,7 +25,7 @@ class IncorporarFormaPagoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required',new ValidarFormatoNombreRule,'unique:formas_pago,nombre','max:255'],
+            'nombre' => ['required',new ValidarFormatoNombreRule,'unique:tipos_cuenta,nombre','max:255'],
         ];
     }
 }

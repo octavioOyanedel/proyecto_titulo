@@ -60,9 +60,8 @@ class ParentescoController extends Controller
      */
     public function edit(Parentesco $parentesco)
     {
-        $e = '';
         $parentescos = Parentesco::orderBy('nombre', 'ASC')->get();
-        return view('sind1.parentesco.edit', compact('parentesco', 'parentescos','e'));
+        return view('sind1.parentesco.edit', compact('parentesco', 'parentescos'));
     }
 
     /**
@@ -72,10 +71,13 @@ class ParentescoController extends Controller
      * @param  \App\Parentesco  $parentesco
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Parentesco $parentesco)
+    public function update(IncorporarParentescoRequest $request, Parentesco $parentesco)
     {
-        $e = '';
-        return redirect()->route('mantenedor_cargas', compact('e'))->with('editar-parentesco',''); 
+        $modificar = Parentesco::findOrFail($parentesco->id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update(); 
+        session(['mensaje' => 'Parentesco editado con éxito.']);
+        return redirect()->route('mantenedor_cargas'); 
     }
 
     /**

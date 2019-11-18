@@ -309,5 +309,9 @@
         $nombreFormateado = str_replace(" Las ", " las ", $nombreFormateado);
         $nombreFormateado = str_replace(" Lo ", " lo ", $nombreFormateado);
         $nombreFormateado = str_replace(" Los ", " los ", $nombreFormateado);
+        $nombreFormateado = str_replace(" En ", " en ", $nombreFormateado);  
+        $nombreFormateado = str_replace(" Con ", " con ", $nombreFormateado);
+        $nombreFormateado = str_replace(" Por ", " por ", $nombreFormateado);
+        $nombreFormateado = str_replace(" El ", " el ", $nombreFormateado);  
         return $nombreFormateado;
     }

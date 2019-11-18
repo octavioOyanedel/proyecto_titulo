@@ -7,11 +7,11 @@
         </div>
     @else
         <div class="table-responsive">
-            <table class="table table-hover data-tables" id="tabla-bancos">
+            <table class="table table-hover data-tables table-striped table-bordered" id="tabla-bancos">
                 <thead>
                     <tr>
-                        <th class="text-center" scope="col" title=""></th>
-                        <th class="text-center" scope="col" title=""></th>
+                        <th class="text-center" scope="col" title="">&nbsp;</th>
+                        <th class="text-center" scope="col" title="">&nbsp;</th>
                         <th class="" scope="col">Banco</th>
                     </tr>
                 </thead>   

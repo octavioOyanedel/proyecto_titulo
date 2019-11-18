@@ -26,4 +26,12 @@ class FormaPago extends Model
     {
         return $this->belongsTo('App\Prestamo');
     }
+
+    /**
+     * mutator nombre 
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = formatoNombres($value);
+    }
 }

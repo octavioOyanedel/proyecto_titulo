@@ -38,7 +38,7 @@ class CuentaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarCuentaRequest $request)
     {
         Cuenta::create($request->all());
         session(['mensaje' => 'Cuenta agregada con éxito.']);
@@ -77,10 +77,15 @@ class CuentaController extends Controller
      * @param  \App\Cuenta  $cuenta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cuenta $cuenta)
+    public function update(IncorporarCuentaRequest $request, Cuenta $cuenta)
     {
-        $e = '';
-        return redirect()->route('mantenedor_contables', compact('e'))->with('editar-cuenta','');
+        $modificar = Cuenta::findOrFail($cuenta->id);
+        $modificar->numero = $request->numero;
+        $modificar->tipo_cuenta_id = $request->tipo_cuenta_id;
+        $modificar->banco_id = $request->banco_id;
+        $modificar->update();             
+        session(['mensaje' => 'Cuenta editada con éxito.']);
+        return redirect()->route('mantenedor_contables');
     }
 
     /**
@@ -94,5 +99,24 @@ class CuentaController extends Controller
         Cuenta::destroy($cuenta->id);
         session(['mensaje' => 'Cuenta eliminada con éxito.']);        
         return redirect()->route('mantenedor_contables'); 
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Prestamo  $prestamo
+     * @return \Illuminate\Http\Response
+     */
+    public function verificarNumeroCuenta(Request $request) 
+    {
+        if ($request->ajax()) {
+            $cuenta = Cuenta::where('numero','=',trim($request->elemento))->get();  
+            if(count($cuenta) != 0){
+                return response()->json(1); //si existe
+            }else{
+                return response()->json(0);
+            }
+            
+        }
     }
 }

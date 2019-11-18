@@ -8,16 +8,14 @@
                 <div class="card-header text-center"><h3 class="mb-0">Editar Banco</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <!-- Formulario -->
-                    <form method="POST" action="">
-                        @csrf
 
-                        @include('partials.components.elementos.contable.banco')
+                    <!-- Formulario -->
+                    <form method="POST" action="{{ route('bancos.update',$banco) }}">   
+
+                        @csrf
+                        @method('PUT')
+
+                        @include('partials.components.elementos.contable.nuevo_banco')
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\TipoCuenta;
 use Illuminate\Http\Request;
+use App\Http\Requests\IncorporarTipoCuentaRequest;
 
 class TipoCuentaController extends Controller
 {
@@ -24,7 +25,7 @@ class TipoCuentaController extends Controller
      */
     public function create()
     {
-        //
+        return view('sind1.tipo_cuenta.create');
     }
 
     /**
@@ -33,9 +34,11 @@ class TipoCuentaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncorporarTipoCuentaRequest $request)
     {
-        //
+        TipoCuenta::create($request->all());
+        session(['mensaje' => 'Tipo de cuenta agregada con éxito.']);
+        return redirect()->route('mantenedor_contables');
     }
 
     /**
@@ -44,9 +47,10 @@ class TipoCuentaController extends Controller
      * @param  \App\TipoCuenta  $tipoCuenta
      * @return \Illuminate\Http\Response
      */
-    public function show(TipoCuenta $tipoCuenta)
+    public function show($id)
     {
-        //
+        $tipoCuenta = TipoCuenta::findOrFail($id);
+        return view('sind1.tipo_cuenta.show', compact('tipoCuenta'));
     }
 
     /**
@@ -55,9 +59,10 @@ class TipoCuentaController extends Controller
      * @param  \App\TipoCuenta  $tipoCuenta
      * @return \Illuminate\Http\Response
      */
-    public function edit(TipoCuenta $tipoCuenta)
+    public function edit($id)
     {
-        //
+        $tipoCuenta = TipoCuenta::findOrFail($id);
+        return view('sind1.tipo_cuenta.edit', compact('tipoCuenta'));
     }
 
     /**
@@ -67,9 +72,13 @@ class TipoCuentaController extends Controller
      * @param  \App\TipoCuenta  $tipoCuenta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipoCuenta $tipoCuenta)
+    public function update(IncorporarTipoCuentaRequest $request, $id)
     {
-        //
+        $modificar = TipoCuenta::findOrFail($id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();             
+        session(['mensaje' => 'Tipo cuenta editada con éxito.']);
+        return redirect()->route('mantenedor_contables');
     }
 
     /**
@@ -78,8 +87,10 @@ class TipoCuentaController extends Controller
      * @param  \App\TipoCuenta  $tipoCuenta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipoCuenta $tipoCuenta)
+    public function destroy($id)
     {
-        //
+        TipoCuenta::destroy($id);
+        session(['mensaje' => 'Tipo cuenta eliminada con éxito.']);        
+        return redirect()->route('mantenedor_contables'); 
     }
 }

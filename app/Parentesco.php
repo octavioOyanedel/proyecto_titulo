@@ -23,5 +23,12 @@ class Parentesco extends Model
     {
         return $this->belongsTo('App\CargaFamiliar');
     }
-
+    
+    /**
+     * mutator nombre 
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = ucfirst($value);
+    }
 }

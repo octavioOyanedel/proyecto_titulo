@@ -60,8 +60,7 @@ class CargoController extends Controller
      */
     public function edit(Cargo $cargo)
     {
-        $e = '';
-        return view('sind1.cargo.edit', compact('cargo','e'));
+        return view('sind1.cargo.edit', compact('cargo'));
     }
 
     /**
@@ -73,11 +72,11 @@ class CargoController extends Controller
      */
     public function update(IncorporarCargoRequest $request, Cargo $cargo)
     {
-        $e = '';
         $modificar = Cargo::findOrFail($cargo->id);
         $modificar->nombre = $request->nombre;
         $modificar->update();
-        return redirect()->route('mantenedor_socios', compact('e'))->with('editar-cargo',''); 
+        session(['mensaje' => 'Cargo editado con éxito.']);
+        return redirect()->route('mantenedor_socios'); 
     }
 
     /**

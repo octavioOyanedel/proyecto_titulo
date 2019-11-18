@@ -52,4 +52,12 @@ class Titulo extends Model
         $valor = $titulo->nombre;
         return $valor;
     }
+
+    /**
+     * mutator nombre 
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = formatoNombres($value);
+    }
 }

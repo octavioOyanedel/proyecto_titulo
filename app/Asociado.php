@@ -23,4 +23,20 @@ class Asociado extends Model
     {
         return $this->hasOne('App\RegistroContable');
     }  
+
+    /**
+     * mutator nombre  
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = formatoNombres($value);
+    }
+
+    /**
+     * mutator nombre  
+     */
+    public function setConceptoAttribute($value)
+    {
+        $this->attributes['concepto'] = formatoNombres($value);
+    }
 }

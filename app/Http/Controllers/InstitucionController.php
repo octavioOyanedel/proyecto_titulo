@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Institucion;
 use App\GradoAcademico;
+use App\GradoAcademicoInstitucion;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarInstitucionRequest;
 
@@ -64,10 +65,9 @@ class InstitucionController extends Controller
      */
     public function edit($id)
     {
-        $e = '';
         $grados = GradoAcademico::orderBy('nombre','ASC')->get();
         $institucion = Institucion::findOrFail($id);
-        return view('sind1.institucion.edit', compact('institucion','grados','e'));
+        return view('sind1.institucion.edit', compact('institucion','grados'));
     }
 
     /**
@@ -77,10 +77,13 @@ class InstitucionController extends Controller
      * @param  \App\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Institucion $institucion)
+    public function update(IncorporarInstitucionRequest $request, $id)
     {
-        $e = '';
-        return redirect()->route('mantenedor_estudios', compact('e'))->with('editar-institucion','');
+        $modificar = Institucion::findOrFail($id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();     
+        session(['mensaje' => 'Institución educacional editada con éxito.']);     
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**

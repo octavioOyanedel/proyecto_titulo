@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidarFormatoNombreRule;
+use App\Rules\ValidarConceptoUnicoRule;
 
 class IncorporarConceptoRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class IncorporarConceptoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required',new ValidarFormatoNombreRule,'unique:conceptos,nombre','max:255'],
+            'nombre' => ['required',new ValidarFormatoNombreRule,new ValidarConceptoUnicoRule(Request()->tipo_registro_id),'max:255'],
             'tipo_registro_id' => ['required','numeric'],
         ];
     }

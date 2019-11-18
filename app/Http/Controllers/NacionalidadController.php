@@ -61,9 +61,8 @@ class NacionalidadController extends Controller
      */
     public function edit($id)
     {
-        $e = '';
         $nacionalidad = Nacionalidad::findOrFail($id);
-        return view('sind1.nacionalidad.edit', compact('nacionalidad','e'));
+        return view('sind1.nacionalidad.edit', compact('nacionalidad'));
     }
 
     /**
@@ -73,10 +72,13 @@ class NacionalidadController extends Controller
      * @param  \App\Nacionalidad  $nacionalidad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nacionalidad $nacionalidad)
+    public function update(IncorporarNacionalidadRequest $request, $id)
     {
-        $e = '';
-        return redirect()->route('mantenedor_socios', compact('e'))->with('editar-nacionalidad',''); 
+        $modificar = Nacionalidad::findOrFail($id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update(); 
+        session(['mensaje' => 'Nacionalidad editada con éxito.']);        
+        return redirect()->route('mantenedor_socios'); 
     }
 
     /**

@@ -2,6 +2,7 @@
 @isset($socio)
     @php $apellido1 = $socio->apellido1 @endphp
 @endisset
+
 <!-- Apellido -->
 <div class="form-group row">
     <label for="apellido1" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Apellido paterno') }}</label>

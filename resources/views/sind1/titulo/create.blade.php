@@ -13,7 +13,6 @@
                     <form method="POST" action="{{ route('titulos.store') }}">
                         @csrf
 
-                        @include('partials.components.elementos.estudio.grado_academico')
                         @include('partials.components.elementos.estudio.nuevo_titulo')
 
                         <!-- Botón submit -->

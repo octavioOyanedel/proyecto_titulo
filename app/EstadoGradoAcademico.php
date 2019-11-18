@@ -26,4 +26,12 @@ class EstadoGradoAcademico extends Model
     {
         return $this->belongsTo('App\EstudioRealizado');
     }
+
+    /**
+     * mutator nombre 
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = ucfirst($value);
+    }
 }

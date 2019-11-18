@@ -9,6 +9,7 @@ use App\EstadoSocio;
 use App\Nacionalidad;
 use App\FormaPago;
 use App\Cuenta;
+use App\TipoCuenta;
 use App\Concepto;
 use App\Asociado;
 use App\User;
@@ -30,13 +31,12 @@ class MantenedorController extends Controller
      */
     public function socios()
     {
-        $e = '';
     	$sedes = Sede::orderBy('nombre', 'ASC')->get();
         $areas = Area::orderBy('sede_id', 'ASC')->get();
         $cargos = Cargo::orderBy('nombre', 'ASC')->get();
         $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
         $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();
-        return view('sind1.mantenedores.socios', compact('sedes','areas','cargos','estados','nacionalidades','e'));
+        return view('sind1.mantenedores.socios', compact('sedes','areas','cargos','estados','nacionalidades'));
     }
 
     /**
@@ -46,9 +46,8 @@ class MantenedorController extends Controller
      */
     public function prestamos()
     {
-        $e = '';
     	$formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
-        return view('sind1.mantenedores.prestamos', compact('formas_pago','e'));
+        return view('sind1.mantenedores.prestamos', compact('formas_pago'));
     }
 
     /**
@@ -58,12 +57,12 @@ class MantenedorController extends Controller
      */
     public function contables()
     {
-        $e = '';
         $cuentas = Cuenta::orderBy('numero', 'ASC')->get();
+        $tipos_cuenta = TipoCuenta::orderBy('nombre', 'ASC')->get();
         $conceptos = Concepto::orderBy('nombre', 'ASC')->get();
         $asociados = Asociado::orderBy('nombre', 'ASC')->get();
         $bancos = Banco::orderBy('nombre', 'ASC')->get();
-        return view('sind1.mantenedores.contables', compact('cuentas','conceptos','asociados','bancos','e'));
+        return view('sind1.mantenedores.contables', compact('cuentas','tipos_cuenta','conceptos','asociados','bancos'));
     }
 
     /**
@@ -73,9 +72,8 @@ class MantenedorController extends Controller
      */
     public function cargas()
     {
-        $e = '';
         $parentescos = Parentesco::orderBy('nombre', 'ASC')->get();
-        return view('sind1.mantenedores.cargas', compact('parentescos','e'));
+        return view('sind1.mantenedores.cargas', compact('parentescos'));
     }
 
     /**
@@ -85,12 +83,11 @@ class MantenedorController extends Controller
      */
     public function estudios()
     {
-        $e = '';
         $grados = GradoAcademico::orderBy('nombre', 'ASC')->get();
         $instituciones = Institucion::orderBy('nombre', 'ASC')->get();
         $estados = EstadoGradoAcademico::orderBy('nombre', 'ASC')->get();
         $titulos = Titulo::orderBy('nombre', 'ASC')->get();
-        return view('sind1.mantenedores.estudios', compact('grados','instituciones','estados','titulos','e'));
+        return view('sind1.mantenedores.estudios', compact('grados','instituciones','estados','titulos'));
     }
 
     /**

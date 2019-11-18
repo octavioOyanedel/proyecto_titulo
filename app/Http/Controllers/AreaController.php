@@ -39,9 +39,8 @@ class AreaController extends Controller
     public function store(IncorporarAreaRequest $request)
     {
         Area::create($request->all());
-        $sedes = Sede::orderBy('nombre','ASC')->get();
         session(['mensaje' => 'Área agregada con éxito.']);     
-        return redirect()->route('mantenedor_socios', compact('sedes'));        
+        return redirect()->route('mantenedor_socios');        
     }
 
     /**
@@ -76,12 +75,12 @@ class AreaController extends Controller
      */
     public function update(IncorporarAreaRequest $request, Area $area)
     {
-        $e = '';
         $modificar = Area::findOrFail($area->id);
         $modificar->nombre = $request->nombre;
         $modificar->sede_id = $request->sede_id;
         $modificar->update();
-        return redirect()->route('mantenedor_socios', compact('e'))->with('editar-area',''); 
+        session(['mensaje' => 'Área editada con éxito.']); 
+        return redirect()->route('mantenedor_socios'); 
     }
 
     /**
@@ -93,9 +92,8 @@ class AreaController extends Controller
     public function destroy(Area $area)
     {
         Area::destroy($area->id);
-        $sedes = Sede::orderBy('nombre','ASC')->get();
         session(['mensaje' => 'Área eliminada con éxito.']);        
-        return redirect()->route('mantenedor_socios', compact('sedes'));          
+        return redirect()->route('mantenedor_socios');          
     }
 
     // obtener areas

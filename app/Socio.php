@@ -215,6 +215,7 @@ class Socio extends Model
             return '';
         }        
     }
+    
     /**
      * Modificador de nacionalidad
      */

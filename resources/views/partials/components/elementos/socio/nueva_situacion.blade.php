@@ -1,4 +1,8 @@
-@php isset($estadoSocio) ? $nombre = $estadoSocio->nombre : $nombre = '' @endphp
+@php $nombre = '' @endphp
+@isset($estadoSocio)
+    @php $nombre = $estadoSocio->nombre @endphp
+@endisset
+
 <!-- Nueva situación -->
 <div class="form-group new-divs row" id="new_div_situation">
     <label for="nombre" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Situación') }}</label>

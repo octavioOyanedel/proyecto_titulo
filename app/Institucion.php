@@ -4,7 +4,9 @@ namespace App;
 
 use App\EstudioRealizado;
 use App\GradoAcademicoInstitucion;
+use App\GradoAcademico;
 use App\InstitucionTitulo;
+use App\Institucion;
 use Illuminate\Database\Eloquent\Model;
 
 class Institucion extends Model
@@ -43,5 +45,21 @@ class Institucion extends Model
     public function instituciones_titulos()
     {
         return $this->hasMany('App\InstitucionTitulo');
-    } 
+    }
+
+    /**
+     * Obtener ultimo registro creado 
+     */
+    static public function obtenerUltimaInstitucionIngresada()
+    {
+        return Institucion::orderBy('created_at', 'DESC')->first();
+    }
+
+    /**
+     * Obtener id por medio del nombre 
+     */
+    static public function obtenerIdConNombre($nombre)
+    {
+        return Institucion::where('nombre','=', $nombre)->get();
+    }
 }

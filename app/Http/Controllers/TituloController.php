@@ -62,10 +62,9 @@ class TituloController extends Controller
      */
     public function edit($id)
     {
-        $e = '';
         $grados = GradoAcademico::orderBy('nombre','ASC')->get();
         $titulo = Titulo::findOrFail($id);
-        return view('sind1.titulo.edit', compact('titulo','grados','e'));
+        return view('sind1.titulo.edit', compact('titulo','grados'));
     }
 
     /**
@@ -75,10 +74,13 @@ class TituloController extends Controller
      * @param  \App\Titulo  $titulo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Titulo $titulo)
+    public function update(IncorporarTituloRequest $request, Titulo $titulo)
     {
-        $e = '';
-        return redirect()->route('mantenedor_estudios', compact('e'))->with('editar-titulo','');
+        $modificar = Titulo::findOrFail($titulo->id);
+        $modificar->nombre = $request->nombre;
+        $modificar->update();             
+        session(['mensaje' => 'Título editado con éxito.']);  
+        return redirect()->route('mantenedor_estudios');
     }
 
     /**

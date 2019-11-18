@@ -72,4 +72,12 @@ class Cuenta extends Model
     {
         return $this->belongTo('App\Prestamo');
     }
+
+    /**
+     * mutator numero cuenta 
+     */
+    public function setNumeroAttribute($value)
+    {
+        $this->attributes['numero'] = formatoNombres($value);
+    }
 }

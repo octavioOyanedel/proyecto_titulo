@@ -48,5 +48,11 @@ class Concepto extends Model
             return '';
         }
     }
-
+    /**
+     * mutator nombre  
+     */
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = formatoNombres($value);
+    }
 }

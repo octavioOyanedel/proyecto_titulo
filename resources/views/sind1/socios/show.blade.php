@@ -174,5 +174,3 @@
     </div>
 </div>
 @endsection
-@include('partials.modals.eliminar_carga')
-@include('partials.modals.eliminar_estudio')
