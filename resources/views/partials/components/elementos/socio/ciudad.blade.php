@@ -21,6 +21,8 @@
     	@endif
 
 	   <input id="old_ciudad" type="hidden" value="{{ $id }}">
-       <input id="edit_ciudad" type="hidden" value="@if($socio->ciudad_id) {{ $socio->getOriginal('ciudad_id') }} @else {{ null }} @endif">
+       @isset($socio)
+            <input id="edit_ciudad" type="hidden" value="@if($socio->ciudad_id) {{ $socio->getOriginal('ciudad_id') }} @else {{ null }} @endif">
+       @endisset
     </div>
 </div>

@@ -40,7 +40,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item sub-item" href="{{ route('socios.create') }}">Incorporar</a>
                     <a class="dropdown-item sub-item" href="{{ route('home') }}">Listar</a>
-                    <a class="dropdown-item sub-item" href="{{ route('filtro_socios') }}">Filtrar</a>
+                    <a class="dropdown-item sub-item" href="{{ route('filtro_socios_form') }}">Filtrar</a>
                 </div>
             </li>
 

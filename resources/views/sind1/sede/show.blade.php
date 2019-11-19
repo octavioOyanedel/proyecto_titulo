@@ -20,7 +20,7 @@
                         
                         @csrf
                         @method('DELETE')                   
-
+                        
 
                         <a class="btn btn-secondary" href="{{ route('mantenedor_socios') }}" role="button">Cancelar</a>
                         <button type="submit" class="btn btn-danger">Aceptar</button>      

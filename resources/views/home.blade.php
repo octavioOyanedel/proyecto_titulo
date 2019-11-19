@@ -44,7 +44,7 @@
                                         <tr>
                                             <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('socios.show',$s) }}"><span>@svg('ver')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href="{{ route('socios.edit',$s) }}"><span>@svg('editar')</span></a></td>
-                                            <td width="50" class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_socio" href="#"><span>@svg('eliminar')</span></a></td>
+                                            <td width="50" class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" href="{{ route('eliminar_socio_form',$s->id) }}"><span>@svg('eliminar')</span></a></td>
                                             @if(buscarDeudaActiva($s->prestamos) != null || buscarDeudaActiva($s->prestamos) != '')
                                             <td class="text-center" scope="row">
                                                 <a class="text-decoration-none" href="{{ route('prestamos.show',buscarPrestamoConDeudaActiva($s->prestamos)) }}">

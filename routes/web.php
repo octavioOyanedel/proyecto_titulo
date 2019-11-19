@@ -54,7 +54,9 @@ Route::get('/cargar_titulos', 'GradoAcademicoTituloController@obtenerTitulos');
 //ajax usuarios
 Route::get('/verificar_correo_usuario', 'UsuarioController@verificarCorreo');
 
-Route::get('/filtro_socios', 'BuscarController@filtroSocios')->name('filtro_socios')->middleware('auth');
+Route::get('/filtro_socios_form', 'SocioController@filtroSociosForm')->name('filtro_socios_form')->middleware('auth');
+Route::post('/filtro_socios', 'SocioController@filtroSocios')->name('filtro_socios')->middleware('auth');
+
 Route::get('/filtro_prestamos', 'BuscarController@filtroPrestamos')->name('filtro_prestamos')->middleware('auth');
 Route::get('/filtro_contables', 'BuscarController@filtroContables')->name('filtro_contables')->middleware('auth');
 Route::get('/filtro_historial', 'BuscarController@filtroHistorial')->name('filtro_historial')->middleware('auth');
@@ -134,6 +136,12 @@ Route::get('/mantenedor_cargas','MantenedorController@cargas')->name('mantenedor
 Route::get('/mantenedor_estudios','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');
 
 //eliminar
+Route::get('/eliminar_socio_form/{id}','SocioController@mostrarEliminarSocio')->name('eliminar_socio_form')->middleware('auth');
+Route::post('/eliminar_socio','SocioController@destroy')->name('eliminar_socio')->middleware('auth');
+
+Route::get('/eliminar_usuario_form/{id}','UsuarioController@mostrarEliminarUsuario')->name('eliminar_usuario_form')->middleware('auth');
+Route::post('/eliminar_usuario','UsuarioController@destroy')->name('eliminar_usuario')->middleware('auth');
+
 Route::post('/eliminar_sede','SedeController@destroy')->name('eliminar_sede')->middleware('auth');
 Route::post('/eliminar_area','AreaController@destroy')->name('eliminar_area')->middleware('auth');
 Route::post('/eliminar_cargo','CargoController@destroy')->name('eliminar_cargo')->middleware('auth');

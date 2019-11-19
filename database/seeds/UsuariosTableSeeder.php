@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosTableSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class UsuariosTableSeeder extends Seeder
             'apellido1' => 'Oyanedel',
             'apellido2' => 'Alarcón',
             'email' => 'octavio.oyanedel@pucv.cl',
-            'password' => bcrypt('secret'),
+            'password' => Hash::make('123456789'),
             'rol_id' => 1
         ]);
 
@@ -27,7 +28,7 @@ class UsuariosTableSeeder extends Seeder
             'apellido1' => 'Mena',
             'apellido2' => 'Serrano',
             'email' => 'carolina.mena@pucv.cl',
-            'password' => bcrypt('secret'),
+            'password' => Hash::make('123456789'),
             'rol_id' => 2
         ]);
 
@@ -37,7 +38,7 @@ class UsuariosTableSeeder extends Seeder
             'apellido1' => 'León',
             'apellido2' => 'montenegro',
             'email' => 'osvaldo.leon@pucv.cl',
-            'password' => bcrypt('secret'),
+            'password' => Hash::make('123456789'),
             'rol_id' => 3
         ]);
     }

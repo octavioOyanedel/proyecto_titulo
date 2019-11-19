@@ -4,9 +4,9 @@ $(window).on('load',function(){
 
 	var ruta = window.location.pathname;
 
-	//alert(ruta);
+	//alert(ruta);	filtro_socios_form
 
-	if(ruta.localeCompare('/home') === 0 || ruta.localeCompare('/filtro_socios') === 0 || ruta.search('socios/') != -1){
+	if(ruta.localeCompare('/home') === 0 || ruta.localeCompare('/filtro_socios_form') === 0 || ruta.search('socios/') != -1){
 		$('#span-socios').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-socio').removeClass('d-none');
 	}

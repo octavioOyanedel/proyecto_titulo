@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidarContrasenasIgualesRule;
 use App\rules\ValidarPasswordEditarRule;
 
 class EditarPasswordRequest extends FormRequest
@@ -25,7 +26,10 @@ class EditarPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'actual' => ['required','alpha_num',new ValidarPasswordEditarRule(Request()->user_id),'min:8','max:15'],
+            'password' => ['required','alpha_num',new ValidarContrasenasIgualesRule(Request()->password_confirm),'min:8','max:15'],
+            'password_confirm' => ['required','alpha_num',new ValidarContrasenasIgualesRule(Request()->password),'min:8','max:15'],     
+            'user_id' => ['required','numeric']   
         ];
     }
 }

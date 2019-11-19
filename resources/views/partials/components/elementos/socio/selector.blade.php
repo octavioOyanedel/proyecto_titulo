@@ -42,5 +42,11 @@
         <script src="{{ asset('js/ajax/cargar_ciudades.js') }}" defer></script>
         <script src="{{ asset('js/ajax/cargar_areas.js') }}" defer></script>
     @break
+    {{-- filtro socios --}}
+    @case('filtro_socios_form')
+        <script src="{{ asset('js/ajax/cargar_ciudades.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/cargar_areas.js') }}" defer></script>
+        <script src="{{ asset('js/switch_filtro_socios.js') }}" defer></script>
+    @break    
     @default
 @endswitch

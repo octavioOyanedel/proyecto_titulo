@@ -14,6 +14,7 @@ use App\Interes;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarSocioRequest;
 use App\Http\Requests\EditarSocioRequest;
+use App\Http\Requests\FiltrarSocioRequest;
 
 class SocioController extends Controller
 {
@@ -128,9 +129,27 @@ class SocioController extends Controller
      * @param  \App\Socio  $socio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Socio $socio) 
+    public function destroy(Request $request) 
     {
-        //
+        $socio = Socio::findOrFail($request->user_id);
+        $socio->estado_socio_id = $request->estado_socio_id;
+        $socio->update();
+        $socio->delete();
+        session(['mensaje' => 'Socio desvinculado con éxito.']);        
+        return redirect()->route('home');              
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function mostrarEliminarSocio($id)
+    {
+        $estados = EstadoSocio::where('nombre','<>','Activo')->get();
+        $socio = Socio::findOrFail($id);
+        return view('sind1.socios.eliminar', compact('socio','estados'));
     }
 
     /**
@@ -206,5 +225,32 @@ class SocioController extends Controller
                 return null;
             }            
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function filtroSociosForm(Request $request) 
+    {
+        $comunas = Comuna::orderBy('nombre', 'ASC')->get();
+        $sedes = Sede::orderBy('nombre', 'ASC')->get();
+        $cargos = Cargo::orderBy('nombre', 'ASC')->get();
+        $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
+        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();
+        return view('sind1.socios.busqueda', compact('comunas','sedes','cargos','estados','nacionalidades'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function filtroSocios(FiltrarSocioRequest $request) 
+    {
+        
     }
 }

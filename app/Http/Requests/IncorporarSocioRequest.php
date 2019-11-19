@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidarRutRule;
 use App\Rules\ValidarFormatoNombreRule;
-
+use App\Rules\ValidarDireccionRule;
 
 class IncorporarSocioRequest extends FormRequest
 {
@@ -36,7 +36,7 @@ class IncorporarSocioRequest extends FormRequest
             'fecha_nac' => ['nullable','date'],
             'celular' => ['nullable','numeric'],
             'correo' => ['nullable','email','unique:socios,correo'],
-            'direccion' => ['nullable','max:255'],
+            'direccion' => ['nullable',new ValidarDireccionRule,'max:255'],
             'fecha_pucv' => ['nullable','date'],
             'anexo' => ['nullable','numeric'],
             'numero_socio' => ['required','numeric','unique:socios,numero_socio'],

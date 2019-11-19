@@ -8,6 +8,7 @@ use App\Rules\ValidarFormatoNombreRule;
 use App\Rules\ValidarRutUnicoEditarRule;
 use App\Rules\ValidarNumeroSocioUnicoEditarRule;
 use App\Rules\ValidarCorreoSocioUnicoEditarRule;
+use App\Rules\ValidarDireccionRule;
 
 class EditarSocioRequest extends FormRequest
 {
@@ -38,7 +39,7 @@ class EditarSocioRequest extends FormRequest
             'fecha_nac' => ['nullable','date'],
             'celular' => ['nullable','numeric'],
             'correo' => ['nullable','email'],
-            'direccion' => ['nullable','max:255'],
+            'direccion' => ['nullable',new ValidarDireccionRule,'max:255'],
             'fecha_pucv' => ['nullable','date'],
             'anexo' => ['nullable','numeric'],
             'numero_socio' => ['required','numeric'],

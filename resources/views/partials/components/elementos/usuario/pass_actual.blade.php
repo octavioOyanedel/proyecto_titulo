@@ -4,10 +4,7 @@
     <div class="col-md-6">
         <input id="actual" type="password" class="form-control @error('actual') is-invalid @enderror" name="actual" required autocomplete="new-actual" maxlength="15" minlength="8">
 
-        @error('actual')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+        {{-- validacion php --}}
+        <small class="form-text text-danger"><strong>@if($errors->has('actual')) {{ $errors->first('actual') }}@endif</strong></small>
     </div>
 </div>

@@ -115,7 +115,21 @@ class UsuarioController extends Controller
      */
     public function destroy(User $usuario)
     {
-        //
+        User::destroy($usuario->id);
+        session(['mensaje' => 'Usuario eliminado con éxito.']);        
+        return redirect()->route('usuarios.index');    
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function mostrarEliminarUsuario($id)
+    {
+        $usuario = User::findOrFail($id);
+        return view('sind1.usuario.eliminar', compact('usuario'));
     }
 
     /**
@@ -137,7 +151,11 @@ class UsuarioController extends Controller
      */
     public function updatePassword(EditarPasswordRequest $request)
     {
-        dd($request);
+        $modificar = User::findOrFail($request->user_id);
+        $modificar->password = Hash::make($request->password);
+        $modificar->update(); 
+        session(['mensaje' => 'Contraseña editada con éxito.']); 
+        return redirect()->route('usuarios.index');              
     }
 
     /**
