@@ -2,7 +2,7 @@
     @switch(request()->path())
         {{-- editar --}}
         @case('usuarios/'.$usuario->id.'/edit')
-            <script src="{{ asset('js/ajax/validar_correo_usuarios_create.js') }}" defer></script>
+            <script src="{{ asset('js/ajax/validar_correo_usuario_create.js') }}" defer></script>
         @break
         {{-- mostrar --}}
         @case('usuarios/'.$usuario->id)
@@ -26,11 +26,15 @@
     @break
     {{-- listar --}}
     @case('usuarios')
-
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>      
     @break
     {{-- filtrar --}}
     @case('filtro_usuarios')
 
-    @break        
+    @break
+    {{-- cambiar password --}}
+    @case('passwords')
+        <script src="{{ asset('js/ajax/validar_password_create.js') }}" defer></script>
+    @break             
     @default
-@endswitch
+@endswitch 

@@ -7,8 +7,10 @@ use App\Rol;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarUsuarioRequest;
+use App\Http\Requests\EditarUsuarioRequest;
+use App\Http\Requests\EditarPasswordRequest;
 
-class UsuarioController extends Controller
+class UsuarioController extends Controller 
 {
     /**
      * Display a listing of the resource.
@@ -64,10 +66,10 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\user  $usuario
+     * @param  \App\User  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(user $usuario)
+    public function show(User $usuario)
     {
         return view('sind1.usuario.show', compact('usuario'));
     }
@@ -75,10 +77,10 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\user  $usuario
+     * @param  \App\User  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function edit(user $usuario)
+    public function edit(User $usuario)
     {
     	$roles = Rol::orderBy('nombre','ASC')->get();
         return view('sind1.usuario.edit', compact('usuario','roles'));
@@ -91,18 +93,27 @@ class UsuarioController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(EditarUsuarioRequest $request, User $usuario)
     {
-        //
+        $modificar = User::findOrFail($usuario->id);
+        $modificar->nombre1 = $request->nombre1;
+        $modificar->nombre2 = $request->nombre2;
+        $modificar->apellido1 = $request->apellido1;
+        $modificar->apellido2 = $request->apellido2;    
+        $modificar->email = $request->email;
+        $modificar->rol_id = $request->rol_id;   
+        $modificar->update(); 
+        session(['mensaje' => 'Usuario editado con éxito.']); 
+        return redirect()->route('usuarios.index');                               
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\user  $usuario
+     * @param  \App\User  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(user $usuario)
+    public function destroy(User $usuario)
     {
         //
     }
@@ -110,12 +121,23 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\user  $usuario
+     * @param  \App\User  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function editPassword(user $usuario)
+    public function editPassword(User $usuario)
     {
         return view('sind1.usuario.password', compact('usuario'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\User  $usuario
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(EditarPasswordRequest $request)
+    {
+        dd($request);
     }
 
     /**

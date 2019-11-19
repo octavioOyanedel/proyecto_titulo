@@ -6,6 +6,8 @@
             <script src="{{ asset('js/ajax/validar_numero_socio_create.js') }}" defer></script>
             <script src="{{ asset('js/ajax/validar_correo_create.js') }}" defer></script>
             <script src="{{ asset('js/ajax/cargar_ciudades.js') }}" defer></script>
+            <script src="{{ asset('js/ajax/cargar_ciudades_edit.js') }}" defer></script>
+            <script src="{{ asset('js/ajax/cargar_areas_edit.js') }}" defer></script>
             <script src="{{ asset('js/ajax/cargar_areas.js') }}" defer></script>
             <script src="{{ asset('js/radio.js') }}" defer></script>
         @break

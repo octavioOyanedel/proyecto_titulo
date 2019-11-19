@@ -13,6 +13,7 @@ use App\CargaFamiliar;
 use App\Interes;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarSocioRequest;
+use App\Http\Requests\EditarSocioRequest;
 
 class SocioController extends Controller
 {

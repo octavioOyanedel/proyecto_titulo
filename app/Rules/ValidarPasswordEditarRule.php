@@ -2,9 +2,10 @@
 
 namespace App\Rules;
 
+use App\User;
 use Illuminate\Contracts\Validation\Rule;
 
-class ValidarRutEditarRule implements Rule
+class ValidarPasswordEditarRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -35,6 +36,6 @@ class ValidarRutEditarRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Contraseñas no válidas o no coinciden.';
     }
 }

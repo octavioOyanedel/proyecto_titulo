@@ -19,6 +19,7 @@
 			@endphp
 		@endif
 
-		<input id="old_area" type="hidden" value="{{ $id }}">        
+		<input id="old_area" type="hidden" value="{{ $id }}">      
+		<input id="edit_area" type="hidden" value="@if($socio->area_id) {{ $socio->getOriginal('area_id') }} @else {{ null }} @endif">  
     </div>
 </div> 

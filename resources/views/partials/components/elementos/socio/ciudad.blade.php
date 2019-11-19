@@ -1,6 +1,7 @@
 @php
     $id = 0;
 @endphp
+
 <!-- Ciudad -->
 <div class="form-group row">
     <label for="ciudad_id" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad') }}</label>
@@ -20,5 +21,6 @@
     	@endif
 
 	   <input id="old_ciudad" type="hidden" value="{{ $id }}">
+       <input id="edit_ciudad" type="hidden" value="@if($socio->ciudad_id) {{ $socio->getOriginal('ciudad_id') }} @else {{ null }} @endif">
     </div>
 </div>

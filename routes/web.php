@@ -54,12 +54,12 @@ Route::get('/cargar_titulos', 'GradoAcademicoTituloController@obtenerTitulos');
 //ajax usuarios
 Route::get('/verificar_correo_usuario', 'UsuarioController@verificarCorreo');
 
-Route::resource('/socios', 'SocioController')->middleware('auth');
 Route::get('/filtro_socios', 'BuscarController@filtroSocios')->name('filtro_socios')->middleware('auth');
 Route::get('/filtro_prestamos', 'BuscarController@filtroPrestamos')->name('filtro_prestamos')->middleware('auth');
 Route::get('/filtro_contables', 'BuscarController@filtroContables')->name('filtro_contables')->middleware('auth');
 Route::get('/filtro_historial', 'BuscarController@filtroHistorial')->name('filtro_historial')->middleware('auth');
 
+Route::resource('/socios', 'SocioController')->middleware('auth');
 Route::resource('/prestamos', 'PrestamoController')->middleware('auth');
 Route::post('/simulacion', 'PrestamoController@simulacion')->name('simulacion')->middleware('auth');
 Route::get('/cancelar_deposito/{id}', 'PrestamoController@cancelarDeposito')->name('cancelar_deposito')->middleware('auth');
@@ -121,7 +121,8 @@ Route::resource('/instituciones', 'InstitucionController')->middleware('auth');
 Route::resource('/estados_nivel', 'EstadoGradoAcademicoController')->middleware('auth');
 Route::resource('/titulos', 'TituloController')->middleware('auth');
 
-Route::get('/cambiar_password', 'UsuarioController@editPassword')->name('usuarios.editPassword')->middleware('auth');
+Route::get('/passwords', 'UsuarioController@editPassword')->name('passwords')->middleware('auth');
+Route::post('/update_passwords', 'UsuarioController@updatePassword')->name('update_passwords')->middleware('auth');
 
 Route::get('/crear_conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar_conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');

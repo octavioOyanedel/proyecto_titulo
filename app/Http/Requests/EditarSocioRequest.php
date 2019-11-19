@@ -5,7 +5,9 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidarRutRule;
 use App\Rules\ValidarFormatoNombreRule;
-use App\Rules\ValidarRutEditarRule;
+use App\Rules\ValidarRutUnicoEditarRule;
+use App\Rules\ValidarNumeroSocioUnicoEditarRule;
+use App\Rules\ValidarCorreoSocioUnicoEditarRule;
 
 class EditarSocioRequest extends FormRequest
 {
@@ -27,15 +29,15 @@ class EditarSocioRequest extends FormRequest
     public function rules()
     {
         return [
-            'rut' => ['required',new ValidarRutRule,'max:9'],
-            'nombre1' => ['required',new ValidarFormatoNombreRule,'max:255'],
-            'nombre2' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
+            'rut' => ['required',new ValidarRutRule,new ValidarRutUnicoEditarRule(Request()->rut_original),'max:9'],
+            'nombre1' => ['required',new ValidarFormatoNombreRule,new ValidarNumeroSocioUnicoEditarRule(Request()->numero_socio_original),'max:255'],
+            'nombre2' => ['nullable',new ValidarFormatoNombreRule,new ValidarCorreoSocioUnicoEditarRule(Request()->correo_original),'max:255'],
             'apellido1' => ['required',new ValidarFormatoNombreRule,'max:255'],
             'apellido2' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
             'genero' => ['required'],
             'fecha_nac' => ['nullable','date'],
             'celular' => ['nullable','numeric'],
-            'correo' => ['nullable','email','correo'],
+            'correo' => ['nullable','email'],
             'direccion' => ['nullable','max:255'],
             'fecha_pucv' => ['nullable','date'],
             'anexo' => ['nullable','numeric'],
@@ -50,7 +52,7 @@ class EditarSocioRequest extends FormRequest
             'nacionalidad_id' => ['required','numeric'],
             'rut_original' => ['required'],
             'numero_socio_original' => ['required'],
-            'correo_original' => ['required'],
+            'correo_original' => ['nullable'],
         ];
     }
 }

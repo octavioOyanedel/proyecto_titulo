@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            
+            @include('partials.alertas')
+
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Usuarios</h3></div>
 
@@ -18,10 +21,10 @@
                             <table class="table table-hover table-bordered table-striped data-tables" id="tabla-usuarios">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-success" scope="col" title=""></th>
-                                        <th class="text-center text-success" scope="col" title=""></th>
-                                        <th class="text-center text-success" scope="col" title=""></th>
-                                        <th class="text-center text-success" scope="col" title=""></th>
+                                        <th class="text-center text-success" scope="col" title="">&nbsp;</th>
+                                        <th class="text-center text-success" scope="col" title="">&nbsp;</th>
+                                        <th class="text-center text-success" scope="col" title="">&nbsp;</th>
+                                        <th class="text-center text-success" scope="col" title="">&nbsp;</th>
                                         <th scope="col">Usuario</th>
                                         <th scope="col">Correo</th>
                                         <th scope="col">Rol</th>
@@ -32,7 +35,7 @@
                                         <tr>
                                             <td class="text-center" with="50" scope="row" title="Ver detalle usuario"><a class="text-primary" href="{{ route('usuarios.show', $u) }}"><span>@svg('ver')</span></a></td>
                                             <td class="text-center" with="50" scope="row" title="Editar usuario"><a class="text-secondary" href="{{ route('usuarios.edit', $u) }}"><span>@svg('editar')</span></a></td>
-                                            <td class="text-center" with="50" scope="row" title="Cambiar contraseña"><a class="text-warning" href="{{ route('usuarios.editPassword', $u) }}"><span>@svg('pass')</span></a></td>
+                                            <td class="text-center" with="50" scope="row" title="Cambiar contraseña"><a class="text-warning" href="{{ route('passwords', $u) }}"><span>@svg('pass')</span></a></td>
                                             <td class="text-center" with="50" scope="row" title="Eliminar usuario"><a class="text-danger" data-toggle="modal" data-target="#eliminar_usuario" href="#"><span>@svg('eliminar')</span></a></td>
                                             <td>@if($u->apellido2 != null) {{ $u->apellido1 }} {{ $u->apellido2 }}, @else {{ $u->apellido1 }}, @endif {{ $u->nombre1 }} {{ $u->nombre2 }}</td>
                                             <td>{{ $u->email }}</td>
