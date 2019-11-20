@@ -11,7 +11,7 @@ $(window).on('load',function(){
 		$('#buscador-socio').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/filtro_prestamos') === 0 || ruta.search('/prestamos') != -1 || ruta.localeCompare('/simulacion') === 0){
+	if(ruta.localeCompare('/filtro_prestamos') === 0 || ruta.search('/prestamos') != -1 || ruta.localeCompare('/simulacion') === 0 || ruta.localeCompare('/filtro_prestamos_form') === 0){
 		$('#span-prestamos').addClass('font-weight-bold text-uppercase text-success');
 		$('#buscador-prestamo').removeClass('d-none');
 	}
@@ -21,10 +21,10 @@ $(window).on('load',function(){
 		$('#buscador-contable').removeClass('d-none');
 	}
 
-	if(ruta.search('/mantenedor') != -1 ||  
-		ruta.localeCompare('/cambiar_password') === 0 || 		
-		ruta.search('/sedes') != -1 || 
-		ruta.search('/areas') != -1 || 
+	if(ruta.search('/mantenedor') != -1 ||
+		ruta.localeCompare('/cambiar_password') === 0 ||
+		ruta.search('/sedes') != -1 ||
+		ruta.search('/areas') != -1 ||
 		ruta.search('/cargos') != -1 ||
 		ruta.search('/situaciones') != -1 ||
 		ruta.search('/nacionalidades') != -1 ||

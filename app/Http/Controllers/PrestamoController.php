@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarPrestamoRequest;
 use App\Http\Requests\SimularPrestamoRequest;
+use App\Http\Requests\FiltrarPrestamoRequest;
 
 class PrestamoController extends Controller
 {
@@ -31,8 +32,8 @@ class PrestamoController extends Controller
         ->numeroEgreso($campo)
         ->cheque($campo)
         ->paginate(15);
-               
-        return view('sind1.prestamos.index', compact('prestamos','formas_pago'));       
+
+        return view('sind1.prestamos.index', compact('prestamos','formas_pago'));
     }
 
     /**
@@ -55,12 +56,12 @@ class PrestamoController extends Controller
      */
     public function store(IncorporarPrestamoRequest $request)
     {
-        Prestamo::create($request->all()); 
+        Prestamo::create($request->all());
         $prestamo = Prestamo::obtenerUltimoPrestamoIngresado();
         if($prestamo->getoriginal('forma_pago_id') === 1){
-            Prestamo::agregarCuotasPrestamo($prestamo);       
-        }   
-        $registro = new RegistroContable;  
+            Prestamo::agregarCuotasPrestamo($prestamo);
+        }
+        $registro = new RegistroContable;
         $registro->fecha = $prestamo->getOriginal('fecha_solicitud');
         $registro->numero_registro = $prestamo->numero_egreso;
         $registro->cheque = $prestamo->cheque;
@@ -74,7 +75,7 @@ class PrestamoController extends Controller
         $registro->socio_id = $prestamo->socio_id;
         $registro->save();
         session(['mensaje' => 'Préstamo agregado con éxito.']);
-        return redirect()->route('prestamos.create');        
+        return redirect()->route('prestamos.create');
     }
 
     /**
@@ -89,7 +90,7 @@ class PrestamoController extends Controller
         if($prestamo->forma_pago_id === '1'){
             $interes = Interes::findOrFail($prestamo->getOriginal('interes_id'));
         }
-        return view('sind1.prestamos.show', compact('prestamo','interes'));        
+        return view('sind1.prestamos.show', compact('prestamo','interes'));
     }
 
     /**
@@ -132,7 +133,7 @@ class PrestamoController extends Controller
      * @param  \App\Prestamo  $prestamo
      * @return \Illuminate\Http\Response
      */
-    public function verificarCheque(Request $request) 
+    public function verificarCheque(Request $request)
     {
         if ($request->ajax()) {
             $prestamo = RegistroContable::where('cheque','=',$request->elemento)->get();
@@ -141,7 +142,7 @@ class PrestamoController extends Controller
             }else{
                 return response()->json(0);
             }
-            
+
         }
     }
 
@@ -151,7 +152,7 @@ class PrestamoController extends Controller
      * @param  \App\Prestamo  $prestamo
      * @return \Illuminate\Http\Response
      */
-    public function verificarNumeroEgreso(Request $request) 
+    public function verificarNumeroEgreso(Request $request)
     {
         if ($request->ajax()) {
             $prestamo = RegistroContable::where([
@@ -163,7 +164,7 @@ class PrestamoController extends Controller
             }else{
                 return response()->json(0);
             }
-            
+
         }
     }
 
@@ -173,7 +174,7 @@ class PrestamoController extends Controller
      * @param  \App\Prestamo  $prestamo
      * @return \Illuminate\Http\Response
      */
-    public function verificarRut(Request $request) 
+    public function verificarRut(Request $request)
     {
         if ($request->ajax()) {
             $socio = Socio::where('rut','=',$request->elemento)->get();
@@ -183,7 +184,7 @@ class PrestamoController extends Controller
             }else{
                 return response()->json(0); //no existe
             }
-            
+
         }
     }
 
@@ -209,9 +210,9 @@ class PrestamoController extends Controller
 
         if($forma_pago_original === '1'){
             $interes = Interes::findOrFail(1); //unico interes
-            $cuotas = crearArregloCuotas($request->numero_cuotas, $request->fecha_solicitud, $request->monto);     
-            $total = obtenerTotalPrestamo($cuotas);      
-        }     
+            $cuotas = crearArregloCuotas($request->numero_cuotas, $request->fecha_solicitud, $request->monto);
+            $total = obtenerTotalPrestamo($cuotas);
+        }
 
         return view('sind1.prestamos.simulacion', compact('forma_pago_original', 'request', 'socio', 'estado', 'interes', 'cuotas', 'total'));
     }
@@ -230,7 +231,7 @@ class PrestamoController extends Controller
         }
         $prestamo->estado_deuda_id = 1;
         $prestamo->update();
-        return redirect()->route('prestamos.show', compact('prestamo','interes'))->with('cancelar-deposito','');    
+        return redirect()->route('prestamos.show', compact('prestamo','interes'))->with('cancelar-deposito','');
     }
 
     /**
@@ -246,7 +247,7 @@ class PrestamoController extends Controller
                 ['forma_pago_id','=',2],
                 ['estado_deuda_id','=',2],
                 ['fecha_pago_deposito','<',date('Y-m-d')]
-            ])->get();   
+            ])->get();
 
             foreach ($prestamos as $prestamo) {
                 $prestamo->estado_deuda_id = 3;
@@ -266,7 +267,7 @@ class PrestamoController extends Controller
         if ($request->ajax()) {
             $cuotas = Cuota::where([
                 ['fecha_pago','<=', date('Y-m-d')]
-            ])->get();   
+            ])->get();
 
             foreach ($cuotas as $cuota) {
                 $cuota->estado_deuda_id = 1;
@@ -287,7 +288,7 @@ class PrestamoController extends Controller
             $prestamos = Prestamo::where([
                 ['forma_pago_id','=',1],
                 ['estado_deuda_id','=',2]
-            ])->get();   
+            ])->get();
 
             foreach ($prestamos as $prestamo) {
                 $pagadas = 0;
@@ -300,9 +301,9 @@ class PrestamoController extends Controller
                     $prestamo->estado_deuda_id = 1; //1 - pagada
                     $prestamo->update();
                 }
-            }                          
+            }
         }
-    } 
+    }
 
     /**
      * Display a listing of the resource.
@@ -315,7 +316,7 @@ class PrestamoController extends Controller
         if ($request->ajax()) {
             $cuotas = Cuota::where([
                 ['estado_deuda_id','=',2]
-            ])->get();   
+            ])->get();
 
             foreach ($cuotas as $cuota) {
                 if($cuota->getOriginal('fecha_pago') === date('Y-m-d')){
@@ -324,5 +325,38 @@ class PrestamoController extends Controller
                 }
             }
         }
-    }   
+    }
+
+    /**
+     * Busca datos personalizados.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function filtroPrestamosForm(Request $request)
+    {
+        $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
+        return view('sind1.prestamos.busqueda', compact('formas_pago'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function filtroPrestamos(FiltrarPrestamoRequest $request)
+    {
+
+        $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
+        $prestamos = Prestamo::orderBy('fecha_solicitud', 'DESC')
+        ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+        ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+        ->monto($request->monto_ini, $request->monto_fin)
+        ->numeroCuotas($request->numero_cuotas)
+        ->formaPagoId($request->forma_pago_id)
+        ->rut($request->rut)
+        ->paginate(15);
+
+        return view('sind1.prestamos.index', compact('prestamos','formas_pago'));
+    }
 }

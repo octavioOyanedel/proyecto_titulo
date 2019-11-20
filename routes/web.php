@@ -54,10 +54,13 @@ Route::get('/cargar_titulos', 'GradoAcademicoTituloController@obtenerTitulos');
 //ajax usuarios
 Route::get('/verificar_correo_usuario', 'UsuarioController@verificarCorreo');
 
+//filtros
 Route::get('/filtro_socios_form', 'SocioController@filtroSociosForm')->name('filtro_socios_form')->middleware('auth');
 Route::post('/filtro_socios', 'SocioController@filtroSocios')->name('filtro_socios')->middleware('auth');
 
-Route::get('/filtro_prestamos', 'BuscarController@filtroPrestamos')->name('filtro_prestamos')->middleware('auth');
+Route::get('/filtro_prestamos_form', 'PrestamoController@filtroPrestamosForm')->name('filtro_prestamos_form')->middleware('auth');
+Route::post('/filtro_prestamos', 'PrestamoController@filtroPrestamos')->name('filtro_prestamos')->middleware('auth');
+
 Route::get('/filtro_contables', 'BuscarController@filtroContables')->name('filtro_contables')->middleware('auth');
 Route::get('/filtro_historial', 'BuscarController@filtroHistorial')->name('filtro_historial')->middleware('auth');
 

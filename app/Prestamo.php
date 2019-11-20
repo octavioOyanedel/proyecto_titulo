@@ -22,6 +22,87 @@ class Prestamo extends Model
         'fecha_solicitud','numero_egreso','cuenta_id','cheque','fecha_pago_deposito','monto','numero_cuotas','socio_id','estado_deuda_id','interes_id','forma_pago_id',
     ];
 
+//scope filtro
+//***************************************************************************************************************
+    /**
+     * scope busqueda fecha de solicitud
+     */
+    public function scopeFechaSolicitud($query, $fecha_ini, $fecha_fin)
+    {
+        if($fecha_ini != null && $fecha_fin != null){
+            return $query->whereBetween('fecha_solicitud', [date($fecha_ini),date($fecha_fin)]);
+        }
+        if($fecha_ini != null && $fecha_fin === null){
+             return $query->where('fecha_solicitud','>=',$fecha_ini);
+        }
+        if($fecha_ini === null && $fecha_fin != null){
+             return $query->where('fecha_solicitud','<=',$fecha_fin);
+        }
+    }
+
+    /**
+     * scope busqueda fecha de solicitud
+     */
+    public function scopeFechaPago($query, $fecha_ini, $fecha_fin)
+    {
+        if($fecha_ini != null && $fecha_fin != null){
+            return $query->whereBetween('fecha_pago_deposito', [date($fecha_ini),date($fecha_fin)]);
+        }
+        if($fecha_ini != null && $fecha_fin === null){
+             return $query->where('fecha_pago_deposito','>=',$fecha_ini);
+        }
+        if($fecha_ini === null && $fecha_fin != null){
+             return $query->where('fecha_pago_deposito','<=',$fecha_fin);
+        }
+    }
+
+    /**
+     * scope busqueda fecha de solicitud
+     */
+    public function scopeMonto($query, $monto_ini, $monto_fin)
+    {
+        if($monto_ini != null && $monto_fin != null){
+            return $query->whereBetween('monto', [date($monto_ini),date($monto_fin)]);
+        }
+        if($monto_ini != null && $monto_fin === null){
+             return $query->where('monto','>=',$monto_ini);
+        }
+        if($monto_ini === null && $monto_fin != null){
+             return $query->where('monto','<=',$monto_fin);
+        }
+    }
+
+    /**
+     * scope busqueda numero de cuotas
+     */
+    public function scopeNumeroCuotas($query, $numero)
+    {
+        if($numero != null){
+            return $query->Where('numero_cuotas','=',$numero);
+        }
+    }
+
+    /**
+     * scope busqueda forma pago
+     */
+    public function scopeFormaPagoId($query, $forma)
+    {
+        if($forma != null){
+            return $query->Where('forma_pago_id','=',$forma);
+        }
+    }
+
+    /**
+     * scope busqueda rut
+     */
+    public function scopeRut($query, $rut)
+    {
+        if($rut != null){
+            return $query->Where('rut','=',$rut);
+        }
+    }
+
+//***************************************************************************************************************
     /**
      * scope busqueda por numero egreso
      */
@@ -54,7 +135,7 @@ class Prestamo extends Model
             return $valor;
         }else{
             return '';
-        }            
+        }
     }
 
     /**
@@ -69,7 +150,7 @@ class Prestamo extends Model
             return $valor;
         }else{
             return '';
-        }            
+        }
     }
 
     /**
@@ -84,7 +165,7 @@ class Prestamo extends Model
             return $valor;
         }else{
             return '';
-        }     
+        }
     }
 
     /**
@@ -99,7 +180,7 @@ class Prestamo extends Model
             return $valor;
         }else{
             return '';
-        }     
+        }
     }
 
     /**
@@ -111,7 +192,7 @@ class Prestamo extends Model
             return formatoMoneda($valor);
         }else{
             return '';
-        }            
+        }
     }
 
     /**
@@ -123,7 +204,7 @@ class Prestamo extends Model
             return formatoFecha($valor);
         }else{
             return '';
-        }         
+        }
     }
 
     /**
@@ -135,11 +216,11 @@ class Prestamo extends Model
             return formatoFecha($valor);
         }else{
             return '';
-        }         
+        }
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function socio()
     {
@@ -147,7 +228,7 @@ class Prestamo extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function cuotas()
     {
@@ -155,39 +236,39 @@ class Prestamo extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function estado_deuda()
     {
         return $this->hasOne('App\EstadoDeuda');
-    }   
+    }
 
     /**
-     * Relación 
+     * Relación
      */
     public function interes()
     {
         return $this->belongsTo('App\Interes');
     }
-    
+
     /**
-     * Relación 
+     * Relación
      */
     public function forma_pago()
     {
         return $this->hasOne('App\FormaPago');
-    } 
+    }
 
     /**
-     * Relación 
+     * Relación
      */
     public function cuenta()
     {
         return $this->hasOne('App\Cuenta');
-    } 
+    }
 
     /**
-     * Verificar si socio cuenta con préstamo activo 
+     * Verificar si socio cuenta con préstamo activo
      */
     static public function verificarPrestamoPendiente($id)
     {
@@ -225,14 +306,14 @@ class Prestamo extends Model
 
         //mes de inicio
         if($dia < 15){
-            $mes_inicio = $mes; 
+            $mes_inicio = $mes;
         }else{
             //inicio mes siguiente
             $mes_inicio = $mes + 1;
             if($mes_inicio == 13){
                 $mes_inicio = 1;
-                $year_pago++; 
-            }      
+                $year_pago++;
+            }
         }
 
         $year_inicio = $year;
@@ -243,7 +324,7 @@ class Prestamo extends Model
 
             if($mes_pago > 12){
                 $mes_pago = 1;
-                $year_pago++; 
+                $year_pago++;
             }
 
             $fecha_cuota = (string)$year_pago.'-'.$mes_pago.'-'.$dia_pago;
@@ -255,12 +336,12 @@ class Prestamo extends Model
             $cuota->estado_deuda_id = 2;
             $cuota->prestamo_id = $prestamo->id;
             $cuota->save();
-            $mes_pago++;       
+            $mes_pago++;
         }
     }
 
     /**
-     * Obtener ultimo registro creado 
+     * Obtener ultimo registro creado
      */
     static public function obtenerUltimoPrestamoIngresado()
     {
@@ -268,7 +349,7 @@ class Prestamo extends Model
     }
 
     /**
-     * buscar prestamos pendientes o atrasados 
+     * buscar prestamos pendientes o atrasados
      */
     static public function buscarDeudaActiva()
     {

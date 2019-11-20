@@ -28,14 +28,14 @@
     {{-- mantenedor --}}
     @case('simulacion')
         <script src="{{ asset('js/switch_estado_deuda.js') }}" defer></script>
-    @break    
+    @break
     {{-- listar --}}
     @case('prestamos')
         <script src="{{ asset('js/switch_estado_deuda.js') }}" defer></script>
     @break
     {{-- filtrar --}}
-    @case('filtro_prestamos')
-        <script src="{{ asset('js/ajax/validar_rut_prestamo_create.js') }}" defer></script>
-    @break    
+    @case('filtro_prestamos_form')
+        <script src="{{ asset('js/switch_filtro_prestamos.js') }}" defer></script>
+    @break
     @default
 @endswitch

@@ -52,7 +52,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item sub-item" href="{{ route('prestamos.create') }}">Solicitar</a>
                     <a class="dropdown-item sub-item" href="{{ route('prestamos.index') }}">Listar</a>
-                    <a class="dropdown-item sub-item" href="{{ route('filtro_prestamos') }}">Filtrar</a>
+                    <a class="dropdown-item sub-item" href="{{ route('filtro_prestamos_form') }}">Filtrar</a>
                 </div>
             </li>
 
@@ -104,8 +104,8 @@
                     <a class="dropdown-item sub-item" href="{{ route('mantenedor_prestamos') }}">Préstamos</a>
                     <a class="dropdown-item sub-item" href="{{ route('mantenedor_contables') }}">Registro contable</a>
                 </div>
-            </li> 
-            
+            </li>
+
         </ul>
 
         <!-- formulario búsqueda socio-->
@@ -114,7 +114,7 @@
                 <button type="button" class="btn btn-sm btn-outline-primary rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de socio(s) por medio de: rut, nombre (primero o segundo), apellido (paterno o materno), celular, anexo, correo y dirección.">?</button>
                 <input class="form-control mr-sm-2" type="search" name="buscar_socio" placeholder="Buscar socio(s)" aria-label="Search">
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
-            </form>            
+            </form>
         </div>
 
 

@@ -26,7 +26,7 @@ class Area extends Model
             $sede_id = $valor;
             $sede = Sede::findOrFail($sede_id);
             $valor = $sede->nombre;
-            return $valor;           
+            return $valor;
         }else{
             return '';
         }
@@ -34,7 +34,7 @@ class Area extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function socio()
     {
@@ -42,7 +42,7 @@ class Area extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function sede()
     {
@@ -50,7 +50,7 @@ class Area extends Model
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setNombreAttribute($value)
     {
