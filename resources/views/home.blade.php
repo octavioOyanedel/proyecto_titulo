@@ -17,14 +17,13 @@
                         <div class="alert alert-warning mt-4 text-center" role="alert">
                             <b>No existen registros.</b>
                         </div>
-                    @else                     
+                    @else  
+                    <div><a href="">Filtro</a></div>                   
                         <div class="table-responsive">
-                            <table class="table table-hover data-tables table-striped table-bordered" id="tabla-socios">
+                            <table class="table table-hover table-striped table-bordered" id="tabla-socios">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" scope="col">&nbsp;</th>
-                                        <th class="text-center" scope="col">&nbsp;</th>
-                                        <th class="text-center" scope="col">&nbsp;</th>
+                                        <th class="text-center" colspan="3" scope="col"></th>
                                         <th class="text-center" title="Estado préstamo solicitado" scope="col">Préstamo</th>
                                         <th scope="col">Nombre</th>
                                         <th class="text-center" scope="col">Género</th>
@@ -77,6 +76,9 @@
                                 </tbody>
                             </table>                      
                         </div>
+                        <div class="float-right mt-3">
+                            {{ $socios->links() }}    
+                        </div>                        
                     @endif 
                 </div>
             </div>

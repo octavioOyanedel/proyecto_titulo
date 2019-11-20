@@ -27,7 +27,7 @@ class ValidarEgresoUnicoRule implements Rule
     public function passes($attribute, $value)
     {
         $registro = RegistroContable::where([
-            ['tipo_registro_contable_id','=' 1],
+            ['tipo_registro_contable_id','=', 1],
             ['numero_registro','=',$value]
         ]);
         if($registro->count() > 0){

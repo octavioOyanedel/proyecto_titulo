@@ -27,7 +27,7 @@ class ValidarChequeEgresoUnicoRule implements Rule
     public function passes($attribute, $value)
     {
         $registro = RegistroContable::where([
-            ['tipo_registro_contable_id','=' 1],
+            ['tipo_registro_contable_id','=', 1],
             ['cheque','=',$value]
         ]);
         if($registro->count() > 0){

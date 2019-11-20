@@ -38,7 +38,7 @@ class HomeController extends Controller
         ->anexo($campo)
         ->correo($campo)
         ->direccion($campo)
-        ->get();
+        ->paginate(15);
         return view('home', compact('socios','estados'));
     }
 }
