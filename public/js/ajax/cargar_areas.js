@@ -17,7 +17,6 @@ $(window).on('load',function(){
 
 	function ajaxNormal(id){
 
-
 		$.ajaxSetup({
 			headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

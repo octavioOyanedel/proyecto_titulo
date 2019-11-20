@@ -37,6 +37,134 @@ class Socio extends Model
         'nombre1','nombre2','apellido1','apellido2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id',
     ];
 
+//scope filtro
+//***************************************************************************************************************
+    /**
+     * scope busqueda fecha de nacimiento
+     */
+    public function scopeFechaNacimiento($query, $fecha_ini, $fecha_fin)
+    {
+        if($fecha_ini != null && $fecha_fin != null){
+            return $query->whereBetween('fecha_nac', [date($fecha_ini),date($fecha_fin)]);
+        }
+        if($fecha_ini != null && $fecha_fin === null){
+             return $query->where('fecha_nac','>=',$fecha_ini);           
+        }
+        if($fecha_ini === null && $fecha_fin != null){
+             return $query->where('fecha_nac','<=',$fecha_fin);           
+        }
+    }
+
+    /**
+     * scope busqueda fecha PUCV
+     */
+    public function scopeFechaIngresoPucv($query, $fecha_ini, $fecha_fin)
+    {
+        if($fecha_ini != null && $fecha_fin != null){
+            return $query->whereBetween('fecha_pucv', [date($fecha_ini),date($fecha_fin)]);
+        }
+    }
+
+    /**
+     * scope busqueda fecha sind1
+     */
+    public function scopeFechaIngresoSind1($query, $fecha_ini, $fecha_fin)
+    {
+        if($fecha_ini != null && $fecha_fin != null){
+            return $query->whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)]);
+        }
+    }
+
+    /**
+     * scope busqueda genero
+     */
+    public function scopeGenero($query, $genero)
+    {
+        if($genero != null){
+            return $query->Where('genero','=',$genero);
+        }
+    }
+
+    /**
+     * scope busqueda comuna
+     */
+    public function scopeComunaId($query, $comuna_id)
+    {
+        if($comuna_id != null){
+            return $query->Where('comuna_id','=',$comuna_id);
+        }
+    }
+
+    /**
+     * scope busqueda ciudad
+     */
+    public function scopeCiudadId($query, $ciudad_id)
+    {
+        if($ciudad_id != null && $ciudad_id != 'Seleccione...'){
+            return $query->Where('ciudad_id','=',$ciudad_id);
+        }
+    }
+
+    /**
+     * scope busqueda direccion
+     */
+    public function scopeDireccionFiltro($query, $direccion)           
+    {
+        if($direccion != null){
+            return $query->Where('direccion','=',$direccion);
+        }
+    }
+
+    /**
+     * scope busqueda sede
+     */
+    public function scopeSedeId($query, $sede_id)
+    {
+        if($sede_id != null){
+            return $query->Where('sede_id','LIKE',"%$sede_id%");
+        }
+    }
+
+    /**
+     * scope busqueda area
+     */
+    public function scopeAreaId($query, $area_id)
+    {
+        if($area_id != null && $area_id != 'Seleccione...'){
+            return $query->Where('area_id','=',$area_id);
+        }
+    }
+
+    /**
+     * scope busqueda cargo
+     */
+    public function scopeCargoId($query, $cargo_id)
+    {
+        if($cargo_id != null){
+            return $query->Where('cargo_id','=',$cargo_id);
+        }
+    }
+
+    /**
+     * scope busqueda estado
+     */
+    public function scopeEstadoSocioId($query, $estado_socio_id)
+    {
+        if($estado_socio_id != null){
+            return $query->Where('estado_socio_id','=',$estado_socio_id);
+        }
+    }
+
+    /**
+     * scope busqueda nacionalidad
+     */
+    public function scopeNacionalidadId($query, $nacionalidad_id)
+    {
+        if($nacionalidad_id != null){
+            return $query->Where('nacionalidad_id','=',$nacionalidad_id);
+        }
+    }
+//***************************************************************************************************************
     /**
      * scope busqueda por rut
      */

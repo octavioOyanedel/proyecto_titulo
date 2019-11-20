@@ -1,4 +1,4 @@
-    @php isset($socio->genero) ? $genero = $socio->genero : $genero = '' @endphp
+@php isset($socio->genero) ? $genero = $socio->genero : $genero = '' @endphp
 <!-- Género -->
 <div class="form-group row">
     <label for="genero" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Género') }}</label>

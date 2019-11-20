@@ -251,6 +251,21 @@ class SocioController extends Controller
      */
     public function filtroSocios(FiltrarSocioRequest $request) 
     {
-        
+        $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
+        $socios = Socio::orderBy('apellido1','DESC')
+        ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+        ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+        ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)     
+        ->genero($request->genero)           
+        ->comunaId($request->comuna_id)
+        ->ciudadId($request->ciudad_id)
+        ->direccionFiltro($request->direccion)
+        ->sedeId($request->sede_id)
+        ->areaId($request->area_id)
+        ->cargoId($request->cargo_id)
+        ->estadoSocioId($request->estado_socio_id)  
+        ->nacionalidadId($request->nacionalidad_id)                         
+        ->get(); 
+        return view('home', compact('socios','estados'));
     }
 }

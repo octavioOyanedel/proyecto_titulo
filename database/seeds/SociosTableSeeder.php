@@ -11,7 +11,7 @@ class SociosTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Socio::class, 48)->create();
+        factory(App\Socio::class, 500)->create();
         App\Socio::create([
             'rut' => '111111111',
             'nombre1' => 'Bob',
