@@ -7,7 +7,7 @@
         </div>
     @else   
         <div class="table-responsive">
-            <table class="table table-hover data-tables table-striped table-bordered" id="tabla-estados">
+            <table class="table table-hover table-striped table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col" title="">&nbsp;</th>
@@ -25,6 +25,9 @@
                     @endforeach
                 </tbody>                                 
             </table>
-        </div>       
+        </div>   
+        <div class="float-right mt-3">
+            {{ $estados->links() }}    
+        </div>              
     @endif                    
 </div>

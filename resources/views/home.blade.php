@@ -20,7 +20,7 @@
                     @else  
                     <div><a href="">Filtro</a></div>                   
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped table-bordered" id="tabla-socios">
+                            <table class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th class="text-center" colspan="3" scope="col"></th>

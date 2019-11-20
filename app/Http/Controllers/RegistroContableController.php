@@ -25,7 +25,7 @@ class RegistroContableController extends Controller
         $registros = RegistroContable::orderBy('fecha','DESC')
         ->numeroRegistro($campo)
         ->cheque($campo)
-        ->get();
+        ->paginate(15);
         return view('sind1.contables.index', compact('registros'));       
     }
 

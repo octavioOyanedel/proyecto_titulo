@@ -15,7 +15,7 @@
                         </div>
                     @else 
                         <div class="table-responsive">
-                            <table class="table table-hover table-bordered table-striped data-tables" id="tabla-prestamos">
+                            <table class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>&nbsp;</th>
@@ -34,7 +34,7 @@
                                     @foreach($prestamos as $p)
                                         <tr>
                                             <td width="50" class="text-center" scope="row" title="Ver detalle préstamo"><a class="text-primary" href="{{ route('prestamos.show',$p) }}"><span>@svg('ver')</span></a></td>
-                                            <td class="">{{ $p->socio->apellido1 }} {{ $p->socio->apellido2 }} {{ $p->socio->nombre1 }} {{ $p->socio->nombre2 }} </td>
+                                            <td class="">@if($p->socio->apellido2 != null) {{ $p->socio->apellido1 }} {{ $p->socio->apellido2 }}, @else {{ $p->socio->apellido1 }}, @endif {{ $p->socio->nombre1 }} {{ $p->socio->nombre2 }} </td>
                                             <td class="text-center">{{ $p->socio->rut }}</td>
                                             <td class="text-center">{{ $p->fecha_solicitud }}</td>
                                             <td class="text-center">{{ $p->numero_egreso }}</td>
@@ -50,6 +50,9 @@
                                 </tbody>
                             </table>                      
                         </div>
+                        <div class="float-right mt-3">
+                            {{ $prestamos->links() }}    
+                        </div>     
                     @endif
                 </div>
             </div>

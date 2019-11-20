@@ -27,7 +27,7 @@ class UsuarioController extends Controller
         ->apellido1($campo)
         ->apellido2($campo)
         ->email($campo)
-        ->get();
+        ->paginate(15);
         return view('sind1.usuario.index', compact('usuarios','roles'));
     }
 

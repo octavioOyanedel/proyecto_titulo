@@ -15,7 +15,7 @@
                         </div>
                     @else 
                         <div class="table-responsive">
-                            <table class="table table-hover table-bordered table-striped data-tables" id="tabla-contables">
+                            <table class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-success" scope="col" title="">&nbsp;</th>
@@ -48,6 +48,9 @@
                                 </tbody>
                             </table>                      
                         </div>
+                        <div class="float-right mt-3">
+                            {{ $registros->links() }}    
+                        </div>                          
                     @endif
                 </div>
             </div>

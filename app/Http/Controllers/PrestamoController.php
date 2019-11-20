@@ -30,7 +30,7 @@ class PrestamoController extends Controller
         $prestamos = Prestamo::orderBy('fecha_solicitud', 'DESC')
         ->numeroEgreso($campo)
         ->cheque($campo)
-        ->get();
+        ->paginate(15);
                
         return view('sind1.prestamos.index', compact('prestamos','formas_pago'));       
     }

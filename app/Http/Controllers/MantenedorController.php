@@ -31,11 +31,11 @@ class MantenedorController extends Controller
      */
     public function socios()
     {
-    	$sedes = Sede::orderBy('nombre', 'ASC')->get();
-        $areas = Area::orderBy('sede_id', 'ASC')->get();
-        $cargos = Cargo::orderBy('nombre', 'ASC')->get();
-        $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
-        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();
+    	$sedes = Sede::orderBy('nombre', 'ASC')->paginate(15);
+        $areas = Area::orderBy('sede_id', 'ASC')->paginate(15);
+        $cargos = Cargo::orderBy('nombre', 'ASC')->paginate(15);
+        $estados = EstadoSocio::orderBy('nombre', 'ASC')->paginate(15);
+        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->paginate(15);
         return view('sind1.mantenedores.socios', compact('sedes','areas','cargos','estados','nacionalidades'));
     }
 

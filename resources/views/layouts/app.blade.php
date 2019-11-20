@@ -19,7 +19,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/spinner.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/data_table.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
 
 </head>
@@ -39,10 +38,6 @@
     </div>
 {{ request()->path() }}
 </body>
-
-    <script src="{{ asset('js/data_table.js') }}" defer></script>
-    <script src="{{ asset('js/data_table_acentos.js') }}" defer></script>
-    <script src="{{ asset('js/tablas/data_tables.js') }}" defer></script>
     <script src="{{ asset('js/ajax/evaluar_fecha_prestamo.js') }}" defer></script>
     <script src="{{ asset('js/ajax/pago_automatico.js') }}" defer></script>
     <script src="{{ asset('js/ajax/saldar_prestamo.js') }}" defer></script>

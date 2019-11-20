@@ -8,7 +8,7 @@
         </div>
     @else
         <div class="table-responsive">
-            <table class="table table-hover data-tables table-striped table-bordered" id="tabla-areas">
+            <table class="table table-hover table-striped table-bordered">
                 <thead>
                     <tr>
                         <th width="50" class="text-center" scope="col" title="">&nbsp;</th>
@@ -29,5 +29,8 @@
                 </tbody>                                 
             </table>
         </div>
+        <div class="float-right mt-3">
+            {{ $areas->links() }}    
+        </div>       
     @endif
 </div>
