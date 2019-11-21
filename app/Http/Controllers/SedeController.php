@@ -37,8 +37,8 @@ class SedeController extends Controller
     public function store(IncorporarSedeRequest $request)
     {
         Sede::create($request->all());
-        session(['mensaje' => 'Sede agregada con éxito.']);     
-        return redirect()->route('mantenedor_socios');
+        session(['mensaje' => 'Sede agregada con éxito.']);
+        return redirect()->route('mantenedor_socio_sede');
     }
 
     /**
@@ -74,9 +74,9 @@ class SedeController extends Controller
     {
         $modificar = Sede::findOrFail($sede->id);
         $modificar->nombre = $request->nombre;
-        $modificar->update(); 
-        session(['mensaje' => 'Sede editada con éxito.']);     
-        return redirect()->route('mantenedor_socios');
+        $modificar->update();
+        session(['mensaje' => 'Sede editada con éxito.']);
+        return redirect()->route('mantenedor_socio_sede');
     }
 
     /**
@@ -87,8 +87,8 @@ class SedeController extends Controller
      */
     public function destroy(Sede $sede)
     {
-        Sede::destroy($sede->id);  
+        Sede::destroy($sede->id);
         session(['mensaje' => 'Sede eliminada con éxito.']);
-        return redirect()->route('mantenedor_socios');    
+        return redirect()->route('mantenedor_socio_sede');
     }
 }

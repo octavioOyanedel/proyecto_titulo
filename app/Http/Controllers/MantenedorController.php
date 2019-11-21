@@ -29,14 +29,54 @@ class MantenedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function socios()
+    public function socioSede()
     {
     	$sedes = Sede::orderBy('nombre', 'ASC')->paginate(15);
+        return view('sind1.mantenedores.socio.sede', compact('sedes'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function socioArea()
+    {
         $areas = Area::orderBy('sede_id', 'ASC')->paginate(15);
+        return view('sind1.mantenedores.socio.area', compact('areas'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function socioCargo()
+    {
         $cargos = Cargo::orderBy('nombre', 'ASC')->paginate(15);
+        return view('sind1.mantenedores.socio.cargo', compact('cargos'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function socioEstado()
+    {
         $estados = EstadoSocio::orderBy('nombre', 'ASC')->paginate(15);
+        return view('sind1.mantenedores.socio.estado', compact('estados'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function socioNacionalidad()
+    {
         $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->paginate(15);
-        return view('sind1.mantenedores.socios', compact('sedes','areas','cargos','estados','nacionalidades'));
+        return view('sind1.mantenedores.socio.nacionalidad', compact('nacionalidades'));
     }
 
     /**
@@ -70,10 +110,10 @@ class MantenedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function cargas()
+    public function cargaParentesco()
     {
-        $parentescos = Parentesco::orderBy('nombre', 'ASC')->get();
-        return view('sind1.mantenedores.cargas', compact('parentescos'));
+        $parentescos = Parentesco::orderBy('nombre', 'ASC')->paginate(15);
+        return view('sind1.mantenedores.carga.parentesco', compact('parentescos'));
     }
 
     /**

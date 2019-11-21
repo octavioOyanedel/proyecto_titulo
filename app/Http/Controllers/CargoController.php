@@ -37,8 +37,8 @@ class CargoController extends Controller
     public function store(IncorporarCargoRequest $request)
     {
         Cargo::create($request->all());
-        session(['mensaje' => 'Cargo agregado con éxito.']);     
-        return redirect()->route('mantenedor_socios'); 
+        session(['mensaje' => 'Cargo agregado con éxito.']);
+        return redirect()->route('mantenedor_socio_cargo');
     }
 
     /**
@@ -76,7 +76,7 @@ class CargoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Cargo editado con éxito.']);
-        return redirect()->route('mantenedor_socios'); 
+        return redirect()->route('mantenedor_socio_cargo');
     }
 
     /**
@@ -88,7 +88,7 @@ class CargoController extends Controller
     public function destroy(Cargo $cargo)
     {
         Cargo::destroy($cargo->id);
-        session(['mensaje' => 'Cargo eliminado con éxito.']);        
-        return redirect()->route('mantenedor_socios'); 
+        session(['mensaje' => 'Cargo eliminado con éxito.']);
+        return redirect()->route('mantenedor_socio_cargo');
     }
 }

@@ -135,7 +135,15 @@ Route::post('/update_passwords', 'UsuarioController@updatePassword')->name('upda
 Route::get('/crear_conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar_conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
 
-Route::get('/mantenedor_socios','MantenedorController@socios')->name('mantenedor_socios')->middleware('auth');
+//mantenedores
+Route::get('/mantenedor_socio_sede','MantenedorController@socioSede')->name('mantenedor_socio_sede')->middleware('auth');
+Route::get('/mantenedor_socio_area','MantenedorController@socioArea')->name('mantenedor_socio_area')->middleware('auth');
+Route::get('/mantenedor_socio_cargo','MantenedorController@socioCargo')->name('mantenedor_socio_cargo')->middleware('auth');
+Route::get('/mantenedor_socio_estado','MantenedorController@socioEstado')->name('mantenedor_socio_estado')->middleware('auth');
+Route::get('/mantenedor_socio_nacionalidad','MantenedorController@socioNacionalidad')->name('mantenedor_socio_nacionalidad')->middleware('auth');
+
+Route::get('/mantenedor_carga_parentesco','MantenedorController@cargaParentesco')->name('mantenedor_carga_parentesco')->middleware('auth');
+
 Route::get('/mantenedor_prestamos','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
 Route::get('/mantenedor_contables','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
 Route::get('/mantenedor_cargas','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');

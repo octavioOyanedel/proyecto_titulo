@@ -19,8 +19,8 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item sub-item" href="{{ route('usuarios.edit', Auth::user()) }}">Actualizar datos</a>
-                    <a class="dropdown-item sub-item" href="{{ route('passwords', Auth::user()) }}">Cambiar contraseña</a>
+                    <a class="dropdown-item sub-item" href="{{ route('usuarios.edit', Auth::user()) }}">Actualizar Datos</a>
+                    <a class="dropdown-item sub-item" href="{{ route('passwords', Auth::user()) }}">Cambiar Contraseña</a>
                     <a class="dropdown-item sub-item" href=""
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
@@ -65,8 +65,8 @@
                     <a class="dropdown-item sub-item" href="{{ route('contables.create') }}">Registrar</a>
                     <a class="dropdown-item sub-item" href="{{ route('contables.index') }}">Listar</a>
                     <a class="dropdown-item sub-item" href="{{ route('filtro_contables_form') }}">Filtrar</a>
-                    <a class="dropdown-item sub-item" href="{{ route('crear_conciliacion') }}">Conciliación bancaria</a>
-                    <a class="dropdown-item sub-item" href="">Anular registro</a>
+                    <a class="dropdown-item sub-item" href="{{ route('crear_conciliacion') }}">Conciliación Bancaria</a>
+                    <a class="dropdown-item sub-item" href="">Anular Registro</a>
                 </div>
             </li>
 
@@ -98,14 +98,10 @@
                     <span id="span-mantenedores">Mantenedor</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_socios') }}">Socios</a>
-                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_cargas') }}">Cargas Familiares</a>
-                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_estudios') }}">Estudios Realizados</a>
-                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_prestamos') }}">Préstamos</a>
-                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_contables') }}">Registro contable</a>
+                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_socio_sede') }}">Socios</a>
+                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_carga_parentesco') }}">Cargas Familiares</a>
                 </div>
             </li>
-
         </ul>
 
         <!-- formulario búsqueda socio-->

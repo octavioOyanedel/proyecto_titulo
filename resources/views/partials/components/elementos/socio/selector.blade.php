@@ -34,7 +34,19 @@
         <script src="{{ asset('js/radio.js') }}" defer></script>
     @break
     {{-- mantenedor --}}
-    @case('mantenedor_socios')
+    @case('mantenedor_socio_sede')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_socio_area')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_socio_cargo')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_socio_estado')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_socio_nacionalidad')
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     {{-- filtro socios --}}
@@ -47,6 +59,6 @@
         <script src="{{ asset('js/ajax/cargar_ciudades.js') }}" defer></script>
         <script src="{{ asset('js/ajax/cargar_areas.js') }}" defer></script>
         <script src="{{ asset('js/switch_filtro_socios.js') }}" defer></script>
-    @break    
+    @break
     @default
 @endswitch

@@ -39,8 +39,8 @@ class AreaController extends Controller
     public function store(IncorporarAreaRequest $request)
     {
         Area::create($request->all());
-        session(['mensaje' => 'Área agregada con éxito.']);     
-        return redirect()->route('mantenedor_socios');        
+        session(['mensaje' => 'Área agregada con éxito.']);
+        return redirect()->route('mantenedor_socio_area');
     }
 
     /**
@@ -79,8 +79,8 @@ class AreaController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->sede_id = $request->sede_id;
         $modificar->update();
-        session(['mensaje' => 'Área editada con éxito.']); 
-        return redirect()->route('mantenedor_socios'); 
+        session(['mensaje' => 'Área editada con éxito.']);
+        return redirect()->route('mantenedor_socio_area');
     }
 
     /**
@@ -92,8 +92,8 @@ class AreaController extends Controller
     public function destroy(Area $area)
     {
         Area::destroy($area->id);
-        session(['mensaje' => 'Área eliminada con éxito.']);        
-        return redirect()->route('mantenedor_socios');          
+        session(['mensaje' => 'Área eliminada con éxito.']);
+        return redirect()->route('mantenedor_socio_area');
     }
 
     // obtener areas
@@ -102,5 +102,5 @@ class AreaController extends Controller
             $areas = Area::where('sede_id','=',$request->id)->get();
             return response()->json($areas);
         }
-    }   
+    }
 }

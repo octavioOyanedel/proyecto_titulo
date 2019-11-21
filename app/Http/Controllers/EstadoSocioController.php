@@ -24,7 +24,7 @@ class EstadoSocioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {    
+    {
         return view('sind1.estado_socio.create');
     }
 
@@ -37,8 +37,8 @@ class EstadoSocioController extends Controller
     public function store(IncorporarEstadoSocioRequest $request)
     {
         EstadoSocio::create($request->all());
-        session(['mensaje' => 'Estado socio agregado con éxito.']); 
-        return redirect()->route('mantenedor_socios'); 
+        session(['mensaje' => 'Estado socio agregado con éxito.']);
+        return redirect()->route('mantenedor_socio_estado');
     }
 
     /**
@@ -59,7 +59,7 @@ class EstadoSocioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $estadoSocio = EstadoSocio::findOrFail($id);
         return view('sind1.estado_socio.edit', compact('estadoSocio'));
     }
@@ -75,9 +75,9 @@ class EstadoSocioController extends Controller
     {
         $modificar = EstadoSocio::findOrFail($estadoSocio->id);
         $modificar->nombre = $request->nombre;
-        $modificar->update();      
-        session(['mensaje' => 'Estado socio editado con éxito.']);    
-        return redirect()->route('mantenedor_socios'); 
+        $modificar->update();
+        session(['mensaje' => 'Estado socio editado con éxito.']);
+        return redirect()->route('mantenedor_socio_estado');
     }
 
     /**
@@ -89,7 +89,7 @@ class EstadoSocioController extends Controller
     public function destroy(EstadoSocio $estadoSocio)
     {
         EstadoSocio::destroy($estadoSocio->id);
-        session(['mensaje' => 'Estado socio eliminado con éxito.']);        
-        return redirect()->route('mantenedor_socios');   
+        session(['mensaje' => 'Estado socio eliminado con éxito.']);
+        return redirect()->route('mantenedor_socio_estado');
     }
 }

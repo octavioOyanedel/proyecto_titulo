@@ -38,7 +38,7 @@ class NacionalidadController extends Controller
     {
         Nacionalidad::create($request->all());
         session(['mensaje' => 'Nacionalidad agregada con éxito.']);
-        return redirect()->route('mantenedor_socios'); 
+        return redirect()->route('mantenedor_socio_nacionalidad');
     }
 
     /**
@@ -76,9 +76,9 @@ class NacionalidadController extends Controller
     {
         $modificar = Nacionalidad::findOrFail($id);
         $modificar->nombre = $request->nombre;
-        $modificar->update(); 
-        session(['mensaje' => 'Nacionalidad editada con éxito.']);        
-        return redirect()->route('mantenedor_socios'); 
+        $modificar->update();
+        session(['mensaje' => 'Nacionalidad editada con éxito.']);
+        return redirect()->route('mantenedor_socio_nacionalidad');
     }
 
     /**
@@ -90,7 +90,7 @@ class NacionalidadController extends Controller
     public function destroy($id)
     {
         Nacionalidad::destroy($id);
-        session(['mensaje' => 'Nacionalidad eliminada con éxito.']);        
-        return redirect()->route('mantenedor_socios');  
+        session(['mensaje' => 'Nacionalidad eliminada con éxito.']);
+        return redirect()->route('mantenedor_socio_nacionalidad');
     }
 }

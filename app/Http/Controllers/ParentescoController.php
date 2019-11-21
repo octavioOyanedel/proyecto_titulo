@@ -36,9 +36,9 @@ class ParentescoController extends Controller
      */
     public function store(IncorporarParentescoRequest $request)
     {
-        Parentesco::create($request->all());        
+        Parentesco::create($request->all());
         session(['mensaje' => 'Parentesco agregado con éxito.']);
-        return redirect()->route('mantenedor_cargas'); 
+        return redirect()->route('mantenedor_carga_parentesco');
     }
 
     /**
@@ -75,9 +75,9 @@ class ParentescoController extends Controller
     {
         $modificar = Parentesco::findOrFail($parentesco->id);
         $modificar->nombre = $request->nombre;
-        $modificar->update(); 
+        $modificar->update();
         session(['mensaje' => 'Parentesco editado con éxito.']);
-        return redirect()->route('mantenedor_cargas'); 
+        return redirect()->route('mantenedor_carga_parentesco');
     }
 
     /**
@@ -89,7 +89,7 @@ class ParentescoController extends Controller
     public function destroy(Parentesco $parentesco)
     {
         Parentesco::destroy($parentesco->id);
-        session(['mensaje' => 'Parentesco eliminado con éxito.']);        
-        return redirect()->route('mantenedor_cargas');  
+        session(['mensaje' => 'Parentesco eliminado con éxito.']);
+        return redirect()->route('mantenedor_carga_parentesco');
     }
 }
