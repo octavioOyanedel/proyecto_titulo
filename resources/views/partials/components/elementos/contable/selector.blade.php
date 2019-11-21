@@ -33,6 +33,7 @@
         <script src="{{ asset('js/ajax/validar_numero_registro_create.js') }}" defer></script>
         <script src="{{ asset('js/switch_numero_registro.js') }}" defer></script>
         <script src="{{ asset('js/ajax/cargar_conceptos.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>        
     @break
     {{-- mantenedor --}}
     @case('mantenedor_contables')
@@ -43,8 +44,9 @@
 
     @break
     {{-- filtrar --}}
-    @case('filtro_contables')
-
+    @case('filtro_contables_form')
+        <script src="{{ asset('js/ajax/cargar_conceptos.js') }}" defer></script>
+        <script src="{{ asset('js/switch_filtro_contables.js') }}" defer></script>
     @break    
     {{-- crear --}}
     @case('cuentas/create')

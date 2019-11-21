@@ -25,6 +25,101 @@ class RegistroContable extends Model
         'fecha','numero_registro','forma_pago','monto','concepto_id','detalle','tipo_registro_contable_id','cuenta_id','asociado_id','socio_id','usuario_id',
     ];
 
+//scope filtro
+//***************************************************************************************************************
+    /**
+     * scope busqueda fecha de solicitud
+     */
+    public function scopeFechaSolicitud($query, $fecha_ini, $fecha_fin)
+    {
+        if($fecha_ini != null && $fecha_fin != null){
+            return $query->whereBetween('fecha', [date($fecha_ini),date($fecha_fin)]);
+        }
+        if($fecha_ini != null && $fecha_fin === null){
+             return $query->where('fecha','>=',$fecha_ini);
+        }
+        if($fecha_ini === null && $fecha_fin != null){
+             return $query->where('fecha','<=',$fecha_fin);
+        }
+    }
+
+    /**
+     * scope busqueda monto
+     */
+    public function scopeMonto($query, $monto_ini, $monto_fin)
+    {
+        if($monto_ini != null && $monto_fin != null){
+            return $query->whereBetween('monto', [date($monto_ini),date($monto_fin)]);
+        }
+        if($monto_ini != null && $monto_fin === null){
+             return $query->where('monto','>=',$monto_ini);
+        }
+        if($monto_ini === null && $monto_fin != null){
+             return $query->where('monto','<=',$monto_fin);
+        }
+    }
+
+    /**
+     * scope busqueda forma pago
+     */
+    public function scopeTipoRegistroContableId($query, $tipo)
+    {
+        if($tipo != null){
+            return $query->Where('tipo_registro_contable_id','=',$tipo);
+        }
+    }
+
+    /**
+     * scope busqueda cuenta
+     */
+    public function scopeCuentaId($query, $cuenta)
+    {
+        if($cuenta != null){
+            return $query->Where('cuenta_id','=',$cuenta);
+        }
+    }
+
+    /**
+     * scope busqueda concepto
+     */
+    public function scopeConceptoId($query, $concepto)
+    {
+        if($concepto != null && $concepto != 'Seleccione...'){
+            return $query->Where('concepto_id','=',$concepto);
+        }
+    }
+
+    /**
+     * scope busqueda socio
+     */
+    public function scopeSocioId($query, $socio)
+    {
+        if($socio != null){
+            return $query->Where('socio_id','=',$socio);
+        }
+    }
+
+    /**
+     * scope busqueda asociado
+     */
+    public function scopeAsociadoId($query, $asociado)
+    {
+        if($asociado != null){
+            return $query->Where('asociado_id','=',$asociado);
+        }
+    }
+
+    /**
+     * scope busqueda asociado
+     */
+    public function scopeDetalle($query, $detalle)
+    {
+        if($detalle != null){
+            return $query->Where('detalle','LIKE',"%$detalle%");
+        }
+    }
+//***************************************************************************************************************
+
     /**
      * scope busqueda por numero de registro
      */

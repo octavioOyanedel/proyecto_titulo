@@ -2,8 +2,11 @@
 
 namespace App;
 
+use App\Socio;
 use App\Usuario;
+use App\LogSistema;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class LogSistema extends Model
 {
@@ -19,11 +22,97 @@ class LogSistema extends Model
         'fecha','accion','ip','navegador','sistema','usuario_id',
     ];
 
+//scope filtro
+//***************************************************************************************************************
+
+    /**
+     * scope busqueda fecha
+     */
+    public function scopeFecha($query, $fecha_ini, $fecha_fin)
+    {
+        if($fecha_ini != null && $fecha_fin != null){
+            return $query->whereBetween('fecha', [date($fecha_ini),date($fecha_fin)]);
+        }
+        if($fecha_ini != null && $fecha_fin === null){
+             return $query->where('fecha','>=',$fecha_ini);
+        }
+        if($fecha_ini === null && $fecha_fin != null){
+             return $query->where('fecha','<=',$fecha_fin);
+        }
+    }
+
+    /**
+     * scope busqueda usuario
+     */
+    public function scopeUsuarioId($query, $usuario)
+    {
+        if($usuario != null){
+            return $query->Where('usuario_id','=',$usuario);
+        }
+    }
+//***************************************************************************************************************
     /**
      * Relación 
      */
     public function usuario()
     {
-        return $this->belongsTo('App\Usuario');
+        return $this->hasOne('App\Usuario');
+    }
+
+    /**
+     * Modificador de id
+     */
+    public function getUsuarioIdAttribute($valor)
+    {
+        if($valor != null){
+            $user_id = $valor;
+            $user = User::findOrFail($user_id);
+            $valor = $user->nombre1.' '.$user->apellido1;
+            return $valor;
+        }else{
+            return '';
+        }           
+    }
+
+    /**
+     * Modificador de fecha
+     */
+    public function getCreatedAtAttribute($valor)
+    {
+        if($valor != null){
+            return date("d-m-Y H:i:s", strtotime($valor));
+        }else{
+            return '';
+        }
+    }
+
+    /**
+     * Modificador de socio
+     */
+    public function getSocioIdAttribute($valor)
+    {
+        if($valor != null){
+            $socio_id = $valor;
+            $socio = Socio::findOrFail($socio_id);
+            $valor = $socio->nombre1.' '.$socio->apellido1;
+            return $valor;
+        }else{
+            return '';
+        }
+    }
+
+    /**
+     * registrar en log 
+     */
+    static public function registrarAccion($accion)
+    {
+        $log = new LogSistema;
+        $log->fecha = date('Y-m-d');
+        $log->accion = $accion;
+        $log->ip = obtenerIp();
+        $log->navegador = obtenerBrowser();
+        $log->sistema = obtenerSistemaOperativo();
+        $log->usuario_id = auth()->user()->id;  
+        $log->save();         
     }
 }

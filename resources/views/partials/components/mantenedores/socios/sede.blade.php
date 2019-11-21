@@ -26,8 +26,9 @@
                 </tbody>                                 
             </table>
         </div>
-        <div class="float-right mt-3">
+        <div class="float-right mt-3 sede">
             {{ $sedes->links() }}    
         </div>              
     @endif
+
 </div>

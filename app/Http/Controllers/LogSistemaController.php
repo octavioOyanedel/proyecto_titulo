@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\LogSistema;
+use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\FiltrarHistorialRequest; 
 
 class LogSistemaController extends Controller
 {
@@ -14,7 +16,7 @@ class LogSistemaController extends Controller
      */
     public function index()
     {
-        $registros = LogSistema::orderBy('created_at', 'DESC');
+        $registros = LogSistema::orderBy('created_at', 'DESC')->paginate(15);
         return view('sind1.historial.index', compact('registros'));
     }
 
@@ -36,7 +38,7 @@ class LogSistemaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -82,5 +84,32 @@ class LogSistemaController extends Controller
     public function destroy(LogSistema $logSistema)
     {
         //
+    }
+
+    /**
+     * Busca datos personalizados.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function filtroHistorialForm(Request $request)
+    {
+        $usuarios = User::orderBy('nombre1', 'ASC')->get();
+        return view('sind1.historial.busqueda', compact('usuarios'));
+
+    }
+
+    /**
+     * Busca datos personalizados.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function filtroHistorial(FiltrarHistorialRequest $request)
+    {
+        $registros = LogSistema::orderBy('created_at', 'DESC')
+        ->fecha($request->fecha_ini, $request->fecha_fin)
+        ->usuarioId($request->usuario_id)        
+        ->paginate(15);
+        return view('sind1.historial.index', compact('registros'));
+
     }
 }

@@ -10,6 +10,7 @@ use App\Socio;
 use App\EstadoDeuda;
 use App\RegistroContable;
 use App\Cuenta;
+use App\LogSistema;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarPrestamoRequest;
@@ -75,6 +76,7 @@ class PrestamoController extends Controller
         $registro->socio_id = $prestamo->socio_id;
         $registro->save();
         session(['mensaje' => 'Préstamo agregado con éxito.']);
+        LogSistema::registrarAccion('Préstamo agregado N° egreso: '.$prestamo->numero_egreso.', cheque: '.$prestamo->cheque.', socio: '.$prestamo->socio->nombre1.' '.$prestamo->socio->apellido1.' rut: '.$prestamo->socio->rut);
         return redirect()->route('prestamos.create');
     }
 

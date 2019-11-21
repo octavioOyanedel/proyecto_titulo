@@ -45,7 +45,7 @@ class EditarSocioRequest extends FormRequest
             'numero_socio' => ['required','numeric'],
             'fecha_sind1' => ['nullable','date'],
             'comuna_id' => ['nullable','numeric'],
-            'ciudad_id' => ['nullable','numeric'],
+            'ciudad_id' => ['nullable'],
             'sede_id' => ['required','numeric'],
             'area_id' => ['nullable','numeric'],
             'cargo_id' => ['required','numeric'],

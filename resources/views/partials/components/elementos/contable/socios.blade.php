@@ -23,7 +23,7 @@
             @else
                 {{-- loop con old --}}
                 @foreach($socios as $s)      
-                    <option value="{{ $s->id }}" @if(old('socio_id') == $s->id) {{ 'selected' }} @endif>{{ $s->apellido1 }} {{ $s->apellido2 }}, {{ $s->nombre1 }} {{ $s->nombre2 }}</option>
+                    <option value="{{ $s->id }}" @if(old('socio_id') == $s->id) {{ 'selected' }} @endif>@if($s->apellido2 != null) {{ $s->apellido1 }} {{ $s->apellido2 }}, @else {{ $s->apellido1 }}, @endif {{ $s->nombre1 }} {{ $s->nombre2 }}</option>
                 @endforeach
             @endif
 

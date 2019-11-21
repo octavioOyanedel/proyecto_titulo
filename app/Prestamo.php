@@ -57,7 +57,7 @@ class Prestamo extends Model
     }
 
     /**
-     * scope busqueda fecha de solicitud
+     * scope busqueda monto
      */
     public function scopeMonto($query, $monto_ini, $monto_fin)
     {
@@ -218,6 +218,7 @@ class Prestamo extends Model
             return '';
         }
     }
+
 
     /**
      * Relación

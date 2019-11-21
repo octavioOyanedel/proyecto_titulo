@@ -1,7 +1,6 @@
 
 <div class="tab-pane fade" id="nav-area" role="tabpanel" aria-labelledby="nav-area-tab">
     <a class="btn btn-primary mt-4 mb-4" href="{{ route('areas.create') }}">Agregar área</a> 
-
     @if($areas->count() === 0)
         <div class="alert alert-warning mt-4 text-center" role="alert">
             <b>No existen registros.</b>

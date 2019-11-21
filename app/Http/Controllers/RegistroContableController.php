@@ -9,8 +9,10 @@ use App\Socio;
 use App\Asociado;
 use App\TipoRegistroContable;
 use App\Banco;
+use App\LogSistema;
 use Illuminate\Http\Request;
-use App\Http\Requests\IncorporarRegistroContableRequest;
+use App\Http\Requests\IncorporarRegistroContableRequest;    
+use App\Http\Requests\FiltrarContableRequest; 
 
 class RegistroContableController extends Controller
 {
@@ -50,8 +52,9 @@ class RegistroContableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(IncorporarRegistroContableRequest $request) //IncorporarRegistroContableRequest
+    public function store(IncorporarRegistroContableRequest $request) 
     {
+
         $registro = new RegistroContable;
         $registro->fecha = $request->fecha;
         $registro->numero_registro = $request->numero_registro;
@@ -65,12 +68,19 @@ class RegistroContableController extends Controller
         $registro->usuario_id = $request->usuario_id;
         $registro->socio_id = $request->socio_id;
         $registro->save();
+        $tipo = TipoRegistroContable::findOrfail($request->tipo_registro_contable_id);
         $socios = Socio::orderBy('apellido1')->get();
         $cuentas = Cuenta::all();
         $conceptos = Concepto::where('id','<>',57)->orderBy('nombre')->get();
         $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
         $asociados = Asociado::orderBy('concepto')->get();
         session(['mensaje' => 'Registro contable agregado con éxito.']);
+        if($request->tipo_registro_contable_id === 1){
+            LogSistema::registrarAccion('Registro contable agregado N°: '.$request->numero_registro.', tipo: '.$tipo->nombre.', cheque: '.$request->cheque);
+        }else{
+            LogSistema::registrarAccion('Registro contable agregado N°: '.$request->numero_registro.', tipo: '.$tipo->nombre);           
+        }
+
         return redirect()->route('contables.create', compact('tipos_registro','cuentas','conceptos','socios','asociados'));  
     }
 
@@ -171,4 +181,39 @@ class RegistroContableController extends Controller
             return response()->json($coleccion);
         }
     }   
+
+    /**
+     * Busca datos personalizados.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function filtroContablesForm(Request $request)
+    {
+        $socios = Socio::orderBy('apellido1')->get();
+        $cuentas = Cuenta::all();
+        $conceptos = Concepto::orderBy('nombre')->get();
+        $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
+        $asociados = Asociado::orderBy('concepto')->get();
+        return view('sind1.contables.busqueda', compact('tipos_registro', 'cuentas', 'socios', 'asociados'));
+    }
+
+    /**
+     * Busca datos personalizados.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function filtroContables(FiltrarContableRequest $request)
+    {
+        $registros = RegistroContable::orderBy('fecha','DESC')
+        ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+        ->monto($request->monto_ini, $request->monto_fin)
+        ->tipoRegistroContableId($request->tipo_registro_contable_id)
+        ->cuentaId($request->cuenta_id)
+        ->conceptoId($request->concepto_id)
+        ->socioId($request->socio_id)
+        ->asociadoId($request->asociado_id)
+        ->detalle($request->detalle)        
+        ->paginate(15);
+        return view('sind1.contables.index', compact('registros'));   
+    }
 }

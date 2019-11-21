@@ -6,7 +6,7 @@
     <label for="concepto_id" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><button type="button" class="btn btn-sm btn-outline-dark rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Debe seleccionar el tipo de registro antes de seleccionar el concepto.">?</button><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Concepto') }}</label>
     <div class="col-md-6">
         <select id="concepto_id" class="default-selects form-control @error('concepto_id') is-invalid @enderror" name="concepto_id" required autocomplete="concepto_id" autofocus>
-            <option selected="true" value="-1">Seleccione...</option>
+            <option selected="true" value="">Seleccione...</option>
         </select>
 
         {{-- validacion php --}}

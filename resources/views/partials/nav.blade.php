@@ -64,7 +64,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item sub-item" href="{{ route('contables.create') }}">Registrar</a>
                     <a class="dropdown-item sub-item" href="{{ route('contables.index') }}">Listar</a>
-                    <a class="dropdown-item sub-item" href="{{ route('filtro_contables') }}">Filtrar</a>
+                    <a class="dropdown-item sub-item" href="{{ route('filtro_contables_form') }}">Filtrar</a>
                     <a class="dropdown-item sub-item" href="{{ route('crear_conciliacion') }}">Conciliación bancaria</a>
                     <a class="dropdown-item sub-item" href="">Anular registro</a>
                 </div>
@@ -77,7 +77,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item sub-item" href="{{ route('historial.index') }}">Listar</a>
-                    <a class="dropdown-item sub-item" href="{{ route('filtro_historial') }}">Filtrar</a>
+                    <a class="dropdown-item sub-item" href="{{ route('filtro_historial_form') }}">Filtrar</a>
                 </div>
             </li>
 

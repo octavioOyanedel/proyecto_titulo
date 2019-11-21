@@ -8,20 +8,16 @@
                 <div class="card-header text-center"><h3 class="mb-0">Búsqueda Filtrada Historial</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
                     <!-- Formulario -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('filtro_historial') }}">
                         @csrf  
                         <!-- Fecha inicio -->
                         <div class="text-center alert alert-secondary" role="alert"><b>Fecha</b></div>
                         <div class="form-group row">
                             <label for="fecha_ini" class="col-md-4 col-form-label text-md-right">{{ __('Inicio') }}</label>
                             <div class="col-md-6">
-                                <input id="fecha_ini" type="date" class="form-control @error('fecha_ini') is-invalid @enderror" name="fecha_ini" value="{{ old('fecha_ini') }}" required autocomplete="fecha_ini" autofocus>
+                                <input id="fecha_ini" type="date" class="form-control @error('fecha_ini') is-invalid @enderror" name="fecha_ini" value="{{ old('fecha_ini') }}" autocomplete="fecha_ini" autofocus>
                                 @error('fecha_ini')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -33,7 +29,7 @@
                         <div class="form-group row">
                             <label for="fecha_fin" class="col-md-4 col-form-label text-md-right">{{ __('Término') }}</label>
                             <div class="col-md-6">
-                                <input id="fecha_fin" type="date" class="form-control @error('fecha_fin') is-invalid @enderror" name="fecha_fin" value="{{ old('fecha_fin') }}" required autocomplete="fecha_fin" autofocus>
+                                <input id="fecha_fin" type="date" class="form-control @error('fecha_fin') is-invalid @enderror" name="fecha_fin" value="{{ old('fecha_fin') }}" autocomplete="fecha_fin" autofocus>
                                 @error('fecha_fin')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

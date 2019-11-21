@@ -10,7 +10,8 @@ use App\EstadoSocio;
 use App\Nacionalidad;
 use App\Prestamo;
 use App\CargaFamiliar;
-use App\Interes;
+use App\Interes;    
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarSocioRequest;
 use App\Http\Requests\EditarSocioRequest;
@@ -51,9 +52,13 @@ class SocioController extends Controller
      */
     public function store(IncorporarSocioRequest $request)
     {
+        if($request->ciudad_id === 'Seleccione...'){
+            $request->ciudad_id = null;
+        }
         Socio::create($request->all());
         $socio = Socio::obtenerUltimoSocioIngresado();
         session(['mensaje' => 'Socio incorporado con éxito.']);
+        LogSistema::registrarAccion('Socio incorporado: '.$socio->nombre1.' '.$socio->nombre2.' '.$socio->apellido1.' '.$socio->apellido2.' rut: '.$socio->rut);
         return redirect()->route('cargas.create',['id'=>$socio->id]);
     }
 
@@ -65,7 +70,7 @@ class SocioController extends Controller
      */
     public function show(Socio $socio)
     {
-        $prestamos = $socio->prestamos()->paginate(10);
+        $prestamos = $socio->prestamos()->paginate(15);
         $estudios = $socio->estudios_realizados_socios;
         $cargas = $socio->cargas_familiares;
         return view('sind1.socios.show', compact('socio','prestamos','estudios','cargas'));
@@ -96,6 +101,9 @@ class SocioController extends Controller
      */
     public function update(EditarSocioRequest $request, Socio $socio)
     {
+        if($request->ciudad_id === 'Seleccione...'){
+            $request->ciudad_id = null;
+        }
         $modificar = Socio::findOrFail($socio->id);
         $modificar->nombre1 = $request->nombre1;
         $modificar->nombre2 = $request->nombre2;
@@ -120,6 +128,7 @@ class SocioController extends Controller
         $modificar->nacionalidad_id = $request->nacionalidad_id;
         $modificar->update();
         session(['mensaje' => 'Socio editado con éxito.']);
+        LogSistema::registrarAccion('Socio editado: '.$socio->nombre1.' '.$socio->nombre2.' '.$socio->apellido1.' '.$socio->apellido2.' rut: '.$socio->rut);        
         return redirect()->route('home');
     }
 
@@ -136,6 +145,7 @@ class SocioController extends Controller
         $socio->update();
         $socio->delete();
         session(['mensaje' => 'Socio desvinculado con éxito.']);
+        LogSistema::registrarAccion('Socio desvinculado: '.$socio->nombre1.' '.$socio->nombre2.' '.$socio->apellido1.' '.$socio->apellido2.' rut: '.$socio->rut);
         return redirect()->route('home');
     }
 

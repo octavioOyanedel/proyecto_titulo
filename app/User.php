@@ -95,7 +95,7 @@ class User extends Authenticatable
      */
     public function LogsSistema()
     {
-        return $this->hasMany('App\LogSistema');
+        return $this->belongsToMany('App\LogSistema');
     }
 
     /**
