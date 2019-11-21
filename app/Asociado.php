@@ -31,12 +31,4 @@ class Asociado extends Model
     {
         $this->attributes['nombre'] = formatoNombres($value);
     }
-
-    /**
-     * mutator nombre  
-     */
-    public function setConceptoAttribute($value)
-    {
-        $this->attributes['concepto'] = formatoNombres($value);
-    }
 }

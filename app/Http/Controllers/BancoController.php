@@ -38,7 +38,7 @@ class BancoController extends Controller
     {
         Banco::create($request->all());
         session(['mensaje' => 'Banco agregado con éxito.']);
-        return redirect()->route('mantenedor_contables');
+        return redirect()->route('mantenedor_contable_banco');
     }
 
     /**
@@ -77,7 +77,7 @@ class BancoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update(); 
         session(['mensaje' => 'Banco editado con éxito.']); 
-        return redirect()->route('mantenedor_contables');
+        return redirect()->route('mantenedor_contable_banco');
     }
 
     /**
@@ -90,6 +90,6 @@ class BancoController extends Controller
     {
         Banco::destroy($banco->id);
         session(['mensaje' => 'Banco eliminado con éxito.']);        
-        return redirect()->route('mantenedor_contables'); 
+        return redirect()->route('mantenedor_contable_banco'); 
     }
 }

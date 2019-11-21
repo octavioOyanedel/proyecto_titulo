@@ -40,7 +40,7 @@ class ConceptoController extends Controller
     {
         Concepto::create($request->all());
         session(['mensaje' => 'Concepto agregado con éxito.']);
-        return redirect()->route('mantenedor_contables');
+        return redirect()->route('mantenedor_contable_concepto');
     }
 
     /**
@@ -80,7 +80,7 @@ class ConceptoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Concepto editado con éxito.']);
-        return redirect()->route('mantenedor_contables');
+        return redirect()->route('mantenedor_contable_concepto');
     }
 
     /**
@@ -93,6 +93,6 @@ class ConceptoController extends Controller
     {
         Concepto::destroy($concepto->id);
         session(['mensaje' => 'Concepto eliminado con éxito.']);        
-        return redirect()->route('mantenedor_contables'); 
+        return redirect()->route('mantenedor_contable_concepto'); 
     }
 }

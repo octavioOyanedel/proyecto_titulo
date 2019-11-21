@@ -39,7 +39,7 @@ class EstadoGradoAcademicoController extends Controller
     {
         EstadoGradoAcademico::create($request->all());
         session(['mensaje' => 'Estado nivel agregado con éxito.']);
-        return redirect()->route('mantenedor_estudios');
+        return redirect()->route('mantenedor_estudio_estado_nivel');
     }
 
     /**
@@ -80,7 +80,7 @@ class EstadoGradoAcademicoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Estado nivel educacional editado con éxito.']); 
-        return redirect()->route('mantenedor_estudios');
+        return redirect()->route('mantenedor_estudio_estado_nivel');
     }
 
     /**
@@ -93,6 +93,6 @@ class EstadoGradoAcademicoController extends Controller
     {
         EstadoGradoAcademico::destroy($id);
         session(['mensaje' => 'Estado nivel educacional eliminado con éxito.']);        
-        return redirect()->route('mantenedor_estudios');  
+        return redirect()->route('mantenedor_estudio_estado_nivel');  
     }
 }

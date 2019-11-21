@@ -14,7 +14,7 @@
 
 @switch(request()->path())
     {{-- mantenedor --}}
-    @case('mantenedor_cargas')
+    @case('mantenedor_carga_parentesco')
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     {{-- crear --}}

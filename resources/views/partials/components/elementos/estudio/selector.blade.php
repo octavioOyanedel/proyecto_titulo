@@ -14,7 +14,16 @@
 
 @switch(request()->path())
     {{-- mantenedor --}}
-    @case('mantenedor_estudios')
+    @case('mantenedor_estudio_nivel')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_estudio_institucion')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_estudio_estado_nivel')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_estudio_titulo')
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     {{-- crear --}}

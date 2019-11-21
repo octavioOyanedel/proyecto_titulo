@@ -144,10 +144,18 @@ Route::get('/mantenedor_socio_nacionalidad','MantenedorController@socioNacionali
 
 Route::get('/mantenedor_carga_parentesco','MantenedorController@cargaParentesco')->name('mantenedor_carga_parentesco')->middleware('auth');
 
-Route::get('/mantenedor_prestamos','MantenedorController@prestamos')->name('mantenedor_prestamos')->middleware('auth');
-Route::get('/mantenedor_contables','MantenedorController@contables')->name('mantenedor_contables')->middleware('auth');
-Route::get('/mantenedor_cargas','MantenedorController@cargas')->name('mantenedor_cargas')->middleware('auth');
-Route::get('/mantenedor_estudios','MantenedorController@estudios')->name('mantenedor_estudios')->middleware('auth');
+Route::get('/mantenedor_estudio_nivel','MantenedorController@estudioNivel')->name('mantenedor_estudio_nivel')->middleware('auth');
+Route::get('/mantenedor_estudio_institucion','MantenedorController@estudioInstitucion')->name('mantenedor_estudio_institucion')->middleware('auth');
+Route::get('/mantenedor_estudio_estado_nivel','MantenedorController@estudioEstadoNivel')->name('mantenedor_estudio_estado_nivel')->middleware('auth');
+Route::get('/mantenedor_estudio_titulo','MantenedorController@estudioTitulo')->name('mantenedor_estudio_titulo')->middleware('auth');
+
+Route::get('/mantenedor_prestamo_forma_pago','MantenedorController@prestamoFormaPago')->name('mantenedor_prestamo_forma_pago')->middleware('auth');
+
+Route::get('/mantenedor_contable_cuenta','MantenedorController@contableCuenta')->name('mantenedor_contable_cuenta')->middleware('auth');
+Route::get('/mantenedor_contable_banco','MantenedorController@contableBanco')->name('mantenedor_contable_banco')->middleware('auth');
+Route::get('/mantenedor_contable_concepto','MantenedorController@contableConcepto')->name('mantenedor_contable_concepto')->middleware('auth');
+Route::get('/mantenedor_contable_tipo_cuenta','MantenedorController@contableTipoCuenta')->name('mantenedor_contable_tipo_cuenta')->middleware('auth');
+Route::get('/mantenedor_contable_asociado','MantenedorController@contableAsociado')->name('mantenedor_contable_asociado')->middleware('auth');
 
 //eliminar
 Route::get('/eliminar_socio_form/{id}','SocioController@mostrarEliminarSocio')->name('eliminar_socio_form')->middleware('auth');

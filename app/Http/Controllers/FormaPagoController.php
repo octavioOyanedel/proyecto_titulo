@@ -39,7 +39,7 @@ class FormaPagoController extends Controller
     {
         FormaPago::create($request->all());
         session(['mensaje' => 'Forma de pago agregada con éxito.']);
-        return redirect()->route('mantenedor_prestamos');
+        return redirect()->route('mantenedor_prestamo_forma_pago');
     }
 
     /**
@@ -80,7 +80,7 @@ class FormaPagoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Forma de pago editada con éxito.']); 
-        return redirect()->route('mantenedor_prestamos');
+        return redirect()->route('mantenedor_prestamo_forma_pago');
     }
 
     /**
@@ -93,6 +93,6 @@ class FormaPagoController extends Controller
     {
         FormaPago::destroy($id);
         session(['mensaje' => 'Forma de pago eliminada con éxito.']);        
-        return redirect()->route('mantenedor_prestamos'); 
+        return redirect()->route('mantenedor_prestamo_forma_pago'); 
     }
 }

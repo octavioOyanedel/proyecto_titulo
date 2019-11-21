@@ -38,7 +38,7 @@ class AsociadoController extends Controller
     {
         Asociado::create($request->all());         
         session(['mensaje' => 'Asociado agregado con éxito.']);        
-        return redirect()->route('mantenedor_contables');
+        return redirect()->route('mantenedor_contable_asociado');
     }
 
     /**
@@ -78,7 +78,7 @@ class AsociadoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Asociado editado con éxito.']);
-        return redirect()->route('mantenedor_contables');
+        return redirect()->route('mantenedor_contable_asociado');
     }
 
     /**
@@ -91,6 +91,6 @@ class AsociadoController extends Controller
     {
         Asociado::destroy($asociado->id);
         session(['mensaje' => 'Asociado eliminado con éxito.']);        
-        return redirect()->route('mantenedor_contables'); 
+        return redirect()->route('mantenedor_contable_asociado'); 
     }
 }

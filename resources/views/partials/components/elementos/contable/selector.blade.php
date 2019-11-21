@@ -36,9 +36,21 @@
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>        
     @break
     {{-- mantenedor --}}
-    @case('mantenedor_contables')
+    @case('mantenedor_contable_cuenta')
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
+    @case('mantenedor_contable_banco')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_contable_concepto')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_contable_tipo_registro')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    @case('mantenedor_contable_asociado')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break    
     {{-- listar --}}
     @case('contables')
 

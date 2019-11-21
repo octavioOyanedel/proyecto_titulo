@@ -22,7 +22,7 @@
                         @method('DELETE')                   
 
 
-                        <a class="btn btn-secondary" href="{{ route('mantenedor_prestamos') }}" role="button">Cancelar</a>
+                        <a class="btn btn-secondary" href="{{ route('mantenedor_prestamo_forma_pago') }}" role="button">Cancelar</a>
                         <button type="submit" class="btn btn-danger">Aceptar</button>      
                     </form>   
                 </div>

@@ -18,7 +18,42 @@
                             <b>No existen registros.</b>
                         </div>
                     @else  
-                    <div><a href="">Filtro</a></div>                   
+<div>
+    <form class="form-inline float-right">
+
+        <div class="input-group mb-2 mr-sm-2">
+            <select id="inputState" class="form-control form-control-sm">
+                <option selected>N° Registros</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-2 mr-sm-2">
+            <select id="inputState" class="form-control form-control-sm">
+                <option selected>Columna</option>
+                <option>Primer nombre</option>
+                <option>Apellido paterno</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-2 mr-sm-2">
+            <select id="inputState" class="form-control form-control-sm">
+                <option selected>Orden</option>
+                <option>Ascendente</option>
+                <option>Descendente</option>                
+            </select>
+        </div>
+
+        <div class="form-check mb-2 mr-sm-2">
+            <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+            <label class="form-check-label" for="inlineFormCheck">Incluir socios descinculados</label>
+        </div>
+        <button type="submit" class="btn btn-sm btn-secondary mb-2">Filtrar</button>
+    </form>
+</div>                   
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered">
                                 <thead>

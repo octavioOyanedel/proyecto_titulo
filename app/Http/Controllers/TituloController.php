@@ -40,7 +40,7 @@ class TituloController extends Controller
     {
         Titulo::create($request->all());
         session(['mensaje' => 'Título agregado con éxito.']);
-        return redirect()->route('mantenedor_estudios');
+        return redirect()->route('mantenedor_estudio_titulo');
     }
 
     /**
@@ -80,7 +80,7 @@ class TituloController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Título editado con éxito.']);  
-        return redirect()->route('mantenedor_estudios');
+        return redirect()->route('mantenedor_estudio_titulo');
     }
 
     /**
@@ -93,6 +93,6 @@ class TituloController extends Controller
     {
         Titulo::destroy($titulo->id);
         session(['mensaje' => 'Título eliminado con éxito.']);        
-        return redirect()->route('mantenedor_estudios');  
+        return redirect()->route('mantenedor_estudio_titulo');  
     }
 }

@@ -22,7 +22,7 @@
         <script src="{{ asset('js/switch_pago_cheque.js') }}" defer></script>
     @break
     {{-- mantenedor --}}
-    @case('mantenedor_prestamos')
+    @case('mantenedor_prestamo_forma_pago')
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     {{-- mantenedor --}}

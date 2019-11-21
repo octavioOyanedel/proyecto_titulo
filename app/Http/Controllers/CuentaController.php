@@ -42,7 +42,7 @@ class CuentaController extends Controller
     {
         Cuenta::create($request->all());
         session(['mensaje' => 'Cuenta agregada con éxito.']);
-        return redirect()->route('mantenedor_contables');
+        return redirect()->route('mantenedor_contable_cuenta');
     }
 
     /**
@@ -85,7 +85,7 @@ class CuentaController extends Controller
         $modificar->banco_id = $request->banco_id;
         $modificar->update();             
         session(['mensaje' => 'Cuenta editada con éxito.']);
-        return redirect()->route('mantenedor_contables');
+        return redirect()->route('mantenedor_contable_cuenta');
     }
 
     /**
@@ -98,7 +98,7 @@ class CuentaController extends Controller
     {
         Cuenta::destroy($cuenta->id);
         session(['mensaje' => 'Cuenta eliminada con éxito.']);        
-        return redirect()->route('mantenedor_contables'); 
+        return redirect()->route('mantenedor_contable_cuenta'); 
     }
 
     /**

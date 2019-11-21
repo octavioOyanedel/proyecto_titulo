@@ -100,6 +100,9 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item sub-item" href="{{ route('mantenedor_socio_sede') }}">Socios</a>
                     <a class="dropdown-item sub-item" href="{{ route('mantenedor_carga_parentesco') }}">Cargas Familiares</a>
+                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_estudio_nivel') }}">Nivel Educacional</a>
+                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_prestamo_forma_pago') }}">Préstamos</a>    
+                    <a class="dropdown-item sub-item" href="{{ route('mantenedor_contable_cuenta') }}">Registros Contables</a>                                     
                 </div>
             </li>
         </ul>

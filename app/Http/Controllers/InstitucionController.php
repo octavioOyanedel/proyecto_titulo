@@ -42,7 +42,7 @@ class InstitucionController extends Controller
     {
         Institucion::create($request->all()); 
         session(['mensaje' => 'Institución agregada con éxito.']);
-        return redirect()->route('mantenedor_estudios');
+        return redirect()->route('mantenedor_estudio_institucion');
     }
 
     /**
@@ -83,7 +83,7 @@ class InstitucionController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();     
         session(['mensaje' => 'Institución educacional editada con éxito.']);     
-        return redirect()->route('mantenedor_estudios');
+        return redirect()->route('mantenedor_estudio_institucion');
     }
 
     /**
@@ -96,6 +96,6 @@ class InstitucionController extends Controller
     {
         Institucion::destroy($id);
         session(['mensaje' => 'Institución educacional eliminada con éxito.']);        
-        return redirect()->route('mantenedor_estudios');  
+        return redirect()->route('mantenedor_estudio_institucion');  
     }
 }
