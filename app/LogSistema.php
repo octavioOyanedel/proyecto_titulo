@@ -41,16 +41,59 @@ class LogSistema extends Model
         }
     }
 
+//***************************************************************************************************************
+
     /**
-     * scope busqueda usuario
+     * scope busqueda fecha
      */
-    public function scopeUsuarioId($query, $usuario)
+    public function scopeFechaUnica($query, $fecha)
     {
-        if($usuario != null){
-            return $query->Where('usuario_id','=',$usuario);
+        $fecha_formarteada = date("Y-m-d", strtotime($fecha));
+        if($fecha != null){
+            return $query->orWhere('fecha','LIKE',"%$fecha_formarteada%");
         }
     }
-//***************************************************************************************************************
+
+    /**
+     * scope busqueda accion
+     */
+    public function scopeAccion($query, $accion)
+    {
+        if($accion != null){
+            return $query->orWhere('accion','LIKE',"%$accion%");
+        }
+    }
+
+    /**
+     * scope busqueda IP
+     */
+    public function scopeIp($query, $ip)
+    {
+        if($ip != null){
+            return $query->orWhere('ip','=',$ip);
+        }
+    }
+
+    /**
+     * scope busqueda navegador
+     */
+    public function scopeNavegador($query, $navegador)
+    {
+        if($navegador != null){
+            return $query->orWhere('navegador','=',$navegador);
+        }
+    }
+
+    /**
+     * scope busqueda navegador
+     */
+    public function scopeSistema($query, $sistema)
+    {
+        if($sistema != null){
+            return $query->orWhere('sistema','LIKE',"%$sistema%");
+        }
+    }
+
     /**
      * Relación 
      */

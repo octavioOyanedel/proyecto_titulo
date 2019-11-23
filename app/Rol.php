@@ -26,4 +26,12 @@ class Rol extends Model
     {
         return $this->belongsTo('App\Usuario');
     }
+
+    /**
+     * Obtener ultimo registro creado
+     */
+    static public function obtenerRolPorNombre($nombre)
+    {
+        return Rol::where('nombre','=',$nombre)->first();
+    }
 }

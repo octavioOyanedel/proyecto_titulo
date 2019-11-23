@@ -20,16 +20,85 @@ class UsuarioController extends Controller
      */
     public function index(Request $request)
     {
+
+        if(request()->has('registros') && request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'apellido1';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'DESC';
+        }
+
         $roles = Rol::orderBy('nombre','ASC')->get();
+
         $campo = $request->get('buscar_usuario');
-        $usuarios = User::orderBy('apellido1','ASC')
-        ->nombre1($campo)
-        ->nombre2($campo)
-        ->apellido1($campo)
-        ->apellido2($campo)
-        ->email($campo)
-        ->paginate(15);
-        return view('sind1.usuario.index', compact('usuarios','roles'));
+        if(Rol::obtenerRolPorNombre($campo) != null){
+            $campo = Rol::obtenerRolPorNombre($campo)->id;
+        }
+
+        switch ($columna) {
+            case 'nombre1':
+                $usuarios = User::orderBy('roles.nombre', $orden)
+                ->join('roles', 'usuarios.rol_id', '=', 'roles.id')
+                ->nombre1($campo)
+                ->nombre2($campo)
+                ->apellido1($campo)
+                ->apellido2($campo)
+                ->email($campo)
+                ->rolId($campo)               
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_usuario' => $campo,                               
+                ]); 
+            break;
+            case 'apellido1':
+                $usuarios = User::orderBy('roles.nombre', $orden)
+                ->join('roles', 'usuarios.rol_id', '=', 'roles.id')
+                ->nombre1($campo)
+                ->nombre2($campo)
+                ->apellido1($campo)
+                ->apellido2($campo)
+                ->email($campo)
+                ->rolId($campo)               
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_usuario' => $campo,                               
+                ]); 
+            break;                                                                                    
+            default:
+                $usuarios = User::orderBy($columna, $orden)
+                ->nombre1($campo)
+                ->nombre2($campo)
+                ->apellido1($campo)
+                ->apellido2($campo)
+                ->email($campo)
+                ->rolId($campo)               
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_usuario' => $campo,                               
+                ]); 
+            break;
+        }
+
+        $total_consulta = $usuarios->total();
+
+        return view('sind1.usuario.index', compact('usuarios','roles','total_consulta'));
     }
 
     /**

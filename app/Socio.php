@@ -106,16 +106,6 @@ class Socio extends Model
     }
 
     /**
-     * scope busqueda direccion
-     */
-    public function scopeDireccionFiltro($query, $direccion)           
-    {
-        if($direccion != null){
-            return $query->Where('direccion','=',$direccion);
-        }
-    }
-
-    /**
      * scope busqueda sede
      */
     public function scopeSedeId($query, $sede_id)
@@ -171,7 +161,7 @@ class Socio extends Model
     public function scopeRut($query, $rut)
     {
         if ($rut) {
-            return $query->orWhere('rut', 'LIKE', "%$rut%");
+            return $query->orWhere('rut', '=', $rut);
         }
     }
     
@@ -219,7 +209,7 @@ class Socio extends Model
     public function scopeCelular($query, $celular)
     {
         if ($celular) {
-            return $query->orWhere('celular', 'LIKE', "%$celular%");
+            return $query->orWhere('celular', '=', $celular);
         }
     }
 
@@ -229,7 +219,7 @@ class Socio extends Model
     public function scopeAnexo($query, $anexo)
     {
         if ($anexo) {
-            return $query->orWhere('anexo', 'LIKE', "%$anexo%");
+            return $query->orWhere('anexo', '=', $anexo);
         }
     }
 
@@ -239,17 +229,17 @@ class Socio extends Model
     public function scopeCorreo($query, $correo)
     {
         if ($correo) {
-            return $query->orWhere('correo', 'LIKE', "%$correo%");
+            return $query->orWhere('correo', '=', $correo);
         }
     }
 
     /**
      * scope busqueda por anexo
      */
-    public function scopeDireccion($query, $direccion)
+    public function scopeNumeroSocio($query, $numero)
     {
-        if ($direccion) {
-            return $query->orWhere('direccion', 'LIKE', "%$direccion%");
+        if ($numero) {
+            return $query->orWhere('numero_socio', '=', $numero);
         }
     }
 

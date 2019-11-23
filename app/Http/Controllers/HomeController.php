@@ -25,21 +25,25 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        //valores por defecto
-        $orden = 'DESC';
-        $registros = 15;
-        $columna = 'fecha_sind1';
+        //$orders = Socio::onlyTrashed()->orderBy('apellido1','ASC')->get();
+        //dd($request);
 
-        if(request()->has('registros') && request('registros') != '0'){
-             $registros = request('registros');
+        if(request()->has('registros') && request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
         }
 
-        if(request()->has('columna') && request('columna') != '0'){
-             $columna = request('columna');
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'fecha_sind1';
         }
 
-        if(request()->has('orden') && request('orden') != '0'){
-             $orden = request('orden');
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'DESC';
         }
 
         if($columna === 'genero' && $orden === 'DESC'){
@@ -48,11 +52,15 @@ class HomeController extends Controller
             $orden = 'DESC';
         }
 
+        $varones = Socio::where('genero','=','Varón')->count();
+        $damas = Socio::where('genero','=','Dama')->count();
+        $total = Socio::all()->count();
+
         $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
         
         $campo = $request->get('buscar_socio');
 
-        switch ($columna) {
+        switch ($columna) {        
             case 'sede_id':
                 $socios = Socio::orderBy('sedes.nombre',$orden)
                 ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
@@ -64,11 +72,11 @@ class HomeController extends Controller
                 ->celular($campo)
                 ->anexo($campo)
                 ->correo($campo)
-                ->direccion($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden,           
+                    'orden' => $orden,
+                    'buscar_socio' => $campo,            
                 ]); 
             break;
             case 'area_id':
@@ -82,11 +90,11 @@ class HomeController extends Controller
                 ->celular($campo)
                 ->anexo($campo)
                 ->correo($campo)
-                ->direccion($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden,           
+                    'orden' => $orden,    
+                    'buscar_socio' => $campo,        
                 ]); 
             break;     
             case 'cargo_id':
@@ -100,11 +108,11 @@ class HomeController extends Controller
                 ->celular($campo)
                 ->anexo($campo)
                 ->correo($campo)
-                ->direccion($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden,           
+                    'orden' => $orden, 
+                    'buscar_socio' => $campo,                               
                 ]); 
             break;                                   
             default:
@@ -117,16 +125,19 @@ class HomeController extends Controller
                 ->celular($campo)
                 ->anexo($campo)
                 ->correo($campo)
-                ->direccion($campo)
-                ->paginate( $request->registros)->appends([
+                ->numeroSocio($campo)
+                ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden,           
+                    'orden' => $orden,   
+                    'buscar_socio' => $campo,                             
                 ]); 
             break;
         }
 
-        return view('home', compact('socios','estados'));
+        $total_consulta = $socios->total();
+
+        return view('home', compact('socios','estados','varones','damas','total','total_consulta'));
     }
 
 }

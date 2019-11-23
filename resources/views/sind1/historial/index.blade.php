@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="ml-5 mr-5">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -15,6 +15,9 @@
                             <b>No existen registros.</b>
                         </div>
                     @else 
+                        <div>                               
+                            @include('partials.components.filtros.historial') 
+                        </div>                     
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
@@ -24,7 +27,7 @@
                                         <th scope="col">Acción</th>
                                         <th class="text-center" scope="col">IP</th>
                                         <th class="text-center" scope="col">Navegador</th>
-                                        <th class="text-center" scope="col">Sistema</th>
+                                        <th class="text-center" scope="col">Sistema operativo</th>
                                     </tr>
                                 </thead>
                                 <tbody>

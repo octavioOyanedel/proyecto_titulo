@@ -45,8 +45,8 @@ $(window).on('load',function(){
 	}
 
 	if(ruta.localeCompare('/filtro_historial') === 0 || ruta.localeCompare('/historial') === 0 || ruta.localeCompare('/filtro_historial_form') === 0){	
-		$('#span-historial').addClass('font-weight-bold text-uppercase text-primary');
-		$('#buscador-socio').removeClass('d-none');
+		$('#span-historial').addClass('font-weight-bold text-uppercase text-danger');
+		$('#buscador-historial').removeClass('d-none');
 	}
 
 	if(ruta.localeCompare('/register') === 0 || ruta.search('/usuarios') != -1){

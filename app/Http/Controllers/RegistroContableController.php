@@ -23,12 +23,41 @@ class RegistroContableController extends Controller
      */
     public function index(Request $request)
     {
+
+        if(request()->has('registros') && request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'fecha';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'DESC';
+        } 
+
         $campo = $request->get('buscar_registro');
-        $registros = RegistroContable::orderBy('fecha','DESC')
+
+        $registros = RegistroContable::orderBy($columna, $orden)
         ->numeroRegistro($campo)
         ->cheque($campo)
-        ->paginate(15);
-        return view('sind1.contables.index', compact('registros'));       
+        ->montoUnico($campo)                                     
+        ->paginate($registros)->appends([
+            'registros' => $registros,
+            'columna' => $columna,
+            'orden' => $orden,
+            'buscar_prestamo' => $campo,                               
+        ]); 
+
+        $total_consulta = $registros->total();
+
+        return view('sind1.contables.index', compact('registros','total_consulta'));       
     }
 
     /**

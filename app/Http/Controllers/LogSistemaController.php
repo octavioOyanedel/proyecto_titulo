@@ -14,10 +14,79 @@ class LogSistemaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $registros = LogSistema::orderBy('created_at', 'DESC')->paginate(15);
-        return view('sind1.historial.index', compact('registros'));
+
+        if(request()->has('registros') && request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'fecha';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'DESC';
+        }
+
+        $campo = $request->get('buscar_historial'); 
+
+        switch ($columna) {
+            case 'nombre1':
+                $registros = LogSistema::orderBy('usuarios.nombre1', $orden)
+                ->join('usuarios', 'log_sistema.usuario_id', '=', 'usuarios.id')
+                ->fechaUnica($campo)
+                ->accion($campo)
+                ->ip($campo)
+                ->navegador($campo)
+                ->sistema($campo)                 
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_historial' => $campo,                               
+                ]); 
+            break;
+            case 'apellido1':
+                $registros = LogSistema::orderBy('usuarios.apellido1', $orden)
+                ->join('usuarios', 'log_sistema.usuario_id', '=', 'usuarios.id')
+                ->fechaUnica($campo)
+                ->accion($campo)
+                ->ip($campo)
+                ->navegador($campo)
+                ->sistema($campo)                 
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_historial' => $campo,                               
+                ]); 
+            break;                                                                              
+            default:
+                $registros = LogSistema::orderBy($columna, $orden)
+                ->fechaUnica($campo)
+                ->accion($campo)
+                ->ip($campo)
+                ->navegador($campo)
+                ->sistema($campo)                
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_historial' => $campo,                               
+                ]); 
+            break;
+        }
+
+        $total_consulta = $registros->total();
+
+        return view('sind1.historial.index', compact('registros','total_consulta'));
     }
 
     /**

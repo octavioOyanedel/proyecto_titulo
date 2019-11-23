@@ -26,15 +26,139 @@ class PrestamoController extends Controller
      */
     public function index(Request $request)
     {
+
+        if(request()->has('registros') && request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'fecha_solicitud';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'DESC';
+        } 
+
         $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
 
         $campo = $request->get('buscar_prestamo');
-        $prestamos = Prestamo::orderBy('fecha_solicitud', 'DESC')
-        ->numeroEgreso($campo)
-        ->cheque($campo)
-        ->paginate(15);
 
-        return view('sind1.prestamos.index', compact('prestamos','formas_pago'));
+
+        if(Prestamo::obtenerSocioPorRut($campo) != null){
+            $campo = Prestamo::obtenerSocioPorRut($campo)->id;
+        }
+
+        switch ($columna) {
+            case 'socio_id':
+                $prestamos = Prestamo::orderBy('socios.apellido1', $orden)
+                ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
+                ->numeroEgreso($campo)
+                ->cheque($campo)
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;     
+            case 'rut':
+                $prestamos = Prestamo::orderBy('socios.rut', $orden)
+                ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
+                ->numeroEgreso($campo)
+                ->cheque($campo)              
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;
+            case 'tipo_cuenta_id':
+                $prestamos = Prestamo::orderBy('tipos_cuenta.nombre', $orden)
+                ->join('cuentas', 'prestamos.cuenta_id', '=', 'cuentas.id')
+                ->join('tipos_cuenta', 'cuentas.tipo_cuenta_id', '=', 'tipos_cuenta.id')
+                ->numeroEgreso($campo)
+                ->cheque($campo)               
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;
+            case 'numero':
+                $prestamos = Prestamo::orderBy('cuentas.numero', $orden)
+                ->join('cuentas', 'prestamos.cuenta_id', '=', 'cuentas.id')
+                ->numeroEgreso($campo)
+                ->cheque($campo)               
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;
+            case 'banco_id':
+                $prestamos = Prestamo::orderBy('bancos.nombre', $orden)
+                ->join('cuentas', 'prestamos.cuenta_id', '=', 'cuentas.id')
+                ->join('bancos', 'cuentas.banco_id', '=', 'bancos.id')
+                ->numeroEgreso($campo)
+                ->cheque($campo)             
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;
+            case 'forma_pago_id':
+                $prestamos = Prestamo::orderBy('formas_pago.nombre', $orden)
+                ->join('formas_pago', 'prestamos.forma_pago_id', '=', 'formas_pago.id')
+                ->numeroEgreso($campo)
+                ->cheque($campo)             
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;
+            case 'estado_deuda_id':
+                $prestamos = Prestamo::orderBy('estados_deuda.nombre', $orden)
+                ->join('estados_deuda', 'prestamos.estado_deuda_id', '=', 'estados_deuda.id')
+                ->numeroEgreso($campo)
+                ->cheque($campo)              
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;                                                               
+            default:
+                $prestamos = Prestamo::orderBy($columna, $orden)
+                ->numeroEgreso($campo)
+                ->cheque($campo)
+                ->rut($campo) 
+                ->montoUnico($campo)                                    
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;
+        }
+
+        $total_consulta = $prestamos->total();
+
+        return view('sind1.prestamos.index', compact('prestamos','formas_pago','total_consulta'));
     }
 
     /**

@@ -22,8 +22,7 @@
 @switch(request()->path())
     {{-- home --}}
     @case('home')
-        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
-        <script src="{{ asset('js/switch_boton_filtro_socios.js') }}" defer></script>        
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>    
     @break
     {{-- crear --}}
     @case('socios/create')
@@ -60,9 +59,6 @@
         <script src="{{ asset('js/ajax/cargar_ciudades.js') }}" defer></script>
         <script src="{{ asset('js/ajax/cargar_areas.js') }}" defer></script>
         <script src="{{ asset('js/switch_filtro_socios.js') }}" defer></script>
-    @break
-    @case('busqueda_filtrada')
-        <script src="{{ asset('js/switch_boton_filtro_socios.js') }}" defer></script> 
-    @break    
+    @break  
     @default
 @endswitch 

@@ -81,12 +81,22 @@ class User extends Authenticatable
     }
 
     /**
-     * scope busqueda por anexo
+     * scope busqueda por correo
      */
     public function scopeEmail($query, $correo)
     {
         if ($correo) {
-            return $query->orWhere('email', 'LIKE', "%$correo%");
+            return $query->orWhere('email', '=', $correo);
+        }
+    }
+
+    /**
+     * scope busqueda por rol
+     */
+    public function scopeRolId($query, $id)
+    {
+        if ($id) {
+            return $query->orWhere('rol_id', 'LIKE', "%$id%");
         }
     }
 

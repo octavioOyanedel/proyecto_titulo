@@ -17,14 +17,16 @@
                         <div class="alert alert-warning mt-4 text-center" role="alert">
                             <b>No existen registros.</b>
                         </div>
-                    @else  
-                        @include('partials.components.filtros.socios')                  
+                    @else 
+                        <div>                                                                                   
+                            @include('partials.components.filtros.socios')                         
+                        </div> 
+                 
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>                                        
                                         <th class="text-center" colspan="3" scope="col"></th>
-                                        <th class="text-center" title="Estado préstamo solicitado" scope="col">Préstamo</th>
                                         <th scope="col">Nombre</th>
                                         <th class="text-center" scope="col">Género</th>
                                         <th class="text-center" scope="col">Rut</th>
@@ -45,25 +47,9 @@
                                             <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('socios.show',$s) }}"><span>@svg('ver')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href="{{ route('socios.edit',$s) }}"><span>@svg('editar')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" href="{{ route('eliminar_socio_form',$s->id) }}"><span>@svg('eliminar')</span></a></td>
-                                            @if(buscarDeudaActiva($s->prestamos) != null || buscarDeudaActiva($s->prestamos) != '')
-                                            <td class="text-center" scope="row">
-                                                <a class="text-decoration-none" href="{{ route('prestamos.show',buscarPrestamoConDeudaActiva($s->prestamos)) }}">
-                                                    <span class="texto-deuda shadow-sm p-1 rounded
-                                                        @if(buscarDeudaActiva($s->prestamos) === 'Vigente')
-                                                            {{ 'bg-warning text-dark' }}
-                                                        @endif
-                                                        @if(buscarDeudaActiva($s->prestamos) === 'Atrasado')
-                                                            {{ 'bg-danger text-light' }}
-                                                        @endif                                                        
-                                                    ">{{ buscarDeudaActiva($s->prestamos) }}</span>
-                                                </a>
-                                            </td>
-                                            @else
-                                                <td class="text-center" title="Sin préstamo."> - </td>
-                                            @endif
                                             <td>@if($s->apellido2 != null) {{ $s->apellido1 }} {{ $s->apellido2 }}, @else {{ $s->apellido1 }}, @endif {{ $s->nombre1 }} {{ $s->nombre2 }}</td>
                                             <td class="text-center">{{ $s->genero }}</td>
-                                            <td>{{ $s->rut }}</td>
+                                            <td class="text-center">{{ $s->rut }}</td>
                                             <td class="text-center" title="{{ ($s->fecha_sind1 === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->fecha_sind1) }}</td>
                                             <td class="text-center" title="{{ ($s->numero_socio === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->numero_socio) }}</td>
                                             <td title="{{ ($s->correo === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->correo) }}</td>

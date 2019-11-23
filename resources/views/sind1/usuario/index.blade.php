@@ -16,15 +16,15 @@
                         <div class="alert alert-warning mt-4 text-center" role="alert">
                             <b>No existen registros.</b>
                         </div>
-                    @else                     
+                    @else    
+                    <div>
+                        @include('partials.components.filtros.usuarios') 
+                    </div>    
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-success" scope="col" title="">&nbsp;</th>
-                                        <th class="text-center text-success" scope="col" title="">&nbsp;</th>
-                                        <th class="text-center text-success" scope="col" title="">&nbsp;</th>
-                                        <th class="text-center text-success" scope="col" title="">&nbsp;</th>
+                                        <th colspan="4"></th>
                                         <th scope="col">Usuario</th>
                                         <th scope="col">Correo</th>
                                         <th scope="col">Rol</th>

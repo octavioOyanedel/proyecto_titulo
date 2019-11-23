@@ -14,6 +14,9 @@
                             <b>No existen registros.</b>
                         </div>
                     @else 
+                        <div>                               
+                            @include('partials.components.filtros.contables') 
+                        </div>                     
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>

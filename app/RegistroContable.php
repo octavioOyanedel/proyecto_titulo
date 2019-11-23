@@ -82,10 +82,10 @@ class RegistroContable extends Model
     /**
      * scope busqueda concepto
      */
-    public function scopeConceptoId($query, $concepto)
+    public function scopeConceptoId($query, $id)
     {
-        if($concepto != null && $concepto != 'Seleccione...'){
-            return $query->Where('concepto_id','=',$concepto);
+        if($id != null && $id != 'Seleccione...'){
+            return $query->Where('concepto_id','=',$id);
         }
     }
 
@@ -119,6 +119,16 @@ class RegistroContable extends Model
         }
     }
 //***************************************************************************************************************
+    /**
+     * scope busqueda monto
+     */
+    static public function scopeMontoUnico($query, $monto)
+    {
+        if($monto != null){
+            return $query->orWhere('monto','=', $monto);
+        }
+    }
+
 
     /**
      * scope busqueda por numero de registro
@@ -126,7 +136,7 @@ class RegistroContable extends Model
     public function scopeNumeroRegistro($query, $numero_registro)
     {
         if ($numero_registro) {
-            return $query->orWhere('numero_registro', 'LIKE', "%$numero_registro%");
+            return $query->orWhere('numero_registro', '=', $numero_registro);
         }
     }
 
@@ -136,7 +146,7 @@ class RegistroContable extends Model
     public function scopeCheque($query, $cheque)
     {
         if ($cheque) {
-            return $query->orWhere('cheque', 'LIKE', "%$cheque%");
+            return $query->orWhere('cheque', '=', $cheque);
         }
     }
 
@@ -241,4 +251,13 @@ class RegistroContable extends Model
     {
         return $this->belongsTo('App\Cuenta');
     } 
+
+    /**
+     * Obtener ultimo registro creado
+     */
+    static public function obtenerTipoRegistroContablePorNombre($nombre)
+    {
+        return TipoRegistroContable::where('nombre','=',$nombre)->first();
+    }
+
 }

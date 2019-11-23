@@ -92,24 +92,25 @@ class Prestamo extends Model
         }
     }
 
+
+//***************************************************************************************************************
     /**
-     * scope busqueda rut
+     * scope busqueda monto
      */
-    public function scopeRut($query, $rut)
+    static public function scopeMontoUnico($query, $monto)
     {
-        if($rut != null){
-            return $query->Where('rut','=',$rut);
+        if($monto != null){
+            return $query->orWhere('monto','=', $monto);
         }
     }
 
-//***************************************************************************************************************
     /**
      * scope busqueda por numero egreso
      */
     public function scopeNumeroEgreso($query, $numero_egreso)
     {
         if ($numero_egreso) {
-            return $query->orWhere('numero_egreso', 'LIKE', "%$numero_egreso%");
+            return $query->orWhere('numero_egreso', '=', $numero_egreso);
         }
     }
 
@@ -119,12 +120,22 @@ class Prestamo extends Model
     public function scopeCheque($query, $cheque)
     {
         if ($cheque) {
-            return $query->orWhere('cheque', 'LIKE', "%$cheque%");
+            return $query->orWhere('cheque', '=', $cheque);
         }
     }
 
     /**
-     * Modificador de monto
+     * scope busqueda rut
+     */
+    public function scopeRut($query, $id)
+    {
+        if($id != null){
+            return $query->orWhere('socio_id', '=', $id);
+        }
+    }
+
+    /**
+     * Modificador de cuenta
      */
     public function getCuentaIdAttribute($valor)
     {
@@ -347,6 +358,14 @@ class Prestamo extends Model
     static public function obtenerUltimoPrestamoIngresado()
     {
         return Prestamo::orderBy('created_at', 'DESC')->first();
+    }
+
+    /**
+     * Obtener ultimo registro creado
+     */
+    static public function obtenerSocioPorRut($rut)
+    {
+        return Socio::where('rut','=',$rut)->first();
     }
 
     /**
