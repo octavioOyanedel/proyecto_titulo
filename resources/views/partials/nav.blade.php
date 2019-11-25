@@ -107,50 +107,7 @@
             </li>
         </ul>
 
-        <!-- formulario búsqueda socio-->
-        <div id="buscador-socio" class="d-none">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('home') }}">
-                <button type="button" class="btn btn-sm btn-outline-primary rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de socio(s) por medio de: Nombre (primer o segundo nombre), apellido (paterno o materno), género (varón o dama), Rut (Ej. 11222333k), Fecha ingreso Sind1 (Ej. 01-01-2019), Número de socio, Correo, Celular y Anexo, Sede (Ej. casa central), Área (Ej. abastecimiento), Cargo (Ej. secretaria).">?</button>
-                <input class="form-control mr-sm-2" type="search" name="buscar_socio" placeholder="Buscar socio(s)" aria-label="Search">
-                <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-        </div>
+        @include('partials.components.nav.buscar')     
 
-
-        <!-- formulario búsqueda prestamo-->
-        <div id="buscador-prestamo" class="d-none">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('prestamos.index') }}">
-                <button type="button" class="btn btn-sm btn-outline-success rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de préstamo(s) por medio de: Estado préstamo (vigente, pagado, atrasado), Rut (Ej. 11222333k), Fecha de solicitud (Ej. 01-01-2019), Número de egreso, Número de cuenta (Ej. 001-001-1111), Método de pago (depósito o descuento por planilla), Cheque y Monto (Ej. 20000).">?</button>
-                <input class="form-control mr-sm-2" type="search" name="buscar_prestamo" placeholder="Buscar prestamo(s)" aria-label="Search">
-                <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-        </div>
-
-        <!-- formulario búsqueda registros contables-->
-        <div id="buscador-contable" class="d-none">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('contables.index') }}">
-                <button type="button" class="btn btn-sm btn-outline-dark rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de registro(s) contable(s) por medio de: Fecha de solicitud (Ej. 01-01-2019), Tipo de registro (egreso o ingreso), Número de registro, Cheque, Monto (Ej. 20000) y Concepto (Ej. préstamo).">?</button>
-                <input class="form-control mr-sm-2" type="search" name="buscar_registro" placeholder="Buscar registro(s)" aria-label="Search">
-                <button class="btn btn-dark my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-        </div>
-
-        <!-- formulario búsqueda log sistema-->
-        <div id="buscador-historial" class="d-none">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('historial.index') }}">
-                <button type="button" class="btn btn-sm btn-outline-danger rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de registro(s) por medio de: Correo, Fecha (Ej. 01-01-2019), Acción (Cualquiera de las palabras incluidas en esta celda Ej. -concepto- depósito, -cheque- 996699660, -nombre- Juan Soto, o -rut- con formato 11.222.333-k), IP, Navegador y Sistema operativo.">?</button>
-                <input class="form-control mr-sm-2" type="search" name="buscar_historial" placeholder="Buscar registro(s)" aria-label="Search">
-                <button class="btn btn-danger my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-        </div>
-
-        <!-- formulario búsqueda usuarios-->
-        <div id="buscador-usuario" class="d-none">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('usuarios.index') }}">
-                <button type="button" class="btn btn-sm btn-outline-danger rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de usuario(s) por medio de: Nombre (primer o segundo nombre), apellido (paterno o materno), Correo y Rol (Ej. usuario).">?</button>
-                <input class="form-control mr-sm-2" type="search" name="buscar_usuario" placeholder="Buscar usuario(s)" aria-label="Search">
-                <button class="btn btn-danger my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-        </div>
     </div>
 </nav>

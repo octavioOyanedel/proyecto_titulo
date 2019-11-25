@@ -13,15 +13,16 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     <h4 class="mt-4"></h4>
-
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_contable_cuenta') }}" role="button">Cuenta Bancaria</a>
-                    <a class="btn btn-outline-primary active" href="{{ route('mantenedor_contable_banco') }}" role="button">Banco</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_contable_concepto') }}" role="button">Concepto</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_contable_tipo_cuenta') }}" role="button">Tipo de Cuenta</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_contable_asociado') }}" role="button">Asociado</a>
+                    <div class="text-center">
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_contable_cuenta') }}" role="button">Cuenta Bancaria</a>
+                        <a class="btn btn-outline-success active" href="{{ route('mantenedor_contable_banco') }}" role="button">Banco</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_contable_concepto') }}" role="button">Concepto</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_contable_tipo_cuenta') }}" role="button">Tipo de Cuenta</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_contable_asociado') }}" role="button">Asociado</a>                        
+                    </div>
 
                     <div>
-                        <a class="btn btn-success mt-4 mb-4" href="{{ route('bancos.create') }}">Agregar Banco</a>
+                        <a class="btn btn-primary mt-4 mb-4" href="{{ route('bancos.create') }}">Agregar Banco</a>
                     </div>
 
                     @if($bancos->count() === 0)
@@ -29,6 +30,9 @@
                             <b>No existen registros.</b>
                         </div>
                     @else
+                        <div>                                                                                   
+                            @include('partials.components.filtros.banco')                         
+                        </div>                     
                         <div class="table-responsive">
                             <table class="table table-hover data-tables table-striped table-bordered" id="tabla-bancos">
                                 <thead>

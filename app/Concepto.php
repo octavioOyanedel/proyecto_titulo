@@ -19,6 +19,29 @@ class Concepto extends Model
     ];
 
     /**
+     * scope busqueda por concepto
+     */
+    public function scopeConcepto($query, $concepto)
+    {
+        if ($concepto) {
+            return $query->orWhere('nombre', 'LIKE', "%$concepto%");
+        }
+    }    
+
+    /**
+     * scope busqueda tipo de registro
+     */
+    public function scopeTipoRegistroContabele($query, $tipo)
+    {
+        if ($tipo) {
+            $tipo_id = TipoRegistroContable::obtenerTipoRegistroContablePorNombre($tipo);
+            if($tipo_id != null){
+                return $query->orWhere('tipo_registro_contable_id', '=', $tipo_id->id);
+            }
+        }
+    }
+
+    /**
      * Obtener tipo cuenta
      */
     static public function obtenerConceptoPorNombre($nombre)

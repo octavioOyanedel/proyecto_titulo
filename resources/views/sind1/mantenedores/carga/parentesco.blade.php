@@ -13,11 +13,12 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     <h4 class="mt-4"></h4>
-
-                    <a class="btn btn-outline-primary active" href="{{ route('mantenedor_carga_parentesco') }}" role="button">Parentesco</a>
+                    <div class="text-center">
+                        <a class="btn btn-outline-success active" href="{{ route('mantenedor_carga_parentesco') }}" role="button">Parentesco</a>                        
+                    </div>
 
                     <div>
-                        <a class="btn btn-success mt-4 mb-4" href="{{ route('parentescos.create') }}">Agregar Parentesco</a>
+                        <a class="btn btn-primary mt-4 mb-4" href="{{ route('parentescos.create') }}">Agregar Parentesco</a>
                     </div>
 
                     @if($parentescos->count() === 0)
@@ -25,12 +26,14 @@
                             <b>No existen registros.</b>
                         </div>
                     @else
+                        <div>                                                                                   
+                            @include('partials.components.filtros.parentesco')                         
+                        </div>                      
                         <div class="table-responsive">
                             <table class="table table-hover data-tables table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" scope="col" title="">&nbsp;</th>
-                                        <th class="text-center" scope="col" title="">&nbsp;</th>
+                                        <th colspan="2"></th>
                                         <th class="" scope="col">Parentesco</th>
                                     </tr>
                                 </thead>

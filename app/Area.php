@@ -34,6 +34,29 @@ class Area extends Model
     }
 
     /**
+     * scope busqueda por nombre
+     */
+    public function scopeNombre($query, $nombre)
+    {
+        if ($nombre) {
+            return $query->orWhere('nombre', 'LIKE', "%$nombre%");
+        }
+    }
+
+    /**
+     * scope busqueda por sede
+     */
+    public function scopeSede($query, $sede)
+    {
+        if ($sede) {
+            $sede_id = Sede::obtenerSedePorNombre($sede);
+            if($sede_id != null){
+                return $query->orWhere('sede_id', '=', $sede_id->id);
+            }
+        }
+    }
+
+    /**
      * Relación
      */
     public function socio()

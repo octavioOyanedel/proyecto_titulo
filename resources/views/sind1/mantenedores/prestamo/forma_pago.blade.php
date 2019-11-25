@@ -13,9 +13,9 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     <h4 class="mt-4"></h4>
-
-                    <a class="btn btn-outline-primary active mb-4" href="{{ route('mantenedor_estudio_nivel') }}" role="button">Forma de Pago</a>
-
+                    <div class="text-center">
+                        <a class="btn btn-outline-success active mb-4" href="{{ route('mantenedor_estudio_nivel') }}" role="button">Forma de Pago</a>                        
+                    </div>
 <!--
                     <div>
                         <a class="btn btn-success mt-4 mb-4" href="{{ route('formas_pago.create') }}">Agregar Forma de Pago</a> 
@@ -26,6 +26,9 @@
                             <b>No existen registros.</b>
                         </div>
                     @else
+                        <div>                                                                                   
+                            @include('partials.components.filtros.forma_pago')                         
+                        </div>                     
                         <div class="table-responsive">
                             <table class="table table-hover data-tables table-striped table-bordered" id="tabla-formas-pago">
                                 <thead>

@@ -13,14 +13,16 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     <h4 class="mt-4"></h4>
+                    <div class="text-center">
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_estudio_nivel') }}" role="button">Nivel Educacional</a>
+                        <a class="btn btn-outline-success active" href="{{ route('mantenedor_estudio_institucion') }}" role="button">Institución</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_estudio_estado_nivel') }}" role="button">Estado Nivel Educacional</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_estudio_titulo') }}" role="button">Título</a>                        
+                    </div>
 
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_estudio_nivel') }}" role="button">Nivel Educacional</a>
-                    <a class="btn btn-outline-primary active" href="{{ route('mantenedor_estudio_institucion') }}" role="button">Institución</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_estudio_estado_nivel') }}" role="button">Estado Nivel Educacional</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_estudio_titulo') }}" role="button">Título</a>
 
                     <div>
-                        <a class="btn btn-success mt-4 mb-4" href="{{ route('instituciones.create') }}">Agregar Institución</a> 
+                        <a class="btn btn-primary mt-4 mb-4" href="{{ route('instituciones.create') }}">Agregar Institución</a> 
                     </div>
 
                     @if($instituciones->count() === 0)
@@ -28,6 +30,9 @@
                             <b>No existen registros.</b>
                         </div>
                     @else
+                        <div>                                                                                   
+                            @include('partials.components.filtros.institucion')                         
+                        </div>                     
                         <div class="table-responsive">
                             <table class="table table-hover data-tables table-striped table-bordered" id="tabla-instituciones">
                                 <thead>

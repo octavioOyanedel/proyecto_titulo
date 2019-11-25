@@ -21,6 +21,16 @@ class Cuenta extends Model
     ];
 
     /**
+     * scope busqueda numero 
+     */
+    public function scopeNumeroCuenta($query, $numero)
+    {
+        if ($numero) {
+            return $query->orWhere('numero', '=', $numero);
+        }
+    }
+
+    /**
      * Obtener cuenta 
      */
     static public function obtenerCuentaPorNumero($numero)

@@ -22,6 +22,16 @@ class GradoAcademico extends Model
     ];
 
     /**
+     * scope busqueda por nombre 1
+     */
+    public function scopeNombre($query, $nombre)
+    {
+        if ($nombre) {
+            return $query->orWhere('nombre', 'LIKE', "%$nombre%");
+        }
+    }
+
+    /**
      * Relación 
      */
     public function estudio_realizado()

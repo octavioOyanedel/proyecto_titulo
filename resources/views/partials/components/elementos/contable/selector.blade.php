@@ -36,7 +36,7 @@
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>        
     @break
     {{-- mantenedor --}}
-    @case('mantenedor_contable_cuenta')
+    @case('mantenedor_contable_tipo_cuenta')
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
     @case('mantenedor_contable_banco')

@@ -20,6 +20,7 @@ class GradoAcademicoTitulo extends Model
         'grado_academico_id', 'titulo_id',
     ];
 
+
     /**
      * Relación 
      */

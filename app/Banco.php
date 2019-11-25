@@ -17,6 +17,16 @@ class Banco extends Model
     ];
 
     /**
+     * scope busqueda por nombre 
+     */
+    public function scopeNombre($query, $nombre)
+    {
+        if ($nombre) {
+            return $query->orWhere('nombre', 'LIKE', "%$nombre%");
+        }
+    }
+
+    /**
      * Obtener banco 
      */
     static public function obtenerBancoPorNombre($nombre)

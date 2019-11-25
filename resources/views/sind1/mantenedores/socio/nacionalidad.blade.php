@@ -13,14 +13,16 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     <h4 class="mt-4"></h4>
+                    <div class="text-center">
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_socio_sede') }}" role="button">Sede</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_socio_area') }}" role="button">Área</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_socio_cargo') }}" role="button">Cargo</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_socio_estado') }}" role="button">Estado Socio</a>
+                        <a class="btn btn-outline-success active" href="{{ route('mantenedor_socio_nacionalidad') }}" role="button">Nacionalidad</a>                        
+                    </div>
 
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_socio_sede') }}" role="button">Sede</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_socio_area') }}" role="button">Área</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_socio_cargo') }}" role="button">Cargo</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_socio_estado') }}" role="button">Estado Socio</a>
-                    <a class="btn btn-outline-primary active" href="{{ route('mantenedor_socio_nacionalidad') }}" role="button">Nacionalidad</a>
                     <div>
-                        <a class="btn btn-success mt-4 mb-4" href="{{ route('nacionalidades.create') }}">Agregar Nacionalidad</a>
+                        <a class="btn btn-primary mt-4 mb-4" href="{{ route('nacionalidades.create') }}">Agregar Nacionalidad</a>
                     </div>
 
                     @if($nacionalidades->count() === 0)
@@ -28,6 +30,9 @@
                             <b>No existen registros.</b>
                         </div>
                     @else
+                        <div>                                                                                   
+                            @include('partials.components.filtros.nacionalidad')                         
+                        </div>                     
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered">
                                 <thead>

@@ -13,15 +13,16 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     <h4 class="mt-4"></h4>
-
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_contable_cuenta') }}" role="button">Cuenta Bancaria</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_contable_banco') }}" role="button">Banco</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_contable_concepto') }}" role="button">Concepto</a>
-                    <a class="btn btn-outline-primary" href="{{ route('mantenedor_contable_tipo_cuenta') }}" role="button">Tipo de Cuenta</a>
-                    <a class="btn btn-outline-primary active" href="{{ route('mantenedor_contable_asociado') }}" role="button">Asociado</a>
+                    <div class="text-center">
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_contable_cuenta') }}" role="button">Cuenta Bancaria</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_contable_banco') }}" role="button">Banco</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_contable_concepto') }}" role="button">Concepto</a>
+                        <a class="btn btn-outline-success" href="{{ route('mantenedor_contable_tipo_cuenta') }}" role="button">Tipo de Cuenta</a>
+                        <a class="btn btn-outline-success active" href="{{ route('mantenedor_contable_asociado') }}" role="button">Asociado</a>                        
+                    </div>
 
                     <div>
-                        <a class="btn btn-success mt-4 mb-4" href="{{ route('asociados.create') }}">Agregar Asociado</a>
+                        <a class="btn btn-primary mt-4 mb-4" href="{{ route('asociados.create') }}">Agregar Asociado</a>
                     </div>
 
                     @if($asociados->count() === 0)
@@ -29,12 +30,16 @@
                             <b>No existen registros.</b>
                         </div>
                     @else
+                        <div>                                                                                   
+                            @include('partials.components.filtros.asociado')                         
+                        </div>                     
                         <div class="table-responsive">
                             <table class="table table-hover data-tables table-striped table-bordered" id="tabla-asociados">
                                 <thead>
                                     <tr>
                                         <th colspan="2"></th>
-                                        <th class="" scope="col">Asociado</th>
+                                        <th scope="col">Concepto</th>
+                                        <th scope="col">Nombre</th>
                                     </tr>
                                 </thead>   
                                 <tbody>
@@ -42,7 +47,8 @@
                                         <tr>                                                
                                             <td width="50" class="text-center" scope="row" title="Editar asociado"><a class="text-secondary" href="{{ route('asociados.edit', $a) }}"><span>@svg('editar')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Eliminar asociado"><a class="text-danger" href="{{ route('asociados.show', $a->id) }}"><span>@svg('eliminar')</span></a></td>
-                                            <td class="">{{ $a->concepto }}@if($a->nombre != null), {{ $a->nombre }} @endif</td>
+                                            <td class="">{{ $a->concepto }}</td>
+                                            <td title="@if(!$a->nombre) {{ 'Sin nombre registrado para este asociado.' }} @endif">@if($a->nombre) {{ $a->nombre }} @else {{ '-' }} @endif</td>
                                         </tr>
                                     @endforeach
                                 </tbody>                                 
