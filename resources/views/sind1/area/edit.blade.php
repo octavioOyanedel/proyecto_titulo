@@ -20,6 +20,9 @@
 
                         @include('partials.components.elementos.socio.sede')
                         @include('partials.components.elementos.socio.nueva_area')
+
+
+                        <input type="hidden" name="area_original" value="{{ $area->nombre }}">                     
                         
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

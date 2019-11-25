@@ -8,7 +8,7 @@ use App\GradoAcademicoInstitucion;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarInstitucionRequest;
-
+use App\Http\Requests\EditarInstitucionRequest;
 
 class InstitucionController extends Controller
 {
@@ -79,7 +79,7 @@ class InstitucionController extends Controller
      * @param  \App\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarInstitucionRequest $request, $id)
+    public function update(EditarInstitucionRequest $request, $id)
     {
         $modificar = Institucion::findOrFail($id);
         $institucion = $modificar->nombre;

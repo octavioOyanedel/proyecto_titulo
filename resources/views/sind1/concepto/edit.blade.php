@@ -18,6 +18,8 @@
                         @include('partials.components.elementos.contable.nuevo_concepto')
                         @include('partials.components.elementos.contable.tipo_registro')
 
+                        <input type="hidden" name="concepto_original" value="{{ $concepto->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

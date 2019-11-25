@@ -17,6 +17,8 @@
 
                         @include('partials.components.elementos.estudio.nuevo_nivel')
 
+                        <input type="hidden" name="nivel_original" value="{{ $gradoAcademico->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

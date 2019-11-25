@@ -17,6 +17,8 @@
 
                         @include('partials.components.elementos.estudio.nuevo_estado')
 
+                        <input type="hidden" name="estado_original" value="{{ $estadoGradoAcademico->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

@@ -17,6 +17,8 @@
 
                         @include('partials.components.elementos.socio.nueva_nacionalidad')
 
+                        <input type="hidden" name="nacionalidad_original" value="{{ $nacionalidad->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

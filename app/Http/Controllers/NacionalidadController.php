@@ -6,6 +6,7 @@ use App\Nacionalidad;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarNacionalidadRequest;
+use App\Http\Requests\EditarNacionalidadRequest;
 
 class NacionalidadController extends Controller
 {
@@ -74,7 +75,7 @@ class NacionalidadController extends Controller
      * @param  \App\Nacionalidad  $nacionalidad
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarNacionalidadRequest $request, $id)
+    public function update(EditarNacionalidadRequest $request, $id)
     {
         $modificar = Nacionalidad::findOrFail($id);
         $nacionalidad = $modificar->nombre;

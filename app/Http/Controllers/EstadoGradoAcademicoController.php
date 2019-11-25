@@ -7,6 +7,7 @@ use App\GradoAcademico;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarEstadoGradoAcademicoRequest;
+use App\Http\Requests\EditarEstadoNivelRequest;
 
 class EstadoGradoAcademicoController extends Controller
 {
@@ -76,7 +77,7 @@ class EstadoGradoAcademicoController extends Controller
      * @param  \App\EstadoGradoAcademico  $estadoGradoAcademico
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarEstadoGradoAcademicoRequest $request, $id)
+    public function update(EditarEstadoNivelRequest $request, $id)
     {
         $modificar = EstadoGradoAcademico::findOrFail($id);
         $estado = $modificar->nombre;

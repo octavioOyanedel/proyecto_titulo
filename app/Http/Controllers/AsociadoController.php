@@ -6,6 +6,7 @@ use App\Asociado;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarAsociadoRequest;
+use App\Http\Requests\EditarAsociadoRequest;
 
 class AsociadoController extends Controller
 {
@@ -73,7 +74,7 @@ class AsociadoController extends Controller
      * @param  \App\Asociado  $asociado
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarAsociadoRequest $request, Asociado $asociado)
+    public function update(EditarAsociadoRequest $request, Asociado $asociado)
     {
         $modificar = Asociado::findOrFail($asociado->id);
         $modificar->concepto = $request->concepto;

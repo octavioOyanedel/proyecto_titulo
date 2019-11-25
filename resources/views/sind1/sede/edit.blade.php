@@ -20,6 +20,9 @@
                         @method('PUT')
 
                         @include('partials.components.elementos.socio.nueva_sede')
+
+                        <input type="hidden" name="sede_original" value="{{ $sede->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

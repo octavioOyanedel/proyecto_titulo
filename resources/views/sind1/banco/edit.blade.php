@@ -17,6 +17,8 @@
 
                         @include('partials.components.elementos.contable.nuevo_banco')
 
+                        <input type="hidden" name="banco_original" value="{{ $banco->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

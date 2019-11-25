@@ -17,6 +17,8 @@
 
                             @include('partials.components.elementos.contable.asociado_concepto')
                             @include('partials.components.elementos.contable.asociado_nombre')
+
+                            <input type="hidden" name="concepto_original" value="{{ $asociado->concepto }}">
                             
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

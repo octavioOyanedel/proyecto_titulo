@@ -6,6 +6,7 @@ use App\TipoCuenta;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarTipoCuentaRequest;
+use App\Http\Requests\EditarTipoCuentaRequest;
 
 class TipoCuentaController extends Controller
 {
@@ -74,7 +75,7 @@ class TipoCuentaController extends Controller
      * @param  \App\TipoCuenta  $tipoCuenta
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarTipoCuentaRequest $request, $id)
+    public function update(EditarTipoCuentaRequest $request, $id)
     {
         $modificar = TipoCuenta::findOrFail($id);
         $tipo = $modificar->nombre;

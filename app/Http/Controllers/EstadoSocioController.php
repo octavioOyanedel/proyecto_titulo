@@ -6,6 +6,7 @@ use App\EstadoSocio;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarEstadoSocioRequest;
+use App\Http\Requests\EditarEstadoSocioRequest;
 
 class EstadoSocioController extends Controller
 {
@@ -73,7 +74,7 @@ class EstadoSocioController extends Controller
      * @param  \App\EstadoSocio  $estadoSocio
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarEstadoSocioRequest $request, EstadoSocio $estadoSocio)
+    public function update(EditarEstadoSocioRequest $request, EstadoSocio $estadoSocio)
     {
         $modificar = EstadoSocio::findOrFail($estadoSocio->id);
         $modificar->nombre = $request->nombre;

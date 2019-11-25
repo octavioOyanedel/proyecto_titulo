@@ -7,6 +7,7 @@ use App\GradoAcademico;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarTituloRequest;
+use App\Http\Requests\EditarTituloRequest;
 
 class TituloController extends Controller
 {
@@ -76,7 +77,7 @@ class TituloController extends Controller
      * @param  \App\Titulo  $titulo
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarTituloRequest $request, Titulo $titulo)
+    public function update(EditarTituloRequest $request, Titulo $titulo)
     {
         $modificar = Titulo::findOrFail($titulo->id);
         $modificar->nombre = $request->nombre;

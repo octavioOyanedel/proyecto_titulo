@@ -16,6 +16,9 @@
                         @method('PUT')
 
                         @include('partials.components.elementos.prestamo.nueva_forma_pago')
+
+                        <input type="hidden" name="pago_original" value="{{ $formaPago->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

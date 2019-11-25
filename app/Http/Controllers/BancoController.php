@@ -6,6 +6,7 @@ use App\Banco;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarBancoRequest;
+use App\Http\Requests\EditarBancoRequest;
 
 class BancoController extends Controller
 {
@@ -73,7 +74,7 @@ class BancoController extends Controller
      * @param  \App\Banco  $banco
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarBancoRequest $request, Banco $banco)
+    public function update(EditarBancoRequest $request, Banco $banco)
     {
         $modificar = Banco::findOrFail($banco->id);
         $modificar->nombre = $request->nombre;

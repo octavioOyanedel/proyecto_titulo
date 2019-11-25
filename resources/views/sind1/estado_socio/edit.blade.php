@@ -16,6 +16,9 @@
                         @method('PUT')
 
                         @include('partials.components.elementos.socio.nueva_situacion')
+
+                        <input type="hidden" name="estado_original" value="{{ $estadoSocio->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

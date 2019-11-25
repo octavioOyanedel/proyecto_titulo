@@ -21,6 +21,8 @@
 
                         @include('partials.components.elementos.socio.nuevo_cargo')
 
+                        <input type="hidden" name="cargo_original" value="{{ $cargo->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

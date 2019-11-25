@@ -6,6 +6,7 @@ use App\Sede;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarSedeRequest;
+use App\Http\Requests\EditarSedeRequest;
 
 class SedeController extends Controller
 {
@@ -72,7 +73,7 @@ class SedeController extends Controller
      * @param  \App\Sede  $sede
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarSedeRequest $request, Sede $sede)
+    public function update(EditarSedeRequest $request, Sede $sede)
     {
         $modificar = Sede::findOrFail($sede->id);
         $modificar->nombre = $request->nombre;

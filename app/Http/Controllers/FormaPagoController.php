@@ -6,6 +6,7 @@ use App\FormaPago;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarFormaPagoRequest;
+use App\Http\Requests\EditarFormaPagoRequest;
 
 class FormaPagoController extends Controller
 {
@@ -76,7 +77,7 @@ class FormaPagoController extends Controller
      * @param  \App\FormaPago  $formaPago
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarFormaPagoRequest $request, $id)
+    public function update(EditarFormaPagoRequest $request, $id)
     {
         $modificar = FormaPago::findOrFail($id);
         $forma = $modificar->nombre;

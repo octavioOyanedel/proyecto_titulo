@@ -17,7 +17,9 @@
 
                         @include('partials.components.elementos.contable.numero_cuenta')
                         @include('partials.components.elementos.contable.tipos_cuenta')
-                        @include('partials.components.elementos.contable.bancos')                  
+                        @include('partials.components.elementos.contable.bancos')    
+
+                        <input type="hidden" name="numero_original" value="{{ $cuenta->numero }}">            
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

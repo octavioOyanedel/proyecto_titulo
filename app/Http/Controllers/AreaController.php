@@ -7,6 +7,7 @@ use App\Sede;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarAreaRequest;
+use App\Http\Requests\EditarAreaRequest;
 
 class AreaController extends Controller
 {
@@ -75,7 +76,7 @@ class AreaController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarAreaRequest $request, Area $area)
+    public function update(EditarAreaRequest $request, Area $area)
     {
         $modificar = Area::findOrFail($area->id);
         $modificar->nombre = $request->nombre;

@@ -6,6 +6,7 @@ use App\Cargo;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarCargoRequest;
+use App\Http\Requests\EditarCargoRequest;
 
 class CargoController extends Controller
 {
@@ -72,7 +73,7 @@ class CargoController extends Controller
      * @param  \App\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarCargoRequest $request, Cargo $cargo)
+    public function update(EditarCargoRequest $request, Cargo $cargo)
     {
         $modificar = Cargo::findOrFail($cargo->id);
         $modificar->nombre = $request->nombre;

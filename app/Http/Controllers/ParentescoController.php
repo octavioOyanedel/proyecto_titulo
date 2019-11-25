@@ -6,6 +6,7 @@ use App\Parentesco;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarParentescoRequest;
+use App\Http\Requests\EditarParentescoRequest;
 
 class ParentescoController extends Controller
 {
@@ -73,7 +74,7 @@ class ParentescoController extends Controller
      * @param  \App\Parentesco  $parentesco
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarParentescoRequest $request, Parentesco $parentesco)
+    public function update(EditarParentescoRequest $request, Parentesco $parentesco)
     {
         $modificar = Parentesco::findOrFail($parentesco->id);
         $modificar->nombre = $request->nombre;

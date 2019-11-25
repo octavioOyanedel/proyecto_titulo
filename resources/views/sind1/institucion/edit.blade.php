@@ -17,6 +17,8 @@
 
                         @include('partials.components.elementos.estudio.nueva_institucion')
 
+                        <input type="hidden" name="institucion_original" value="{{ $institucion->nombre }}">
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

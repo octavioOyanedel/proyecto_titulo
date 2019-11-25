@@ -7,6 +7,7 @@ use App\TipoRegistroContable;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarConceptoRequest;
+use App\Http\Requests\EditarConceptoRequest;
 
 class ConceptoController extends Controller
 {
@@ -75,7 +76,7 @@ class ConceptoController extends Controller
      * @param  \App\Concepto  $concepto
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarConceptoRequest $request, Concepto $concepto)
+    public function update(EditarConceptoRequest $request, Concepto $concepto)
     {
         $tipo = TipoRegistroContable::findOrFail($request->tipo_registro_contable_id)->nombre;
         $modificar = Concepto::findOrFail($concepto->id);

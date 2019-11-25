@@ -8,6 +8,7 @@ use App\TipoCuenta;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarCuentaRequest;
+use App\Http\Requests\EditarCuentaRequest;
 
 class CuentaController extends Controller
 {
@@ -79,7 +80,7 @@ class CuentaController extends Controller
      * @param  \App\Cuenta  $cuenta
      * @return \Illuminate\Http\Response
      */
-    public function update(IncorporarCuentaRequest $request, Cuenta $cuenta)
+    public function update(EditarCuentaRequest $request, Cuenta $cuenta)
     {
 
         $modificar = Cuenta::findOrFail($cuenta->id);
