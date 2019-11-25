@@ -26,8 +26,8 @@ class IncorporarConceptoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required',new ValidarFormatoNombreRule,new ValidarConceptoUnicoRule(Request()->tipo_registro_id),'max:255'],
-            'tipo_registro_id' => ['required','numeric'],
+            'nombre' => ['required',new ValidarFormatoNombreRule,new ValidarConceptoUnicoRule(Request()->tipo_registro_contable_id),'max:255'],
+            'tipo_registro_contable_id' => ['required','numeric'],
         ];
     }
 }

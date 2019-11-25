@@ -12,9 +12,9 @@ class ValidarConceptoUnicoRule implements Rule
      *
      * @return void
      */
-    public function __construct($tipo_registro)
+    public function __construct($tipo_registro_contable_id)
     {
-        $this->tipo_registro = $tipo_registro;
+        $this->tipo_registro_contable_id = $tipo_registro_contable_id;
     }
 
     /**
@@ -28,7 +28,7 @@ class ValidarConceptoUnicoRule implements Rule
     {
         $concepto = Concepto::where([
             ['nombre','=',$value],
-            ['tipo_registro_id','=',$this->tipo_registro]
+            ['tipo_registro_contable_id','=',$this->tipo_registro_contable_id]
         ]);
         if($concepto->count() > 0){
             return false;

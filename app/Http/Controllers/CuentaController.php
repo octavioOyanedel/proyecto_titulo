@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Banco;
 use App\Cuenta;
 use App\TipoCuenta;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarCuentaRequest;
 
@@ -40,8 +41,9 @@ class CuentaController extends Controller
      */
     public function store(IncorporarCuentaRequest $request)
     {
-        Cuenta::create($request->all());
+        $cuenta = Cuenta::create($request->all());
         session(['mensaje' => 'Cuenta agregada con éxito.']);
+        LogSistema::registrarAccion('Cuenta bancaria agragada: '.$cuenta->tipo_cuenta_id.' N° '.$cuenta->numero.' - '.$cuenta->banco_id);
         return redirect()->route('mantenedor_contable_cuenta');
     }
 
@@ -79,12 +81,16 @@ class CuentaController extends Controller
      */
     public function update(IncorporarCuentaRequest $request, Cuenta $cuenta)
     {
+
         $modificar = Cuenta::findOrFail($cuenta->id);
         $modificar->numero = $request->numero;
         $modificar->tipo_cuenta_id = $request->tipo_cuenta_id;
         $modificar->banco_id = $request->banco_id;
+        $tipo = TipoCuenta::findOrFail($request->tipo_cuenta_id)->nombre;
+        $banco = Banco::findOrFail($request->banco_id)->nombre;        
         $modificar->update();             
         session(['mensaje' => 'Cuenta editada con éxito.']);
+        LogSistema::registrarAccion('Cuenta editada, de: '.$cuenta->tipo_cuenta_id.' N° '.$cuenta->numero.' - '.$cuenta->banco_id.' a '.$tipo.' N° '.$request->numero.' - '.$banco);
         return redirect()->route('mantenedor_contable_cuenta');
     }
 
@@ -96,8 +102,12 @@ class CuentaController extends Controller
      */
     public function destroy(Cuenta $cuenta)
     {
+        $eliminada_tipo = $cuenta->tipo_cuenta_id;
+        $eliminada_numero = $cuenta->numero;
+        $eliminada_banco = $cuenta->banco_id;              
         Cuenta::destroy($cuenta->id);
-        session(['mensaje' => 'Cuenta eliminada con éxito.']);        
+        session(['mensaje' => 'Cuenta bancaria eliminada con éxito.']); 
+        LogSistema::registrarAccion('Cuenta bancaria eliminada: '.$eliminada_tipo.' N° '.$eliminada_numero.' - '.$eliminada_banco);      
         return redirect()->route('mantenedor_contable_cuenta'); 
     }
 

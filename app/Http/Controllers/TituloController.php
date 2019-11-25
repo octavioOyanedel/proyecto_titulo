@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Titulo;
 use App\GradoAcademico;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarTituloRequest;
 
@@ -38,8 +39,9 @@ class TituloController extends Controller
      */
     public function store(IncorporarTituloRequest $request)
     {
-        Titulo::create($request->all());
+        $titulo = Titulo::create($request->all());
         session(['mensaje' => 'Título agregado con éxito.']);
+        LogSistema::registrarAccion('Título agragado: '.$titulo->nombre);
         return redirect()->route('mantenedor_estudio_titulo');
     }
 
@@ -79,7 +81,8 @@ class TituloController extends Controller
         $modificar = Titulo::findOrFail($titulo->id);
         $modificar->nombre = $request->nombre;
         $modificar->update();             
-        session(['mensaje' => 'Título editado con éxito.']);  
+        session(['mensaje' => 'Título editado con éxito.']);
+        LogSistema::registrarAccion('Título editado, de: '.$titulo->nombre.' a '.$request->nombre);
         return redirect()->route('mantenedor_estudio_titulo');
     }
 
@@ -91,8 +94,10 @@ class TituloController extends Controller
      */
     public function destroy(Titulo $titulo)
     {
+        $eliminada = $titulo->nombre;
         Titulo::destroy($titulo->id);
-        session(['mensaje' => 'Título eliminado con éxito.']);        
+        session(['mensaje' => 'Título eliminado con éxito.']);
+        LogSistema::registrarAccion('Título eliminado: '.$eliminada);       
         return redirect()->route('mantenedor_estudio_titulo');  
     }
 }

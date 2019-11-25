@@ -31,4 +31,12 @@ class Cargo extends Model
     {
         $this->attributes['nombre'] = formatoNombres($value);
     }
+
+    /**
+     * Obtener cargo 
+     */
+    static public function obtenerCargoPorNombre($nombre)
+    {
+        return Cargo::where('nombre', $nombre)->first();
+    }
 }

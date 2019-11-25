@@ -33,4 +33,11 @@ class Sede extends Model
         return $this->hasMany('App\Area');
     }
 
+    /**
+     * Obtener sede 
+     */
+    static public function obtenerSedePorNombre($nombre)
+    {
+        return Sede::where('nombre', $nombre)->first();
+    }
 }

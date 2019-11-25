@@ -11,6 +11,8 @@ use App\EstadoDeuda;
 use App\RegistroContable;
 use App\Cuenta;
 use App\LogSistema;
+use App\TipoCuenta;
+use App\Banco;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarPrestamoRequest;
@@ -48,7 +50,6 @@ class PrestamoController extends Controller
         $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
 
         $campo = $request->get('buscar_prestamo');
-
 
         if(Prestamo::obtenerSocioPorRut($campo) != null){
             $campo = Prestamo::obtenerSocioPorRut($campo)->id;
@@ -143,7 +144,11 @@ class PrestamoController extends Controller
             break;                                                               
             default:
                 $prestamos = Prestamo::orderBy($columna, $orden)
+                ->estadoDeudaId($campo)
+                ->fechaUnica($campo)
+                ->numeroCuenta($campo)                        
                 ->numeroEgreso($campo)
+                ->formaPagoId($campo)                
                 ->cheque($campo)
                 ->rut($campo) 
                 ->montoUnico($campo)                                    

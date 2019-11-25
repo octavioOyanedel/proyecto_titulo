@@ -18,6 +18,8 @@
         <div class="input-group mb-2 mr-sm-2">
             <select name="columna" id="columna" class="form-control form-control-sm">
                 <option value="" selected>Columna</option>
+                <option value="fecha" @if(request('columna') === 'fecha') {{ 'selected' }} @endif>Fecha de solicitud</option>
+                <option value="tipo_registro_contable_id" @if(request('columna') === 'tipo_registro_contable_id') {{ 'selected' }} @endif>Tipo de registro</option>                
                 <option value="numero_registro" @if(request('columna') === 'numero_registro') {{ 'selected' }} @endif>Numero de registro</option>
                 <option value="cheque" @if(request('columna') === 'cheque') {{ 'selected' }} @endif>Cheque</option>
                 <option value="Monto" @if(request('columna') === 'Monto') {{ 'selected' }} @endif>Monto</option>                           

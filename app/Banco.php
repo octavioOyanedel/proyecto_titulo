@@ -17,6 +17,14 @@ class Banco extends Model
     ];
 
     /**
+     * Obtener banco 
+     */
+    static public function obtenerBancoPorNombre($nombre)
+    {
+        return Banco::where('nombre', $nombre)->first();
+    }
+
+    /**
      * Relación 
      */
     public function cuenta()

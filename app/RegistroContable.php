@@ -60,32 +60,12 @@ class RegistroContable extends Model
     }
 
     /**
-     * scope busqueda forma pago
-     */
-    public function scopeTipoRegistroContableId($query, $tipo)
-    {
-        if($tipo != null){
-            return $query->Where('tipo_registro_contable_id','=',$tipo);
-        }
-    }
-
-    /**
      * scope busqueda cuenta
      */
     public function scopeCuentaId($query, $cuenta)
     {
         if($cuenta != null){
             return $query->Where('cuenta_id','=',$cuenta);
-        }
-    }
-
-    /**
-     * scope busqueda concepto
-     */
-    public function scopeConceptoId($query, $id)
-    {
-        if($id != null && $id != 'Seleccione...'){
-            return $query->Where('concepto_id','=',$id);
         }
     }
 
@@ -147,6 +127,43 @@ class RegistroContable extends Model
     {
         if ($cheque) {
             return $query->orWhere('cheque', '=', $cheque);
+        }
+    }
+
+    /**
+     * scope busqueda concepto
+     */
+    public function scopeConceptoId($query, $concepto)
+    {
+        if ($concepto) {
+            $concepto_id = Concepto::obtenerConceptoPorNombre($concepto);
+            if($concepto_id != null){
+                return $query->orWhere('concepto_id', '=', $concepto_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda concepto
+     */
+    public function scopeTipoRegistroContableId($query, $registro)
+    {
+        if ($registro) {
+            $registro_id = TipoRegistroContable::obtenerTipoRegistroContablePorNombre($registro);
+            if($registro_id != null){
+                return $query->orWhere('tipo_registro_contable_id', '=', $registro_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda fecha
+     */
+    public function scopeFechaUnica($query, $fecha)
+    {
+        $fecha_formarteada = date("Y-m-d", strtotime($fecha));
+        if($fecha != null){
+            return $query->orWhere('fecha','=',$fecha_formarteada);
         }
     }
 

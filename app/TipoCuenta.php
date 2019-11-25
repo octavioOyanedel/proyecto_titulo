@@ -20,6 +20,14 @@ class TipoCuenta extends Model
     ];
 
     /**
+     * Obtener tipo cuenta
+     */
+    static public function obtenerTipoCuentaPorNombre($nombre)
+    {
+        return TipoCuenta::where('nombre', $nombre)->first();
+    }
+
+    /**
      * Relación 
      */
     public function cuenta()

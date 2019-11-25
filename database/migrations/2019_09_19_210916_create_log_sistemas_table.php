@@ -22,6 +22,7 @@ class CreateLogSistemasTable extends Migration
             $table->string('ip');
             $table->string('navegador');
             $table->string('sistema');
+            $table->string('correo');
             $table->unsignedInteger('usuario_id');
             $table->timestamps();
         });

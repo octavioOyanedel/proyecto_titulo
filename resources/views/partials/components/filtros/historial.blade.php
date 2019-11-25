@@ -20,6 +20,7 @@
                 <option value="" selected>Columna</option>
                 <option value="nombre1" @if(request('columna') === 'nombre1') {{ 'selected' }} @endif>Primer nombre</option>
                 <option value="apellido1" @if(request('columna') === 'apellido1') {{ 'selected' }} @endif>Apellido paterno</option>
+                <option value="correo" @if(request('columna') === 'correo') {{ 'selected' }} @endif>Correo</option>                
                 <option value="fecha" @if(request('columna') === 'fecha') {{ 'selected' }} @endif>Fecha</option>
                 <option value="accion" @if(request('columna') === 'accion') {{ 'selected' }} @endif>Acción</option>
                 <option value="ip" @if(request('columna') === 'ip') {{ 'selected' }} @endif>IP</option>

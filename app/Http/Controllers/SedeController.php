@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sede;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarSedeRequest;
 
@@ -36,8 +37,9 @@ class SedeController extends Controller
      */
     public function store(IncorporarSedeRequest $request)
     {
-        Sede::create($request->all());
+        $sede = Sede::create($request->all());
         session(['mensaje' => 'Sede agregada con éxito.']);
+        LogSistema::registrarAccion('Sede agragada: '.$sede->nombre);
         return redirect()->route('mantenedor_socio_sede');
     }
 
@@ -76,6 +78,7 @@ class SedeController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Sede editada con éxito.']);
+        LogSistema::registrarAccion('Sede editada, de: '.$sede->nombre.' a '.$request->nombre);
         return redirect()->route('mantenedor_socio_sede');
     }
 
@@ -87,8 +90,15 @@ class SedeController extends Controller
      */
     public function destroy(Sede $sede)
     {
-        Sede::destroy($sede->id);
+        $eliminada_nombre = $sede->nombre;
+        $sede = Sede::destroy($sede->id);
         session(['mensaje' => 'Sede eliminada con éxito.']);
+        LogSistema::registrarAccion('Sede eliminada: '.$eliminada);        
         return redirect()->route('mantenedor_socio_sede');
     }
 }
+
+//          LogSistema::registrarAccion('Sede agragada: '.$sede->nombre);
+//          LogSistema::registrarAccion('Sede editada, de: '.$sede->nombre.' a '.$request->nombre);
+//          LogSistema::registrarAccion('Sede eliminada: '.$eliminada); 
+//        $nacionalidad = $modificar->nombre;

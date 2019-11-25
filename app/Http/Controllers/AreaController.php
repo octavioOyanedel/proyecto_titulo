@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use App\Sede;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarAreaRequest;
 
@@ -38,8 +39,9 @@ class AreaController extends Controller
      */
     public function store(IncorporarAreaRequest $request)
     {
-        Area::create($request->all());
+        $area = Area::create($request->all());
         session(['mensaje' => 'Área agregada con éxito.']);
+        LogSistema::registrarAccion('Área agragada: '.$area->nombre);
         return redirect()->route('mantenedor_socio_area');
     }
 
@@ -80,6 +82,7 @@ class AreaController extends Controller
         $modificar->sede_id = $request->sede_id;
         $modificar->update();
         session(['mensaje' => 'Área editada con éxito.']);
+        LogSistema::registrarAccion('Área editada, de: '.$area->nombre.' a '.$request->nombre);
         return redirect()->route('mantenedor_socio_area');
     }
 
@@ -91,8 +94,10 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
+        $eliminada = $area->nombre;
         Area::destroy($area->id);
         session(['mensaje' => 'Área eliminada con éxito.']);
+        LogSistema::registrarAccion('Área eliminada: '.$eliminada); 
         return redirect()->route('mantenedor_socio_area');
     }
 

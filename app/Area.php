@@ -56,4 +56,12 @@ class Area extends Model
     {
         $this->attributes['nombre'] = ucfirst($value);
     }
+
+    /**
+     * Obtener sede 
+     */
+    static public function obtenerAreaPorNombre($nombre)
+    {
+        return Area::where('nombre', $nombre)->first();
+    }
 }

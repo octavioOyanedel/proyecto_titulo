@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="ml-5 mr-5">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -28,7 +29,7 @@
                                         <th class="text-center" scope="col">Fecha de solicitud</th>
                                         <th class="text-center" scope="col">Número de egreso</th>
                                         <th scope="col">Cuenta</th>
-                                        <th class="text-center" scope="col">Método de pago</th>
+                                        <th scope="col">Método de pago</th>
                                         <th class="text-center" scope="col">Cheque</th>
                                         <th class="text-center" scope="col">Monto</th>
                                     </tr>
@@ -45,7 +46,7 @@
                                             <td class="text-center">{{ $p->fecha_solicitud }}</td>
                                             <td class="text-center">{{ $p->numero_egreso }}</td>
                                             <td>{{ $p->cuenta_id }}</td>
-                                            <td class="text-center">{{ $p->forma_pago_id }}</td>
+                                            <td>{{ $p->forma_pago_id }}</td>
                                             <td class="text-center">{{ celdaCadena($p->cheque) }}</td>
                                             <td class="text-center">{{ $p->monto }}</td>                                       
                                         </tr>

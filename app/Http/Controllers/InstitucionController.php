@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Institucion;
 use App\GradoAcademico;
 use App\GradoAcademicoInstitucion;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarInstitucionRequest;
 
@@ -40,8 +41,9 @@ class InstitucionController extends Controller
      */
     public function store(IncorporarInstitucionRequest $request)
     {
-        Institucion::create($request->all()); 
+        $institucion = Institucion::create($request->all()); 
         session(['mensaje' => 'Institución agregada con éxito.']);
+        LogSistema::registrarAccion('Institución agragada: '.$institucion->nombre);
         return redirect()->route('mantenedor_estudio_institucion');
     }
 
@@ -80,9 +82,11 @@ class InstitucionController extends Controller
     public function update(IncorporarInstitucionRequest $request, $id)
     {
         $modificar = Institucion::findOrFail($id);
+        $institucion = $modificar->nombre;
         $modificar->nombre = $request->nombre;
         $modificar->update();     
-        session(['mensaje' => 'Institución educacional editada con éxito.']);     
+        session(['mensaje' => 'Institución educacional editada con éxito.']);   
+        LogSistema::registrarAccion('Institución educacional editada, de: '.$institucion.' a '.$request->nombre);  
         return redirect()->route('mantenedor_estudio_institucion');
     }
 
@@ -94,8 +98,10 @@ class InstitucionController extends Controller
      */
     public function destroy($id)
     {
+        $eliminada = Institucion::findOrFail($id)->nombre;
         Institucion::destroy($id);
-        session(['mensaje' => 'Institución educacional eliminada con éxito.']);        
+        session(['mensaje' => 'Institución educacional eliminada con éxito.']);      
+        LogSistema::registrarAccion('Institución eliminada: '.$eliminada);   
         return redirect()->route('mantenedor_estudio_institucion');  
     }
 }

@@ -76,16 +76,6 @@ class Socio extends Model
     }
 
     /**
-     * scope busqueda genero
-     */
-    public function scopeGenero($query, $genero)
-    {
-        if($genero != null){
-            return $query->Where('genero','=',$genero);
-        }
-    }
-
-    /**
      * scope busqueda comuna
      */
     public function scopeComunaId($query, $comuna_id)
@@ -164,7 +154,19 @@ class Socio extends Model
             return $query->orWhere('rut', '=', $rut);
         }
     }
-    
+
+    /**
+     * scope busqueda fecha
+     */
+    public function scopeFechaUnica($query, $fecha)
+    {
+        $fecha_formarteada = date("Y-m-d", strtotime($fecha));
+        //dd($fecha.' - '.$fecha_formarteada);        
+        if($fecha != null){
+            return $query->orWhere('fecha_sind1','=',$fecha_formarteada);
+        }
+    }
+   
     /**
      * scope busqueda por nombre 1
      */
@@ -174,6 +176,7 @@ class Socio extends Model
             return $query->orWhere('nombre1', 'LIKE', "%$nombre1%");
         }
     }
+
     /**
      * scope busqueda por nombre 2
      */
@@ -240,6 +243,55 @@ class Socio extends Model
     {
         if ($numero) {
             return $query->orWhere('numero_socio', '=', $numero);
+        }
+    }
+
+    /**
+     * scope busqueda por anexo
+     */
+    public function scopeGenero($query, $genero)
+    {
+        if ($genero) {
+            return $query->orWhere('genero', 'LIKE', "%$genero%");
+        }
+    }
+
+    /**
+     * scope busqueda por sede
+     */
+    public function scopeSede($query, $sede)
+    {
+        if ($sede) {
+            $sede_id = Sede::obtenerSedePorNombre($sede);
+            if($sede_id != null){
+                return $query->orWhere('sede_id', '=', $sede_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda por area
+     */
+    public function scopeArea($query, $area)
+    {
+        if ($area) {
+            $area_id = Area::obtenerAreaPorNombre($area);
+            if($area_id != null){
+                return $query->orWhere('area_id', '=', $area_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda por cargo
+     */
+    public function scopeCargo($query, $cargo)
+    {
+        if ($cargo) {
+            $cargo_id = cargo::obtenerCargoPorNombre($cargo);
+            if($cargo_id != null){
+                return $query->orWhere('cargo_id', '=', $cargo_id->id);
+            }
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EstadoSocio;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarEstadoSocioRequest;
 
@@ -36,8 +37,9 @@ class EstadoSocioController extends Controller
      */
     public function store(IncorporarEstadoSocioRequest $request)
     {
-        EstadoSocio::create($request->all());
+        $estado = EstadoSocio::create($request->all());
         session(['mensaje' => 'Estado socio agregado con éxito.']);
+        LogSistema::registrarAccion('Estado socio agragado: '.$estado->nombre);
         return redirect()->route('mantenedor_socio_estado');
     }
 
@@ -77,6 +79,7 @@ class EstadoSocioController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Estado socio editado con éxito.']);
+        LogSistema::registrarAccion('Estado socio editado, de: '.$estadoSocio->nombre.' a '.$request->nombre);
         return redirect()->route('mantenedor_socio_estado');
     }
 
@@ -88,8 +91,10 @@ class EstadoSocioController extends Controller
      */
     public function destroy(EstadoSocio $estadoSocio)
     {
+        $eliminada = $estadoSocio->nombre;        
         EstadoSocio::destroy($estadoSocio->id);
         session(['mensaje' => 'Estado socio eliminado con éxito.']);
+        LogSistema::registrarAccion('Estado socio eliminado: '.$eliminada); 
         return redirect()->route('mantenedor_socio_estado');
     }
 }

@@ -23,6 +23,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Usuario</th>
+                                        <th scope="col">Correo</th>
                                         <th class="text-center" scope="col">Fecha</th>
                                         <th scope="col">Acción</th>
                                         <th class="text-center" scope="col">IP</th>
@@ -34,6 +35,7 @@
                                     @foreach($registros as $r)
                                         <tr>
                                             <td>{{ $r->usuario_id }}</td>
+                                            <td>{{ $r->correo }}</td>                                            
                                             <td class="text-center">{{ $r->created_at }}</td>
                                             <td>{{ $r->accion }}</td>
                                             <td class="text-center">{{ $r->ip }}</td>

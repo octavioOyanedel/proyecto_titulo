@@ -44,16 +44,56 @@ class RegistroContableController extends Controller
 
         $campo = $request->get('buscar_registro');
 
-        $registros = RegistroContable::orderBy($columna, $orden)
-        ->numeroRegistro($campo)
-        ->cheque($campo)
-        ->montoUnico($campo)                                     
-        ->paginate($registros)->appends([
-            'registros' => $registros,
-            'columna' => $columna,
-            'orden' => $orden,
-            'buscar_prestamo' => $campo,                               
-        ]); 
+        switch ($columna) {
+            case 'estado_deuda_id':
+                $registros = RegistroContable::orderBy('conceptos.nombre', $orden)
+                ->join('conceptos', 'registros_contables.concepto_id', '=', 'conceptos.id')
+                ->fechaUnica($campo) 
+                ->tipoRegistroContableId($campo)
+                ->numeroRegistro($campo)
+                ->cheque($campo)
+                ->montoUnico($campo)
+                ->conceptoId($campo)         
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;    
+            case 'tipo_registro_contable_id':
+                $registros = RegistroContable::orderBy('tipos_registro_contable.nombre', $orden)
+                ->join('tipos_registro_contable', 'registros_contables.tipo_registro_contable_id', '=', 'tipos_registro_contable.id')
+                ->fechaUnica($campo) 
+                ->tipoRegistroContableId($campo)
+                ->numeroRegistro($campo)
+                ->cheque($campo)
+                ->montoUnico($campo)
+                ->conceptoId($campo)    
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;  
+            default:
+                $registros = RegistroContable::orderBy($columna, $orden)
+                ->fechaUnica($campo) 
+                ->tipoRegistroContableId($campo)
+                ->numeroRegistro($campo)
+                ->cheque($campo)
+                ->montoUnico($campo)
+                ->conceptoId($campo)
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_prestamo' => $campo,                               
+                ]); 
+            break;
+        }
+
 
         $total_consulta = $registros->total();
 

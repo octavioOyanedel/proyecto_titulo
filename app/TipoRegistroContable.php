@@ -22,6 +22,14 @@ class TipoRegistroContable extends Model
     ];
 
     /**
+     * Obtener tipo cuenta
+     */
+    static public function obtenerTipoRegistroContablePorNombre($nombre)
+    {
+        return TipoRegistroContable::where('nombre', $nombre)->first();
+    }
+
+    /**
      * Relación 
      */
     public function conceptos()

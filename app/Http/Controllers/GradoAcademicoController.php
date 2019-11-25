@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\GradoAcademico;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarGradoAcademicoRequest;
 
@@ -36,8 +37,9 @@ class GradoAcademicoController extends Controller
      */
     public function store(IncorporarGradoAcademicoRequest $request)
     {
-        GradoAcademico::create($request->all());         
+        $nivel = GradoAcademico::create($request->all());         
         session(['mensaje' => 'Nivel educacional agregado con éxito.']);
+        LogSistema::registrarAccion('Nivel educacional agragado: '.$nivel->nombre);
         return redirect()->route('mantenedor_estudio_nivel');
     }
 
@@ -75,9 +77,11 @@ class GradoAcademicoController extends Controller
     public function update(IncorporarGradoAcademicoRequest $request, $id)
     {
         $modificar = GradoAcademico::findOrFail($id);
+        $nivel = $modificar->nombre;
         $modificar->nombre = $request->nombre;
         $modificar->update();     
-        session(['mensaje' => 'Nivel educacional editado con éxito.']);   
+        session(['mensaje' => 'Nivel educacional editado con éxito.']);
+        LogSistema::registrarAccion('Nivel educacional editado, de: '.$nivel.' a '.$request->nombre);
         return redirect()->route('mantenedor_estudio_nivel');
     }
 
@@ -89,9 +93,10 @@ class GradoAcademicoController extends Controller
      */
     public function destroy($id)
     {
-
+        $eliminada = GradoAcademico::findOrFail($id)->nombre;
         GradoAcademico::destroy($id);
-        session(['mensaje' => 'Nivel educacional eliminado con éxito.']);        
+        session(['mensaje' => 'Nivel educacional eliminado con éxito.']);  
+        LogSistema::registrarAccion('Nivel educacional eliminado: '.$eliminada);       
         return redirect()->route('mantenedor_estudio_nivel');  
     }
 }

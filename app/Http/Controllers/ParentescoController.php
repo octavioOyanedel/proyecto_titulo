@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Parentesco;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarParentescoRequest;
 
@@ -36,8 +37,9 @@ class ParentescoController extends Controller
      */
     public function store(IncorporarParentescoRequest $request)
     {
-        Parentesco::create($request->all());
+        $parentesco = Parentesco::create($request->all());
         session(['mensaje' => 'Parentesco agregado con éxito.']);
+        LogSistema::registrarAccion('Parentesco agragado: '.$parentesco->nombre);        
         return redirect()->route('mantenedor_carga_parentesco');
     }
 
@@ -77,6 +79,7 @@ class ParentescoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Parentesco editado con éxito.']);
+        LogSistema::registrarAccion('Parentesco editaoa, de: '.$parentesco->nombre.' a '.$request->nombre);
         return redirect()->route('mantenedor_carga_parentesco');
     }
 
@@ -88,8 +91,10 @@ class ParentescoController extends Controller
      */
     public function destroy(Parentesco $parentesco)
     {
+        $eliminada = $parentesco->nombre;        
         Parentesco::destroy($parentesco->id);
         session(['mensaje' => 'Parentesco eliminado con éxito.']);
+        LogSistema::registrarAccion('Parentesco eliminado: '.$eliminada); 
         return redirect()->route('mantenedor_carga_parentesco');
     }
 }

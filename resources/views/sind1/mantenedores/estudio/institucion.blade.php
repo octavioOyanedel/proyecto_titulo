@@ -20,7 +20,7 @@
                     <a class="btn btn-outline-primary" href="{{ route('mantenedor_estudio_titulo') }}" role="button">Título</a>
 
                     <div>
-                        <a class="btn btn-success mt-4 mb-4" href="{{ route('niveles.create') }}">Agregar Nivel Educacional</a> 
+                        <a class="btn btn-success mt-4 mb-4" href="{{ route('instituciones.create') }}">Agregar Institución</a> 
                     </div>
 
                     @if($instituciones->count() === 0)

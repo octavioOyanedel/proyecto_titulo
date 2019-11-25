@@ -19,7 +19,7 @@ class LogSistema extends Model
     * @var array
     */
     protected $fillable = [
-        'fecha','accion','ip','navegador','sistema','usuario_id',
+        'fecha','accion','ip','navegador','sistema','usuario_id','correo',
     ];
 
 //scope filtro
@@ -61,6 +61,16 @@ class LogSistema extends Model
     {
         if($accion != null){
             return $query->orWhere('accion','LIKE',"%$accion%");
+        }
+    }
+
+    /**
+     * scope busqueda accion
+     */
+    public function scopeCorreo($query, $correo)
+    {
+        if($correo != null){
+            return $query->orWhere('correo','LIKE',"%$correo%");
         }
     }
 
@@ -156,6 +166,7 @@ class LogSistema extends Model
         $log->navegador = obtenerBrowser();
         $log->sistema = obtenerSistemaOperativo();
         $log->usuario_id = auth()->user()->id;  
+        $log->correo = auth()->user()->email; 
         $log->save();         
     }
 }

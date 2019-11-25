@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Asociado;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarAsociadoRequest;
 
@@ -36,8 +37,9 @@ class AsociadoController extends Controller
      */
     public function store(IncorporarAsociadoRequest $request)
     {
-        Asociado::create($request->all());         
-        session(['mensaje' => 'Asociado agregado con éxito.']);        
+        $asociado = Asociado::create($request->all());         
+        session(['mensaje' => 'Asociado agregado con éxito.']);
+        LogSistema::registrarAccion('Asociado agragado: '.$asociado->concepto.' - '.$asociado->nombre);        
         return redirect()->route('mantenedor_contable_asociado');
     }
 
@@ -78,6 +80,7 @@ class AsociadoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Asociado editado con éxito.']);
+        LogSistema::registrarAccion('Asociado editado, de: '.$asociado->concepto.' '.$asociado->nombre.' a '.$request->concepto.' '.$request->nombre);
         return redirect()->route('mantenedor_contable_asociado');
     }
 
@@ -89,8 +92,11 @@ class AsociadoController extends Controller
      */
     public function destroy(Asociado $asociado)
     {
+        $eliminada_concepto = $asociado->concepto;
+        $eliminada_nombre = $asociado->nombre;
         Asociado::destroy($asociado->id);
-        session(['mensaje' => 'Asociado eliminado con éxito.']);        
+        session(['mensaje' => 'Asociado eliminado con éxito.']); 
+        LogSistema::registrarAccion('Asociado eliminado: '.$eliminada_concepto.' '.$eliminada_nombre);        
         return redirect()->route('mantenedor_contable_asociado'); 
     }
 }

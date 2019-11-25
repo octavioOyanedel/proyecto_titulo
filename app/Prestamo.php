@@ -8,6 +8,7 @@ use App\EstadoDeuda;
 use App\Interes;
 use App\FormaPago;
 use App\Cuenta;
+use App\TipoCuenta;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
@@ -82,18 +83,58 @@ class Prestamo extends Model
         }
     }
 
+
+//***************************************************************************************************************
+    /**
+     * scope busqueda estado
+     */
+    public function scopeEstadoDeudaId($query, $estado)
+    {
+        if ($estado) {
+            $estado_id = EstadoDeuda::obtenerEstadoPorNombre($estado);
+            if($estado_id != null){
+                return $query->orWhere('estado_deuda_id', '=', $estado_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda fecha
+     */
+    public function scopeFechaUnica($query, $fecha)
+    {
+        $fecha_formarteada = date("Y-m-d", strtotime($fecha));
+        if($fecha != null){
+            return $query->orWhere('fecha_solicitud','=',$fecha_formarteada);
+        }
+    }
+
+    /**
+     * scope busqueda numero cuenta
+     */
+    public function scopeNumeroCuenta($query, $cuenta)
+    {
+        if ($cuenta) {
+            $cuenta_id = Cuenta::obtenerCuentaPorNumero($cuenta);
+            if($cuenta_id != null){
+                return $query->orWhere('cuenta_id', '=', $cuenta_id->id);
+            }
+        }
+    }
+
     /**
      * scope busqueda forma pago
      */
     public function scopeFormaPagoId($query, $forma)
     {
-        if($forma != null){
-            return $query->Where('forma_pago_id','=',$forma);
+        if ($forma) {
+            $forma_id = FormaPago::obtenerFormaPagoPorNombre($forma);
+            if($forma_id != null){
+                return $query->orWhere('forma_pago_id', '=', $forma_id->id);
+            }
         }
     }
 
-
-//***************************************************************************************************************
     /**
      * scope busqueda monto
      */

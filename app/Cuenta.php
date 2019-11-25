@@ -4,6 +4,7 @@ namespace App;
 
 use App\TipoCuenta;
 use App\Banco;
+use App\Cuenta;
 use App\RegistroContable;
 use App\Prestamo;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,22 @@ class Cuenta extends Model
     protected $fillable = [
         'numero','tipo_cuenta_id','banco_id',
     ];
+
+    /**
+     * Obtener cuenta 
+     */
+    static public function obtenerCuentaPorNumero($numero)
+    {
+        return Cuenta::where('numero', $numero)->first();
+    }
+
+    /**
+     * Obtener cuenta 
+     */
+    static public function obtenerCuentaPorBanco($id)
+    {
+        return Cuenta::where('banco_id', $id)->first();
+    }
 
     /**
      * Modificador de tipo cuenta

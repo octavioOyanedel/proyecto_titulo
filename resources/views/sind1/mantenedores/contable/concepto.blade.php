@@ -44,7 +44,7 @@
                                             <td width="50" class="text-center" scope="row" title="Editar concepto"><a class="text-secondary" href="{{ route('conceptos.edit', $c) }}"><span>@svg('editar')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Eliminar concepto"><a class="text-danger" href="{{ route('conceptos.show', $c) }}"><span>@svg('eliminar')</span></a></td>
                                             <td class="">{{ $c->nombre }}</td>
-                                            <td class="text-center">{{ $c->tipo_registro_id }}</td>
+                                            <td class="text-center">{{ $c->tipo_registro_contable_id }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>                                 

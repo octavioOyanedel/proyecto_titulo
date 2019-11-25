@@ -15,8 +15,16 @@ class Concepto extends Model
     * @var array
     */
     protected $fillable = [
-        'nombre','tipo_registro_id',
+        'nombre','tipo_registro_contable_id',
     ];
+
+    /**
+     * Obtener tipo cuenta
+     */
+    static public function obtenerConceptoPorNombre($nombre)
+    {
+        return Concepto::where('nombre', $nombre)->first();
+    }
 
     /**
      * Relación 
@@ -37,7 +45,7 @@ class Concepto extends Model
     /**
      * Modificador de tipo registro
      */
-    public function getTipoRegistroIdAttribute($valor)
+    public function getTipoRegistroContableIdAttribute($valor)
     {
         if($valor != null){
             $tipo_id = $valor;

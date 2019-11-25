@@ -26,13 +26,13 @@ class LogSistemaController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'fecha';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'DESC';
+            $orden = 'ASC';
         }
 
         $campo = $request->get('buscar_historial'); 
@@ -70,6 +70,7 @@ class LogSistemaController extends Controller
             break;                                                                              
             default:
                 $registros = LogSistema::orderBy($columna, $orden)
+                ->correo($campo)
                 ->fechaUnica($campo)
                 ->accion($campo)
                 ->ip($campo)

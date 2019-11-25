@@ -20,6 +20,14 @@ class FormaPago extends Model
     ];
 
     /**
+     * Obtener forma pago 
+     */
+    static public function obtenerFormaPagoPorNombre($nombre)
+    {
+        return FormaPago::where('nombre', $nombre)->first();
+    }
+
+    /**
      * Relación 
      */
     public function prestamo()

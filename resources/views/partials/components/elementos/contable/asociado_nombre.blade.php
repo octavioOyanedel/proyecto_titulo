@@ -1,6 +1,6 @@
 @php $nombre = '' @endphp
 @isset($asociado)
-    @php $nombre1 = $asociado->nombre @endphp
+    @php $nombre = $asociado->nombre @endphp
 @endisset
 <!-- Nuevo nombre asociado -->
 <div class="form-group new-divs row" id="new_div_nation">

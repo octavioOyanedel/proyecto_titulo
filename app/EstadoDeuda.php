@@ -36,4 +36,11 @@ class EstadoDeuda extends Model
         return $this->belongsTo('App\Cuota');
     }
 
+    /**
+     * Obtener cargo 
+     */
+    static public function obtenerEstadoPorNombre($nombre)
+    {
+        return EstadoDeuda::where('nombre', $nombre)->first();
+    }
 }

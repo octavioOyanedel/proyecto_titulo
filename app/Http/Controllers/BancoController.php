@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Banco;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarBancoRequest;
 
@@ -36,8 +37,9 @@ class BancoController extends Controller
      */
     public function store(IncorporarBancoRequest $request)
     {
-        Banco::create($request->all());
+        $banco = Banco::create($request->all());
         session(['mensaje' => 'Banco agregado con éxito.']);
+        LogSistema::registrarAccion('Banco agragado: '.$banco->nombre);
         return redirect()->route('mantenedor_contable_banco');
     }
 
@@ -77,6 +79,7 @@ class BancoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update(); 
         session(['mensaje' => 'Banco editado con éxito.']); 
+        LogSistema::registrarAccion('Banco editado, de: '.$banco->nombre.' a '.$request->nombre);
         return redirect()->route('mantenedor_contable_banco');
     }
 
@@ -88,8 +91,10 @@ class BancoController extends Controller
      */
     public function destroy(Banco $banco)
     {
+        $eliminada = $banco->nombre;
         Banco::destroy($banco->id);
-        session(['mensaje' => 'Banco eliminado con éxito.']);        
+        session(['mensaje' => 'Banco eliminado con éxito.']);  
+        LogSistema::registrarAccion('Banco eliminado: '.$eliminada);       
         return redirect()->route('mantenedor_contable_banco'); 
     }
 }

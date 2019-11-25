@@ -65,6 +65,8 @@ class HomeController extends Controller
                 $socios = Socio::orderBy('sedes.nombre',$orden)
                 ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
                 ->rut($campo)
+                ->genero($campo)
+                ->fechaUnica($campo)
                 ->nombre1($campo)
                 ->nombre2($campo)
                 ->apellido1($campo)
@@ -72,6 +74,10 @@ class HomeController extends Controller
                 ->celular($campo)
                 ->anexo($campo)
                 ->correo($campo)
+                ->numeroSocio($campo)
+                ->sede($campo)
+                ->area($campo)
+                ->cargo($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -83,6 +89,8 @@ class HomeController extends Controller
                 $socios = Socio::orderBy('areas.nombre',$orden)
                 ->join('areas', 'socios.area_id', '=', 'areas.id')
                 ->rut($campo)
+                ->genero($campo)
+                ->fechaUnica($campo)
                 ->nombre1($campo)
                 ->nombre2($campo)
                 ->apellido1($campo)
@@ -90,6 +98,10 @@ class HomeController extends Controller
                 ->celular($campo)
                 ->anexo($campo)
                 ->correo($campo)
+                ->numeroSocio($campo)
+                ->sede($campo)
+                ->area($campo)
+                ->cargo($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -101,6 +113,8 @@ class HomeController extends Controller
                 $socios = Socio::orderBy('cargos.nombre',$orden)
                 ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
                 ->rut($campo)
+                ->genero($campo)
+                ->fechaUnica($campo)
                 ->nombre1($campo)
                 ->nombre2($campo)
                 ->apellido1($campo)
@@ -108,6 +122,10 @@ class HomeController extends Controller
                 ->celular($campo)
                 ->anexo($campo)
                 ->correo($campo)
+                ->numeroSocio($campo)
+                ->sede($campo)
+                ->area($campo)
+                ->cargo($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -118,6 +136,8 @@ class HomeController extends Controller
             default:
                 $socios = Socio::orderBy($columna, $orden)
                 ->rut($campo)
+                ->genero($campo)
+                ->fechaUnica($campo)
                 ->nombre1($campo)
                 ->nombre2($campo)
                 ->apellido1($campo)
@@ -126,6 +146,9 @@ class HomeController extends Controller
                 ->anexo($campo)
                 ->correo($campo)
                 ->numeroSocio($campo)
+                ->sede($campo)
+                ->area($campo)
+                ->cargo($campo)                                            
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,

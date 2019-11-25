@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cargo;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarCargoRequest;
 
@@ -36,8 +37,9 @@ class CargoController extends Controller
      */
     public function store(IncorporarCargoRequest $request)
     {
-        Cargo::create($request->all());
+        $cargo = Cargo::create($request->all());
         session(['mensaje' => 'Cargo agregado con éxito.']);
+        LogSistema::registrarAccion('Cargo agragado: '.$cargo->nombre);
         return redirect()->route('mantenedor_socio_cargo');
     }
 
@@ -76,6 +78,7 @@ class CargoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Cargo editado con éxito.']);
+        LogSistema::registrarAccion('Cargo editado, de: '.$cargo->nombre.' a '.$request->nombre);
         return redirect()->route('mantenedor_socio_cargo');
     }
 
@@ -87,8 +90,10 @@ class CargoController extends Controller
      */
     public function destroy(Cargo $cargo)
     {
+        $eliminada = $cargo->nombre;        
         Cargo::destroy($cargo->id);
         session(['mensaje' => 'Cargo eliminado con éxito.']);
+        LogSistema::registrarAccion('Cargo eliminado: '.$eliminada); 
         return redirect()->route('mantenedor_socio_cargo');
     }
 }

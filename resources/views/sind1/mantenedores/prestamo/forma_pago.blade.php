@@ -14,12 +14,13 @@
 
                     <h4 class="mt-4"></h4>
 
-                    <a class="btn btn-outline-primary active" href="{{ route('mantenedor_estudio_nivel') }}" role="button">Forma de Pago</a>
+                    <a class="btn btn-outline-primary active mb-4" href="{{ route('mantenedor_estudio_nivel') }}" role="button">Forma de Pago</a>
 
+<!--
                     <div>
                         <a class="btn btn-success mt-4 mb-4" href="{{ route('formas_pago.create') }}">Agregar Forma de Pago</a> 
                     </div>
-
+-->
                     @if($formas_pago->count() === 0)
                         <div class="alert alert-warning mt-4 text-center" role="alert">
                             <b>No existen registros.</b>
@@ -29,15 +30,17 @@
                             <table class="table table-hover data-tables table-striped table-bordered" id="tabla-formas-pago">
                                 <thead>
                                     <tr>
-                                        <th colspan="2"></th>
+                                        <th colspan="1"></th>
                                         <th class="" scope="col">Forma de pago</th>
                                     </tr>
                                 </thead>   
                                 <tbody>
                                     @foreach($formas_pago as $f)
-                                        <tr>                                                
+                                        <tr>                                               
                                             <td width="50" class="text-center" scope="row" title="Editar forma de pago"><a class="text-secondary" href="{{ route('formas_pago.edit',$f) }}"><span>@svg('editar')</span></a></td>
+                                        <!--
                                             <td width="50" class="text-center" scope="row" title="Eliminar forma de pago"><a class="text-danger" href="{{ route('formas_pago.show',$f->id) }}"><span>@svg('eliminar')</span></a></td>
+                                        -->
                                             <td class="">{{ $f->nombre }}</td>
                                         </tr>
                                     @endforeach

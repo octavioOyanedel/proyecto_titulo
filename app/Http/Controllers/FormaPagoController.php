@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FormaPago;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarFormaPagoRequest;
 
@@ -37,8 +38,9 @@ class FormaPagoController extends Controller
      */
     public function store(IncorporarFormaPagoRequest $request)
     {
-        FormaPago::create($request->all());
+        $forma= FormaPago::create($request->all());
         session(['mensaje' => 'Forma de pago agregada con éxito.']);
+        LogSistema::registrarAccion('Forma de pago agragada: '.$forma->nombre);
         return redirect()->route('mantenedor_prestamo_forma_pago');
     }
 
@@ -77,9 +79,11 @@ class FormaPagoController extends Controller
     public function update(IncorporarFormaPagoRequest $request, $id)
     {
         $modificar = FormaPago::findOrFail($id);
+        $forma = $modificar->nombre;
         $modificar->nombre = $request->nombre;
         $modificar->update();             
-        session(['mensaje' => 'Forma de pago editada con éxito.']); 
+        session(['mensaje' => 'Forma de pago editada con éxito.']);
+        LogSistema::registrarAccion('Forma de pago editada, de: '.$forma.' a '.$request->nombre);
         return redirect()->route('mantenedor_prestamo_forma_pago');
     }
 
@@ -91,8 +95,10 @@ class FormaPagoController extends Controller
      */
     public function destroy($id)
     {
+        $eliminada = FormaPago::findOrFail($id)->nombre;
         FormaPago::destroy($id);
-        session(['mensaje' => 'Forma de pago eliminada con éxito.']);        
+        session(['mensaje' => 'Forma de pago eliminada con éxito.']);   
+        LogSistema::registrarAccion('Forma de pago eliminada: '.$eliminada);      
         return redirect()->route('mantenedor_prestamo_forma_pago'); 
     }
 }

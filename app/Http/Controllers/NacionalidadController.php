@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Nacionalidad;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarNacionalidadRequest;
 
@@ -36,8 +37,9 @@ class NacionalidadController extends Controller
      */
     public function store(IncorporarNacionalidadRequest $request)
     {
-        Nacionalidad::create($request->all());
+        $nacion = Nacionalidad::create($request->all());
         session(['mensaje' => 'Nacionalidad agregada con éxito.']);
+        LogSistema::registrarAccion('Nacionalidad agragada: '.$nacion->nombre);
         return redirect()->route('mantenedor_socio_nacionalidad');
     }
 
@@ -75,9 +77,11 @@ class NacionalidadController extends Controller
     public function update(IncorporarNacionalidadRequest $request, $id)
     {
         $modificar = Nacionalidad::findOrFail($id);
+        $nacionalidad = $modificar->nombre;
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Nacionalidad editada con éxito.']);
+        LogSistema::registrarAccion('Nacionalidad editada, de: '.$nacionalidad.' a '.$request->nombre);
         return redirect()->route('mantenedor_socio_nacionalidad');
     }
 
@@ -89,8 +93,10 @@ class NacionalidadController extends Controller
      */
     public function destroy($id)
     {
+        $eliminada = Nacionalidad::findOrFail($id)->nombre;       
         Nacionalidad::destroy($id);
         session(['mensaje' => 'Nacionalidad eliminada con éxito.']);
+        LogSistema::registrarAccion('Nacionalidad eliminada: '.$eliminada); 
         return redirect()->route('mantenedor_socio_nacionalidad');
     }
 }
