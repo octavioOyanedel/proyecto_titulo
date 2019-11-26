@@ -81,7 +81,7 @@ class Socio extends Model
     public function scopeComunaId($query, $comuna_id)
     {
         if($comuna_id != null){
-            return $query->Where('comuna_id','=',$comuna_id);
+            return $query->where('comuna_id','=',$comuna_id);
         }
     }
 
@@ -91,7 +91,7 @@ class Socio extends Model
     public function scopeCiudadId($query, $ciudad_id)
     {
         if($ciudad_id != null && $ciudad_id != 'Seleccione...'){
-            return $query->Where('ciudad_id','=',$ciudad_id);
+            return $query->where('ciudad_id','=',$ciudad_id);
         }
     }
 
@@ -101,7 +101,7 @@ class Socio extends Model
     public function scopeSedeId($query, $sede_id)
     {
         if($sede_id != null){
-            return $query->Where('sede_id','LIKE',"%$sede_id%");
+            return $query->where('sede_id','=',$sede_id);
         }
     }
 
@@ -111,9 +111,20 @@ class Socio extends Model
     public function scopeAreaId($query, $area_id)
     {
         if($area_id != null && $area_id != 'Seleccione...'){
-            return $query->Where('area_id','=',$area_id);
+            return $query->where('area_id','=',$area_id);
         }
     }
+
+    /**
+     * scope busqueda sede
+     */
+    public function scopeDireccion($query, $direccion)
+    {
+        if($direccion != null){
+            return $query->where('direccion','LIKE',"%$direccion%");
+        }
+    }
+
 
     /**
      * scope busqueda cargo
@@ -121,7 +132,7 @@ class Socio extends Model
     public function scopeCargoId($query, $cargo_id)
     {
         if($cargo_id != null){
-            return $query->Where('cargo_id','=',$cargo_id);
+            return $query->where('cargo_id','=',$cargo_id);
         }
     }
 
@@ -131,7 +142,7 @@ class Socio extends Model
     public function scopeEstadoSocioId($query, $estado_socio_id)
     {
         if($estado_socio_id != null){
-            return $query->Where('estado_socio_id','=',$estado_socio_id);
+            return $query->where('estado_socio_id','=',$estado_socio_id);
         }
     }
 
@@ -141,7 +152,17 @@ class Socio extends Model
     public function scopeNacionalidadId($query, $nacionalidad_id)
     {
         if($nacionalidad_id != null){
-            return $query->Where('nacionalidad_id','=',$nacionalidad_id);
+            return $query->where('nacionalidad_id','=',$nacionalidad_id);
+        }
+    }
+
+    /**
+     * scope busqueda por anexo
+     */
+    public function scopeGenero($query, $genero)
+    {
+        if ($genero) {
+            return $query->where('genero', 'LIKE', "%$genero%");
         }
     }
 //***************************************************************************************************************
@@ -243,16 +264,6 @@ class Socio extends Model
     {
         if ($numero) {
             return $query->orWhere('numero_socio', '=', $numero);
-        }
-    }
-
-    /**
-     * scope busqueda por anexo
-     */
-    public function scopeGenero($query, $genero)
-    {
-        if ($genero) {
-            return $query->orWhere('genero', 'LIKE', "%$genero%");
         }
     }
 
@@ -551,6 +562,14 @@ class Socio extends Model
     static public function obtenerUltimoSocioIngresado()
     {
         return Socio::orderBy('created_at', 'DESC')->first();
+    }
+
+    /**
+     * Obtener ultimo registro creado 
+     */
+    static public function obtenerSocioPorRut($rut)
+    {
+        return Socio::where('rut','=',$rut)->first();
     }
 
     /**

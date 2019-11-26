@@ -32,10 +32,15 @@
     {{-- listar --}}
     @case('prestamos')
         <script src="{{ asset('js/switch_estado_deuda.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>        
     @break
     {{-- filtrar --}}
     @case('filtro_prestamos_form')
         <script src="{{ asset('js/switch_filtro_prestamos.js') }}" defer></script>
     @break
+    {{-- filtrar --}}
+    @case('filtro_prestamos')
+        <script src="{{ asset('js/switch_estado_deuda.js') }}" defer></script>
+    @break
     @default
-@endswitch
+@endswitch 

@@ -75,7 +75,7 @@
                         </div>
                     @endif
                     @if($prestamo->getOriginal('forma_pago_id') === 2 && ($prestamo->getOriginal('estado_deuda_id') === 2 || $prestamo->getOriginal('estado_deuda_id') === 3))
-                        <a class="btn btn-success float-right" href="{{ route('cancelar_deposito', ['id' => $prestamo->id]) }}" role="button">Cancelar Préstamo</a>
+                        <a class="btn btn-primary" href="{{ route('cancelar_deposito', ['id' => $prestamo->id]) }}" role="button">Cancelar Préstamo</a>
                     @endif
                 </div>
             </div>

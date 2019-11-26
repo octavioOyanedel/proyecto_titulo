@@ -33,7 +33,9 @@ class FiltrarPrestamoRequest extends FormRequest
           'monto_fin' => ['nullable','numeric'],
           'numero_cuotas' => ['nullable','numeric'],
           'forma_pago_id' => ['nullable','numeric'],
-          'rut' => ['nullable',new ValidarRutRule,'unique:socios,rut','max:9'],
+          'rut' => ['nullable',new ValidarRutRule,'max:9'],
+          'cuenta_id' => ['nullable','numeric'],
+          'estado_deuda_id' => ['nullable','numeric'],
         ];
     }
 }

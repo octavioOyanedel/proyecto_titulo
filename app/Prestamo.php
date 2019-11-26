@@ -79,11 +79,52 @@ class Prestamo extends Model
     public function scopeNumeroCuotas($query, $numero)
     {
         if($numero != null){
-            return $query->Where('numero_cuotas','=',$numero);
+            return $query->where('numero_cuotas','=',$numero);
         }
     }
 
+    /**
+     * scope busqueda forma pago
+     */
+    public function scopeFormaPagoFiltro($query, $forma)
+    {
+        if($forma != null){
+            return $query->where('forma_pago_id','=',$forma);
+        }
+    }
 
+    /**
+     * scope busqueda rut
+     */
+    public function scopeRutFiltro($query, $rut)
+    {
+        if ($rut) {
+            $socio = Socio::obtenerSocioPorRut($rut);
+            if($socio != null){
+                return $query->where('socio_id', '=', $socio->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda cuenta
+     */
+    public function scopeCuentaId($query, $cuenta)
+    {
+        if($cuenta != null){
+            return $query->where('cuenta_id','=',$cuenta);
+        }
+    }
+
+    /**
+     * scope busqueda estado prestamo
+     */
+    public function scopeEstadoDeudaIdFiltro($query, $estado)
+    {
+        if($estado != null){
+            return $query->where('estado_deuda_id','=',$estado);
+        }
+    }
 //***************************************************************************************************************
     /**
      * scope busqueda estado

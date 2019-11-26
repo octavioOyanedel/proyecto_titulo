@@ -14,8 +14,21 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="{{ route('filtro_socios') }}">
-                        @csrf
+                    <form method="GET" action="{{ route('filtro_socios') }}">
+
+                    <div class="form-check text-center mb-3">
+                        <input class="form-check-input" type="radio" name="desvinculados" id="radio_incluir" value="incluir">
+                        <label class="form-check-label" for="radio_incluir">
+                        Incluir socios descvinculados.
+                        </label>
+                    </div>
+                    <div class="form-check text-center mb-3">
+                        <input class="form-check-input" type="radio" name="desvinculados" id="radio_solo" value="solo">
+                        <label class="form-check-label" for="radio_solo">
+                        Mostrar solo socios desvinculados.
+                        </label>
+                    </div>
+
                         <!-- Fecha nacimiento inicio -->
                         <div class="text-center alert alert-secondary" role="alert"><b>Fecha de nacimiento</b></div>
                         <div class="form-group row">
@@ -95,14 +108,19 @@
                         </div>                        
                         <hr>
 
-                        @include('partials.components.elementos.socio.genero')                        
+                        @include('partials.components.elementos.socio.genero')                      
+
                         @include('partials.components.elementos.socio.comuna')
                         @include('partials.components.elementos.socio.ciudad')
                         @include('partials.components.elementos.socio.direccion')
                         @include('partials.components.elementos.socio.sede')    
                         @include('partials.components.elementos.socio.area') 
                         @include('partials.components.elementos.socio.cargo')
-                        @include('partials.components.elementos.socio.situacion')
+
+
+                        {{-- @include('partials.components.elementos.socio.situacion') --}} 
+
+
                         @include('partials.components.elementos.socio.nacion')   
 
                         <!-- Botón submit -->

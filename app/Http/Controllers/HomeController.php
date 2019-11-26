@@ -25,8 +25,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        //$orders = Socio::onlyTrashed()->orderBy('apellido1','ASC')->get();
-        //dd($request);
 
         if(request()->has('registros') && request('registros') != ''){
             $registros = request('registros');

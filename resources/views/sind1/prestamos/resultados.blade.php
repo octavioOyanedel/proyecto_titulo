@@ -5,11 +5,8 @@
 <div class="ml-5 mr-5">
     <div class="row justify-content-center">
         <div class="col-md-12">
-
-            @include('partials.alertas')
-
             <div class="card">
-                <div class="card-header text-center"><h3 class="mb-0">Listado de Préstamos</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Resultados de Búsqueda</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
@@ -19,7 +16,7 @@
                         </div>
                     @else
                         <div>                               
-                            @include('partials.components.filtros.prestamos') 
+                            @include('partials.components.filtros.prestamos_busqueda') 
                         </div> 
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">

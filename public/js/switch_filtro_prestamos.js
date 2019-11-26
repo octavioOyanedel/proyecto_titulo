@@ -1,19 +1,37 @@
 $(window).on('load',function(){
 
 	var ruta = window.location.pathname;
-	var div_cuotas = $('#campo_numero_cuotas');
 	var forma_pago = $('#forma_pago_id');
+	var cuenta = $('#cuenta_id');
 	var rut = $('#rut');
+	var cuenta = $('#cuenta_id');
+	var estado = $('#estado_deuda_id');
+	var contenedor_cuotas = $('#contenedor_cuotas');
+	var contenedor_fechas = $('#contenedor_fecha_pago');
 
 	if(ruta === '/filtro_prestamos_form'){
 		desactivarElemento(forma_pago);
+		desactivarElemento(cuenta);
 		desactivarElemento(rut);
-		mostrarCuotas(div_cuotas);
+		desactivarElemento(estado);
 	}else{
 		activarElemento(forma_pago);
+		activarElemento(cuenta);
 		activarElemento(rut);
-		ocultarCuotas(div_cuotas)
+		activarElemento(estado);
 	}
+
+	forma_pago.change(function(){
+		var valor = $('#forma_pago_id option:selected').val();
+		if(valor === '1'){
+			mostrarElemento(contenedor_cuotas);
+			ocultarElemento(contenedor_fechas);
+		}else{
+			mostrarElemento(contenedor_fechas);
+			ocultarElemento(contenedor_cuotas);
+		}
+
+	});
 
 	function activarElemento(elemento){
 		elemento.attr('required','true');
@@ -23,11 +41,12 @@ $(window).on('load',function(){
 		elemento.removeAttr('required');
 	}
 
-	function mostrarCuotas(elemento){
+	function mostrarElemento(elemento){
 		elemento.removeClass('d-none');
 	}
 
-	function ocultarCuotas(elemento){
+	function ocultarElemento(elemento){
 		elemento.addClass('d-none');
 	}
+
 });

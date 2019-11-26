@@ -59,87 +59,171 @@ class PrestamoController extends Controller
             case 'socio_id':
                 $prestamos = Prestamo::orderBy('socios.apellido1', $orden)
                 ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
-                ->numeroEgreso($campo)
-                ->cheque($campo)
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoId($request->forma_pago_id)
+                ->rut($request->rut)   
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'rut' => $request->rut,                               
                 ]); 
             break;     
             case 'rut':
                 $prestamos = Prestamo::orderBy('socios.rut', $orden)
                 ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
-                ->numeroEgreso($campo)
-                ->cheque($campo)              
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoId($request->forma_pago_id)
+                ->rut($request->rut)              
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'rut' => $request->rut,                               
                 ]); 
             break;
             case 'tipo_cuenta_id':
                 $prestamos = Prestamo::orderBy('tipos_cuenta.nombre', $orden)
                 ->join('cuentas', 'prestamos.cuenta_id', '=', 'cuentas.id')
                 ->join('tipos_cuenta', 'cuentas.tipo_cuenta_id', '=', 'tipos_cuenta.id')
-                ->numeroEgreso($campo)
-                ->cheque($campo)               
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoId($request->forma_pago_id)
+                ->rut($request->rut)               
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'rut' => $request->rut,                               
                 ]); 
             break;
             case 'numero':
                 $prestamos = Prestamo::orderBy('cuentas.numero', $orden)
                 ->join('cuentas', 'prestamos.cuenta_id', '=', 'cuentas.id')
-                ->numeroEgreso($campo)
-                ->cheque($campo)               
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoId($request->forma_pago_id)
+                ->rut($request->rut)               
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'rut' => $request->rut,                               
                 ]); 
             break;
             case 'banco_id':
                 $prestamos = Prestamo::orderBy('bancos.nombre', $orden)
                 ->join('cuentas', 'prestamos.cuenta_id', '=', 'cuentas.id')
                 ->join('bancos', 'cuentas.banco_id', '=', 'bancos.id')
-                ->numeroEgreso($campo)
-                ->cheque($campo)             
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoId($request->forma_pago_id)
+                ->rut($request->rut)             
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'rut' => $request->rut,                               
                 ]); 
             break;
             case 'forma_pago_id':
                 $prestamos = Prestamo::orderBy('formas_pago.nombre', $orden)
                 ->join('formas_pago', 'prestamos.forma_pago_id', '=', 'formas_pago.id')
-                ->numeroEgreso($campo)
-                ->cheque($campo)             
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoId($request->forma_pago_id)
+                ->rut($request->rut)             
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'rut' => $request->rut,                               
                 ]); 
             break;
             case 'estado_deuda_id':
                 $prestamos = Prestamo::orderBy('estados_deuda.nombre', $orden)
                 ->join('estados_deuda', 'prestamos.estado_deuda_id', '=', 'estados_deuda.id')
-                ->numeroEgreso($campo)
-                ->cheque($campo)              
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoId($request->forma_pago_id)
+                ->rut($request->rut)              
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'rut' => $request->rut,                               
                 ]); 
             break;                                                               
             default:
@@ -156,7 +240,15 @@ class PrestamoController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'rut' => $request->rut,                               
                 ]); 
             break;
         }
@@ -355,14 +447,15 @@ class PrestamoController extends Controller
      */
     public function cancelarDeposito($id)
     {
-        $prestamo = Prestamo::findOrFail($id);
-        $interes = null;
-        if($prestamo->forma_pago_id === '1'){
-            $interes = Interes::findOrFail($prestamo->getOriginal('interes_id'));
-        }
+        $prestamos = Prestamo::orderBy('fecha_solicitud','DESC')->paginate(15);
+        $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
+        $total_consulta = $prestamos->total();
+
+        $prestamo = Prestamo::findorFail($id);
         $prestamo->estado_deuda_id = 1;
         $prestamo->update();
-        return redirect()->route('prestamos.show', compact('prestamo','interes'))->with('cancelar-deposito','');
+        session(['mensaje' => 'Préstamo cancelado con éxito.']);
+        return redirect()->route('prestamos.index', compact('prestamos','formas_pago','total_consulta'));
     }
 
     /**
@@ -465,8 +558,10 @@ class PrestamoController extends Controller
      */
     public function filtroPrestamosForm(Request $request)
     {
+        $cuentas = Cuenta::all();
+        $estados = EstadoDeuda::orderBy('nombre','ASC')->get();
         $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
-        return view('sind1.prestamos.busqueda', compact('formas_pago'));
+        return view('sind1.prestamos.busqueda', compact('formas_pago','cuentas','estados'));
     }
 
     /**
@@ -477,17 +572,258 @@ class PrestamoController extends Controller
      */
     public function filtroPrestamos(FiltrarPrestamoRequest $request)
     {
+        //dd($request);
+
+        if(request()->has('registros') && request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'fecha_solicitud';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'DESC';
+        } 
 
         $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
-        $prestamos = Prestamo::orderBy('fecha_solicitud', 'DESC')
-        ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
-        ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
-        ->monto($request->monto_ini, $request->monto_fin)
-        ->numeroCuotas($request->numero_cuotas)
-        ->formaPagoId($request->forma_pago_id)
-        ->rut($request->rut)
-        ->paginate(15);
 
-        return view('sind1.prestamos.index', compact('prestamos','formas_pago'));
+        switch ($columna) {
+            case 'socio_id':
+                $prestamos = Prestamo::orderBy('socios.apellido1', $orden)
+                ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->scopeFormaPagoFiltro($request->forma_pago_id)
+                ->rutFiltro($request->rut)
+                ->cuentaId($request->cuenta_id)   
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)                    
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'estado_deuda_id' => $request->estado_deuda_id,                    
+                    'rut' => $request->rut,                               
+                ]); 
+            break;     
+            case 'rut':
+                $prestamos = Prestamo::orderBy('socios.rut', $orden)
+                ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoFiltro($request->forma_pago_id)
+                ->rutFiltro($request->rut)
+                ->cuentaId($request->cuenta_id)   
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'estado_deuda_id' => $request->estado_deuda_id,                     
+                    'rut' => $request->rut,                               
+                ]); 
+            break;
+            case 'tipo_cuenta_id':
+                $prestamos = Prestamo::orderBy('tipos_cuenta.nombre', $orden)
+                ->join('cuentas', 'prestamos.cuenta_id', '=', 'cuentas.id')
+                ->join('tipos_cuenta', 'cuentas.tipo_cuenta_id', '=', 'tipos_cuenta.id')
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoFiltro($request->forma_pago_id)
+                ->rutFiltro($request->rut)
+                ->cuentaId($request->cuenta_id)   
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                 
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'estado_deuda_id' => $request->estado_deuda_id,                     
+                    'rut' => $request->rut,                               
+                ]); 
+            break;
+            case 'numero':
+                $prestamos = Prestamo::orderBy('cuentas.numero', $orden)
+                ->join('cuentas', 'prestamos.cuenta_id', '=', 'cuentas.id')
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoFiltro($request->forma_pago_id)
+                ->rutFiltro($request->rut)
+                ->cuentaId($request->cuenta_id)   
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                 
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'estado_deuda_id' => $request->estado_deuda_id,                     
+                    'rut' => $request->rut,                               
+                ]); 
+            break;
+            case 'banco_id':
+                $prestamos = Prestamo::orderBy('bancos.nombre', $orden)
+                ->join('cuentas', 'prestamos.cuenta_id', '=', 'cuentas.id')
+                ->join('bancos', 'cuentas.banco_id', '=', 'bancos.id')
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoFiltro($request->forma_pago_id)
+                ->rutFiltro($request->rut)
+                ->cuentaId($request->cuenta_id)   
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)                               
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'estado_deuda_id' => $request->estado_deuda_id,                     
+                    'rut' => $request->rut,                               
+                ]); 
+            break;
+            case 'forma_pago_id':
+                $prestamos = Prestamo::orderBy('formas_pago.nombre', $orden)
+                ->join('formas_pago', 'prestamos.forma_pago_id', '=', 'formas_pago.id')
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoFiltro($request->forma_pago_id)
+                ->rutFiltro($request->rut)
+                ->cuentaId($request->cuenta_id)   
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)                               
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'estado_deuda_id' => $request->estado_deuda_id,                     
+                    'rut' => $request->rut,                               
+                ]); 
+            break;
+            case 'estado_deuda_id':
+                $prestamos = Prestamo::orderBy('estados_deuda.nombre', $orden)
+                ->join('estados_deuda', 'prestamos.estado_deuda_id', '=', 'estados_deuda.id')
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoFiltro($request->forma_pago_id)
+                ->rutFiltro($request->rut)
+                ->cuentaId($request->cuenta_id)   
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                 
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'estado_deuda_id' => $request->estado_deuda_id,                     
+                    'rut' => $request->rut,                               
+                ]); 
+            break;                                                               
+            default:
+                $prestamos = Prestamo::orderBy($columna, $orden)
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->fechaPago($request->fecha_pago_ini, $request->fecha_pago_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->numeroCuotas($request->numero_cuotas)
+                ->formaPagoFiltro($request->forma_pago_id)
+                ->rutFiltro($request->rut) 
+                ->cuentaId($request->cuenta_id)   
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                                
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'fecha_pago_ini' => $request->fecha_pago_ini,
+                    'fecha_pago_fin' => $request->fecha_pago_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'numero_cuotas' => $request->numero_cuotas,
+                    'forma_pago_id' => $request->forma_pago_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'estado_deuda_id' => $request->estado_deuda_id,                     
+                    'rut' => $request->rut,                               
+                ]); 
+            break;
+        }
+
+        $total_consulta = $prestamos->total();
+
+        return view('sind1.prestamos.resultados', compact('prestamos','formas_pago','total_consulta'));
     }
 }

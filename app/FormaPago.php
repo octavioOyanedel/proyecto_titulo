@@ -34,7 +34,7 @@ class FormaPago extends Model
      */
     static public function obtenerFormaPagoPorNombre($nombre)
     {
-        return FormaPago::where('nombre', $nombre)->first();
+        return FormaPago::where('nombre','=', $nombre)->first();
     }
 
     /**
