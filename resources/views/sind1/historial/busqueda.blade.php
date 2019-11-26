@@ -10,8 +10,7 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     <!-- Formulario -->
-                    <form method="POST" action="{{ route('filtro_historial') }}">
-                        @csrf  
+                    <form method="GET" action="{{ route('filtro_historial') }}">  
                         <!-- Fecha inicio -->
                         <div class="text-center alert alert-secondary" role="alert"><b>Fecha</b></div>
                         <div class="form-group row">

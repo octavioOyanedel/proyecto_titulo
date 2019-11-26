@@ -45,7 +45,7 @@ class RegistroContableController extends Controller
         $campo = $request->get('buscar_registro');
 
         switch ($columna) {
-            case 'estado_deuda_id':
+            case 'concepto_id':
                 $registros = RegistroContable::orderBy('conceptos.nombre', $orden)
                 ->join('conceptos', 'registros_contables.concepto_id', '=', 'conceptos.id')
                 ->fechaUnica($campo) 
@@ -58,7 +58,17 @@ class RegistroContableController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'buscar_registro' => $campo,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'tipo_registro_contable_id' => $request->tipo_registro_contable_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'concepto_id' => $request->concepto_id,
+                    'socio_id' => $request->socio_id,
+                    'asociado_id' => $request->asociado_id,
+                    'detalle' => $request->detalle,                                                   
                 ]); 
             break;    
             case 'tipo_registro_contable_id':
@@ -74,7 +84,17 @@ class RegistroContableController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'buscar_registro' => $campo,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'tipo_registro_contable_id' => $request->tipo_registro_contable_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'concepto_id' => $request->concepto_id,
+                    'socio_id' => $request->socio_id,
+                    'asociado_id' => $request->asociado_id,
+                    'detalle' => $request->detalle,                                                   
                 ]); 
             break;  
             default:
@@ -89,7 +109,17 @@ class RegistroContableController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_prestamo' => $campo,                               
+                    'buscar_registro' => $campo,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'tipo_registro_contable_id' => $request->tipo_registro_contable_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'concepto_id' => $request->concepto_id,
+                    'socio_id' => $request->socio_id,
+                    'asociado_id' => $request->asociado_id,
+                    'detalle' => $request->detalle,                                                   
                 ]); 
             break;
         }
@@ -243,7 +273,7 @@ class RegistroContableController extends Controller
     public function obtenerConceptos(Request $request){
         $coleccion = array();
         if($request->ajax()){
-            $conceptos = Concepto::where('tipo_registro_id','=',$request->id)->get();
+            $conceptos = Concepto::where('tipo_registro_contable_id','=',$request->id)->get();
             foreach ($conceptos as $c) {
                 array_push($coleccion,array('id'=>$c->id,'nombre'=>$c->nombre));
             }
@@ -273,16 +303,110 @@ class RegistroContableController extends Controller
      */
     public function filtroContables(FiltrarContableRequest $request)
     {
-        $registros = RegistroContable::orderBy('fecha','DESC')
-        ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
-        ->monto($request->monto_ini, $request->monto_fin)
-        ->tipoRegistroContableId($request->tipo_registro_contable_id)
-        ->cuentaId($request->cuenta_id)
-        ->conceptoId($request->concepto_id)
-        ->socioId($request->socio_id)
-        ->asociadoId($request->asociado_id)
-        ->detalle($request->detalle)        
-        ->paginate(15);
-        return view('sind1.contables.index', compact('registros'));   
+
+        if(request()->has('registros') && request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'fecha';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'DESC';
+        } 
+
+        switch ($columna) {
+            case 'concepto_id':
+                $registros = RegistroContable::orderBy('conceptos.nombre', $orden)
+                ->join('conceptos', 'registros_contables.concepto_id', '=', 'conceptos.id')
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->tipoRegistroContableFiltro($request->tipo_registro_contable_id)
+                ->cuentaId($request->cuenta_id)
+                ->conceptoFiltro($request->concepto_id)
+                ->socioId($request->socio_id)
+                ->asociadoId($request->asociado_id)
+                ->detalle($request->detalle)      
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'tipo_registro_contable_id' => $request->tipo_registro_contable_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'concepto_id' => $request->concepto_id,
+                    'socio_id' => $request->socio_id,
+                    'asociado_id' => $request->asociado_id,
+                    'detalle' => $request->detalle,                               
+                ]); 
+            break;    
+            case 'tipo_registro_contable_id':
+                $registros = RegistroContable::orderBy('tipos_registro_contable.nombre', $orden)
+                ->join('tipos_registro_contable', 'registros_contables.tipo_registro_contable_id', '=', 'tipos_registro_contable.id')
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->tipoRegistroContableFiltro($request->tipo_registro_contable_id)
+                ->cuentaId($request->cuenta_id)
+                ->conceptoFiltro($request->concepto_id)
+                ->socioId($request->socio_id)
+                ->asociadoId($request->asociado_id)
+                ->detalle($request->detalle)
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'tipo_registro_contable_id' => $request->tipo_registro_contable_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'concepto_id' => $request->concepto_id,
+                    'socio_id' => $request->socio_id,
+                    'asociado_id' => $request->asociado_id,
+                    'detalle' => $request->detalle,
+                ]); 
+            break;  
+            default:
+                $registros = RegistroContable::orderBy($columna, $orden)
+                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->monto($request->monto_ini, $request->monto_fin)
+                ->tipoRegistroContableFiltro($request->tipo_registro_contable_id)
+                ->cuentaId($request->cuenta_id)
+                ->conceptoFiltro($request->concepto_id)
+                ->socioId($request->socio_id)
+                ->asociadoId($request->asociado_id)
+                ->detalle($request->detalle) 
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_solicitud_ini' => $request->fecha_solicitud_ini,
+                    'fecha_solicitud_fin' => $request->fecha_solicitud_fin,
+                    'monto_ini' => $request->monto_ini,
+                    'monto_fin' => $request->monto_fin,
+                    'tipo_registro_contable_id' => $request->tipo_registro_contable_id,
+                    'cuenta_id' => $request->cuenta_id,
+                    'concepto_id' => $request->concepto_id,
+                    'socio_id' => $request->socio_id,
+                    'asociado_id' => $request->asociado_id,
+                    'detalle' => $request->detalle,                               
+                ]); 
+            break;
+        }      
+
+        $total_consulta = $registros->total();
+
+        return view('sind1.contables.resultados', compact('registros','total_consulta'));   
     }
 }

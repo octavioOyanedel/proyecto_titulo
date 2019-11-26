@@ -3,7 +3,7 @@
             <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif </span>
         </div>                                                                            
     </div>   
-    <form class="form-inline float-right" method="GET" action="{{ route('contables.index') }}">
+    <form class="form-inline float-right" method="GET" action="{{ route('filtro_contables') }}">
      
         <div class="input-group mb-2 mr-sm-2">
             <select name="registros" id="registro" class="form-control form-control-sm">
@@ -23,7 +23,7 @@
                 <option value="numero_registro" @if(request('columna') === 'numero_registro') {{ 'selected' }} @endif>Numero de registro</option>
                 <option value="cheque" @if(request('columna') === 'cheque') {{ 'selected' }} @endif>Cheque</option>
                 <option value="Monto" @if(request('columna') === 'Monto') {{ 'selected' }} @endif>Monto</option>   
-                <option value="concepto_id" @if(request('columna') === 'concepto_id') {{ 'selected' }} @endif>Concepto</option>                   
+                <option value="concepto_id" @if(request('columna') === 'concepto_id') {{ 'selected' }} @endif>Concepto</option>                                      
             </select>
         </div>
 
@@ -35,7 +35,16 @@
             </select>
         </div>
 
-        <input type="hidden" name="buscar_registro" value="{{ request('buscar_registro') }}">
+        <input type="hidden" name="fecha_solicitud_ini" value="{{ request('fecha_solicitud_ini') }}">
+        <input type="hidden" name="fecha_solicitud_fin" value="{{ request('fecha_solicitud_fin') }}">
+        <input type="hidden" name="monto_ini" value="{{ request('monto_ini') }}">
+        <input type="hidden" name="monto_fin" value="{{ request('monto_fin') }}">
+        <input type="hidden" name="tipo_registro_contable_id" value="{{ request('tipo_registro_contable_id') }}">
+        <input type="hidden" name="cuenta_id" value="{{ request('cuenta_id') }}">
+        <input type="hidden" name="concepto_id" value="{{ request('concepto_id') }}">
+        <input type="hidden" name="socio_id" value="{{ request('socio_id') }}">
+        <input type="hidden" name="asociado_id" value="{{ request('asociado_id') }}">
+        <input type="hidden" name="detalle" value="{{ request('detalle') }}">
 
         <div class="input-group mb-2 mr-sm-2">
             <button type="submit" id="filtrar" class="btn btn-sm btn-secondary">Filtrar</button>

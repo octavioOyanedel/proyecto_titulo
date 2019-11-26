@@ -41,6 +41,16 @@ class LogSistema extends Model
         }
     }
 
+    /**
+     * scope busqueda IP
+     */
+    public function scopeUsuarioId($query, $id)
+    {
+        if($id != null){
+            return $query->where('usuario_id','=',$id);
+        }
+    }
+
 //***************************************************************************************************************
 
     /**

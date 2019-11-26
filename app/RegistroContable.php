@@ -65,7 +65,7 @@ class RegistroContable extends Model
     public function scopeCuentaId($query, $cuenta)
     {
         if($cuenta != null){
-            return $query->Where('cuenta_id','=',$cuenta);
+            return $query->where('cuenta_id','=',$cuenta);
         }
     }
 
@@ -75,7 +75,7 @@ class RegistroContable extends Model
     public function scopeSocioId($query, $socio)
     {
         if($socio != null){
-            return $query->Where('socio_id','=',$socio);
+            return $query->where('socio_id','=',$socio);
         }
     }
 
@@ -85,7 +85,7 @@ class RegistroContable extends Model
     public function scopeAsociadoId($query, $asociado)
     {
         if($asociado != null){
-            return $query->Where('asociado_id','=',$asociado);
+            return $query->where('asociado_id','=',$asociado);
         }
     }
 
@@ -95,7 +95,33 @@ class RegistroContable extends Model
     public function scopeDetalle($query, $detalle)
     {
         if($detalle != null){
-            return $query->Where('detalle','LIKE',"%$detalle%");
+            return $query->where('detalle','LIKE',"%$detalle%");
+        }
+    }
+
+        /**
+     * scope busqueda concepto
+     */
+    public function scopeConceptoFiltro($query, $concepto)
+    {
+        if ($concepto) {
+            $concepto_id = Concepto::obtenerConceptoPorNombre($concepto);
+            if($concepto_id != null){
+                return $query->where('concepto_id', '=', $concepto_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda concepto
+     */
+    public function scopeTipoRegistroContableFiltro($query, $registro)
+    {
+        if ($registro) {
+            $registro_id = TipoRegistroContable::obtenerTipoRegistroContablePorNombre($registro);
+            if($registro_id != null){
+                return $query->where('tipo_registro_contable_id', '=', $registro_id->id);
+            }
         }
     }
 //***************************************************************************************************************

@@ -78,6 +78,7 @@ $(window).on('load',function(){
 	}
 
 	function ajaxOld(id_tipo, id_concepto){
+		
 		$.ajaxSetup({
 			headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

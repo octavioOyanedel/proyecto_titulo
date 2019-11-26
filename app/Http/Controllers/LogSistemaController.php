@@ -50,7 +50,10 @@ class LogSistemaController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_historial' => $campo,                               
+                    'buscar_historial' => $campo,
+                    'fecha_ini' => $request->fecha_ini,
+                    'fecha_fin' => $request->fecha_fin,
+                    'usuario_id' => $request->usuario_id,                                                   
                 ]); 
             break;
             case 'apellido1':
@@ -65,7 +68,10 @@ class LogSistemaController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_historial' => $campo,                               
+                    'buscar_historial' => $campo,
+                    'fecha_ini' => $request->fecha_ini,
+                    'fecha_fin' => $request->fecha_fin,
+                    'usuario_id' => $request->usuario_id,                                                    
                 ]); 
             break;                                                                              
             default:
@@ -80,7 +86,10 @@ class LogSistemaController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_historial' => $campo,                               
+                    'buscar_historial' => $campo,
+                    'fecha_ini' => $request->fecha_ini,
+                    'fecha_fin' => $request->fecha_fin,
+                    'usuario_id' => $request->usuario_id,                                                    
                 ]); 
             break;
         }
@@ -175,11 +184,71 @@ class LogSistemaController extends Controller
      */
     public function filtroHistorial(FiltrarHistorialRequest $request)
     {
-        $registros = LogSistema::orderBy('created_at', 'DESC')
-        ->fecha($request->fecha_ini, $request->fecha_fin)
-        ->usuarioId($request->usuario_id)        
-        ->paginate(15);
-        return view('sind1.historial.index', compact('registros'));
+        if(request()->has('registros') && request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'created_at';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'ASC';
+        }
+
+        switch ($columna) {
+            case 'nombre1':
+                $registros = LogSistema::orderBy('usuarios.nombre1', $orden)
+                ->join('usuarios', 'log_sistema.usuario_id', '=', 'usuarios.id')
+                ->fecha($request->fecha_ini, $request->fecha_fin)
+                ->usuarioId($request->usuario_id)                   
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_ini' => $request->fecha_ini,
+                    'fecha_fin' => $request->fecha_fin,
+                    'usuario_id' => $request->usuario_id,                                                   
+                ]); 
+            break;
+            case 'apellido1':
+                $registros = LogSistema::orderBy('usuarios.apellido1', $orden)
+                ->join('usuarios', 'log_sistema.usuario_id', '=', 'usuarios.id')
+                ->fecha($request->fecha_ini, $request->fecha_fin)
+                ->usuarioId($request->usuario_id)                   
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_ini' => $request->fecha_ini,
+                    'fecha_fin' => $request->fecha_fin,
+                    'usuario_id' => $request->usuario_id,                                                   
+                ]); 
+            break;                                                                              
+            default:
+                $registros = LogSistema::orderBy($columna, $orden)
+                ->fecha($request->fecha_ini, $request->fecha_fin)
+                ->usuarioId($request->usuario_id)                  
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'fecha_ini' => $request->fecha_ini,
+                    'fecha_fin' => $request->fecha_fin,
+                    'usuario_id' => $request->usuario_id,                                                 
+                ]); 
+            break;
+        }
+
+        $total_consulta = $registros->total();
+
+        return view('sind1.historial.resultados', compact('registros','total_consulta'));
 
     }
 }

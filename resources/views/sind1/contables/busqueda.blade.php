@@ -14,8 +14,7 @@
                         </div>
                     @endif
                     <!-- Formulario -->
-                    <form method="POST" action="{{ route('filtro_contables') }}">
-                        @csrf 
+                    <form method="GET" action="{{ route('filtro_contables') }}">
                         <!-- Fecha solicitud inicio -->
                         <div class="text-center alert alert-secondary" role="alert"><b>Fecha de solicitud</b></div>
                         <div class="form-group row">
@@ -41,7 +40,7 @@
                                 @enderror
                             </div>
                         </div>     
-
+                        <hr>
                         <!-- monto inicio-->
                         <div class="text-center alert alert-secondary" role="alert"><b>Monto</b></div>
                         <div class="form-group row">

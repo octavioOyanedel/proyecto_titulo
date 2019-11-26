@@ -3,7 +3,7 @@
             <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif </span>
         </div>                                                                            
     </div>   
-    <form class="form-inline float-right" method="GET" action="{{ route('contables.index') }}">
+    <form class="form-inline float-right" method="GET" action="{{ route('filtro_historial') }}">
      
         <div class="input-group mb-2 mr-sm-2">
             <select name="registros" id="registro" class="form-control form-control-sm">
@@ -18,12 +18,14 @@
         <div class="input-group mb-2 mr-sm-2">
             <select name="columna" id="columna" class="form-control form-control-sm">
                 <option value="" selected>Columna</option>
-                <option value="fecha" @if(request('columna') === 'fecha') {{ 'selected' }} @endif>Fecha de solicitud</option>
-                <option value="tipo_registro_contable_id" @if(request('columna') === 'tipo_registro_contable_id') {{ 'selected' }} @endif>Tipo de registro</option>           
-                <option value="numero_registro" @if(request('columna') === 'numero_registro') {{ 'selected' }} @endif>Numero de registro</option>
-                <option value="cheque" @if(request('columna') === 'cheque') {{ 'selected' }} @endif>Cheque</option>
-                <option value="Monto" @if(request('columna') === 'Monto') {{ 'selected' }} @endif>Monto</option>   
-                <option value="concepto_id" @if(request('columna') === 'concepto_id') {{ 'selected' }} @endif>Concepto</option>                   
+                <option value="nombre1" @if(request('columna') === 'nombre1') {{ 'selected' }} @endif>Primer nombre</option>
+                <option value="apellido1" @if(request('columna') === 'apellido1') {{ 'selected' }} @endif>Apellido paterno</option>
+                <option value="correo" @if(request('columna') === 'correo') {{ 'selected' }} @endif>Correo</option>                
+                <option value="fecha" @if(request('columna') === 'fecha') {{ 'selected' }} @endif>Fecha</option>
+                <option value="accion" @if(request('columna') === 'accion') {{ 'selected' }} @endif>Acción</option>
+                <option value="ip" @if(request('columna') === 'ip') {{ 'selected' }} @endif>IP</option>
+                <option value="navegador" @if(request('columna') === 'navegador') {{ 'selected' }} @endif>Navegador</option>
+                <option value="sistema" @if(request('columna') === 'sistema') {{ 'selected' }} @endif>Sistema operativo</option>                                  
             </select>
         </div>
 
@@ -35,7 +37,9 @@
             </select>
         </div>
 
-        <input type="hidden" name="buscar_registro" value="{{ request('buscar_registro') }}">
+        <input type="hidden" name="fecha_ini" value="{{ request('fecha_ini') }}">
+        <input type="hidden" name="fecha_fin" value="{{ request('fecha_fin') }}">
+        <input type="hidden" name="usuario_id" value="{{ request('usuario_id') }}">
 
         <div class="input-group mb-2 mr-sm-2">
             <button type="submit" id="filtrar" class="btn btn-sm btn-secondary">Filtrar</button>

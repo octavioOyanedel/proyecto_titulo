@@ -62,10 +62,10 @@ Route::get('/filtro_prestamos_form', 'PrestamoController@filtroPrestamosForm')->
 Route::get('/filtro_prestamos', 'PrestamoController@filtroPrestamos')->name('filtro_prestamos')->middleware('auth');
 
 Route::get('/filtro_contables_form', 'RegistroContableController@filtroContablesForm')->name('filtro_contables_form')->middleware('auth');
-Route::post('/filtro_contables', 'RegistroContableController@filtroContables')->name('filtro_contables')->middleware('auth');
+Route::get('/filtro_contables', 'RegistroContableController@filtroContables')->name('filtro_contables')->middleware('auth');
 
 Route::get('/filtro_historial_form', 'LogSistemaController@filtroHistorialForm')->name('filtro_historial_form')->middleware('auth');
-Route::post('/filtro_historial', 'LogSistemaController@filtroHistorial')->name('filtro_historial')->middleware('auth');
+Route::get('/filtro_historial', 'LogSistemaController@filtroHistorial')->name('filtro_historial')->middleware('auth');
 
 Route::resource('/socios', 'SocioController')->middleware('auth');
 Route::resource('/prestamos', 'PrestamoController')->middleware('auth');
