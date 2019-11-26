@@ -32,7 +32,7 @@ class LogSistemaController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         $campo = $request->get('buscar_historial'); 
@@ -199,7 +199,7 @@ class LogSistemaController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         switch ($columna) {

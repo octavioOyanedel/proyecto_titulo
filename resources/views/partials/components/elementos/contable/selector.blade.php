@@ -51,6 +51,9 @@
     @case('mantenedor_contable_asociado')
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break    
+    @case('mantenedor_contable_cuenta')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break      
     {{-- listar --}}
     @case('contables')
 
@@ -66,3 +69,4 @@
     @break  
     @default
 @endswitch
+

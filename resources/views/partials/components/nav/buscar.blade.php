@@ -29,8 +29,8 @@
 <!-- formulario búsqueda log sistema-->
 <div id="buscador-historial" class="d-none">
     <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('historial.index') }}">
-        <button type="button" class="btn btn-sm btn-outline-primary rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de registro(s) por medio de: Correo, Fecha (Ej. 01-01-2019), Acción (Cualquiera de las palabras incluidas en esta celda Ej. -concepto- depósito, -cheque- 996699660, -nombre- Juan Soto, o -rut- con formato 11.222.333-k), IP, Navegador y Sistema operativo.">?</button>
-        <input class="form-control mr-sm-2" type="search" name="buscar_historial" placeholder="Buscar registro(s)" aria-label="Search">
+        <button type="button" class="btn btn-sm btn-outline-primary rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de log(s) por medio de: Correo, Fecha (Ej. 01-01-2019), Acción (Cualquiera de las palabras incluidas en esta celda Ej. -concepto- depósito, -cheque- 996699660, -nombre- Juan Soto, o -rut- con formato 11.222.333-k), IP, Navegador y Sistema operativo.">?</button>
+        <input class="form-control mr-sm-2" type="search" name="buscar_historial" placeholder="Buscar log(s)" aria-label="Search">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
 </div>

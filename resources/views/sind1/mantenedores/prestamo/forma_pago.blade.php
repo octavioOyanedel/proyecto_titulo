@@ -22,8 +22,8 @@
                     </div>
 -->
                     @if($formas_pago->count() === 0)
-                        <div class="alert alert-warning mt-4 text-center" role="alert">
-                            <b>No existen registros.</b>
+                        <div class="alert alert-dark mt-4 text-center" role="alert">
+                            <b>No se han encontrado registros.</b>
                         </div>
                     @else
                         <div>                                                                                   

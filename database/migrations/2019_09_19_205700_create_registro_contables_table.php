@@ -20,7 +20,7 @@ class CreateRegistroContablesTable extends Migration
             $table->date('fecha');
             $table->unsignedInteger('numero_registro');
             $table->unsignedInteger('cheque')->nullable();
-            $table->unsignedInteger('monto');
+            $table->unsignedInteger('monto')->nullable();
             $table->unsignedInteger('concepto_id')->nullable();
             $table->string('detalle')->nullable();
             $table->unsignedInteger('tipo_registro_contable_id')->nullable();

@@ -396,3 +396,85 @@
         }
         return $ip;
     }
+
+    function obtenerMesPorNumero($numero){
+        switch ($numero) {
+            case 1:
+                return 'Enero';                
+                break;
+            case 2:
+                return 'Febrero';
+                break;
+            case 3:
+                return 'Marzo';
+                break;
+            case 4:
+                return 'Abril';                
+                break;
+            case 5:
+                return 'Mayo';
+                break;
+            case 6:
+                return 'Junio';
+                break;
+            case 7:
+                return 'Julio';        
+                break;
+            case 8:
+                return 'Agosto';
+                break;
+            case 9:
+                return 'Septiembre';
+                break;
+            case 10:
+                return 'Octubre';                
+                break;
+            case 11:
+                return 'Noviembre';
+                break;
+            case 12:
+                return 'Diciembre';
+                break;                                                 
+        } 
+    }
+
+    function obtenerDiasPorMes($mes){
+        switch ($mes) {
+            case 1:
+                return 31;                
+                break;
+            case 2:
+                return 28;
+                break;
+            case 3:
+                return 31;
+                break;
+            case 4:
+                return 30;                
+                break;
+            case 5:
+                return 31;
+                break;
+            case 6:
+                return 30;
+                break;
+            case 7:
+                return 31;        
+                break;
+            case 8:
+                return 31;
+                break;
+            case 9:
+                return 30;
+                break;
+            case 10:
+                return 31;                
+                break;
+            case 11:
+                return 30;
+                break;
+            case 12:
+                return 31;
+                break;                                                 
+        } 
+    }

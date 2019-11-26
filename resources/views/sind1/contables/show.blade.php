@@ -8,12 +8,8 @@
                 <div class="card-header text-center"><h3 class="mb-0">Detalle Registro Contable</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <h4>Información registro contable</h4>
+
+                    <h4>Información Registro Contable</h4>
                     <div class="table-responsive">                     
                         <table class="table table-hover table-bordered table-stripred">
                             <thead></thead>
@@ -23,12 +19,12 @@
                                 <tr><th>Fecha de solicitud</th><td>{{ $registroContable->fecha }}</td></tr>
                                 <tr><th>Tipo de registro</th><td>{{ $registroContable->tipo_registro_contable_id }}</td></tr>
                                 <tr><th>Concepto</th><td>{{ $registroContable->concepto_id }}, @if($registroContable->socio != null){{ $registroContable->socio->apellido1 }} {{ $registroContable->socio->apellido2 }}, {{ $registroContable->socio->nombre1 }} {{ $registroContable->socio->nombre12 }}@endif @if($registroContable->asociado != null){{ $registroContable->asociado->concepto }} - {{ $registroContable->asociado->nombre }}@endif</td></tr>
-                                <tr><th>Detalle</th><td>{{ $registroContable->detalle }}</td></tr>
                                 <tr><th>Número de registro</th><td>{{ $registroContable->numero_registro }}</td></tr>
-                                <tr><th>Cheque</th><td>{{ $registroContable->cheque }}</td></tr>
+                                <tr><th>Cheque</th><td>{{ ($registroContable->cheque == null) ? 'Depósito' : $registroContable->cheque }}</td></tr>
                                 <tr><th>Monto</th><td>{{ $registroContable->monto }}</td></tr>
                                 <tr><th>Cuenta</th><td>{{ $registroContable->cuenta->tipo_cuenta_id }} N° {{ $registroContable->cuenta->numero }}</td></tr>
                                 <tr><th>Banco</th><td> {{ $registroContable->cuenta->banco_id }}</td></tr>
+                                <tr><th>Detalle</th><td>@if($registroContable->detalle){{ $registroContable->detalle }} @else {{ '-' }} @endif</td></tr>                                
                             </tbody>
                         </table>
                     </div>

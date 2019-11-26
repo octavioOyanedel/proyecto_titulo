@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cuenta;
 use App\RegistroContable;
 use Illuminate\Http\Request;
+use App\Http\Requests\ConciliacionRequest;
 
 class ConciliacionController extends Controller
 {
@@ -25,14 +26,14 @@ class ConciliacionController extends Controller
      * @param  \App\ConciliacionController  $conciliacionController
      * @return \Illuminate\Http\Response
      */
-    public function mostrar(Request $request)
+    public function mostrar(ConciliacionRequest $request)
     {
         $cuenta = Cuenta::findOrFail($request->cuenta_id);
         $mes = $request->mes;
         $year = $request->year;
         $fecha_inicio = obtenerFechaConciliacion($request->year.'-'.$request->mes.'-01');
-        $fecha_final = obtenerFechaConciliacion($request->year.'-'.$request->mes.'-31');
-        $registros = RegistroContable::whereBetween('fecha', [$fecha_inicio, $fecha_final])->where('cuenta_id', '=', $request->cuenta_id)->get();
+        $fecha_final = obtenerFechaConciliacion($request->year.'-'.$request->mes.'-'.obtenerDiasPorMes($request->mes));
+        $registros = RegistroContable::whereBetween('fecha', [date($fecha_inicio), date($fecha_final)])->where('cuenta_id', '=', $request->cuenta_id)->get();
         return view('sind1.conciliaciones.show', compact('registros','cuenta','mes','year'));
     }
 }

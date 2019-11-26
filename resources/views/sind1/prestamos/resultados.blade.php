@@ -11,8 +11,8 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     @if($prestamos->count() === 0)
-                        <div class="alert alert-warning mt-4 text-center" role="alert">
-                            <b>No existen registros.</b>
+                        <div class="alert alert-dark mt-4 text-center" role="alert">
+                            <b>No se han encontrado registros. <a href="{{ route('filtro_prestamos_form') }}">Volver atrás.</a></b>
                         </div>
                     @else
                         <div>                               

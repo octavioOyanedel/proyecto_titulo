@@ -11,8 +11,8 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     @if($registros->count() === 0)
-                        <div class="alert alert-warning mt-4 text-center" role="alert">
-                            <b>No existen registros.</b>
+                        <div class="alert alert-dark mt-4 text-center" role="alert">
+                            <b>No se han encontrado registros. <a href="{{ route('historial.index') }}">Volver a historial.</a></b>
                         </div>
                     @else 
                         <div>                               
