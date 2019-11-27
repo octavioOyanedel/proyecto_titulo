@@ -11,6 +11,8 @@ class ConceptosTableSeeder extends Seeder
      */
     public function run()
     {
+        App\Concepto::create(['nombre' => 'NULO', 'tipo_registro_contable_id' =>1]);
+        App\Concepto::create(['nombre' => 'NULO', 'tipo_registro_contable_id' =>2]);        
         App\Concepto::create(['nombre' => 'Aporte Día del Trabajador', 'tipo_registro_contable_id' =>2]);
         App\Concepto::create(['nombre' => 'Aporte Aniversario Sindicato', 'tipo_registro_contable_id' =>2]);
         App\Concepto::create(['nombre' => 'Aporte Deportivo Clausula 65', 'tipo_registro_contable_id' =>2]);

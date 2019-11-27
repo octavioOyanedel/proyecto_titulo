@@ -11,7 +11,7 @@
 <div id="campo_cheque" class="form-group row d-none">
     <label for="cheque" class="col-md-4 col-form-label text-md-right"><span title="Campo obligatorio." class="text-danger"><b>{{ esObligatorio(request()->path()) }} </b></span>{{ __('Cheque') }}</label>
     <div class="col-md-6">
-        <input id="cheque" type="number" class="form-control @error('cheque') is-invalid @enderror" name="cheque" value="{{ old('cheque') }}" autocomplete="cheque" autofocus min="1000000" max="999999999" placeholder="Ej. 3210123">
+        <input id="cheque" type="number" class="form-control @error('cheque') is-invalid @enderror" name="cheque" value="{{ old('cheque') == true ? old('cheque') : $cheque }}" autocomplete="cheque" autofocus min="1000000" max="999999999" placeholder="Ej. 3210123">
 
         {{-- validacion php --}}
         <small id="error-cheque-php" class="form-text text-danger"><strong>@if($errors->has('cheque')) {{ $errors->first('cheque') }}@endif</strong></small>  

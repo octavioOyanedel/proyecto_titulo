@@ -107,7 +107,7 @@ $(window).on('load',function(){
 	}
 
 	function comprobarRuta(){
-		return ruta.search('create');
+		return ruta.search('anular_registro_form');
 	}
 
 	function formatearEntrada(texto){

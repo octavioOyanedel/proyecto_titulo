@@ -10,9 +10,11 @@ use App\Asociado;
 use App\TipoRegistroContable;
 use App\Banco;
 use App\LogSistema;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarRegistroContableRequest;    
 use App\Http\Requests\FiltrarContableRequest; 
+use App\Http\Requests\AnularChequeRequest;
 
 class RegistroContableController extends Controller
 {
@@ -408,5 +410,49 @@ class RegistroContableController extends Controller
         $total_consulta = $registros->total();
 
         return view('sind1.contables.resultados', compact('registros','total_consulta'));   
+    }
+
+    /**
+     * Busca datos personalizados.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function anularCheque()
+    {
+        $cuentas = Cuenta::all();
+        $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
+        return view('sind1.contables.anular', compact('tipos_registro','cuentas'));
+    }
+
+    /**
+     * Busca datos personalizados.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function anular(AnularChequeRequest $request)
+    {
+        $concepto = 0;
+
+        if($request->tipo_registro_contable_id === 1){
+            $concepto = 1;
+        }else{
+            $concepto = 2;
+        }
+        $registro = new RegistroContable;
+        $registro->fecha = date('Y-m-d');
+        $registro->numero_registro = $request->numero_registro;
+        $registro->cheque = $request->cheque;
+        $registro->monto = null;
+        $registro->concepto_id = $concepto;
+        $registro->detalle = $request->detalle;
+        $registro->tipo_registro_contable_id = $request->tipo_registro_contable_id;
+        $registro->cuenta_id = $request->cuenta_id;
+        $registro->asociado_id = null;
+        $registro->usuario_id = Auth::user()->id;
+        $registro->socio_id = null;
+        $registro->save();
+        session(['mensaje' => 'Registro contable anulado con éxito.']);
+        LogSistema::registrarAccion('Préstamo contable anulado N° '. $request->numero_registro);
+        return redirect()->route('contables.index');
     }
 }

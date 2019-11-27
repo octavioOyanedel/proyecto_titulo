@@ -135,6 +135,9 @@ Route::post('/update_passwords', 'UsuarioController@updatePassword')->name('upda
 Route::get('/crear_conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
 Route::post('/mostrar_conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
 
+Route::get('/anular_registro_form', 'RegistroContableController@anularCheque')->name('anular_registro_form')->middleware('auth');
+Route::post('/anular_registro', 'RegistroContableController@anular')->name('anular_registro')->middleware('auth');
+
 //mantenedores
 Route::get('/mantenedor_socio_sede','MantenedorController@socioSede')->name('mantenedor_socio_sede')->middleware('auth');
 Route::get('/mantenedor_socio_area','MantenedorController@socioArea')->name('mantenedor_socio_area')->middleware('auth');

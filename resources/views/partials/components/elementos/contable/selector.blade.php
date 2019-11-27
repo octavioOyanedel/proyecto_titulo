@@ -56,7 +56,7 @@
     @break      
     {{-- listar --}}
     @case('contables')
-
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script> 
     @break
     {{-- filtrar --}}
     @case('filtro_contables_form')
@@ -67,6 +67,12 @@
     @case('cuentas/create')
         <script src="{{ asset('js/ajax/validar_numero_cuenta_create.js') }}" defer></script>
     @break  
+    {{-- anular --}}
+    @case('anular_registro_form')
+        <script src="{{ asset('js/ajax/validar_cheque_contable_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/validar_numero_registro_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script> 
+    @break      
     @default
 @endswitch
 

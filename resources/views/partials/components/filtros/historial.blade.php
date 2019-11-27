@@ -1,10 +1,10 @@
     <div class="float-left">
         <div class="input-group mb-2 mr-sm-2">
             <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif </span>
+            <a title="Resetear listado." class="mr-2" href="{{ route('historial.index') }}">&nbsp;|<b>Resetear</b>|</a>
         </div>                                                                            
     </div>   
     <form class="form-inline float-right" method="GET" action="{{ route('historial.index') }}">
-     <a class="mr-2" href="{{ route('historial.index') }}">|<b>Resetear</b>|</a>
         <div class="input-group mb-2 mr-sm-2">
             <select name="registros" id="registro" class="form-control form-control-sm">
                 <option value="" selected>N° Registros</option>

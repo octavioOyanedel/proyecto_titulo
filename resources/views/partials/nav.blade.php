@@ -66,7 +66,7 @@
                     <a class="dropdown-item sub-item" href="{{ route('contables.index') }}">Listar</a>
                     <a class="dropdown-item sub-item" href="{{ route('filtro_contables_form') }}">Filtrar</a>
                     <a class="dropdown-item sub-item" href="{{ route('crear_conciliacion') }}">Conciliación Bancaria</a>
-                    <a class="dropdown-item sub-item" href="">Anular Registro</a>
+                    <a class="dropdown-item sub-item" href="{{ route('anular_registro_form') }}">Anular Registro</a>
                 </div>
             </li>
 

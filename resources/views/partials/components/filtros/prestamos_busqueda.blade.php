@@ -1,6 +1,7 @@
     <div class="float-left">
         <div class="input-group mb-2 mr-sm-2">
             <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif </span>
+            <a title="Resetear listado." class="mr-2" href="{{ route('prestamos.index') }}">&nbsp;|<b>Resetear</b>|</a>            
         </div>                                                                            
     </div>   
     <form class="form-inline float-right" method="GET" action="{{ route('filtro_prestamos') }}">

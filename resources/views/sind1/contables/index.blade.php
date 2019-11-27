@@ -4,6 +4,9 @@
 <div class="ml-5 mr-5">
     <div class="row justify-content-center">
         <div class="col-md-12">
+
+            @include('partials.alertas')
+
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Listado Registros Contables</h3></div>
 
@@ -40,7 +43,7 @@
                                             <td class="text-center">{{ $r->tipo_registro_contable_id }}</td>
                                             <td class="text-center">{{ $r->numero_registro }}</td>
                                             <td class="text-center" title="@if($r->cheque != null) {{ '' }} @else {{ 'Ingreso sin cheque asociado.' }} @endif">@if($r->cheque != null) {{ $r->cheque }} @else {{ '-' }} @endif</td>
-                                            <td class="text-center">{{ $r->monto }}</td>                                              
+                                            <td class="text-center">@if($r->monto) {{ $r->monto }} @else {{ '-' }}@endif</td>                                              
                                             <td class="">
                                                 <b>{{ $r->concepto_id }}</b>@if($r->socio != null) - {{ $r->socio->apellido1 }} {{ $r->socio->apellido2 }}, {{ $r->socio->nombre1 }} {{ $r->socio->nombre2 }}@endif
                                                 @if($r->asociado != null){{ $r->asociado->concepto }} - {{ $r->asociado->nombre }}@endif

@@ -48,7 +48,7 @@
                                             <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href="{{ route('socios.edit',$s) }}"><span>@svg('editar')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" href="{{ route('eliminar_socio_form',$s->id) }}"><span>@svg('eliminar')</span></a></td>
                                             <td>@if($s->apellido2 != null) {{ $s->apellido1 }} {{ $s->apellido2 }}, @else {{ $s->apellido1 }}, @endif {{ $s->nombre1 }} {{ $s->nombre2 }}</td>
-                                            <td class="text-center">{{ $s->genero }}</td>
+                                            <td class="text-center">{{ $s->genero }}{{ $loop->remaining }}</td>
                                             <td class="text-center">{{ $s->rut }}</td>
                                             <td class="text-center" title="{{ ($s->fecha_sind1 === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->fecha_sind1) }}</td>
                                             <td class="text-center" title="{{ ($s->numero_socio === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->numero_socio) }}</td>
