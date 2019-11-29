@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\CargaFamiliar;
 use App\Parentesco;
+use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarCargaRequest;
+use App\Http\Requests\EditarCargaRequest;
 
 class CargaFamiliarController extends Controller
 {
@@ -38,8 +40,10 @@ class CargaFamiliarController extends Controller
      */
     public function store(IncorporarCargaRequest $request)
     {
-        CargaFamiliar::create($request->all()); 
-        session(['mensaje' => 'Carga familiar incorporada con éxito.']);        
+        //dd($request);
+        $carga = CargaFamiliar::create($request->all());
+        session(['mensaje' => 'Carga familiar incorporada con éxito.']);
+        LogSistema::registrarAccion('Carga familiar agragada: '.$carga->parentesco_id.', nombre: '.$carga->nombre1.' '.$carga->apellido1.' rut: '.$carga->rut);
         return redirect()->route('cargas.create',['id'=>$request->input('socio_id')]);
     }
 
@@ -74,9 +78,28 @@ class CargaFamiliarController extends Controller
      * @param  \App\CargaFamiliar  $cargaFamiliar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CargaFamiliar $cargaFamiliar)
+    public function update(EditarCargaRequest $request, $id)
     {
-        //
+        $r = array();
+        $r = array_slice($request->toArray(),2);
+
+        dd($r);
+
+        $modificar = CargaFamiliar::findOrFail($id);
+        $cargaFamiliar = CargaFamiliar::findOrFail($id);
+        //dd($cargaFamiliar);
+        $modificar->nombre1 = $request->nombre1;
+        $modificar->nombre2 = $request->nombre2;
+        $modificar->apellido1 = $request->apellido1;
+        $modificar->apellido2 = $request->apellido2;
+        $modificar->rut = $request->rut;
+        $modificar->fecha_nac = $request->fecha_nac;
+        $modificar->socio_id = $request->socio_id;
+        $modificar->parentesco_id = $request->parentesco_id;
+        $modificar->update();
+        session(['mensaje' => 'Carga familiar editada con éxito.']);
+        //LogSistema::registrarAccion('Carga familiar editada, de: '.convertirArray($cargaFamiliar).' a '.convertirArray($request));
+        return redirect()->route('home');
     }
 
     /**
@@ -96,7 +119,7 @@ class CargaFamiliarController extends Controller
      * @param  \App\CargaFamiliar  $carga
      * @return \Illuminate\Http\Response
      */
-    public function verificarRut(Request $request) 
+    public function verificarRut(Request $request)
     {
         if ($request->ajax()) {
             $carga = CargaFamiliar::where('rut','=',$request->elemento)->get();
@@ -105,7 +128,7 @@ class CargaFamiliarController extends Controller
             }else{
                 return response()->json(0); //no existe
             }
-            
+
         }
     }
 }

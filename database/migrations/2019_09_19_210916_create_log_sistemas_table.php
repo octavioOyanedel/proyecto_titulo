@@ -18,7 +18,7 @@ class CreateLogSistemasTable extends Migration
             $table->collation = 'utf8mb4_spanish_ci';
             $table->increments('id');
             $table->date('fecha');
-            $table->string('accion');
+            $table->text('accion');
             $table->string('ip');
             $table->string('navegador');
             $table->string('sistema');

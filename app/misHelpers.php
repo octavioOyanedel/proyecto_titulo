@@ -1,19 +1,19 @@
 <?php
 
     /**
-     * buscar prestamos pendientes o atrasados 
+     * buscar prestamos pendientes o atrasados
      */
     function buscarPrestamoConDeudaActiva($coleccion)
     {
-        foreach ($coleccion as $item) {    
+        foreach ($coleccion as $item) {
             if($item->getOriginal('estado_deuda_id') === 2 || $item->getOriginal('estado_deuda_id') === 3){
                 return $item;
-            }    
+            }
         }
     }
 
     /**
-     * buscar prestamos pendientes o atrasados 
+     * buscar prestamos pendientes o atrasados
      */
     function buscarDeudaActiva($coleccion)
     {
@@ -26,7 +26,7 @@
                     return 'Atrasado';
                     break;
 
-            }                 
+            }
         }
     }
 
@@ -37,7 +37,7 @@
     {
         switch ($valor) {
             case 1:
-                return 'Pagado';                
+                return 'Pagado';
                 break;
             case 2:
                 return 'Vigente';
@@ -45,8 +45,8 @@
             case 3:
                 return 'Atrasado';
                 break;
-        } 
-    }  
+        }
+    }
 
     /**
      * formato celda cuota
@@ -55,7 +55,7 @@
     {
         switch ($valor) {
             case 1:
-                return 'Pagada';                
+                return 'Pagada';
                 break;
             case 2:
                 return 'Vigente';
@@ -63,11 +63,11 @@
             case 3:
                 return 'Atrasada';
                 break;
-        } 
-    }  
+        }
+    }
 
     /**
-     * formato celda 
+     * formato celda
      */
     function celdaCadena($valor)
     {
@@ -99,7 +99,7 @@
             return '-';
         }else{
             return 'Si';
-        }  
+        }
     }
 
     /**
@@ -111,7 +111,7 @@
             return '(*)';
         } else {
             return '';
-        }       
+        }
     }
 
     /**
@@ -225,7 +225,7 @@
     {
         if($valor != null && $valor != ''){
             $bloque = explode('-', $valor);
-            return $nuevaFecha = $bloque[2] . '-' . $bloque[1] . '-' . $bloque[0];            
+            return $nuevaFecha = $bloque[2] . '-' . $bloque[1] . '-' . $bloque[0];
         }else{
             return '';
         }
@@ -247,7 +247,7 @@
         $mes_pago = '';
         $montoConInteres = ((2 / 100) * $monto) + $monto;
         $montoCouta = $montoConInteres / $cuotas;
-        $coleccion = array();   
+        $coleccion = array();
         //obtener año, mes y dia
         $year = substr($fecha,0,-6);
         $mes = substr($fecha,5,-3);
@@ -261,30 +261,30 @@
             $mes_inicio = $mes + 1;
             if($mes_inicio == 13){
                 $mes_inicio = 1;
-                $year_pago++; 
-            }      
+                $year_pago++;
+            }
         }
         $year_inicio = $year;
         $mes_pago = (string)$mes_inicio;
-        //loop cuotas     
+        //loop cuotas
         for($i = 0; $i < $cuotas; $i++){
             if($mes_pago > 12){
                 $mes_pago = 1;
-                $year_pago++; 
+                $year_pago++;
             }
 
             if($mes_pago < 10){
                 $mes_pago = '0'.$mes_pago;
-            }    
-            
+            }
+
             array_push($array_fecha_cuota,$year_pago,$mes_pago,$dia_pago);
             $fecha_cuota = implode('-',$array_fecha_cuota);
             array_push($coleccion,array('numero' => $i + 1, 'fecha' => formatoFecha($fecha_cuota), 'monto' => $montoCouta));
 
-            $mes_pago++;       
+            $mes_pago++;
         }
         return $coleccion;
-    }    
+    }
 
     /**
      * obtener total prestamo
@@ -299,7 +299,7 @@
 
     /**
      * formato nombres
-     */   
+     */
     function formatoNombres($cadena) {
         $nombreFormateado = strtolower($cadena);
         $nombreFormateado = ucwords($nombreFormateado);
@@ -309,16 +309,16 @@
         $nombreFormateado = str_replace(" Las ", " las ", $nombreFormateado);
         $nombreFormateado = str_replace(" Lo ", " lo ", $nombreFormateado);
         $nombreFormateado = str_replace(" Los ", " los ", $nombreFormateado);
-        $nombreFormateado = str_replace(" En ", " en ", $nombreFormateado);  
+        $nombreFormateado = str_replace(" En ", " en ", $nombreFormateado);
         $nombreFormateado = str_replace(" Con ", " con ", $nombreFormateado);
         $nombreFormateado = str_replace(" Por ", " por ", $nombreFormateado);
-        $nombreFormateado = str_replace(" El ", " el ", $nombreFormateado);  
+        $nombreFormateado = str_replace(" El ", " el ", $nombreFormateado);
         return $nombreFormateado;
     }
 
     /**
      * obtener sistema operativo
-     */   
+     */
     function obtenerSistemaOperativo() {
 
         $os_platform  = "Sistema operativo desconocido.";
@@ -355,7 +355,7 @@
 
     /**
      * obtener browser
-     */   
+     */
     function obtenerBrowser() {
 
         $browser = "Browser desconocido.";
@@ -380,7 +380,7 @@
 
     /**
      * obtener ip
-     */   
+     */
     function obtenerIp(){
 
         if ( getenv("HTTP_CLIENT_IP") ) {
@@ -400,7 +400,7 @@
     function obtenerMesPorNumero($numero){
         switch ($numero) {
             case 1:
-                return 'Enero';                
+                return 'Enero';
                 break;
             case 2:
                 return 'Febrero';
@@ -409,7 +409,7 @@
                 return 'Marzo';
                 break;
             case 4:
-                return 'Abril';                
+                return 'Abril';
                 break;
             case 5:
                 return 'Mayo';
@@ -418,7 +418,7 @@
                 return 'Junio';
                 break;
             case 7:
-                return 'Julio';        
+                return 'Julio';
                 break;
             case 8:
                 return 'Agosto';
@@ -427,21 +427,21 @@
                 return 'Septiembre';
                 break;
             case 10:
-                return 'Octubre';                
+                return 'Octubre';
                 break;
             case 11:
                 return 'Noviembre';
                 break;
             case 12:
                 return 'Diciembre';
-                break;                                                 
-        } 
+                break;
+        }
     }
 
     function obtenerDiasPorMes($mes){
         switch ($mes) {
             case 1:
-                return 31;                
+                return 31;
                 break;
             case 2:
                 return 28;
@@ -450,7 +450,7 @@
                 return 31;
                 break;
             case 4:
-                return 30;                
+                return 30;
                 break;
             case 5:
                 return 31;
@@ -459,7 +459,7 @@
                 return 30;
                 break;
             case 7:
-                return 31;        
+                return 31;
                 break;
             case 8:
                 return 31;
@@ -468,13 +468,21 @@
                 return 30;
                 break;
             case 10:
-                return 31;                
+                return 31;
                 break;
             case 11:
                 return 30;
                 break;
             case 12:
                 return 31;
-                break;                                                 
-        } 
+                break;
+        }
+    }
+
+    function prepararRequest($arreglo){
+        return implode('-',$arreglo->toArray());
+    }
+
+    function prepararModelo($arreglo){
+        return implode('-',$arreglo->toArray());
     }
