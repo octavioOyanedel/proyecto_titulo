@@ -20,7 +20,7 @@ class Institucion extends Model
     * @var array
     */
     protected $fillable = [
-        'nombre',
+        'nombre','grado_academico_id',
     ];
 
     /**
@@ -52,6 +52,14 @@ class Institucion extends Model
     /**
      * Relación 
      */
+    public function grados_academicos()
+    {
+        return $this->hasMany('App\GradoAcademico');
+    }
+
+    /**
+     * Relación 
+     */
     public function instituciones_titulos()
     {
         return $this->hasMany('App\InstitucionTitulo');
@@ -71,5 +79,20 @@ class Institucion extends Model
     static public function obtenerIdConNombre($nombre)
     {
         return Institucion::where('nombre','=', $nombre)->get();
+    }
+
+    /**
+     * Modificador de ciudad
+     */
+    public function getGradoAcademicoIdAttribute($valor)
+    {
+        if($valor != null){
+            $grado_academico_id = $valor;
+            $grado_academico = GradoAcademico::findOrFail($grado_academico_id);
+            $valor = $grado_academico->nombre;
+            return $valor;
+        }else{
+            return '';
+        }
     }
 }

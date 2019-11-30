@@ -3,8 +3,17 @@ $(window).on('load',function(){
 	var grado = $('#grado_academico_id');
 	var titulo = $('#titulo_id');
 	var estado = $('#estado_grado_academico_id');
-
+	var ruta = window.location.pathname; 
 	var id_titulo = parseInt($('#old_titulo').val());
+	var titulo_actual = parseInt($('#edit_titulo').val());
+
+	if(ruta.indexOf('estudios_socio') >= 0 && ruta.indexOf('edit') >= 0){
+		activarTitulo();
+		var grado_academico_id = parseInt($('#grado_academico_id option:selected').val());
+		ajaxOld(grado_academico_id, titulo_actual);
+	}else{
+		desactivarTitulo();
+	}
 
 	if(id_titulo != 0){
 		var id_grado = parseInt($('#grado_academico_id option:selected').val());
@@ -110,4 +119,11 @@ $(window).on('load',function(){
 		$('#estado_grado_academico_id option:contains("Graduado")').hide();
 	}
 
+	function activarInput(){
+		titulo.removeAttr('disabled');
+	}
+
+	function desactivarInput(){
+		titulo.attr('disabled','true');
+	}
 });

@@ -102,9 +102,9 @@ class GradoAcademicoInstitucionController extends Controller
     public function obtenerInstituciones(Request $request){
         $coleccion = array();
         if($request->ajax()){
-            $instituciones = GradoAcademicoInstitucion::where('grado_academico_id','=',$request->id)->get();
+            $instituciones = Institucion::where('grado_academico_id','=',$request->id)->get();
             foreach ($instituciones as $i) {
-                array_push($coleccion,array('id'=>$i->getOriginal('institucion_id'),'nombre'=>$i->institucion_id));
+                array_push($coleccion,array('id'=>$i->getOriginal('id'),'nombre'=>$i->nombre));
             }
             return response()->json($coleccion);
         }

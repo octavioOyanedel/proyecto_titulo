@@ -18,7 +18,12 @@
             @if(old('estado_grado_academico_id') === null)
                 {{-- loop sin old --}}
                 @foreach($estados as $e)
-                    <option value="{{ $e->id }}" {{ $estado_grado_academico_id == $e->id ? 'selected' : ''}}>{{ $e->nombre }}</option>
+                    @if(isset($estudioRealizado))
+                        {{-- si existe estudio -editar- --}}
+                        <option value="{{ $e->id }}" {{ $estudioRealizado->getOriginal('estado_grado_academico_id') == $e->id ? 'selected' : ''}}>{{ $e->nombre }}</option>                     
+                    @else
+                        <option value="{{ $e->id }}" {{ $estado_grado_academico_id == $e->id ? 'selected' : ''}}>{{ $e->nombre }}</option>
+                    @endif
                 @endforeach 
             @else
                 {{-- loop con old --}}

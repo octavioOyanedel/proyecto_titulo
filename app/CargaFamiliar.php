@@ -106,4 +106,17 @@ class CargaFamiliar extends Model
     {
         $this->attributes['apellido2'] = formatoNombres($value);
     }
+
+    /**
+     * Formato editar cargo 
+     */
+    static public function formatoEditarCargo($request, $carga)
+    {
+        $request['rut'] = formatoRut($request->rut);
+        $request['parentesco_id'] = Parentesco::findOrFail($request->parentesco_id)->nombre;
+        $formato_request = array_slice($request->toArray(),2,8);
+        $formato_carga = array_slice($carga->toArray(),1,8);
+
+        return convertirArrayAString($formato_carga).' >>> a >>> '.convertirArrayAString($formato_request);
+    }
 }

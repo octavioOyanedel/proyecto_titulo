@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidarFormatoNombreRule;
+use App\Rules\ValidarTituloUnicoRule;
 
 class IncorporarTituloRequest extends FormRequest
 {
@@ -25,7 +26,8 @@ class IncorporarTituloRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required',new ValidarFormatoNombreRule,'unique:titulos,nombre','max:255'],
+            'nombre' => ['required',new ValidarFormatoNombreRule,new ValidarTituloUnicoRule(Request()->grado_academico_id),'max:255'],
+            'grado_academico_id' => ['required','numeric'],
         ];
     }
 }

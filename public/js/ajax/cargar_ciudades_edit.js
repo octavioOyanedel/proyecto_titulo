@@ -1,6 +1,6 @@
 $(window).on('load',function(){
 
-	var ruta = window.location.pathname 
+	var ruta = window.location.pathname; 
 	var ciudad = $('#ciudad_id');
 	var ciudad_id = parseInt($('#edit_ciudad').val());
 

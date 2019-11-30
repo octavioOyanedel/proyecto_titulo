@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\GradoAcademico;
+use App\EstudioRealizado;
 use App\EstudioRealizadoSocio;
+use App\EstadoGradoAcademico;
+use App\GradoAcademicoInstitucion;
+use App\GradoAcademicoTitulo;
+use App\Titulo;
 use Illuminate\Http\Request;
 
 class EstudioRealizadoSocioController extends Controller
@@ -55,9 +61,16 @@ class EstudioRealizadoSocioController extends Controller
      * @param  \App\EstudioRealizadoSocio  $estudioRealizadoSocio
      * @return \Illuminate\Http\Response
      */
-    public function edit(EstudioRealizadoSocio $estudioRealizadoSocio)
+    public function edit($id)
     {
-        //
+        $estudioRealizadoSocio = EstudioRealizadoSocio::findOrFail($id);
+        $estudioRealizado = EstudioRealizado::findOrFail($estudioRealizadoSocio->estudio_realizado_id);
+        $socio_id = $estudioRealizadoSocio->socio_id;
+        $grados = GradoAcademico::orderBy('nombre','ASC')->get();
+        $estados = EstadoGradoAcademico::orderBy('nombre','ASC')->get();       
+        $instituciones = GradoAcademicoInstitucion::all();         
+        $titulos = GradoAcademicoTitulo::all();              
+        return view('sind1.estudio.edit', compact('grados', 'instituciones', 'estados', 'titulos','estudioRealizado','socio_id'));
     }
 
     /**

@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+
+            @include('partials.alertas')
+
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Detalle Socio</h3></div>
 
@@ -58,8 +61,8 @@
                                     <tbody>
                                         @foreach($estudios as $s)
                                             <tr>
-                                                <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="{{ route('estudios.create', ['id'=>$socio->id]) }}"><span>@svg('editar')</span></a></td>
-                                                <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estudio" href="#"><span>@svg('eliminar')</span></a></td>
+                                                <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="{{ route('estudios_socio.edit', $s->id) }}"><span>@svg('editar')</span></a></td>
+                                                <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estudio" href=""><span>@svg('eliminar')</span></a></td>
                                                 <td>{{ $s->estudio_realizado->grado_academico_id }}</td>
                                                 <td>{{ $s->estudio_realizado->institucion_id }}</td>
                                                 <td>{{ $s->estudio_realizado->estado_grado_academico_id }}</td>
@@ -94,7 +97,7 @@
                                     @foreach($cargas as $c)
                                         <tr>
                                             <td width="50" class="text-center" scope="row" title="Editar carga familiar"><a class="text-secondary" href="{{ route('cargas.edit', $c->id) }}"><span>@svg('editar')</a></td>
-                                            <td width="50" class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" data-toggle="modal" data-target="#eliminar_carga" href="#"><span>@svg('eliminar')</span></td>
+                                            <td width="50" class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" href="{{ route('cargas.show', $c->id) }}"><span>@svg('eliminar')</span></td>
                                             <td>{{ $c->apellido1 }} {{ $c->apellido2 }}, {{ $c->nombre1 }} {{ $c->nombre2 }}</td>
                                             <td class="text-center">{{ $c->rut }}</td>
                                             <td class="text-center">{{ $c->fecha_nac }}</td>

@@ -479,10 +479,6 @@
         }
     }
 
-    function prepararRequest($arreglo){
-        return implode('-',$arreglo->toArray());
-    }
-
-    function prepararModelo($arreglo){
-        return implode('-',$arreglo->toArray());
+    function convertirArrayAString($arreglo){
+        return implode(' ',$arreglo);
     }

@@ -26,7 +26,8 @@ class EditarInstitucionRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required',new ValidarFormatoNombreRule,new ValidarInstitucionUnicaEditarRule(Request()->institucion_original),'max:255'],
+            'nombre' => ['required',new ValidarFormatoNombreRule,new ValidarInstitucionUnicaEditarRule(Request()->institucion_original, Request()->grado_academico_id),'max:255'],
+            'grado_academico_id' => ['required','numeric'],
             'institucion_original' => ['required'],
         ];
     }

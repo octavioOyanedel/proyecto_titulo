@@ -1,6 +1,7 @@
 @php
     $id = 0;
 @endphp
+
 <!-- Titulo -->
 <div class="form-group row">
         <label for="titulo_id" class="col-md-4 col-form-label text-md-right">{{ __('Título') }}</label>
@@ -21,5 +22,8 @@
 
         <input id="old_titulo" type="hidden" value="{{ $id }}">     
 
+       @isset($estudioRealizado)
+            <input id="edit_titulo" type="hidden" value="@if($estudioRealizado->titulo_id) {{ $estudioRealizado->getOriginal('titulo_id') }} @else {{ null }} @endif">
+       @endisset
     </div>
 </div>  

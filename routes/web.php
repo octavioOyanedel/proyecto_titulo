@@ -119,7 +119,11 @@ Route::get('estudios/create/', function () {
 });
 
 Route::resource('/estudios', 'EstudioRealizadoController', ['except' => 'create'])->middleware('auth');
-Route::get('/estudios_socio', 'EstudioRealizadoSocioController@agregarEstudio')->name('estudios_socio')->middleware('auth');
+
+
+Route::resource('/estudios_socio', 'EstudioRealizadoSocioController')->middleware('auth');
+
+
 //****************************************************************************************************
 
 Route::resource('/parentescos', 'ParentescoController')->middleware('auth');

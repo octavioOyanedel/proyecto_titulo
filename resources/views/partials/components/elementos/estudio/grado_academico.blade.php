@@ -18,7 +18,18 @@
             @if(old('grado_academico_id') === null)
                 {{-- loop sin old --}}
                 @foreach($grados as $g)
-                    <option value="{{ $g->id }}" {{ $grado_academico_id == $g->id ? 'selected' : ''}}>{{ $g->nombre }}</option>
+                    @if (isset($institucion))
+                        {{-- si existe institucion -editar- --}}
+                        <option value="{{ $g->id }}" {{ $institucion->getOriginal('grado_academico_id') == $g->id ? 'selected' : ''}}>{{ $g->nombre }}</option>
+                    @elseif (isset($titulo))
+                        {{-- si existe titulo -editar- --}}
+                        <option value="{{ $g->id }}" {{ $titulo->getOriginal('grado_academico_id') == $g->id ? 'selected' : ''}}>{{ $g->nombre }}</option>
+                    @elseif (isset($estudioRealizado))
+                        {{-- si existe estudio -editar- --}}
+                        <option value="{{ $g->id }}" {{ $estudioRealizado->getOriginal('grado_academico_id') == $g->id ? 'selected' : ''}}>{{ $g->nombre }}</option>                       
+                    @else
+                        <option value="{{ $g->id }}" {{ $grado_academico_id == $g->id ? 'selected' : ''}}>{{ $g->nombre }}</option>
+                    @endif             
                 @endforeach 
             @else
                 {{-- loop con old --}}

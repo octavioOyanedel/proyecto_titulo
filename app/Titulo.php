@@ -5,6 +5,7 @@ namespace App;
 use App\EstudioRealizado;
 use App\EstadoSocio;
 use App\Titulo;
+use App\GradoAcademico;
 use Illuminate\Database\Eloquent\Model;
 
 class Titulo extends Model
@@ -15,7 +16,7 @@ class Titulo extends Model
     * @var array
     */
     protected $fillable = [
-        'nombre',
+        'nombre', 'grado_academico_id',
     ];
 
     /**
@@ -28,6 +29,14 @@ class Titulo extends Model
         }
     }
 
+    /**
+     * Relación 
+     */
+    public function grados_academicos()
+    {
+        return $this->hasMany('App\GradoAcademico');
+    }
+    
     /**
      * Relación 
      */
@@ -61,6 +70,21 @@ class Titulo extends Model
         $titulo = Titulo::findOrFail($titulo_id);
         $valor = $titulo->nombre;
         return $valor;
+    }
+
+    /**
+     * Modificador de ciudad
+     */
+    public function getGradoAcademicoIdAttribute($valor)
+    {
+        if($valor != null){
+            $grado_academico_id = $valor;
+            $grado_academico = GradoAcademico::findOrFail($grado_academico_id);
+            $valor = $grado_academico->nombre;
+            return $valor;
+        }else{
+            return '';
+        }
     }
 
     /**

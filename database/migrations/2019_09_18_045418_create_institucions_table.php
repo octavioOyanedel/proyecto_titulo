@@ -18,6 +18,7 @@ class CreateInstitucionsTable extends Migration
             $table->collation = 'utf8mb4_spanish_ci';
             $table->increments('id');
             $table->string('nombre');
+            $table->unsignedInteger('grado_academico_id')->nullable();
             $table->timestamps();
         });
     }

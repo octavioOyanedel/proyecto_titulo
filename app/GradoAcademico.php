@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Institucion;
+use App\Titulo;
 use App\EstudioRealizado;
 use App\GradoAcademicoInstitucion;
 use App\GradoAcademicoTitulo;
@@ -37,6 +39,22 @@ class GradoAcademico extends Model
     public function estudio_realizado()
     {
         return $this->belongsTo('App\EstudioRealizado');
+    }
+
+    /**
+     * Relación 
+     */
+    public function institucion()
+    {
+        return $this->belongsTo('App\Institucion');
+    }
+
+    /**
+     * Relación 
+     */
+    public function titulo()
+    {
+        return $this->belongsTo('App\Titulo');
     }
 
     /**

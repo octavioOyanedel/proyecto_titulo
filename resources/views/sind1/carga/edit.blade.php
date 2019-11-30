@@ -20,9 +20,9 @@
                         @include('partials.components.elementos.carga.apellido1')
                         @include('partials.components.elementos.carga.apellido2')
                         @include('partials.components.elementos.carga.fecha_nac')
+                        <input type="hidden" name="socio_id" value="{{ $cargaFamiliar->getOriginal('socio_id') }}">                        
                         @include('partials.components.elementos.carga.parentesco')
                         <input type="hidden" name="rut_original" value="{{ $cargaFamiliar->getOriginal('rut') }}">
-                        <input type="hidden" name="socio_id" value="{{ $cargaFamiliar->getOriginal('socio_id') }}">
 
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">

@@ -21,5 +21,9 @@
 
         <input id="old_institucion" type="hidden" value="{{ $id }}">  
 
+       @isset($estudioRealizado)
+            <input id="edit_institucion" type="hidden" value="@if($estudioRealizado->institucion_id) {{ $estudioRealizado->getOriginal('institucion_id') }} @else {{ null }} @endif">
+       @endisset
+
     </div>
 </div>   

@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Institucion;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarInstitucionUnicaEditarRule implements Rule
@@ -11,9 +12,10 @@ class ValidarInstitucionUnicaEditarRule implements Rule
      *
      * @return void
      */
-    public function __construct($institucion_original)
+    public function __construct($institucion_original, $grado_academico_id)
     {
         $this->institucion_original = $institucion_original;
+        $this->grado_academico_id = $grado_academico_id;
     }
 
     /**
@@ -27,7 +29,10 @@ class ValidarInstitucionUnicaEditarRule implements Rule
     {
         //$value = institucion actual
         if($this->institucion_original != $value){
-            $institucion = Institucion::where('nombre','=',$value)->get();            
+            $institucion = Institucion::where([
+                ['nombre','=', $value],
+                ['grado_academico_id','=', $this->grado_academico_id]
+            ])->get();          
             if($institucion->count() > 0){
                 return false;
             }else{

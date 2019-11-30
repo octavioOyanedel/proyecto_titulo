@@ -40,10 +40,9 @@ class CargaFamiliarController extends Controller
      */
     public function store(IncorporarCargaRequest $request)
     {
-        //dd($request);
         $carga = CargaFamiliar::create($request->all());
         session(['mensaje' => 'Carga familiar incorporada con éxito.']);
-        LogSistema::registrarAccion('Carga familiar agragada: '.$carga->parentesco_id.', nombre: '.$carga->nombre1.' '.$carga->apellido1.' rut: '.$carga->rut);
+        LogSistema::registrarAccion('Carga familiar agragada: '.convertirArrayAString($carga->toArray()));
         return redirect()->route('cargas.create',['id'=>$request->input('socio_id')]);
     }
 
@@ -53,9 +52,10 @@ class CargaFamiliarController extends Controller
      * @param  \App\CargaFamiliar  $cargaFamiliar
      * @return \Illuminate\Http\Response
      */
-    public function show(CargaFamiliar $cargaFamiliar)
+    public function show($id)
     {
-        //
+        $cargaFamiliar = CargaFamiliar::findOrFail($id);
+        return view('sind1.carga.show', compact('cargaFamiliar'));
     }
 
     /**
@@ -80,14 +80,9 @@ class CargaFamiliarController extends Controller
      */
     public function update(EditarCargaRequest $request, $id)
     {
-        $r = array();
-        $r = array_slice($request->toArray(),2);
-
-        dd($r);
 
         $modificar = CargaFamiliar::findOrFail($id);
         $cargaFamiliar = CargaFamiliar::findOrFail($id);
-        //dd($cargaFamiliar);
         $modificar->nombre1 = $request->nombre1;
         $modificar->nombre2 = $request->nombre2;
         $modificar->apellido1 = $request->apellido1;
@@ -98,7 +93,7 @@ class CargaFamiliarController extends Controller
         $modificar->parentesco_id = $request->parentesco_id;
         $modificar->update();
         session(['mensaje' => 'Carga familiar editada con éxito.']);
-        //LogSistema::registrarAccion('Carga familiar editada, de: '.convertirArray($cargaFamiliar).' a '.convertirArray($request));
+        LogSistema::registrarAccion('Carga familiar editada, de: '.CargaFamiliar::formatoEditarCargo($request, $cargaFamiliar));
         return redirect()->route('home');
     }
 
@@ -108,9 +103,15 @@ class CargaFamiliarController extends Controller
      * @param  \App\CargaFamiliar  $cargaFamiliar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CargaFamiliar $cargaFamiliar)
+    public function destroy($id)
     {
-        //
+        $cargaFamiliar = CargaFamiliar::findOrFail($id);
+        $socio_id = $cargaFamiliar->socio_id;
+        $eliminada = convertirArrayAString($cargaFamiliar->toArray());
+        CargaFamiliar::destroy($cargaFamiliar->id);
+        session(['mensaje' => 'Carga familiar eliminada con éxito.']);
+        LogSistema::registrarAccion('Carga familiar eliminada: '.$eliminada); 
+        return redirect()->route('socios.show', compact('socio_id'));
     }
 
     /**

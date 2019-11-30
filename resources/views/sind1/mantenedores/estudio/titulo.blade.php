@@ -37,6 +37,7 @@
                                 <thead>
                                     <tr>
                                         <th colspan="2"></th>
+                                        <th class="" scope="col">Nivel educacional</th>
                                         <th class="" scope="col">Título</th>
                                     </tr>
                                 </thead>   
@@ -45,6 +46,7 @@
                                         <tr>                                                
                                             <td width="50" class="text-center" scope="row" title="Editar título"><a class="text-secondary" href="{{ route('titulos.edit', $t->id) }}"><span>@svg('editar')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Eliminar título"><a class="text-danger" href="{{ route('titulos.show', $t) }}"><span>@svg('eliminar')</span></a></td>
+                                            <td class="">{{ $t->grado_academico_id }}</td>
                                             <td class="">{{ $t->nombre }}</td>
                                         </tr>
                                     @endforeach

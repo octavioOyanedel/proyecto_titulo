@@ -2,8 +2,17 @@ $(window).on('load',function(){
 
 	var grado = $('#grado_academico_id');
 	var institucion = $('#institucion_id');
-
+	var ruta = window.location.pathname; 
 	var id_institucion = parseInt($('#old_institucion').val());
+	var institucion_actual = parseInt($('#edit_institucion').val());
+
+	console.log(institucion_actual);
+
+	if(ruta.indexOf('estudios_socio') >= 0 && ruta.indexOf('edit') >= 0){
+
+		var grado_academico_id = parseInt($('#grado_academico_id option:selected').val());
+		ajaxOld(grado_academico_id, institucion_actual);
+	}
 
 	if(id_institucion != 0){
 		var id_grado = parseInt($('#grado_academico_id option:selected').val());

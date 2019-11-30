@@ -15,6 +15,7 @@
                         @csrf
                         @method('PUT')
 
+                        @include('partials.components.elementos.estudio.grado_academico')
                         @include('partials.components.elementos.estudio.nueva_institucion')
 
                         <input type="hidden" name="institucion_original" value="{{ $institucion->nombre }}">
