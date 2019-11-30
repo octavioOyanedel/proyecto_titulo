@@ -6,7 +6,7 @@ $(window).on('load',function(){
 	var id_institucion = parseInt($('#old_institucion').val());
 	var institucion_actual = parseInt($('#edit_institucion').val());
 
-	console.log(institucion_actual);
+
 
 	if(ruta.indexOf('estudios_socio') >= 0 && ruta.indexOf('edit') >= 0){
 

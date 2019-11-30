@@ -104,7 +104,7 @@ class GradoAcademicoInstitucionController extends Controller
         if($request->ajax()){
             $instituciones = Institucion::where('grado_academico_id','=',$request->id)->get();
             foreach ($instituciones as $i) {
-                array_push($coleccion,array('id'=>$i->getOriginal('id'),'nombre'=>$i->nombre));
+                array_push($coleccion,array('id'=>$i->id,'nombre'=>$i->nombre));
             }
             return response()->json($coleccion);
         }

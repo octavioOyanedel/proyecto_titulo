@@ -6,7 +6,7 @@
         @break
         {{-- mostrar --}}
         @case('estudios/'.$estudio->id)
-
+            <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
         @break
         @default
     @endswitch
@@ -45,7 +45,21 @@
         @break
         {{-- mostrar --}}
         @case('estudios/'.$estudioRealizado->id)
+            <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+        @break
+        @default
+    @endswitch
+@endisset
 
+@isset($estudioRealizadoSocio)
+    @switch(request()->path())
+    {{-- editar --}}
+        @case('estudios_socio/'.$estudioRealizadoSocio->id.'/edit')
+
+        @break
+        {{-- mostrar --}}
+        @case('estudios/'.$estudioRealizadoSocio->id)
+            <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
         @break
         @default
     @endswitch

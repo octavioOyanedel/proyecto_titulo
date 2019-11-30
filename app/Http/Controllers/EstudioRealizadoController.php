@@ -100,12 +100,12 @@ class EstudioRealizadoController extends Controller
         $modificar->estado_grado_academico_id = $request->estado_grado_academico_id;
         $modificar->titulo_id = $request->titulo_id;                        
         $modificar->update();
-        session(['mensaje' => 'Estudio realizado editado con éxito.']);
-        LogSistema::registrarAccion('Cargo editado, de: '.convertirArrayAString($estudioRealizado->toArray()));
         $socio = Socio::findOrFail($request->socio_id);
         $prestamos = $socio->prestamos()->paginate(15);
         $estudios = $socio->estudios_realizados_socios;
         $cargas = $socio->cargas_familiares;
+        session(['mensaje' => 'Estudio realizado editado con éxito.']);
+        LogSistema::registrarAccion('Cargo editado, de: '.convertirArrayAString($estudioRealizado->toArray()));        
         return view('sind1.socios.show', compact('socio','prestamos','estudios','cargas'));
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\GradoAcademicoTitulo;
+use App\Titulo;
 use Illuminate\Http\Request;
 
 class GradoAcademicoTituloController extends Controller
@@ -87,9 +88,9 @@ class GradoAcademicoTituloController extends Controller
     public function obtenerTitulos(Request $request){
         $coleccion = array();
         if($request->ajax()){
-            $titulos = GradoAcademicoTitulo::where('titulo_id','=',$request->id)->get();
+            $titulos = Titulo::where('grado_academico_id','=',$request->id)->get();
             foreach ($titulos as $t) {
-                array_push($coleccion,array('id'=>$t->getOriginal('titulo_id'),'nombre'=>$t->titulo_id));
+                array_push($coleccion,array('id'=>$t->id,'nombre'=>$t->nombre));
             }
             return response()->json($coleccion);
         }
