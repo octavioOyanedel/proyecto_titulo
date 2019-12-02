@@ -1,11 +1,13 @@
-@isset($estudio)
+@isset($estudioRealizado)
     @switch(request()->path())
         {{-- editar --}}
-        @case('estudios/'.$estudio->id.'/edit')
-
+        @case('estudios/'.$estudioRealizado->id.'/edit')
+            <script src="{{ asset('js/ajax/cargar_instituciones.js') }}" defer></script>
+            <script src="{{ asset('js/ajax/cargar_titulos.js') }}" defer></script>
+            <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
         @break
         {{-- mostrar --}}
-        @case('estudios/'.$estudio->id)
+        @case('estudios/'.$estudioRealizado->id)
             <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
         @break
         @default
@@ -39,9 +41,7 @@
     @switch(request()->path())
     {{-- editar --}}
         @case('estudios_socio/'.$estudioRealizado->id.'/edit')
-            <script src="{{ asset('js/ajax/cargar_instituciones.js') }}" defer></script>
-            <script src="{{ asset('js/ajax/cargar_titulos.js') }}" defer></script>
-            <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+
         @break
         {{-- mostrar --}}
         @case('estudios/'.$estudioRealizado->id)

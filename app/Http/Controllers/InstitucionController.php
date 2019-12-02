@@ -43,7 +43,7 @@ class InstitucionController extends Controller
     {
         $institucion = Institucion::create($request->all()); 
         session(['mensaje' => 'Institución agregada con éxito.']);
-        LogSistema::registrarAccion('Institución agragada: '.$institucion->nombre);
+        LogSistema::registrarAccion('Institución agragada: '.convertirArrayAString($institucion->toArray()));
         return redirect()->route('mantenedor_estudio_institucion');
     }
 
@@ -82,11 +82,11 @@ class InstitucionController extends Controller
     public function update(EditarInstitucionRequest $request, $id)
     {
         $modificar = Institucion::findOrFail($id);
-        $institucion = $modificar->nombre;
+        $institucion = Institucion::findOrFail($id);
         $modificar->nombre = $request->nombre;
         $modificar->update();     
         session(['mensaje' => 'Institución educacional editada con éxito.']);   
-        LogSistema::registrarAccion('Institución educacional editada, de: '.$institucion.' a '.$request->nombre);  
+        LogSistema::registrarAccion('Institución editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($institucion->toArray()));
         return redirect()->route('mantenedor_estudio_institucion');
     }
 
@@ -101,7 +101,7 @@ class InstitucionController extends Controller
         $eliminada = Institucion::findOrFail($id)->nombre;
         Institucion::destroy($id);
         session(['mensaje' => 'Institución educacional eliminada con éxito.']);      
-        LogSistema::registrarAccion('Institución eliminada: '.$eliminada);   
+        LogSistema::registrarAccion('Institución eliminada: '.convertirArrayAString($eliminada->toArray())); 
         return redirect()->route('mantenedor_estudio_institucion');  
     }
 }

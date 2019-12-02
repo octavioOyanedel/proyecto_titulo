@@ -1,7 +1,8 @@
     <div class="float-left">
         <div class="input-group mb-2 mr-sm-2">
-            <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif </span>
-            <a title="Resetear listado." class="mr-2" href="{{ route('home') }}">&nbsp;|<b>Resetear</b>|</a>
+            <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif &nbsp;</span>
+            <a title="Resetear listado." class="mr-2" href="{{ route('home') }}">|<b>Resetear</b>|</a>
+            <a title="Exportar listado." class="mr-2" href="{{ route('listado_socios') }}">|<b>Exportar Excel</b>|</a>
         </div>                                                                            
     </div>        
     <form class="form-inline float-right" method="GET" action="{{ route('home') }}">
@@ -22,7 +23,7 @@
                 <option value="apellido1" @if(request('columna') === 'apellido1') {{ 'selected' }} @endif>Apellido paterno</option>
                 <option value="genero" @if(request('columna') === 'genero') {{ 'selected' }} @endif>Género</option>
                 <option value="rut" @if(request('columna') === 'rut') {{ 'selected' }} @endif>Rut</option>
-                <option value="fecha_sind1" @if(request('columna') === 'fecha_sind1') {{ 'selected' }} @endif>Fecha incorporación sind1</option>
+                <option value="fecha_sind1" @if(request('columna') === 'fecha_sind1') {{ 'selected' }} @endif>Fecha ingreso sind1</option>
                 <option value="numero_socio" @if(request('columna') === 'numero_socio') {{ 'selected' }} @endif>N° Socio</option>
                 <option value="correo" @if(request('columna') === 'correo') {{ 'selected' }} @endif>Correo</option>
                 <option value="anexo" @if(request('columna') === 'anexo') {{ 'selected' }} @endif>Anexo</option>
@@ -34,8 +35,8 @@
         </div>
 
         <div class="input-group mb-2 mr-sm-2">
-            <select name="" id="orden" class="form-control form-control-sm">
-                <option value="DESC" selected>Orden</option>
+            <select name="orden" id="orden" class="form-control form-control-sm">
+                <option value="" selected>Orden</option>
                 <option value="ASC" @if(request('orden') === 'ASC') {{ 'selected' }} @endif>Ascendente</option>
                 <option value="DESC" @if(request('orden') === 'DESC') {{ 'selected' }} @endif>Descendente</option>                
             </select>

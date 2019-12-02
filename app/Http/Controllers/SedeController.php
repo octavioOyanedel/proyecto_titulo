@@ -40,7 +40,7 @@ class SedeController extends Controller
     {
         $sede = Sede::create($request->all());
         session(['mensaje' => 'Sede agregada con éxito.']);
-        LogSistema::registrarAccion('Sede agragada: '.$sede->nombre);
+        LogSistema::registrarAccion('Sede agragada: '.convertirArrayAString($sede->toArray()));
         return redirect()->route('mantenedor_socio_sede');
     }
 
@@ -79,7 +79,7 @@ class SedeController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Sede editada con éxito.']);
-        LogSistema::registrarAccion('Sede editada, de: '.$sede->nombre.' a '.$request->nombre);
+        LogSistema::registrarAccion('Sede editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($sede->toArray()));
         return redirect()->route('mantenedor_socio_sede');
     }
 
@@ -94,12 +94,7 @@ class SedeController extends Controller
         $eliminada_nombre = $sede->nombre;
         $sede = Sede::destroy($sede->id);
         session(['mensaje' => 'Sede eliminada con éxito.']);
-        LogSistema::registrarAccion('Sede eliminada: '.$eliminada);        
+        LogSistema::registrarAccion('Área eliminada: '.convertirArrayAString($eliminada->toArray()));         
         return redirect()->route('mantenedor_socio_sede');
     }
 }
-
-//          LogSistema::registrarAccion('Sede agragada: '.$sede->nombre);
-//          LogSistema::registrarAccion('Sede editada, de: '.$sede->nombre.' a '.$request->nombre);
-//          LogSistema::registrarAccion('Sede eliminada: '.$eliminada); 
-//        $nacionalidad = $modificar->nombre;

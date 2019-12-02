@@ -69,8 +69,8 @@
     @break  
     {{-- anular --}}
     @case('anular_registro_form')
-        <script src="{{ asset('js/ajax/validar_cheque_contable_create.js') }}" defer></script>
-        <script src="{{ asset('js/ajax/validar_numero_registro_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/validar_cheque_contable_anular_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/validar_numero_registro_anular_create.js') }}" defer></script>
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script> 
     @break      
     @default

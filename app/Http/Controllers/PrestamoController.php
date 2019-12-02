@@ -305,7 +305,7 @@ class PrestamoController extends Controller
         $registro->socio_id = $prestamo->socio_id;
         $registro->save();
         session(['mensaje' => 'Préstamo agregado con éxito.']);
-        LogSistema::registrarAccion('Préstamo agregado N° egreso: '.$prestamo->numero_egreso.', cheque: '.$prestamo->cheque.', socio: '.$prestamo->socio->nombre1.' '.$prestamo->socio->apellido1.' rut: '.$prestamo->socio->rut);
+        LogSistema::registrarAccion('Préstamo agragado: '.convertirArrayAString($prestamo->toArray()));
         return redirect()->route('prestamos.create');
     }
 

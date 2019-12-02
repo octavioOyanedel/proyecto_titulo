@@ -8,7 +8,7 @@ $(window).on('load',function(){
 
 
 
-	if(ruta.indexOf('estudios_socio') >= 0 && ruta.indexOf('edit') >= 0){
+	if(ruta.indexOf('estudios') >= 0 && ruta.indexOf('edit') >= 0){
 
 		var grado_academico_id = parseInt($('#grado_academico_id option:selected').val());
 		ajaxOld(grado_academico_id, institucion_actual);

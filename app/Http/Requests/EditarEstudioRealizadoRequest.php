@@ -25,7 +25,7 @@ class EditarEstudioRealizadoRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo_id' => ['nullable','numeric'],
+            'titulo_id' => ['nullable'],
             'institucion_id' => ['required','numeric'],
             'grado_academico_id' => ['required','numeric',new ValidarEstudioUnicoEditarRule(Request()->institucion_id, Request()->socio_id, Request()->grado_original, Request()->institucion_original)],
             'estado_grado_academico_id' => ['required','numeric'],

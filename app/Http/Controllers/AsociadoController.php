@@ -40,7 +40,7 @@ class AsociadoController extends Controller
     {
         $asociado = Asociado::create($request->all());         
         session(['mensaje' => 'Asociado agregado con éxito.']);
-        LogSistema::registrarAccion('Asociado agragado: '.$asociado->concepto.' - '.$asociado->nombre);        
+        LogSistema::registrarAccion('Asociado agragado: '.convertirArrayAString($asociado->toArray()));     
         return redirect()->route('mantenedor_contable_asociado');
     }
 
@@ -81,7 +81,7 @@ class AsociadoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Asociado editado con éxito.']);
-        LogSistema::registrarAccion('Asociado editado, de: '.$asociado->concepto.' '.$asociado->nombre.' a '.$request->concepto.' '.$request->nombre);
+        LogSistema::registrarAccion('Asociado editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($asociado->toArray()));
         return redirect()->route('mantenedor_contable_asociado');
     }
 
@@ -97,7 +97,7 @@ class AsociadoController extends Controller
         $eliminada_nombre = $asociado->nombre;
         Asociado::destroy($asociado->id);
         session(['mensaje' => 'Asociado eliminado con éxito.']); 
-        LogSistema::registrarAccion('Asociado eliminado: '.$eliminada_concepto.' '.$eliminada_nombre);        
+        LogSistema::registrarAccion('Asociado eliminado: '.convertirArrayAString($eliminada->toArray()));   
         return redirect()->route('mantenedor_contable_asociado'); 
     }
 }

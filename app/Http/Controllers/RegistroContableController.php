@@ -169,6 +169,7 @@ class RegistroContableController extends Controller
         $registro->usuario_id = $request->usuario_id;
         $registro->socio_id = $request->socio_id;
         $registro->save();
+        $contable = RegistroContable::obtenerUltimoRegistroIngresado();
         $tipo = TipoRegistroContable::findOrfail($request->tipo_registro_contable_id);
         $socios = Socio::orderBy('apellido1')->get();
         $cuentas = Cuenta::all();
@@ -176,12 +177,7 @@ class RegistroContableController extends Controller
         $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
         $asociados = Asociado::orderBy('concepto')->get();
         session(['mensaje' => 'Registro contable agregado con éxito.']);
-        if($request->tipo_registro_contable_id === 1){
-            LogSistema::registrarAccion('Registro contable agregado N°: '.$request->numero_registro.', tipo: '.$tipo->nombre.', cheque: '.$request->cheque);
-        }else{
-            LogSistema::registrarAccion('Registro contable agregado N°: '.$request->numero_registro.', tipo: '.$tipo->nombre);           
-        }
-
+        LogSistema::registrarAccion('Registro contable agragado: '.convertirArrayAString($contable->toArray()));
         return redirect()->route('contables.create', compact('tipos_registro','cuentas','conceptos','socios','asociados'));  
     }
 

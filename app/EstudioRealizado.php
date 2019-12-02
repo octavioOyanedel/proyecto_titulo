@@ -87,6 +87,14 @@ class EstudioRealizado extends Model
     /**
      * Relación 
      */
+    static public function obtenerEstudioRealizadoSocio($id)
+    {
+        return EstudioRealizadoSocio::where('estudio_realizado_id','=',$id)->first();
+    }      
+
+    /**
+     * Relación 
+     */
     public function titulo()
     {
         return $this->hasOne('App\Titulo');

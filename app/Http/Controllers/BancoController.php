@@ -40,7 +40,7 @@ class BancoController extends Controller
     {
         $banco = Banco::create($request->all());
         session(['mensaje' => 'Banco agregado con éxito.']);
-        LogSistema::registrarAccion('Banco agragado: '.$banco->nombre);
+        LogSistema::registrarAccion('Banco agragado: '.convertirArrayAString($banco->toArray()));
         return redirect()->route('mantenedor_contable_banco');
     }
 
@@ -80,7 +80,7 @@ class BancoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update(); 
         session(['mensaje' => 'Banco editado con éxito.']); 
-        LogSistema::registrarAccion('Banco editado, de: '.$banco->nombre.' a '.$request->nombre);
+        LogSistema::registrarAccion('Banco editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($banco->toArray()));
         return redirect()->route('mantenedor_contable_banco');
     }
 
@@ -95,7 +95,7 @@ class BancoController extends Controller
         $eliminada = $banco->nombre;
         Banco::destroy($banco->id);
         session(['mensaje' => 'Banco eliminado con éxito.']);  
-        LogSistema::registrarAccion('Banco eliminado: '.$eliminada);       
+        LogSistema::registrarAccion('Banco eliminado: '.convertirArrayAString($eliminada->toArray()));  
         return redirect()->route('mantenedor_contable_banco'); 
     }
 }

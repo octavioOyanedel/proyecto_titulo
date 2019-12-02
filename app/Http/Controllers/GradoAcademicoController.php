@@ -40,7 +40,7 @@ class GradoAcademicoController extends Controller
     {
         $nivel = GradoAcademico::create($request->all());         
         session(['mensaje' => 'Nivel educacional agregado con éxito.']);
-        LogSistema::registrarAccion('Nivel educacional agragado: '.$nivel->nombre);
+        LogSistema::registrarAccion('Nivel educacional agragado: '.convertirArrayAString($nivel->toArray()));
         return redirect()->route('mantenedor_estudio_nivel');
     }
 
@@ -78,11 +78,11 @@ class GradoAcademicoController extends Controller
     public function update(EditarNivelRequest $request, $id)
     {
         $modificar = GradoAcademico::findOrFail($id);
-        $nivel = $modificar->nombre;
+        $nivel = GradoAcademico::findOrFail($id);
         $modificar->nombre = $request->nombre;
         $modificar->update();     
         session(['mensaje' => 'Nivel educacional editado con éxito.']);
-        LogSistema::registrarAccion('Nivel educacional editado, de: '.$nivel.' a '.$request->nombre);
+        LogSistema::registrarAccion('Nivel educacional editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($nivel->toArray()));
         return redirect()->route('mantenedor_estudio_nivel');
     }
 
@@ -97,7 +97,7 @@ class GradoAcademicoController extends Controller
         $eliminada = GradoAcademico::findOrFail($id)->nombre;
         GradoAcademico::destroy($id);
         session(['mensaje' => 'Nivel educacional eliminado con éxito.']);  
-        LogSistema::registrarAccion('Nivel educacional eliminado: '.$eliminada);       
+        LogSistema::registrarAccion('Nivel educacional eliminado: '.convertirArrayAString($eliminada->toArray()));       
         return redirect()->route('mantenedor_estudio_nivel');  
     }
 }

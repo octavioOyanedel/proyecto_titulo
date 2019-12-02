@@ -1,14 +1,16 @@
 $(window).on('load',function(){
 
 	//variables
-	var elemento = $('#cheque');
+	var elemento = $('#numero_registro');
 	var patron = /^\d*$/;
-	var spin = $('#comprobar-cheque');
+	var spin = $('#comprobar-numero');
 	var ruta = window.location.pathname;
 	var valor = '';
-	var ok = $('#cheque-ok');
-	var error = $('#error-cheque');
+	var ok = $('#numero-ok');
+	var error = $('#error-numero');
+	var boton = $('#incorporar');
 	var original = '';
+	var tipo = '';
 
 	//reset mensajes
 	limpiarMensajes();
@@ -16,25 +18,30 @@ $(window).on('load',function(){
 	//capturar valor original
 	original = formatearEntrada(elemento.val());
 
+	//captura de tipo de registro
+	$('#tipo_registro_contable_id').change(function(){
+		tipo = $(this).val();
+	});
+
 	//capturar evento
 	elemento.focusout( function(){ //keyup - focusout
 
 		//formatear valor de entrada
 		valor = formatearEntrada(elemento.val());
 
-		limpiarMensajes();
-		
-		if(valor != ''){		
-			mostrarSpin();
+		limpiarMensajes();	
+
+		if(valor != ''){
+			mostrarSpin();	
 			//condiciones que se deben cumplir para llamar a funcion ajax
-			if(valor.length >= 1 && valor.length <= 10 && valor != '' &&  validarFormato() != null){
+			if(valor.length >= 1 && valor.length <= 4 && valor != '' &&  validarFormato() != null){
 				//form editar
 				if(comprobarRuta() === -1){
 					//si valor original es distinto de vacío
 					if(original != ''){
 						//si campos no son iguales
 						if(original != valor){
-							consultaAjax(valor);
+							consultaAjax(valor, tipo);
 						}else{
 							valido();
 						}
@@ -42,27 +49,29 @@ $(window).on('load',function(){
 				}
 				//form crear
 				else{
-					consultaAjax(valor);
+					consultaAjax(valor, tipo);
 				}
 			}else{
 				invalido();
-			}	
-		}		
+			}
+		}else{
+			desactivarBoton();
+		}			
 	});
 
-	function consultaAjax(valor){
+	function consultaAjax(valor, tipo){
 
 		$.ajaxSetup({
 			headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}}
 		);		
-		
+
 		$.ajax({
 			method: 'GET',
 			dataType: 'json',
-			url: '/verificar_cheque_contable',
-			data: {elemento: valor},
+			url: '/verificar_numero_registro',
+			data: {elemento: valor, tipo: tipo},
 			success: function(respuesta){												
 				if(respuesta === 1){
 					yaRegistrado();
@@ -77,25 +86,28 @@ $(window).on('load',function(){
 	}
 
 	function valido(){
+		activarBoton();
 		limpiarMensajes();	
-		ok.removeClass('d-none').append('Cheque válido.');
+		ok.removeClass('d-none').append('Número de registro contable válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
+		desactivarBoton();
 		limpiarMensajes();
-		error.removeClass('d-none').append('Cheque no válido.');
+		error.removeClass('d-none').append('Número de registro contable no válido.');
 		ocultarSpin();
 	}
 
 	function yaRegistrado(){
+		desactivarBoton();
 		limpiarMensajes();	
-		error.removeClass('d-none').append('El valor de este campo ya ha sido registrado.');
+		error.removeClass('d-none').append('Número de registro contable ya registrado.');
 		ocultarSpin();		
 	}
 
 	function comprobarRuta(){
-		return ruta.search('contables/create');
+		return ruta.search('anular_registro_form');
 	}
 
 	function formatearEntrada(texto){
@@ -119,4 +131,11 @@ $(window).on('load',function(){
 		ok.addClass('d-none').empty();
 	}
 
+	function activarBoton(){
+		boton.removeAttr('disabled');
+	}
+
+	function desactivarBoton(){
+		boton.attr('disabled','true');
+	}
 });

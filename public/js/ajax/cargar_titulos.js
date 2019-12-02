@@ -7,7 +7,7 @@ $(window).on('load',function(){
 	var id_titulo = parseInt($('#old_titulo').val());
 	var titulo_actual = parseInt($('#edit_titulo').val());
 
-	if(ruta.indexOf('estudios_socio') >= 0 && ruta.indexOf('edit') >= 0){
+	if(ruta.indexOf('estudios') >= 0 && ruta.indexOf('edit') >= 0){
 		activarTitulo();
 		var grado_academico_id = parseInt($('#grado_academico_id option:selected').val());
 		ajaxOld(grado_academico_id, titulo_actual);
@@ -39,6 +39,8 @@ $(window).on('load',function(){
 		if(texto_estado === 'Titulado'){
 			activarTitulo();
 		}else{
+			//limpiar select
+			titulo.prop('selectedIndex',0);
 			desactivarTitulo();
 		}
 	});		

@@ -165,6 +165,16 @@ class Socio extends Model
             return $query->where('genero', 'LIKE', "%$genero%");
         }
     }
+
+    /**
+     * scope busqueda por rut
+     */
+    public function scopeRutFiltro($query, $rut)
+    {
+        if ($rut) {
+            return $query->where('rut', '=', $rut);
+        }
+    }    
 //***************************************************************************************************************
     /**
      * scope busqueda por rut

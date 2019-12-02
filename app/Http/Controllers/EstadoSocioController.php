@@ -40,7 +40,7 @@ class EstadoSocioController extends Controller
     {
         $estado = EstadoSocio::create($request->all());
         session(['mensaje' => 'Estado socio agregado con éxito.']);
-        LogSistema::registrarAccion('Estado socio agragado: '.$estado->nombre);
+        LogSistema::registrarAccion('Estado socio agragado: '.convertirArrayAString($carga->toArray()));
         return redirect()->route('mantenedor_socio_estado');
     }
 
@@ -80,7 +80,7 @@ class EstadoSocioController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Estado socio editado con éxito.']);
-        LogSistema::registrarAccion('Estado socio editado, de: '.$estadoSocio->nombre.' a '.$request->nombre);
+        LogSistema::registrarAccion('Estado socio editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($estadoSocio->toArray()));
         return redirect()->route('mantenedor_socio_estado');
     }
 
@@ -95,7 +95,7 @@ class EstadoSocioController extends Controller
         $eliminada = $estadoSocio->nombre;        
         EstadoSocio::destroy($estadoSocio->id);
         session(['mensaje' => 'Estado socio eliminado con éxito.']);
-        LogSistema::registrarAccion('Estado socio eliminado: '.$eliminada); 
+        LogSistema::registrarAccion('Estado socio eliminado: '.convertirArrayAString($eliminada->toArray())); 
         return redirect()->route('mantenedor_socio_estado');
     }
 }

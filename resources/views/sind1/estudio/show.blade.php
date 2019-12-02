@@ -12,17 +12,16 @@
                     
                     <div class="text-center alertas alert alert-danger alert-dismissible fade show" role="alert">
                         <h4>Información Importante</h4>
-                        <strong class="icono-alerta">Si elimina este registro no estará visible en ninguna de las tablas del modulo de estudios realizados, asimismo no estará disponible para la incorporación o edición de estudios realizados.</strong>
+                        <strong class="icono-alerta">Si elimina este registro no estará visible en ninguna de las tablas del modulo de estudios realizados.</strong>
                     </div>
-                    <p class="text-center">¿Desea continuar con la eliminación de este nivel educacional <b>{{ $estudioRealizado->nombre }}</b>?</p>
+                    <p class="text-center">¿Desea continuar con la eliminación de este estudio realizado <b>{{ $estudioRealizado->grado_academico_id }} {{ $estudioRealizado->institucion_id }} {{ $estudioRealizado->estado_grado_academico_id }} {{ $estudioRealizado->titulo_id }}</b>?</p>
                     <!-- Formulario -->
-                    <form class="text-center" method="POST" action="{{ route('estudios.destroy', $estudioRealizado) }}">
+                    <form class="text-center" method="POST" action="{{ route('estudios.destroy', $estudioRealizado->id) }}">
                         
                         @csrf
                         @method('DELETE')                   
 
-
-                        <a class="btn btn-secondary" href="{{ route('mantenedor_estudios') }}" role="button">Cancelar</a>
+                        <a class="btn btn-secondary" href="{{ route('socios.show', $estudioRealizado->obtenerEstudioRealizadoSocio($estudioRealizado->id)->socio_id ) }}" role="button">Cancelar</a>
                         <button type="submit" class="btn btn-danger">Aceptar</button>      
                     </form>   
                 </div>

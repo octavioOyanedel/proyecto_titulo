@@ -93,7 +93,7 @@ class CargaFamiliarController extends Controller
         $modificar->parentesco_id = $request->parentesco_id;
         $modificar->update();
         session(['mensaje' => 'Carga familiar editada con éxito.']);
-        LogSistema::registrarAccion('Carga familiar editada, de: '.CargaFamiliar::formatoEditarCargo($request, $cargaFamiliar));
+        LogSistema::registrarAccion('Carga familiar editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($cargaFamiliar->toArray()));
         return redirect()->route('home');
     }
 

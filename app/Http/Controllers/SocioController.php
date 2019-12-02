@@ -16,6 +16,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarSocioRequest;
 use App\Http\Requests\EditarSocioRequest;
 use App\Http\Requests\FiltrarSocioRequest;
+use Rap2hpoutre\FastExcel\FastExcel;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SocioExport;
+use App\Exports\FiltroSocioExport;
 
 class SocioController extends Controller
 {
@@ -58,7 +62,7 @@ class SocioController extends Controller
         Socio::create($request->all());
         $socio = Socio::obtenerUltimoSocioIngresado();
         session(['mensaje' => 'Socio incorporado con éxito.']);
-        LogSistema::registrarAccion('Socio incorporado: '.$socio->nombre1.' '.$socio->nombre2.' '.$socio->apellido1.' '.$socio->apellido2.' rut: '.$socio->rut);
+        LogSistema::registrarAccion('Socio agragado: '.convertirArrayAString($socio->toArray()));
         return redirect()->route('cargas.create',['id'=>$socio->id]);
     }
 
@@ -128,7 +132,7 @@ class SocioController extends Controller
         $modificar->nacionalidad_id = $request->nacionalidad_id;
         $modificar->update();
         session(['mensaje' => 'Socio editado con éxito.']);
-        LogSistema::registrarAccion('Socio editado: '.$socio->nombre1.' '.$socio->nombre2.' '.$socio->apellido1.' '.$socio->apellido2.' rut: '.$socio->rut);        
+        LogSistema::registrarAccion('Socio editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($socio->toArray()));     
         return redirect()->route('home');
     }
 
@@ -145,7 +149,7 @@ class SocioController extends Controller
         $socio->update();
         $socio->delete();
         session(['mensaje' => 'Socio desvinculado con éxito.']);
-        LogSistema::registrarAccion('Socio desvinculado: '.$socio->nombre1.' '.$socio->nombre2.' '.$socio->apellido1.' '.$socio->apellido2.' rut: '.$socio->rut);
+        LogSistema::registrarAccion('Socio eliminado: '.convertirArrayAString($eliminada->toArray())); 
         return redirect()->route('home');
     }
 
@@ -261,6 +265,7 @@ class SocioController extends Controller
      */
     public function filtroSocios(FiltrarSocioRequest $request)
     {
+        $total_consulta = 0;
 
         if(request()->has('registros') && request('registros') != ''){
             $registros = request('registros');
@@ -287,451 +292,543 @@ class SocioController extends Controller
         }
 
         $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
+        $socios = null;
 
-        if(request()->has('desvinculados') && request('desvinculados') === 'incluir'){
-            switch ($columna) {        
-                case 'sede_id':
-                    $socios = Socio::withTrashed()->orderBy('sedes.nombre',$orden)
-                    ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
+        if(request()->has('desvinculados')){
+            switch (request('desvinculados')) {        
+                case 'activos':
+                    switch ($columna) {        
+                        case 'sede_id':
+                            $socios = Socio::orderBy('sedes.nombre',$orden)
+                            ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;
+                        case 'area_id':
+                            $socios = Socio::orderBy('areas.nombre',$orden)
+                            ->join('areas', 'socios.area_id', '=', 'areas.id')
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;     
+                        case 'cargo_id':
+                            $socios = Socio::orderBy('cargos.nombre',$orden)
+                            ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;                                   
+                        default:
+                            $socios = Socio::orderBy($columna, $orden)
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;
+                    }    
                 break;
-                case 'area_id':
-                    $socios = Socio::withTrashed()->orderBy('areas.nombre',$orden)
-                    ->join('areas', 'socios.area_id', '=', 'areas.id')
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;     
-                case 'cargo_id':
-                    $socios = Socio::withTrashed()->orderBy('cargos.nombre',$orden)
-                    ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;                                   
-                default:
-                    $socios = Socio::withTrashed()->orderBy($columna, $orden)
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
+                case 'incluir': 
+                    switch ($columna) {        
+                        case 'sede_id':
+                            $socios = Socio::withTrashed()->orderBy('sedes.nombre',$orden)
+                            ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;
+                        case 'area_id':
+                            $socios = Socio::withTrashed()->orderBy('areas.nombre',$orden)
+                            ->join('areas', 'socios.area_id', '=', 'areas.id')
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;     
+                        case 'cargo_id':
+                            $socios = Socio::withTrashed()->orderBy('cargos.nombre',$orden)
+                            ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;                                   
+                        default:
+                            $socios = Socio::withTrashed()->orderBy($columna, $orden)
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;
+                    }  
                 break;
-            }              
+                case 'solo':
+                    switch ($columna) {        
+                        case 'sede_id':
+                            $socios = Socio::onlyTrashed()->orderBy('sedes.nombre',$orden)
+                            ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;
+                        case 'area_id':
+                            $socios = Socio::onlyTrashed()->orderBy('areas.nombre',$orden)
+                            ->join('areas', 'socios.area_id', '=', 'areas.id')
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;     
+                        case 'cargo_id':
+                            $socios = Socio::onlyTrashed()->orderBy('cargos.nombre',$orden)
+                            ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;                                   
+                        default:
+                            $socios = Socio::onlyTrashed()->orderBy($columna, $orden)
+                            ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
+                            ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
+                            ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
+                            ->genero($request->genero)
+                            ->rutFiltro($request->rut)
+                            ->comunaId($request->comuna_id)
+                            ->ciudadId($request->ciudad_id)
+                            ->direccion($request->direccion)
+                            ->sedeId($request->sede_id)
+                            ->areaId($request->area_id)
+                            ->cargoId($request->cargo_id)
+                            ->estadoSocioId($request->estado_socio_id)
+                            ->nacionalidadId($request->nacionalidad_id)
+                            ->paginate($registros)->appends([
+                                'registros' => $registros,
+                                'columna' => $columna,
+                                'orden' => $orden,                    
+                                'fecha_nac_ini' => $request->fecha_nac_ini,
+                                'fecha_nac_fin' => $request->fecha_nac_fin,
+                                'fecha_pucv_ini' => $request->fecha_pucv_ini,
+                                'fecha_pucv_fin' => $request->fecha_pucv_fin,
+                                'fecha_sind1_ini' => $request->fecha_sind1_ini,
+                                'fecha_sind1_fin' => $request->fecha_sind1_fin,
+                                'genero' => $request->genero,
+                                'rut' => $request->rut,
+                                'comuna_id' => $request->comuna_id,
+                                'ciudad_id' => $request->ciudad_id,
+                                'direccion' => $request->direccion,
+                                'sede_id' => $request->sede_id,
+                                'area_id' => $request->area_id,
+                                'cargo_id' => $request->cargo_id,
+                                'estado_socio_id' => $request->estado_socio_id,
+                                'nacionalidad_id' => $request->nacionalidad_id,
+                                'desvinculados' => $request->desvinculados,            
+                            ]);
+                             $total_consulta = $socios->total();
+                        break;
+                    }                  
+                break;
+            }                        
         }
-        if(request()->has('desvinculados') && request('desvinculados') === 'solo'){
-            switch ($columna) {        
-                case 'sede_id':
-                    $socios = Socio::onlyTrashed()->orderBy('sedes.nombre',$orden)
-                    ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;
-                case 'area_id':
-                    $socios = Socio::onlyTrashed()->orderBy('areas.nombre',$orden)
-                    ->join('areas', 'socios.area_id', '=', 'areas.id')
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;     
-                case 'cargo_id':
-                    $socios = Socio::onlyTrashed()->orderBy('cargos.nombre',$orden)
-                    ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;                                   
-                default:
-                    $socios = Socio::onlyTrashed()->orderBy($columna, $orden)
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;
-            }              
-        }        
-        if(!request()->has('desvinculados')){
-            switch ($columna) {        
-                case 'sede_id':
-                    $socios = Socio::orderBy('sedes.nombre',$orden)
-                    ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;
-                case 'area_id':
-                    $socios = Socio::orderBy('areas.nombre',$orden)
-                    ->join('areas', 'socios.area_id', '=', 'areas.id')
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;     
-                case 'cargo_id':
-                    $socios = Socio::orderBy('cargos.nombre',$orden)
-                    ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;                                   
-                default:
-                    $socios = Socio::orderBy($columna, $orden)
-                    ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
-                    ->fechaIngresoPucv($request->fecha_pucv_ini,$request->fecha_pucv_fin)
-                    ->fechaIngresoSind1($request->fecha_sind1_ini,$request->fecha_sind1_fin)
-                    ->genero($request->genero)
-                    ->comunaId($request->comuna_id)
-                    ->ciudadId($request->ciudad_id)
-                    ->direccion($request->direccion)
-                    ->sedeId($request->sede_id)
-                    ->areaId($request->area_id)
-                    ->cargoId($request->cargo_id)
-                    ->estadoSocioId($request->estado_socio_id)
-                    ->nacionalidadId($request->nacionalidad_id)
-                    ->paginate($registros)->appends([
-                        'registros' => $registros,
-                        'columna' => $columna,
-                        'orden' => $orden,                    
-                        'fecha_nac_ini' => $request->fecha_nac_ini,
-                        'fecha_nac_fin' => $request->fecha_nac_fin,
-                        'fecha_pucv_ini' => $request->fecha_pucv_ini,
-                        'fecha_pucv_fin' => $request->fecha_pucv_fin,
-                        'fecha_sind1_ini' => $request->fecha_sind1_ini,
-                        'fecha_sind1_fin' => $request->fecha_sind1_fin,
-                        'genero' => $request->genero,
-                        'comuna_id' => $request->comuna_id,
-                        'ciudad_id' => $request->ciudad_id,
-                        'direccion' => $request->direccion,
-                        'sede_id' => $request->sede_id,
-                        'area_id' => $request->area_id,
-                        'cargo_id' => $request->cargo_id,
-                        'estado_socio_id' => $request->estado_socio_id,
-                        'nacionalidad_id' => $request->nacionalidad_id,            
-                    ]);
-                break;
-            }              
-        }
+
+        $fecha_nac_ini = $request->fecha_nac_ini;
+        $fecha_nac_fin = $request->fecha_nac_fin;
+        $fecha_pucv_ini = $request->fecha_pucv_ini;
+        $fecha_pucv_fin = $request->fecha_pucv_fin;
+        $fecha_sind1_ini = $request->fecha_sind1_ini;
+        $fecha_sind1_fin = $request->fecha_sind1_fin;
+        $genero = $request->genero;
+        $rut = $request->rut;
+        $comuna_id = $request->comuna_id;
+        $ciudad_id = $request->ciudad_id;
+        $direccion = $request->direccion;
+        $sede_id = $request->sede_id;
+        $area_id = $request->area_id;
+        ($request->cargo_id) ?  $cargo_id = $request->cargo_id : $cargo_id = 'null';
+        $estado_socio_id = $request->estado_socio_id;
+        $nacionalidad_id = $request->nacionalidad_id;
+        $desvinculados = $request->desvinculados;  
         
-        $total_consulta = $socios->total();
+        $desvinculados = $request->desvinculados;
+        return view('sind1.socios.resultados', compact('socios','estados','total_consulta','desvinculados','genero','cargo_id'));
+    }
 
-        return view('sind1.socios.resultados', compact('socios','estados','total_consulta'));
+    /**
+     * Exportar a excel.
+     */
+    public function exportarExcel()
+    {
+        return Excel::download(new SocioExport, 'listado_socios_activos.xlsx');
+        //return (new FastExcel(
+        //    Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')->get()
+        //))->download('listado_socios_activos.xlsx');
+    }
+
+    /**
+     * Exportar a excel.
+     */
+    public function exportarExcelFiltro($genero, $cargo_id)
+    {
+        return Excel::download(new FiltroSocioExport($genero, $cargo_id), 'listado_socios_activos.xlsx');
+        //return (new FastExcel(
+        //    Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')->get()
+        //))->download('listado_socios_activos.xlsx');
     }
 }

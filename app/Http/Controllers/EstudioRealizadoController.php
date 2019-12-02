@@ -54,11 +54,9 @@ class EstudioRealizadoController extends Controller
         $estudio_socio->socio_id = $request->socio_id;
         $estudio_socio->estudio_realizado_id = $estudio->id;
         $estudio_socio->save();
-        //asignar nivel/institución
 
-        //asignar nivel/titulo
-        
         session(['mensaje' => 'Estudio realizado agregado con éxito.']); 
+        LogSistema::registrarAccion('Estudio realizado agragado: '.convertirArrayAString($estudio->toArray()));        
         return redirect()->route('estudios.create',['id'=>$request->input('socio_id')]);
     }
 
@@ -68,8 +66,9 @@ class EstudioRealizadoController extends Controller
      * @param  \App\EstudioRealizado  $estudioRealizado
      * @return \Illuminate\Http\Response
      */
-    public function show(EstudioRealizado $estudioRealizado)
+    public function show($id)
     {
+        $estudioRealizado = EstudioRealizado::findOrFail($id);
         return view('sind1.estudio.show', compact('estudioRealizado'));
     }
 
@@ -79,9 +78,16 @@ class EstudioRealizadoController extends Controller
      * @param  \App\EstudioRealizado  $estudioRealizado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-
+        $estudioRealizado = EstudioRealizado::findOrFail($id);
+        $estudioRealizadoSocio = EstudioRealizado::obtenerEstudioRealizadoSocio($id);
+        $socio_id = $estudioRealizadoSocio->socio_id;
+        $grados = GradoAcademico::orderBy('nombre','ASC')->get();
+        $estados = EstadoGradoAcademico::orderBy('nombre','ASC')->get();       
+        $instituciones = GradoAcademicoInstitucion::all();         
+        $titulos = GradoAcademicoTitulo::all();              
+        return view('sind1.estudio.edit', compact('grados', 'instituciones', 'estados', 'titulos','estudioRealizado','socio_id'));        
     }
 
     /**
@@ -93,19 +99,28 @@ class EstudioRealizadoController extends Controller
      */
     public function update(EditarEstudioRealizadoRequest $request, $id)
     {  
-        $modificar = EstudioRealizado::findOrFail($id);
-        $estudioRealizado = EstudioRealizado::findOrFail($id);         
-        $modificar->grado_academico_id = $request->grado_academico_id;
-        $modificar->institucion_id = $request->institucion_id;
-        $modificar->estado_grado_academico_id = $request->estado_grado_academico_id;
-        $modificar->titulo_id = $request->titulo_id;                        
-        $modificar->update();
+        $estudioRealizado = EstudioRealizado::findOrFail($id);
+
+        if($request->titulo_id === 'Seleccione...'){
+          $estudioRealizado->grado_academico_id = $request->grado_academico_id;
+          $estudioRealizado->institucion_id = $request->institucion_id;
+          $estudioRealizado->estado_grado_academico_id = $request->estado_grado_academico_id;
+          $estudioRealizado->titulo_id = null;
+          $estudioRealizado->update();
+        }else{
+          $estudioRealizado->grado_academico_id = $request->grado_academico_id;
+          $estudioRealizado->institucion_id = $request->institucion_id;
+          $estudioRealizado->estado_grado_academico_id = $request->estado_grado_academico_id;
+          $estudioRealizado->titulo_id = $request->titulo_id;
+          $estudioRealizado->update();
+        }
+                      
         $socio = Socio::findOrFail($request->socio_id);
         $prestamos = $socio->prestamos()->paginate(15);
         $estudios = $socio->estudios_realizados_socios;
         $cargas = $socio->cargas_familiares;
         session(['mensaje' => 'Estudio realizado editado con éxito.']);
-        LogSistema::registrarAccion('Cargo editado, de: '.convertirArrayAString($estudioRealizado->toArray()));        
+        LogSistema::registrarAccion('Estudio realizado editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($estudioRealizado->toArray()));    
         return view('sind1.socios.show', compact('socio','prestamos','estudios','cargas'));
     }
 
@@ -115,25 +130,21 @@ class EstudioRealizadoController extends Controller
      * @param  \App\EstudioRealizado  $estudioRealizado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EstudioRealizado $estudioRealizado)
+    public function destroy($id)
     {
-        //
+        $estudioRealizado = EstudioRealizado::findOrFail($id);
+        $estudioRealizadoSocio = EstudioRealizado::obtenerEstudioRealizadoSocio($id);
+        $socio_id = $estudioRealizadoSocio->socio_id;
+        $eliminada = EstudioRealizado::findOrFail($id);
+        EstudioRealizado::destroy($id);
+        EstudioRealizadoSocio::destroy($id);
+        $socio = Socio::findOrFail($estudioRealizadoSocio->socio_id);
+        $prestamos = $socio->prestamos()->paginate(15);
+        $estudios = $socio->estudios_realizados_socios;
+        $cargas = $socio->cargas_familiares;        
+        session(['mensaje' => 'Estudio realizado eliminado con éxito.']);      
+        LogSistema::registrarAccion('Estudio realizado eliminado: '.convertirArrayAString($eliminada->toArray())); 
+        return view('sind1.socios.show', compact('socio','prestamos','estudios','cargas')); 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\EstudioRealizado  $estudioRealizado
-     * @return \Illuminate\Http\Response
-     */
-    public function editarEstudio(Request $request)
-    {
-        dd($request); 
-        $grados = GradoAcademico::orderBy('nombre','ASC')->get();
-        $estados = EstadoGradoAcademico::orderBy('nombre','ASC')->get();       
-        $instituciones = GradoAcademicoInstitucion::all();         
-        $titulos = GradoAcademicoTitulo::all();       
-        //$estudio = EstudioRealizado::where('','=',);
-        return view('sind1.estudio.edit', compact('grados', 'instituciones', 'estados', 'titulos', 'estudio'));
-    }
 }

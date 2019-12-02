@@ -188,3 +188,6 @@ Route::post('/eliminar_asociado','AsociadoController@destroy')->name('eliminar_a
 Route::post('/eliminar_banco','BancoController@destroy')->name('eliminar_banco')->middleware('auth');
 
 Route::get('/cerrar_alerta','MantenedorController@cerrarAlerta')->name('cerrar_alerta')->middleware('auth');
+
+Route::get('socios_excel','SocioController@exportarExcel')->name('listado_socios')->middleware('auth');
+Route::get('filtro_socios_excel/{genero}/{cargo_id}','SocioController@exportarExcelFiltro')->name('listado_socios_filtro')->middleware('auth');

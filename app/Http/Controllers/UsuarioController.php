@@ -128,8 +128,10 @@ class UsuarioController extends Controller
         $usuario->password = Hash::make($request->password);
         $usuario->rol_id = $request->rol_id;
         $usuario->save();
+        $user = User::obtenerUltimoUsuarioIngresado();
         $roles = Rol::orderBy('nombre','ASC')->get();
         session(['mensaje' => 'Usuario agregado con éxito.']);
+        LogSistema::registrarAccion('Usuario agragado: '.convertirArrayAString($user->toArray()));        
         return redirect()->route('register', compact('roles'));  
     }
 
@@ -174,6 +176,7 @@ class UsuarioController extends Controller
         $modificar->rol_id = $request->rol_id;   
         $modificar->update(); 
         session(['mensaje' => 'Usuario editado con éxito.']); 
+        LogSistema::registrarAccion('Usuario editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($usuario->toArray()));        
         return redirect()->route('usuarios.index');                               
     }
 
@@ -186,7 +189,8 @@ class UsuarioController extends Controller
     public function destroy(User $usuario)
     {
         User::destroy($usuario->id);
-        session(['mensaje' => 'Usuario eliminado con éxito.']);        
+        session(['mensaje' => 'Usuario eliminado con éxito.']);
+        LogSistema::registrarAccion('xxx eliminada: '.convertirArrayAString($eliminada->toArray()));        
         return redirect()->route('usuarios.index');    
     }
 
@@ -222,9 +226,11 @@ class UsuarioController extends Controller
     public function updatePassword(EditarPasswordRequest $request)
     {
         $modificar = User::findOrFail($request->user_id);
+        $usuario = User::findOrfail($request->user_id);
         $modificar->password = Hash::make($request->password);
         $modificar->update(); 
         session(['mensaje' => 'Contraseña editada con éxito.']); 
+        LogSistema::registrarAccion('Contraseña editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($usuario->toArray()));       
         return redirect()->route('usuarios.index');              
     }
 

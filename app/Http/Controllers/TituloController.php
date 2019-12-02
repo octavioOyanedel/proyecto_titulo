@@ -42,7 +42,7 @@ class TituloController extends Controller
     {
         $titulo = Titulo::create($request->all());
         session(['mensaje' => 'Título agregado con éxito.']);
-        LogSistema::registrarAccion('Título agragado: '.$titulo->nombre);
+        LogSistema::registrarAccion('Título agragado: '.convertirArrayAString($titulo->toArray()));
         return redirect()->route('mantenedor_estudio_titulo');
     }
 
@@ -83,7 +83,7 @@ class TituloController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Título editado con éxito.']);
-        LogSistema::registrarAccion('Título editado, de: '.$titulo->nombre.' a '.$request->nombre);
+        LogSistema::registrarAccion('Título editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($titulo->toArray()));
         return redirect()->route('mantenedor_estudio_titulo');
     }
 
@@ -98,7 +98,7 @@ class TituloController extends Controller
         $eliminada = $titulo->nombre;
         Titulo::destroy($titulo->id);
         session(['mensaje' => 'Título eliminado con éxito.']);
-        LogSistema::registrarAccion('Título eliminado: '.$eliminada);       
+        LogSistema::registrarAccion('Título eliminado: '.convertirArrayAString($eliminada->toArray()));     
         return redirect()->route('mantenedor_estudio_titulo');  
     }
 }

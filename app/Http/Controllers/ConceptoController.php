@@ -42,7 +42,7 @@ class ConceptoController extends Controller
     {
         $concepto = Concepto::create($request->all());
         session(['mensaje' => 'Concepto agregado con éxito.']);
-        LogSistema::registrarAccion('Concepto agragado: '.$concepto->nombre.' - '.$concepto->tipo_registro_contable_id);
+        LogSistema::registrarAccion('Concepto agragado: '.convertirArrayAString($concepto->toArray()));
         return redirect()->route('mantenedor_contable_concepto');
     }
 
@@ -84,7 +84,7 @@ class ConceptoController extends Controller
         $modificar->tipo_registro_contable_id = $request->tipo_registro_contable_id;
         $modificar->update();             
         session(['mensaje' => 'Concepto editado con éxito.']);
-        LogSistema::registrarAccion('Concepto editado, de: '.$concepto->nombre.' - '.$concepto->tipo_registro_contable_id.' a '.$request->nombre.' - '.$tipo);
+        LogSistema::registrarAccion('Concepto editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($concepto->toArray()));
         return redirect()->route('mantenedor_contable_concepto');
     }
 
@@ -100,7 +100,7 @@ class ConceptoController extends Controller
         $eliminada_tipo = $concepto->tipo_registro_contable_id;
         Concepto::destroy($concepto->id);
         session(['mensaje' => 'Concepto eliminado con éxito.']);     
-        LogSistema::registrarAccion('Concepto eliminado: '.$eliminada_nombre.' - '.$eliminada_tipo);    
+        LogSistema::registrarAccion('Concepto eliminado: '.convertirArrayAString($eliminada->toArray()));  
         return redirect()->route('mantenedor_contable_concepto'); 
     }
 }

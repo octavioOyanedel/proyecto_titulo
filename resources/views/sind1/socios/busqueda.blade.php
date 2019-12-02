@@ -8,13 +8,16 @@
                 <div class="card-header text-center"><h3 class="mb-0">Búsqueda Filtrada Socios</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
                     <!-- Formulario -->
                     <form method="GET" action="{{ route('filtro_socios') }}">
+
+                    <div class="form-check text-center mb-3">
+                        <input class="form-check-input" type="radio" name="desvinculados" id="radio_incluir" value="activos" checked="">
+                        <label class="form-check-label" for="radio_incluir">
+                        Mostrar solo socios activos.
+                        </label>
+                    </div>
 
                     <div class="form-check text-center mb-3">
                         <input class="form-check-input" type="radio" name="desvinculados" id="radio_incluir" value="incluir">
@@ -22,6 +25,7 @@
                         Incluir socios descvinculados.
                         </label>
                     </div>
+
                     <div class="form-check text-center mb-3">
                         <input class="form-check-input" type="radio" name="desvinculados" id="radio_solo" value="solo">
                         <label class="form-check-label" for="radio_solo">

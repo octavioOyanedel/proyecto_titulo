@@ -40,7 +40,7 @@ class NacionalidadController extends Controller
     {
         $nacion = Nacionalidad::create($request->all());
         session(['mensaje' => 'Nacionalidad agregada con éxito.']);
-        LogSistema::registrarAccion('Nacionalidad agragada: '.$nacion->nombre);
+        LogSistema::registrarAccion('Nacionalidad agragada: '.convertirArrayAString($nacion->toArray()));
         return redirect()->route('mantenedor_socio_nacionalidad');
     }
 
@@ -78,11 +78,11 @@ class NacionalidadController extends Controller
     public function update(EditarNacionalidadRequest $request, $id)
     {
         $modificar = Nacionalidad::findOrFail($id);
-        $nacionalidad = $modificar->nombre;
+        $nacionalidad = Nacionalidad::findOrFail($id);
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Nacionalidad editada con éxito.']);
-        LogSistema::registrarAccion('Nacionalidad editada, de: '.$nacionalidad.' a '.$request->nombre);
+        LogSistema::registrarAccion('Nacionalidad editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($nacionalidad->toArray()));
         return redirect()->route('mantenedor_socio_nacionalidad');
     }
 
@@ -97,7 +97,7 @@ class NacionalidadController extends Controller
         $eliminada = Nacionalidad::findOrFail($id)->nombre;       
         Nacionalidad::destroy($id);
         session(['mensaje' => 'Nacionalidad eliminada con éxito.']);
-        LogSistema::registrarAccion('Nacionalidad eliminada: '.$eliminada); 
+        LogSistema::registrarAccion('Nacionalidad eliminada: '.convertirArrayAString($eliminada->toArray())); 
         return redirect()->route('mantenedor_socio_nacionalidad');
     }
 }

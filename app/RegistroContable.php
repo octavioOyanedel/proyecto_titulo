@@ -303,4 +303,11 @@ class RegistroContable extends Model
         return TipoRegistroContable::where('nombre','=',$nombre)->first();
     }
 
+    /**
+     * Obtener ultimo registro creado
+     */
+    static public function obtenerUltimoRegistroIngresado()
+    {
+        return RegistroContable::orderBy('created_at', 'DESC')->first();
+    }
 }

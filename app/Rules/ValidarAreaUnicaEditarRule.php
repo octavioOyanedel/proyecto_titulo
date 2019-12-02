@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Area;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarAreaUnicaEditarRule implements Rule

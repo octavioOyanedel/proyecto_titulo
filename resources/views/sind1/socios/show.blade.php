@@ -61,8 +61,8 @@
                                     <tbody>
                                         @foreach($estudios as $s)
                                             <tr>
-                                                <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="{{ route('estudios_socio.edit', $s->id) }}"><span>@svg('editar')</span></a></td>
-                                                <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" data-toggle="modal" data-target="#eliminar_estudio" href=""><span>@svg('eliminar')</span></a></td>
+                                                <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="{{ route('estudios.edit', $s->id) }}"><span>@svg('editar')</span></a></td>
+                                                <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" href="{{ route('estudios.show', $s->id) }}"><span>@svg('eliminar')</span></a></td>
                                                 <td>{{ $s->estudio_realizado->grado_academico_id }}</td>
                                                 <td>{{ $s->estudio_realizado->institucion_id }}</td>
                                                 <td>{{ $s->estudio_realizado->estado_grado_academico_id }}</td>
@@ -111,7 +111,7 @@
 
                     @if($prestamos->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>Socio sin préstamos registrados.</b>
+                            <b>Socio sin préstamos registrados. <a href="{{ route('prestamos.create') }}">Agregar préstamo</a></b>
                         </div>
                     @else  
                         <div class="table-responsive">                    

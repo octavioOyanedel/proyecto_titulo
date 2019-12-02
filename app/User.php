@@ -170,4 +170,12 @@ class User extends Authenticatable
     {
         $this->attributes['apellido2'] = formatoNombres($value);
     }
+
+    /**
+     * Obtener ultimo registro creado
+     */
+    static public function obtenerUltimoUsuarioIngresado()
+    {
+        return User::orderBy('created_at', 'DESC')->first();
+    }
 }

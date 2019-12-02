@@ -39,9 +39,9 @@ class FormaPagoController extends Controller
      */
     public function store(IncorporarFormaPagoRequest $request)
     {
-        $forma= FormaPago::create($request->all());
+        $forma = FormaPago::create($request->all());
         session(['mensaje' => 'Forma de pago agregada con éxito.']);
-        LogSistema::registrarAccion('Forma de pago agragada: '.$forma->nombre);
+        LogSistema::registrarAccion('Forma pago agragada: '.convertirArrayAString($forma->toArray()));
         return redirect()->route('mantenedor_prestamo_forma_pago');
     }
 
@@ -80,11 +80,11 @@ class FormaPagoController extends Controller
     public function update(EditarFormaPagoRequest $request, $id)
     {
         $modificar = FormaPago::findOrFail($id);
-        $forma = $modificar->nombre;
+        $forma = FormaPago::findOrFail($id);
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Forma de pago editada con éxito.']);
-        LogSistema::registrarAccion('Forma de pago editada, de: '.$forma.' a '.$request->nombre);
+        LogSistema::registrarAccion('Forma pago editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($forma->toArray()));
         return redirect()->route('mantenedor_prestamo_forma_pago');
     }
 
@@ -99,7 +99,7 @@ class FormaPagoController extends Controller
         $eliminada = FormaPago::findOrFail($id)->nombre;
         FormaPago::destroy($id);
         session(['mensaje' => 'Forma de pago eliminada con éxito.']);   
-        LogSistema::registrarAccion('Forma de pago eliminada: '.$eliminada);      
+        LogSistema::registrarAccion('Forma pago eliminada: '.convertirArrayAString($eliminada->toArray()));    
         return redirect()->route('mantenedor_prestamo_forma_pago'); 
     }
 }

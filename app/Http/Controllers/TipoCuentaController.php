@@ -40,7 +40,7 @@ class TipoCuentaController extends Controller
     {
         $tipo = TipoCuenta::create($request->all());
         session(['mensaje' => 'Tipo de cuenta bancaria agregada con éxito.']);
-        LogSistema::registrarAccion('Tipo de cuenta bancaria agragada: '.$tipo->nombre);
+        LogSistema::registrarAccion('Tipo de cuenta agragada: '.convertirArrayAString($tipo->toArray()));
         return redirect()->route('mantenedor_contable_tipo_cuenta');
     }
 
@@ -78,11 +78,11 @@ class TipoCuentaController extends Controller
     public function update(EditarTipoCuentaRequest $request, $id)
     {
         $modificar = TipoCuenta::findOrFail($id);
-        $tipo = $modificar->nombre;
+        $tipo = TipoCuenta::findOrFail($id);
         $modificar->nombre = $request->nombre;
         $modificar->update();             
         session(['mensaje' => 'Tipo de cuenta editada con éxito.']);
-        LogSistema::registrarAccion('Tipo de cuenta editada, de: '.$tipo.' a '.$request->nombre);
+        LogSistema::registrarAccion('Tipo de cuenta editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($tipo->toArray()));
         return redirect()->route('mantenedor_contable_tipo_cuenta');
     }
 
@@ -97,7 +97,7 @@ class TipoCuentaController extends Controller
         $eliminada = TipoCuenta::findOrFail($id)->nombre;
         TipoCuenta::destroy($id);
         session(['mensaje' => 'Tipo de cuenta eliminada con éxito.']);    
-        LogSistema::registrarAccion('Tipo de cuenta eliminada: '.$eliminada);     
+        LogSistema::registrarAccion('Tipo de cuenta eliminada: '.convertirArrayAString($eliminada->toArray())); 
         return redirect()->route('mantenedor_contable_tipo_cuenta'); 
     }
 }

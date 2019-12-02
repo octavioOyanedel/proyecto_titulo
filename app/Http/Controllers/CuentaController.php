@@ -44,7 +44,7 @@ class CuentaController extends Controller
     {
         $cuenta = Cuenta::create($request->all());
         session(['mensaje' => 'Cuenta agregada con éxito.']);
-        LogSistema::registrarAccion('Cuenta bancaria agragada: '.$cuenta->tipo_cuenta_id.' N° '.$cuenta->numero.' - '.$cuenta->banco_id);
+        LogSistema::registrarAccion('Cuenta agragada: '.convertirArrayAString($cuenta->toArray()));
         return redirect()->route('mantenedor_contable_cuenta');
     }
 
@@ -91,7 +91,7 @@ class CuentaController extends Controller
         $banco = Banco::findOrFail($request->banco_id)->nombre;        
         $modificar->update();             
         session(['mensaje' => 'Cuenta editada con éxito.']);
-        LogSistema::registrarAccion('Cuenta editada, de: '.$cuenta->tipo_cuenta_id.' N° '.$cuenta->numero.' - '.$cuenta->banco_id.' a '.$tipo.' N° '.$request->numero.' - '.$banco);
+        LogSistema::registrarAccion('Cuenta editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($cuenta->toArray()));
         return redirect()->route('mantenedor_contable_cuenta');
     }
 
@@ -108,7 +108,7 @@ class CuentaController extends Controller
         $eliminada_banco = $cuenta->banco_id;              
         Cuenta::destroy($cuenta->id);
         session(['mensaje' => 'Cuenta bancaria eliminada con éxito.']); 
-        LogSistema::registrarAccion('Cuenta bancaria eliminada: '.$eliminada_tipo.' N° '.$eliminada_numero.' - '.$eliminada_banco);      
+        LogSistema::registrarAccion('Cuenta eliminada: '.convertirArrayAString($eliminada->toArray()));     
         return redirect()->route('mantenedor_contable_cuenta'); 
     }
 

@@ -107,7 +107,7 @@ $(window).on('load',function(){
 	}
 
 	function comprobarRuta(){
-		return ruta.search('anular_registro_form');
+		return ruta.search('contables/create');
 	}
 
 	function formatearEntrada(texto){

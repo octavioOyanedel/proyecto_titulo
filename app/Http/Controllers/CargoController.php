@@ -40,7 +40,7 @@ class CargoController extends Controller
     {
         $cargo = Cargo::create($request->all());
         session(['mensaje' => 'Cargo agregado con éxito.']);
-        LogSistema::registrarAccion('Cargo agragado: '.$cargo->nombre);
+        LogSistema::registrarAccion('Cargo agragada: '.convertirArrayAString($cargo->toArray()));
         return redirect()->route('mantenedor_socio_cargo');
     }
 
@@ -79,7 +79,7 @@ class CargoController extends Controller
         $modificar->nombre = $request->nombre;
         $modificar->update();
         session(['mensaje' => 'Cargo editado con éxito.']);
-        LogSistema::registrarAccion('Cargo editado, de: '.$cargo->nombre.' a '.$request->nombre);
+        LogSistema::registrarAccion('Cargo editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($cargo->toArray()));
         return redirect()->route('mantenedor_socio_cargo');
     }
 
@@ -94,7 +94,7 @@ class CargoController extends Controller
         $eliminada = $cargo->nombre;        
         Cargo::destroy($cargo->id);
         session(['mensaje' => 'Cargo eliminado con éxito.']);
-        LogSistema::registrarAccion('Cargo eliminado: '.$eliminada); 
+        LogSistema::registrarAccion('Área eliminada: '.convertirArrayAString($eliminada->toArray())); 
         return redirect()->route('mantenedor_socio_cargo');
     }
 }
