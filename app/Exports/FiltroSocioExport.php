@@ -54,22 +54,63 @@ class FiltroSocioExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')
-        ->orderBY('apellido1','ASC')
-        ->fechaNacimiento($this->fecha_nac_ini,$this->fecha_nac_fin)
-        ->fechaIngresoPucv($this->fecha_pucv_ini,$this->fecha_pucv_fin)
-        ->fechaIngresoSind1($this->fecha_sind1_ini,$this->fecha_sind1_fin)
-        ->genero($this->genero)
-        ->rutFiltro($this->rut)
-        ->comunaId($this->comuna_id)
-        ->ciudadId($this->ciudad_id)
-        ->direccion($this->direccion)
-        ->sedeId($this->sede_id)
-        ->areaId($this->area_id)
-        ->cargoId($this->cargo_id)
-        ->estadoSocioId($this->estado_socio_id)
-        ->nacionalidadId($this->nacionalidad_id)
-        ->get();
+
+        switch($this->desvinculados){
+            case 'activos':
+                return Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')
+                ->orderBY('apellido1','ASC')
+                ->fechaNacimiento($this->fecha_nac_ini,$this->fecha_nac_fin)
+                ->fechaIngresoPucv($this->fecha_pucv_ini,$this->fecha_pucv_fin)
+                ->fechaIngresoSind1($this->fecha_sind1_ini,$this->fecha_sind1_fin)
+                ->genero($this->genero)
+                ->rutFiltro($this->rut)
+                ->comunaId($this->comuna_id)
+                ->ciudadId($this->ciudad_id)
+                ->direccion($this->direccion)
+                ->sedeId($this->sede_id)
+                ->areaId($this->area_id)
+                ->cargoId($this->cargo_id)
+                ->estadoSocioId($this->estado_socio_id)
+                ->nacionalidadId($this->nacionalidad_id)
+                ->get();
+            break;
+            case 'incluir':
+                return Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')->withTrashed()
+                ->orderBY('apellido1','ASC')
+                ->fechaNacimiento($this->fecha_nac_ini,$this->fecha_nac_fin)
+                ->fechaIngresoPucv($this->fecha_pucv_ini,$this->fecha_pucv_fin)
+                ->fechaIngresoSind1($this->fecha_sind1_ini,$this->fecha_sind1_fin)
+                ->genero($this->genero)
+                ->rutFiltro($this->rut)
+                ->comunaId($this->comuna_id)
+                ->ciudadId($this->ciudad_id)
+                ->direccion($this->direccion)
+                ->sedeId($this->sede_id)
+                ->areaId($this->area_id)
+                ->cargoId($this->cargo_id)
+                ->estadoSocioId($this->estado_socio_id)
+                ->nacionalidadId($this->nacionalidad_id)
+                ->get();
+            break;
+            case 'solo':
+                return Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')->onlyTrashed()
+                ->orderBY('apellido1','ASC')
+                ->fechaNacimiento($this->fecha_nac_ini,$this->fecha_nac_fin)
+                ->fechaIngresoPucv($this->fecha_pucv_ini,$this->fecha_pucv_fin)
+                ->fechaIngresoSind1($this->fecha_sind1_ini,$this->fecha_sind1_fin)
+                ->genero($this->genero)
+                ->rutFiltro($this->rut)
+                ->comunaId($this->comuna_id)
+                ->ciudadId($this->ciudad_id)
+                ->direccion($this->direccion)
+                ->sedeId($this->sede_id)
+                ->areaId($this->area_id)
+                ->cargoId($this->cargo_id)
+                ->estadoSocioId($this->estado_socio_id)
+                ->nacionalidadId($this->nacionalidad_id)
+                ->get();
+            break;
+        }
     }
 
     public function headings(): array

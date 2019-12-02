@@ -144,12 +144,13 @@ class SocioController extends Controller
      */
     public function destroy(Request $request)
     {
+        //dd($request);
         $socio = Socio::findOrFail($request->user_id);
         $socio->estado_socio_id = $request->estado_socio_id;
         $socio->update();
         $socio->delete();
         session(['mensaje' => 'Socio desvinculado con éxito.']);
-        LogSistema::registrarAccion('Socio eliminado: '.convertirArrayAString($eliminada->toArray()));
+        LogSistema::registrarAccion('Socio eliminado: '.convertirArrayAString($socio->toArray()));
         return redirect()->route('home');
     }
 
