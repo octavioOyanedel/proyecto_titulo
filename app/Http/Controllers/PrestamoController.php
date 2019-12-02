@@ -18,6 +18,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarPrestamoRequest;
 use App\Http\Requests\SimularPrestamoRequest;
 use App\Http\Requests\FiltrarPrestamoRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SocioExport;
+use App\Exports\FiltroSocioExport;
 
 class PrestamoController extends Controller
 {
@@ -45,7 +48,7 @@ class PrestamoController extends Controller
             $orden = request('orden');
         }else{
             $orden = 'DESC';
-        } 
+        }
 
         $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
 
@@ -64,7 +67,7 @@ class PrestamoController extends Controller
                 ->monto($request->monto_ini, $request->monto_fin)
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoId($request->forma_pago_id)
-                ->rut($request->rut)   
+                ->rut($request->rut)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -78,9 +81,9 @@ class PrestamoController extends Controller
                     'monto_fin' => $request->monto_fin,
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
-                    'rut' => $request->rut,                               
-                ]); 
-            break;     
+                    'rut' => $request->rut,
+                ]);
+            break;
             case 'rut':
                 $prestamos = Prestamo::orderBy('socios.rut', $orden)
                 ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
@@ -89,7 +92,7 @@ class PrestamoController extends Controller
                 ->monto($request->monto_ini, $request->monto_fin)
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoId($request->forma_pago_id)
-                ->rut($request->rut)              
+                ->rut($request->rut)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -103,8 +106,8 @@ class PrestamoController extends Controller
                     'monto_fin' => $request->monto_fin,
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
-                    'rut' => $request->rut,                               
-                ]); 
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'tipo_cuenta_id':
                 $prestamos = Prestamo::orderBy('tipos_cuenta.nombre', $orden)
@@ -115,7 +118,7 @@ class PrestamoController extends Controller
                 ->monto($request->monto_ini, $request->monto_fin)
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoId($request->forma_pago_id)
-                ->rut($request->rut)               
+                ->rut($request->rut)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -129,8 +132,8 @@ class PrestamoController extends Controller
                     'monto_fin' => $request->monto_fin,
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
-                    'rut' => $request->rut,                               
-                ]); 
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'numero':
                 $prestamos = Prestamo::orderBy('cuentas.numero', $orden)
@@ -140,7 +143,7 @@ class PrestamoController extends Controller
                 ->monto($request->monto_ini, $request->monto_fin)
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoId($request->forma_pago_id)
-                ->rut($request->rut)               
+                ->rut($request->rut)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -154,8 +157,8 @@ class PrestamoController extends Controller
                     'monto_fin' => $request->monto_fin,
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
-                    'rut' => $request->rut,                               
-                ]); 
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'banco_id':
                 $prestamos = Prestamo::orderBy('bancos.nombre', $orden)
@@ -166,7 +169,7 @@ class PrestamoController extends Controller
                 ->monto($request->monto_ini, $request->monto_fin)
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoId($request->forma_pago_id)
-                ->rut($request->rut)             
+                ->rut($request->rut)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -180,8 +183,8 @@ class PrestamoController extends Controller
                     'monto_fin' => $request->monto_fin,
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
-                    'rut' => $request->rut,                               
-                ]); 
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'forma_pago_id':
                 $prestamos = Prestamo::orderBy('formas_pago.nombre', $orden)
@@ -191,7 +194,7 @@ class PrestamoController extends Controller
                 ->monto($request->monto_ini, $request->monto_fin)
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoId($request->forma_pago_id)
-                ->rut($request->rut)             
+                ->rut($request->rut)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -205,8 +208,8 @@ class PrestamoController extends Controller
                     'monto_fin' => $request->monto_fin,
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
-                    'rut' => $request->rut,                               
-                ]); 
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'estado_deuda_id':
                 $prestamos = Prestamo::orderBy('estados_deuda.nombre', $orden)
@@ -216,7 +219,7 @@ class PrestamoController extends Controller
                 ->monto($request->monto_ini, $request->monto_fin)
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoId($request->forma_pago_id)
-                ->rut($request->rut)              
+                ->rut($request->rut)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -230,19 +233,19 @@ class PrestamoController extends Controller
                     'monto_fin' => $request->monto_fin,
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
-                    'rut' => $request->rut,                               
-                ]); 
-            break;                                                               
+                    'rut' => $request->rut,
+                ]);
+            break;
             default:
                 $prestamos = Prestamo::orderBy($columna, $orden)
                 ->estadoDeudaId($campo)
                 ->fechaUnica($campo)
-                ->numeroCuenta($campo)                        
+                ->numeroCuenta($campo)
                 ->numeroEgreso($campo)
-                ->formaPagoId($campo)                
+                ->formaPagoId($campo)
                 ->cheque($campo)
-                ->rut($campo) 
-                ->montoUnico($campo)                                    
+                ->rut($campo)
+                ->montoUnico($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -256,8 +259,8 @@ class PrestamoController extends Controller
                     'monto_fin' => $request->monto_fin,
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
-                    'rut' => $request->rut,                               
-                ]); 
+                    'rut' => $request->rut,
+                ]);
             break;
         }
 
@@ -598,7 +601,7 @@ class PrestamoController extends Controller
             $orden = request('orden');
         }else{
             $orden = 'DESC';
-        } 
+        }
 
         $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
 
@@ -612,8 +615,8 @@ class PrestamoController extends Controller
                 ->numeroCuotas($request->numero_cuotas)
                 ->scopeFormaPagoFiltro($request->forma_pago_id)
                 ->rutFiltro($request->rut)
-                ->cuentaId($request->cuenta_id)   
-                ->estadoDeudaIdFiltro($request->estado_deuda_id)                    
+                ->cuentaId($request->cuenta_id)
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -627,10 +630,10 @@ class PrestamoController extends Controller
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
                     'cuenta_id' => $request->cuenta_id,
-                    'estado_deuda_id' => $request->estado_deuda_id,                    
-                    'rut' => $request->rut,                               
-                ]); 
-            break;     
+                    'estado_deuda_id' => $request->estado_deuda_id,
+                    'rut' => $request->rut,
+                ]);
+            break;
             case 'rut':
                 $prestamos = Prestamo::orderBy('socios.rut', $orden)
                 ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
@@ -640,8 +643,8 @@ class PrestamoController extends Controller
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoFiltro($request->forma_pago_id)
                 ->rutFiltro($request->rut)
-                ->cuentaId($request->cuenta_id)   
-                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                
+                ->cuentaId($request->cuenta_id)
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -655,9 +658,9 @@ class PrestamoController extends Controller
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
                     'cuenta_id' => $request->cuenta_id,
-                    'estado_deuda_id' => $request->estado_deuda_id,                     
-                    'rut' => $request->rut,                               
-                ]); 
+                    'estado_deuda_id' => $request->estado_deuda_id,
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'tipo_cuenta_id':
                 $prestamos = Prestamo::orderBy('tipos_cuenta.nombre', $orden)
@@ -669,8 +672,8 @@ class PrestamoController extends Controller
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoFiltro($request->forma_pago_id)
                 ->rutFiltro($request->rut)
-                ->cuentaId($request->cuenta_id)   
-                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                 
+                ->cuentaId($request->cuenta_id)
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -684,9 +687,9 @@ class PrestamoController extends Controller
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
                     'cuenta_id' => $request->cuenta_id,
-                    'estado_deuda_id' => $request->estado_deuda_id,                     
-                    'rut' => $request->rut,                               
-                ]); 
+                    'estado_deuda_id' => $request->estado_deuda_id,
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'numero':
                 $prestamos = Prestamo::orderBy('cuentas.numero', $orden)
@@ -697,8 +700,8 @@ class PrestamoController extends Controller
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoFiltro($request->forma_pago_id)
                 ->rutFiltro($request->rut)
-                ->cuentaId($request->cuenta_id)   
-                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                 
+                ->cuentaId($request->cuenta_id)
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -712,9 +715,9 @@ class PrestamoController extends Controller
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
                     'cuenta_id' => $request->cuenta_id,
-                    'estado_deuda_id' => $request->estado_deuda_id,                     
-                    'rut' => $request->rut,                               
-                ]); 
+                    'estado_deuda_id' => $request->estado_deuda_id,
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'banco_id':
                 $prestamos = Prestamo::orderBy('bancos.nombre', $orden)
@@ -726,8 +729,8 @@ class PrestamoController extends Controller
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoFiltro($request->forma_pago_id)
                 ->rutFiltro($request->rut)
-                ->cuentaId($request->cuenta_id)   
-                ->estadoDeudaIdFiltro($request->estado_deuda_id)                               
+                ->cuentaId($request->cuenta_id)
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -741,9 +744,9 @@ class PrestamoController extends Controller
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
                     'cuenta_id' => $request->cuenta_id,
-                    'estado_deuda_id' => $request->estado_deuda_id,                     
-                    'rut' => $request->rut,                               
-                ]); 
+                    'estado_deuda_id' => $request->estado_deuda_id,
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'forma_pago_id':
                 $prestamos = Prestamo::orderBy('formas_pago.nombre', $orden)
@@ -754,8 +757,8 @@ class PrestamoController extends Controller
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoFiltro($request->forma_pago_id)
                 ->rutFiltro($request->rut)
-                ->cuentaId($request->cuenta_id)   
-                ->estadoDeudaIdFiltro($request->estado_deuda_id)                               
+                ->cuentaId($request->cuenta_id)
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -769,9 +772,9 @@ class PrestamoController extends Controller
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
                     'cuenta_id' => $request->cuenta_id,
-                    'estado_deuda_id' => $request->estado_deuda_id,                     
-                    'rut' => $request->rut,                               
-                ]); 
+                    'estado_deuda_id' => $request->estado_deuda_id,
+                    'rut' => $request->rut,
+                ]);
             break;
             case 'estado_deuda_id':
                 $prestamos = Prestamo::orderBy('estados_deuda.nombre', $orden)
@@ -782,8 +785,8 @@ class PrestamoController extends Controller
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoFiltro($request->forma_pago_id)
                 ->rutFiltro($request->rut)
-                ->cuentaId($request->cuenta_id)   
-                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                 
+                ->cuentaId($request->cuenta_id)
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -797,10 +800,10 @@ class PrestamoController extends Controller
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
                     'cuenta_id' => $request->cuenta_id,
-                    'estado_deuda_id' => $request->estado_deuda_id,                     
-                    'rut' => $request->rut,                               
-                ]); 
-            break;                                                               
+                    'estado_deuda_id' => $request->estado_deuda_id,
+                    'rut' => $request->rut,
+                ]);
+            break;
             default:
                 $prestamos = Prestamo::orderBy($columna, $orden)
                 ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
@@ -808,9 +811,9 @@ class PrestamoController extends Controller
                 ->monto($request->monto_ini, $request->monto_fin)
                 ->numeroCuotas($request->numero_cuotas)
                 ->formaPagoFiltro($request->forma_pago_id)
-                ->rutFiltro($request->rut) 
-                ->cuentaId($request->cuenta_id)   
-                ->estadoDeudaIdFiltro($request->estado_deuda_id)                                                
+                ->rutFiltro($request->rut)
+                ->cuentaId($request->cuenta_id)
+                ->estadoDeudaIdFiltro($request->estado_deuda_id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -824,9 +827,9 @@ class PrestamoController extends Controller
                     'numero_cuotas' => $request->numero_cuotas,
                     'forma_pago_id' => $request->forma_pago_id,
                     'cuenta_id' => $request->cuenta_id,
-                    'estado_deuda_id' => $request->estado_deuda_id,                     
-                    'rut' => $request->rut,                               
-                ]); 
+                    'estado_deuda_id' => $request->estado_deuda_id,
+                    'rut' => $request->rut,
+                ]);
             break;
         }
 

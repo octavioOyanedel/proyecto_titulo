@@ -16,7 +16,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarSocioRequest;
 use App\Http\Requests\EditarSocioRequest;
 use App\Http\Requests\FiltrarSocioRequest;
-use Rap2hpoutre\FastExcel\FastExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SocioExport;
 use App\Exports\FiltroSocioExport;
@@ -816,9 +815,6 @@ class SocioController extends Controller
     public function exportarExcel()
     {
         return Excel::download(new SocioExport, 'listado_socios_activos.xlsx');
-        //return (new FastExcel(
-        //    Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')->get()
-        //))->download('listado_socios_activos.xlsx');
     }
 
     /**
@@ -827,8 +823,5 @@ class SocioController extends Controller
     public function exportarExcelFiltro($desvinculados, $fecha_nac_ini, $fecha_nac_fin, $fecha_pucv_ini, $fecha_pucv_fin, $fecha_sind1_ini, $fecha_sind1_fin, $genero, $rut, $comuna_id, $ciudad_id, $direccion, $sede_id, $area_id, $cargo_id, $estado_socio_id, $nacionalidad_id)
     {
         return Excel::download(new FiltroSocioExport($desvinculados, $fecha_nac_ini, $fecha_nac_fin, $fecha_pucv_ini, $fecha_pucv_fin, $fecha_sind1_ini, $fecha_sind1_fin, $genero, $rut, $comuna_id, $ciudad_id, $direccion, $sede_id, $area_id, $cargo_id, $estado_socio_id, $nacionalidad_id), 'listado_socios_activos.xlsx');
-        //return (new FastExcel(
-        //    Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')->get()
-        //))->download('listado_socios_activos.xlsx');
     }
 }
