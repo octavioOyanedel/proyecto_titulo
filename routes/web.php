@@ -189,5 +189,6 @@ Route::post('/eliminar_banco','BancoController@destroy')->name('eliminar_banco')
 
 Route::get('/cerrar_alerta','MantenedorController@cerrarAlerta')->name('cerrar_alerta')->middleware('auth');
 
+//exportar excel
 Route::get('socios_excel','SocioController@exportarExcel')->name('listado_socios')->middleware('auth');
-Route::get('filtro_socios_excel/{genero}/{cargo_id}','SocioController@exportarExcelFiltro')->name('listado_socios_filtro')->middleware('auth');
+Route::get('filtro_socios_excel/{desvinculados}/{fecha_nac_ini}/{fecha_nac_fin}/{fecha_pucv_ini}/{fecha_pucv_fin}/{fecha_sind1_ini}/{fecha_sind1_fin}/{genero}/{rut}/{comuna_id}/{ciudad_id}/{direccion}/{sede_id}/{area_id}/{cargo_id}/{estado_socio_id}/{nacionalidad_id}','SocioController@exportarExcelFiltro')->name('listado_socios_filtro')->middleware('auth');

@@ -10,7 +10,7 @@ use App\EstadoSocio;
 use App\Nacionalidad;
 use App\Prestamo;
 use App\CargaFamiliar;
-use App\Interes;    
+use App\Interes;
 use App\LogSistema;
 use Illuminate\Http\Request;
 use App\Http\Requests\IncorporarSocioRequest;
@@ -132,7 +132,7 @@ class SocioController extends Controller
         $modificar->nacionalidad_id = $request->nacionalidad_id;
         $modificar->update();
         session(['mensaje' => 'Socio editado con éxito.']);
-        LogSistema::registrarAccion('Socio editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($socio->toArray()));     
+        LogSistema::registrarAccion('Socio editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($socio->toArray()));
         return redirect()->route('home');
     }
 
@@ -149,7 +149,7 @@ class SocioController extends Controller
         $socio->update();
         $socio->delete();
         session(['mensaje' => 'Socio desvinculado con éxito.']);
-        LogSistema::registrarAccion('Socio eliminado: '.convertirArrayAString($eliminada->toArray())); 
+        LogSistema::registrarAccion('Socio eliminado: '.convertirArrayAString($eliminada->toArray()));
         return redirect()->route('home');
     }
 
@@ -295,9 +295,9 @@ class SocioController extends Controller
         $socios = null;
 
         if(request()->has('desvinculados')){
-            switch (request('desvinculados')) {        
+            switch (request('desvinculados')) {
                 case 'activos':
-                    switch ($columna) {        
+                    switch ($columna) {
                         case 'sede_id':
                             $socios = Socio::orderBy('sedes.nombre',$orden)
                             ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
@@ -317,7 +317,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -334,7 +334,7 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
                         break;
@@ -357,7 +357,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -374,10 +374,10 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
-                        break;     
+                        break;
                         case 'cargo_id':
                             $socios = Socio::orderBy('cargos.nombre',$orden)
                             ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
@@ -397,7 +397,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -414,10 +414,10 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
-                        break;                                   
+                        break;
                         default:
                             $socios = Socio::orderBy($columna, $orden)
                             ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
@@ -436,7 +436,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -453,14 +453,14 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
                         break;
-                    }    
+                    }
                 break;
-                case 'incluir': 
-                    switch ($columna) {        
+                case 'incluir':
+                    switch ($columna) {
                         case 'sede_id':
                             $socios = Socio::withTrashed()->orderBy('sedes.nombre',$orden)
                             ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
@@ -480,7 +480,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -497,7 +497,7 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
                         break;
@@ -520,7 +520,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -537,10 +537,10 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
-                        break;     
+                        break;
                         case 'cargo_id':
                             $socios = Socio::withTrashed()->orderBy('cargos.nombre',$orden)
                             ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
@@ -560,7 +560,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -577,10 +577,10 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
-                        break;                                   
+                        break;
                         default:
                             $socios = Socio::withTrashed()->orderBy($columna, $orden)
                             ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
@@ -599,7 +599,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -616,14 +616,14 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
                         break;
-                    }  
+                    }
                 break;
                 case 'solo':
-                    switch ($columna) {        
+                    switch ($columna) {
                         case 'sede_id':
                             $socios = Socio::onlyTrashed()->orderBy('sedes.nombre',$orden)
                             ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
@@ -643,7 +643,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -660,7 +660,7 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
                         break;
@@ -683,7 +683,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -700,10 +700,10 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
-                        break;     
+                        break;
                         case 'cargo_id':
                             $socios = Socio::onlyTrashed()->orderBy('cargos.nombre',$orden)
                             ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
@@ -723,7 +723,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -740,10 +740,10 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
-                        break;                                   
+                        break;
                         default:
                             $socios = Socio::onlyTrashed()->orderBy($columna, $orden)
                             ->fechaNacimiento($request->fecha_nac_ini,$request->fecha_nac_fin)
@@ -762,7 +762,7 @@ class SocioController extends Controller
                             ->paginate($registros)->appends([
                                 'registros' => $registros,
                                 'columna' => $columna,
-                                'orden' => $orden,                    
+                                'orden' => $orden,
                                 'fecha_nac_ini' => $request->fecha_nac_ini,
                                 'fecha_nac_fin' => $request->fecha_nac_fin,
                                 'fecha_pucv_ini' => $request->fecha_pucv_ini,
@@ -779,35 +779,34 @@ class SocioController extends Controller
                                 'cargo_id' => $request->cargo_id,
                                 'estado_socio_id' => $request->estado_socio_id,
                                 'nacionalidad_id' => $request->nacionalidad_id,
-                                'desvinculados' => $request->desvinculados,            
+                                'desvinculados' => $request->desvinculados,
                             ]);
                              $total_consulta = $socios->total();
                         break;
-                    }                  
+                    }
                 break;
-            }                        
+            }
         }
 
-        $fecha_nac_ini = $request->fecha_nac_ini;
-        $fecha_nac_fin = $request->fecha_nac_fin;
-        $fecha_pucv_ini = $request->fecha_pucv_ini;
-        $fecha_pucv_fin = $request->fecha_pucv_fin;
-        $fecha_sind1_ini = $request->fecha_sind1_ini;
-        $fecha_sind1_fin = $request->fecha_sind1_fin;
-        $genero = $request->genero;
-        $rut = $request->rut;
-        $comuna_id = $request->comuna_id;
-        $ciudad_id = $request->ciudad_id;
-        $direccion = $request->direccion;
-        $sede_id = $request->sede_id;
-        $area_id = $request->area_id;
+        ($request->fecha_nac_ini) ?  $fecha_nac_ini = $request->fecha_nac_ini : $fecha_nac_ini = 'null';
+        ($request->fecha_nac_fin) ?  $fecha_nac_fin = $request->fecha_nac_fin : $fecha_nac_fin = 'null';
+        ($request->fecha_pucv_ini) ?  $fecha_pucv_ini = $request->fecha_pucv_ini : $fecha_pucv_ini = 'null';
+        ($request->fecha_pucv_fin) ?  $fecha_pucv_fin = $request->fecha_pucv_fin : $fecha_pucv_fin = 'null';
+        ($request->fecha_sind1_ini) ?  $fecha_sind1_ini = $request->fecha_sind1_ini : $fecha_sind1_ini = 'null';
+        ($request->fecha_sind1_fin) ?  $fecha_sind1_fin = $request->fecha_sind1_fin : $fecha_sind1_fin = 'null';
+        ($request->genero) ?  $genero = $request->genero : $genero = 'null';
+        ($request->rut) ?  $rut = $request->rut : $rut = 'null';
+        ($request->comuna_id) ?  $comuna_id = $request->comuna_id : $comuna_id = 'null';
+        ($request->ciudad_id) ?  $ciudad_id = $request->ciudad_id : $ciudad_id = 'null';
+        ($request->direccion) ?  $direccion = $request->direccion : $direccion = 'null';
+        ($request->sede_id) ?  $sede_id = $request->sede_id : $sede_id = 'null';
+        ($request->area_id) ?  $area_id = $request->area_id : $area_id = 'null';
         ($request->cargo_id) ?  $cargo_id = $request->cargo_id : $cargo_id = 'null';
-        $estado_socio_id = $request->estado_socio_id;
-        $nacionalidad_id = $request->nacionalidad_id;
-        $desvinculados = $request->desvinculados;  
-        
-        $desvinculados = $request->desvinculados;
-        return view('sind1.socios.resultados', compact('socios','estados','total_consulta','desvinculados','genero','cargo_id'));
+        ($request->estado_socio_id) ?  $estado_socio_id = $request->estado_socio_id : $estado_socio_id = 'null';
+        ($request->nacionalidad_id) ?  $nacionalidad_id = $request->nacionalidad_id : $nacionalidad_id = 'null';
+        ($request->desvinculados) ?  $desvinculados = $request->desvinculados : $desvinculados = 'null';
+
+        return view('sind1.socios.resultados', compact('socios','estados','total_consulta','desvinculados','fecha_nac_ini','fecha_nac_fin','fecha_pucv_ini','fecha_pucv_fin','fecha_sind1_ini','fecha_sind1_fin','genero','rut','comuna_id','ciudad_id','direccion','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id'));
     }
 
     /**
@@ -824,9 +823,9 @@ class SocioController extends Controller
     /**
      * Exportar a excel.
      */
-    public function exportarExcelFiltro($genero, $cargo_id)
+    public function exportarExcelFiltro($desvinculados, $fecha_nac_ini, $fecha_nac_fin, $fecha_pucv_ini, $fecha_pucv_fin, $fecha_sind1_ini, $fecha_sind1_fin, $genero, $rut, $comuna_id, $ciudad_id, $direccion, $sede_id, $area_id, $cargo_id, $estado_socio_id, $nacionalidad_id)
     {
-        return Excel::download(new FiltroSocioExport($genero, $cargo_id), 'listado_socios_activos.xlsx');
+        return Excel::download(new FiltroSocioExport($desvinculados, $fecha_nac_ini, $fecha_nac_fin, $fecha_pucv_ini, $fecha_pucv_fin, $fecha_sind1_ini, $fecha_sind1_fin, $genero, $rut, $comuna_id, $ciudad_id, $direccion, $sede_id, $area_id, $cargo_id, $estado_socio_id, $nacionalidad_id), 'listado_socios_activos.xlsx');
         //return (new FastExcel(
         //    Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')->get()
         //))->download('listado_socios_activos.xlsx');

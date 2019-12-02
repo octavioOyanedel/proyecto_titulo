@@ -48,10 +48,10 @@ class Socio extends Model
             return $query->whereBetween('fecha_nac', [date($fecha_ini),date($fecha_fin)]);
         }
         if($fecha_ini != null && $fecha_fin === null){
-             return $query->where('fecha_nac','>=',$fecha_ini);           
+             return $query->where('fecha_nac','>=',$fecha_ini);
         }
         if($fecha_ini === null && $fecha_fin != null){
-             return $query->where('fecha_nac','<=',$fecha_fin);           
+             return $query->where('fecha_nac','<=',$fecha_fin);
         }
     }
 
@@ -63,8 +63,13 @@ class Socio extends Model
         if($fecha_ini != null && $fecha_fin != null){
             return $query->whereBetween('fecha_pucv', [date($fecha_ini),date($fecha_fin)]);
         }
+        if($fecha_ini != null && $fecha_fin === null){
+             return $query->where('fecha_pucv','>=',$fecha_ini);
+        }
+        if($fecha_ini === null && $fecha_fin != null){
+             return $query->where('fecha_pucv','<=',$fecha_fin);
+        }
     }
-
     /**
      * scope busqueda fecha sind1
      */
@@ -72,6 +77,12 @@ class Socio extends Model
     {
         if($fecha_ini != null && $fecha_fin != null){
             return $query->whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)]);
+        }
+        if($fecha_ini != null && $fecha_fin === null){
+             return $query->where('fecha_sind1','>=',$fecha_ini);
+        }
+        if($fecha_ini === null && $fecha_fin != null){
+             return $query->where('fecha_sind1','<=',$fecha_fin);
         }
     }
 
@@ -161,8 +172,8 @@ class Socio extends Model
      */
     public function scopeGenero($query, $genero)
     {
-        if ($genero) {
-            return $query->where('genero', 'LIKE', "%$genero%");
+        if ($genero != null) {
+            return $query->where('genero', '=', $genero);
         }
     }
 
@@ -174,7 +185,7 @@ class Socio extends Model
         if ($rut) {
             return $query->where('rut', '=', $rut);
         }
-    }    
+    }
 //***************************************************************************************************************
     /**
      * scope busqueda por rut
@@ -192,12 +203,11 @@ class Socio extends Model
     public function scopeFechaUnica($query, $fecha)
     {
         $fecha_formarteada = date("Y-m-d", strtotime($fecha));
-        //dd($fecha.' - '.$fecha_formarteada);        
         if($fecha != null){
             return $query->orWhere('fecha_sind1','=',$fecha_formarteada);
         }
     }
-   
+
     /**
      * scope busqueda por nombre 1
      */
@@ -325,7 +335,7 @@ class Socio extends Model
             $comuna_id = $valor;
             $comuna = Comuna::findOrFail($comuna_id);
             $valor = $comuna->nombre;
-            return $valor;        
+            return $valor;
         }else{
             return '';
         }
@@ -346,7 +356,7 @@ class Socio extends Model
             return '';
         }
     }
-    
+
     /**
      * Modificador de sedes
      */
@@ -374,7 +384,7 @@ class Socio extends Model
             return $valor;
         }else{
             return '';
-        }        
+        }
 
     }
 
@@ -390,7 +400,7 @@ class Socio extends Model
             return $valor;
         }else{
             return '';
-        }        
+        }
     }
     /**
      * Modificador de estado socio
@@ -404,9 +414,9 @@ class Socio extends Model
             return $valor;
         }else{
             return '';
-        }        
+        }
     }
-    
+
     /**
      * Modificador de nacionalidad
      */
@@ -419,7 +429,7 @@ class Socio extends Model
             return $valor;
         }else{
             return '';
-        }        
+        }
     }
 
     /**
@@ -431,7 +441,7 @@ class Socio extends Model
             return formatoRut($valor);
         }else{
             return '';
-        }         
+        }
     }
 
     /**
@@ -443,7 +453,7 @@ class Socio extends Model
             return formatoFecha($valor);
         }else{
             return '';
-        }         
+        }
     }
 
     /**
@@ -455,7 +465,7 @@ class Socio extends Model
             return formatoFecha($valor);
         }else{
             return '';
-        }         
+        }
     }
 
     /**
@@ -467,11 +477,11 @@ class Socio extends Model
             return formatoFecha($valor);
         }else{
             return '';
-        }         
+        }
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function prestamos()
     {
@@ -479,7 +489,7 @@ class Socio extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function estudios_realizados_socios()
     {
@@ -487,71 +497,71 @@ class Socio extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function estudios_realizados()
     {
         return $this->hasManyThrough('App\EstudioRealizado', 'App\EstudioRealizadoSocio');
     }
-    
+
     /**
-     * Relación 
+     * Relación
      */
     public function comuna()
     {
         return $this->hasOne('App\Comuna');
-    }  
-    
+    }
+
     /**
-     * Relación 
+     * Relación
      */
     public function ciudad()
     {
         return $this->hasOne('App\Ciudad');
-    }  
-    
+    }
+
     /**
-     * Relación 
+     * Relación
      */
     public function sede()
     {
         return $this->hasOne('App\Sede');
-    }   
+    }
 
     /**
-     * Relación 
+     * Relación
      */
     public function area()
     {
         return $this->hasOne('App\Area');
-    } 
+    }
 
     /**
-     * Relación 
+     * Relación
      */
     public function cargo()
     {
         return $this->hasOne('App\Cargo');
-    }  
+    }
 
     /**
-     * Relación 
+     * Relación
      */
     public function estado_socio()
     {
         return $this->hasOne('App\EstadoSocio');
-    }  
-    
+    }
+
     /**
-     * Relación 
+     * Relación
      */
     public function nacionalidad()
     {
         return $this->hasOne('App\Nacionalidad');
-    }  
-    
+    }
+
     /**
-     * Relación 
+     * Relación
      */
     public function cargas_familiares()
     {
@@ -559,7 +569,7 @@ class Socio extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function registros_contables()
     {
@@ -567,7 +577,7 @@ class Socio extends Model
     }
 
     /**
-     * Obtener ultimo registro creado 
+     * Obtener ultimo registro creado
      */
     static public function obtenerUltimoSocioIngresado()
     {
@@ -575,7 +585,7 @@ class Socio extends Model
     }
 
     /**
-     * Obtener ultimo registro creado 
+     * Obtener ultimo registro creado
      */
     static public function obtenerSocioPorRut($rut)
     {
@@ -583,7 +593,7 @@ class Socio extends Model
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setNombre1Attribute($value)
     {
@@ -591,7 +601,7 @@ class Socio extends Model
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setNombre2Attribute($value)
     {
@@ -599,7 +609,7 @@ class Socio extends Model
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setApellido1Attribute($value)
     {
@@ -607,7 +617,7 @@ class Socio extends Model
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setApellido2Attribute($value)
     {
