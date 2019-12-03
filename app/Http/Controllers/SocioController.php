@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Socio;
-use App\Comuna;
+
 use App\Sede;
 use App\Cargo;
+use App\Socio;
+use App\Comuna;
+use App\Interes;
+use App\Prestamo;
+use App\LogSistema;
 use App\EstadoSocio;
 use App\Nacionalidad;
-use App\Prestamo;
 use App\CargaFamiliar;
-use App\Interes;
-use App\LogSistema;
+use App\Exports\SocioExport;
 use Illuminate\Http\Request;
-use App\Http\Requests\IncorporarSocioRequest;
+use App\Exports\FiltroSocioExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\EditarSocioRequest;
 use App\Http\Requests\FiltrarSocioRequest;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\SocioExport;
-use App\Exports\FiltroSocioExport;
+use App\Http\Requests\IncorporarSocioRequest;
 
 class SocioController extends Controller
 {

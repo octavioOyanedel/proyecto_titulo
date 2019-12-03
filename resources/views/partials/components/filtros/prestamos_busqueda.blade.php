@@ -1,7 +1,20 @@
     <div class="float-left">
         <div class="input-group mb-2 mr-sm-2">
-            <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif </span>
-            <a title="Resetear listado." class="mr-2" href="{{ route('prestamos.index') }}">&nbsp;|<b>Resetear</b>|</a>            
+            <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif &nbsp;</span>
+            <a title="Resetear listado." class="mr-2" href="{{ route('prestamos.index') }}">|<b>Resetear</b>|</a>
+            <a title="Exportar listado." class="mr-2" href="{{ route('listado_prestamos_filtro',[
+                'rut' => $rut,
+                'fecha_solicitud_ini' => $fecha_solicitud_ini,
+                'fecha_solicitud_fin' => $fecha_solicitud_fin,
+                'monto_ini' => $monto_ini,
+                'monto_fin' => $monto_fin,
+                'forma_pago_id' => $forma_pago_id,
+                'fecha_pago_ini' => $fecha_pago_ini,
+                'fecha_pago_fin' => $fecha_pago_fin,
+                'numero_cuotas' => $numero_cuotas,
+                'cuenta_id' => $cuenta_id,
+                'estado_deuda_id' => $estado_deuda_id
+            ]) }}">|<b>Exportar Excel</b>|</a>                      
         </div>                                                                            
     </div>   
     <form class="form-inline float-right" method="GET" action="{{ route('filtro_prestamos') }}">

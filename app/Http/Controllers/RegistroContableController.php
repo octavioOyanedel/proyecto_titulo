@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\RegistroContable;
-use App\Cuenta;
-use App\Concepto;
-use App\Socio;
-use App\Asociado;
-use App\TipoRegistroContable;
 use App\Banco;
+use App\Socio;
+use App\Cuenta;
+use App\Asociado;
+use App\Concepto;
 use App\LogSistema;
-use Illuminate\Support\Facades\Auth;
+use App\RegistroContable;
 use Illuminate\Http\Request;
-use App\Http\Requests\IncorporarRegistroContableRequest;    
-use App\Http\Requests\FiltrarContableRequest; 
+use App\TipoRegistroContable;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RegistroContableExport;
 use App\Http\Requests\AnularChequeRequest;
+use App\Exports\FiltroRegistroContableExport;
+use App\Http\Requests\FiltrarContableRequest;
+use App\Http\Requests\IncorporarRegistroContableRequest;
 
 class RegistroContableController extends Controller
 {
@@ -301,6 +304,7 @@ class RegistroContableController extends Controller
      */
     public function filtroContables(FiltrarContableRequest $request)
     {
+        //dd($request);
 
         if(request()->has('registros') && request('registros') != ''){
             $registros = request('registros');
@@ -405,7 +409,35 @@ class RegistroContableController extends Controller
 
         $total_consulta = $registros->total();
 
-        return view('sind1.contables.resultados', compact('registros','total_consulta'));   
+        ($request->fecha_solicitud_ini) ?  $fecha_solicitud_ini = $request->fecha_solicitud_ini : $fecha_solicitud_ini = 'null';
+        ($request->fecha_solicitud_fin) ?  $fecha_solicitud_fin = $request->fecha_solicitud_fin : $fecha_solicitud_fin = 'null';
+        ($request->monto_ini) ?  $monto_ini = $request->monto_ini : $monto_ini = 'null';
+        ($request->monto_fin) ?  $monto_fin = $request->monto_fin : $monto_fin = 'null';
+        ($request->tipo_registro_contable_id) ?  $tipo_registro_contable_id = $request->tipo_registro_contable_id : $tipo_registro_contable_id = 'null';
+        ($request->cuenta_id) ?  $cuenta_id = $request->cuenta_id : $cuenta_id = 'null';
+        ($request->concepto_id) ?  $concepto_id = $request->concepto_id : $concepto_id = 'null';
+        ($request->socio_id) ?  $socio_id = $request->socio_id : $socio_id = 'null';
+        ($request->asociado_id) ?  $asociado_id = $request->asociado_id : $asociado_id = 'null';
+        ($request->detalle) ?  $detalle = $request->detalle : $detalle = 'null';        
+
+
+        return view('sind1.contables.resultados', compact('registros','total_consulta','fecha_solicitud_ini', 'fecha_solicitud_fin', 'monto_ini', 'monto_fin', 'tipo_registro_contable_id', 'cuenta_id', 'concepto_id', 'socio_id', 'asociado_id', 'detalle'));   
+    }
+
+    /**
+     * Exportar a excel.
+     */
+    public function exportarExcel()
+    {
+        return Excel::download(new RegistroContableExport, 'listado_registros_contables.xlsx');
+    }
+
+    /**
+     * Exportar a excel.
+     */
+    public function exportarExcelFiltro($fecha_solicitud_ini, $fecha_solicitud_fin, $monto_ini, $monto_fin, $tipo_registro_contable_id, $cuenta_id, $concepto_id, $socio_id, $asociado_id, $detalle)
+    {
+        return Excel::download(new FiltroRegistroContableExport($fecha_solicitud_ini, $fecha_solicitud_fin, $monto_ini, $monto_fin, $tipo_registro_contable_id, $cuenta_id, $concepto_id, $socio_id, $asociado_id, $detalle), 'listado_registros_contables.xlsx');
     }
 
     /**
@@ -446,9 +478,10 @@ class RegistroContableController extends Controller
         $registro->asociado_id = null;
         $registro->usuario_id = Auth::user()->id;
         $registro->socio_id = null;
+        $registro_anulado = $registro;        
         $registro->save();
         session(['mensaje' => 'Registro contable anulado con éxito.']);
-        LogSistema::registrarAccion('Préstamo contable anulado N° '. $request->numero_registro);
+        LogSistema::registrarAccion('Préstamo contable anulado N° '. $registro_anulado);
         return redirect()->route('contables.index');
     }
 }

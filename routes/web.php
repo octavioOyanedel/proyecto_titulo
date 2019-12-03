@@ -192,3 +192,9 @@ Route::get('/cerrar_alerta','MantenedorController@cerrarAlerta')->name('cerrar_a
 //exportar excel
 Route::get('socios_excel','SocioController@exportarExcel')->name('listado_socios')->middleware('auth');
 Route::get('filtro_socios_excel/{desvinculados}/{fecha_nac_ini}/{fecha_nac_fin}/{fecha_pucv_ini}/{fecha_pucv_fin}/{fecha_sind1_ini}/{fecha_sind1_fin}/{genero}/{rut}/{comuna_id}/{ciudad_id}/{direccion}/{sede_id}/{area_id}/{cargo_id}/{estado_socio_id}/{nacionalidad_id}','SocioController@exportarExcelFiltro')->name('listado_socios_filtro')->middleware('auth');
+
+Route::get('prestamos_excel','PrestamoController@exportarExcel')->name('listado_prestamos')->middleware('auth');
+Route::get('filtro_prestamos_excel/{rut}/{fecha_solicitud_ini}/{fecha_solicitud_fin}/{monto_ini}/{monto_fin}/{forma_pago_id}/{fecha_pago_ini}/{fecha_pago_fin}/{numero_cuotas}/{cuenta_id}/{estado_deuda_id}','PrestamoController@exportarExcelFiltro')->name('listado_prestamos_filtro')->middleware('auth');
+
+Route::get('contables_excel','RegistroContableController@exportarExcel')->name('listado_contables')->middleware('auth');
+Route::get('filtro_contables_excel/{fecha_solicitud_ini}/{fecha_solicitud_fin}/{monto_ini}/{monto_fin}/{tipo_registro_contable_id}/{cuenta_id}/{concepto_id}/{socio_id}/{asociado_id}/{detalle}','RegistroContableController@exportarExcelFiltro')->name('listado_contables_filtro')->middleware('auth');

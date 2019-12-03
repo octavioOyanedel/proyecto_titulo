@@ -19,8 +19,8 @@ use App\Http\Requests\IncorporarPrestamoRequest;
 use App\Http\Requests\SimularPrestamoRequest;
 use App\Http\Requests\FiltrarPrestamoRequest;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\SocioExport;
-use App\Exports\FiltroSocioExport;
+use App\Exports\PrestamoExport;
+use App\Exports\FiltroPrestamoExport;
 
 class PrestamoController extends Controller
 {
@@ -583,7 +583,6 @@ class PrestamoController extends Controller
      */
     public function filtroPrestamos(FiltrarPrestamoRequest $request)
     {
-        //dd($request);
 
         if(request()->has('registros') && request('registros') != ''){
             $registros = request('registros');
@@ -835,6 +834,34 @@ class PrestamoController extends Controller
 
         $total_consulta = $prestamos->total();
 
-        return view('sind1.prestamos.resultados', compact('prestamos','formas_pago','total_consulta'));
+        ($request->fecha_solicitud_ini) ?  $fecha_solicitud_ini = $request->fecha_solicitud_ini : $fecha_solicitud_ini = 'null';
+        ($request->fecha_solicitud_fin) ?  $fecha_solicitud_fin = $request->fecha_solicitud_fin : $fecha_solicitud_fin = 'null';
+        ($request->fecha_pago_ini) ?  $fecha_pago_ini = $request->fecha_pago_ini : $fecha_pago_ini = 'null';
+        ($request->fecha_pago_fin) ?  $fecha_pago_fin = $request->fecha_pago_fin : $fecha_pago_fin = 'null';
+        ($request->monto_ini) ?  $monto_ini = $request->monto_ini : $monto_ini = 'null';
+        ($request->monto_fin) ?  $monto_fin = $request->monto_fin : $monto_fin = 'null';
+        ($request->numero_cuotas) ?  $numero_cuotas = $request->numero_cuotas : $numero_cuotas = 'null';
+        ($request->forma_pago_id) ?  $forma_pago_id = $request->forma_pago_id : $forma_pago_id = 'null';
+        ($request->cuenta_id) ?  $cuenta_id = $request->cuenta_id : $cuenta_id = 'null';
+        ($request->estado_deuda_id) ?  $estado_deuda_id = $request->estado_deuda_id : $estado_deuda_id = 'null';
+        ($request->rut) ?  $rut = $request->rut : $rut = 'null';
+
+        return view('sind1.prestamos.resultados', compact('prestamos', 'formas_pago', 'total_consulta', 'rut', 'fecha_solicitud_ini', 'fecha_solicitud_fin', 'monto_ini', 'monto_fin', 'forma_pago_id', 'fecha_pago_ini', 'fecha_pago_fin', 'numero_cuotas', 'cuenta_id', 'estado_deuda_id'));
+    }
+
+    /**
+     * Exportar a excel.
+     */
+    public function exportarExcel()
+    {
+        return Excel::download(new PrestamoExport, 'listado_prestamos.xlsx');
+    }
+
+    /**
+     * Exportar a excel.
+     */
+    public function exportarExcelFiltro($rut, $fecha_solicitud_ini, $fecha_solicitud_fin, $monto_ini, $monto_fin, $forma_pago_id, $fecha_pago_ini, $fecha_pago_fin, $numero_cuotas, $cuenta_id, $estado_deuda_id)
+    {
+        return Excel::download(new FiltroPrestamoExport($rut, $fecha_solicitud_ini, $fecha_solicitud_fin, $monto_ini, $monto_fin, $forma_pago_id, $fecha_pago_ini, $fecha_pago_fin, $numero_cuotas, $cuenta_id, $estado_deuda_id), 'listado_prestamos.xlsx');
     }
 }

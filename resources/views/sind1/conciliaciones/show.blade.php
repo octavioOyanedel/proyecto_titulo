@@ -15,6 +15,7 @@
                         </div>
                     @else 
                         <h4 class="mt-4 text-center">{{ $cuenta->tipo_cuenta_id }} N° {{ $cuenta->numero }} {{ $cuenta->banco_id }}</h4>
+                        <a title="Exportar listado." class="mr-2" href="">|<b>Exportar Excel</b>|</a>   
                         <h5 class="mt-4"></h5>
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">

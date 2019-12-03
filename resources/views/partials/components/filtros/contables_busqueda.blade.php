@@ -1,7 +1,19 @@
     <div class="float-left">
         <div class="input-group mb-2 mr-sm-2">
-            <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif </span>
-            <a title="Resetear listado." class="mr-2" href="{{ route('contables.index') }}">&nbsp;|<b>Resetear</b>|</a>            
+            <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif &nbsp;</span>
+            <a title="Resetear listado." class="mr-2" href="{{ route('contables.index') }}">|<b>Resetear</b>|</a>
+            <a title="Exportar listado." class="mr-2" href="{{ route('listado_contables_filtro',[
+                'fecha_solicitud_ini' => $fecha_solicitud_ini,
+                'fecha_solicitud_fin' => $fecha_solicitud_fin,
+                'monto_ini' => $monto_ini,
+                'monto_fin' => $monto_fin,
+                'tipo_registro_contable_id' => $tipo_registro_contable_id,
+                'cuenta_id' => $cuenta_id,
+                'concepto_id' => $concepto_id,
+                'socio_id' => $socio_id,
+                'asociado_id' => $asociado_id,
+                'detalle' => $detalle
+            ]) }}">|<b>Exportar Excel</b>|</a>                           
         </div>                                                                            
     </div>   
     <form class="form-inline float-right" method="GET" action="{{ route('filtro_contables') }}">
