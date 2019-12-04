@@ -15,7 +15,7 @@
             <!-- módulo sesion -->
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    Hola, {{ Auth::user()->nombre1 }} <span class="caret"></span>
+                    Hola, <span class="font-weight-bold text-uppercase text-dark">{{ Auth::user()->nombre1 }}</span> <span class="caret"></span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -67,6 +67,20 @@
                     <a class="dropdown-item sub-item" href="{{ route('filtro_contables_form') }}">Filtrar</a>
                     <a class="dropdown-item sub-item" href="{{ route('crear_conciliacion') }}">Conciliación Bancaria</a>
                     <a class="dropdown-item sub-item" href="{{ route('anular_registro_form') }}">Anular Registro</a>
+                </div>
+            </li>
+
+            <!-- módulo registros contables -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span id="span-estadisticas">Estadísticas</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por sede - área</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por cargo</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por comuna - ciudad</a>                    
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por nacionalidad</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por incorporación - desvinculación</a>
                 </div>
             </li>
 

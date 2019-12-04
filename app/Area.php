@@ -87,4 +87,36 @@ class Area extends Model
     {
         return Area::where('nombre', $nombre)->first();
     }
+
+    /**
+     * Contar varones 
+     */
+    public function contarVarones($id)
+    {
+        return Socio::where([
+            ['genero','=','Varón'],
+            ['area_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar varones 
+     */
+    public function contarDamas($id)
+    {
+        return Socio::where([
+            ['genero','=','Dama'],
+            ['area_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar varones 
+     */
+    public function contarTodos($id)
+    {
+        return Socio::where([
+            ['area_id','=',$id]
+        ])->count();
+    }
 }

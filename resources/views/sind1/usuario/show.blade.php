@@ -15,7 +15,7 @@
                     @endif
                     <h4>Información Personal</h4>
                     <div class="table-responsive">                     
-                        <table class="table table-hover">
+                        <table class="table table-hover table-striped table-bordered">
                             <thead></thead>
                             <tbody>
                                 <tr><th>Nombre</th>

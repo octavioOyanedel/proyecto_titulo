@@ -137,7 +137,7 @@ Route::get('/passwords', 'UsuarioController@editPassword')->name('passwords')->m
 Route::post('/update_passwords', 'UsuarioController@updatePassword')->name('update_passwords')->middleware('auth');
 
 Route::get('/crear_conciliacion', 'ConciliacionController@crear')->name('crear_conciliacion')->middleware('auth');
-Route::post('/mostrar_conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
+Route::get('/mostrar_conciliacion', 'ConciliacionController@mostrar')->name('mostrar_conciliacion')->middleware('auth');
 
 Route::get('/anular_registro_form', 'RegistroContableController@anularCheque')->name('anular_registro_form')->middleware('auth');
 Route::post('/anular_registro', 'RegistroContableController@anular')->name('anular_registro')->middleware('auth');
@@ -198,3 +198,9 @@ Route::get('filtro_prestamos_excel/{rut}/{fecha_solicitud_ini}/{fecha_solicitud_
 
 Route::get('contables_excel','RegistroContableController@exportarExcel')->name('listado_contables')->middleware('auth');
 Route::get('filtro_contables_excel/{fecha_solicitud_ini}/{fecha_solicitud_fin}/{monto_ini}/{monto_fin}/{tipo_registro_contable_id}/{cuenta_id}/{concepto_id}/{socio_id}/{asociado_id}/{detalle}','RegistroContableController@exportarExcelFiltro')->name('listado_contables_filtro')->middleware('auth');
+
+Route::get('conciliacion_excel/{cuenta}/{mes}/{year}','ConciliacionController@exportarExcel')->name('listado_conciliacion')->middleware('auth');
+
+Route::get('estadisticas','MantenedorController@estadisticaGenero')->name('estadisticas')->middleware('auth');
+
+Route::get('socios_sede/{sede}','SocioController@sociosSede')->name('socios_sede')->middleware('auth');

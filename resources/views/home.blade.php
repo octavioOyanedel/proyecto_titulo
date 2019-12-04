@@ -41,7 +41,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $i = 0 @endphp
                                     @foreach($socios as $s)
                                         <tr>
                                             <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('socios.show',$s) }}"><span>@svg('ver')</span></a></td>

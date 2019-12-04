@@ -825,4 +825,23 @@ class SocioController extends Controller
     {
         return Excel::download(new FiltroSocioExport($desvinculados, $fecha_nac_ini, $fecha_nac_fin, $fecha_pucv_ini, $fecha_pucv_fin, $fecha_sind1_ini, $fecha_sind1_fin, $genero, $rut, $comuna_id, $ciudad_id, $direccion, $sede_id, $area_id, $cargo_id, $estado_socio_id, $nacionalidad_id), 'listado_socios_activos.xlsx');
     }
+
+    /**
+     * Exportar a excel.
+     */
+    public function sociosSede($sede)
+    {
+
+        $socios = Socio::where([
+            ['sede_id','=',$sede],
+            ['genero','=','Varón']
+        ])->orderBy('apellido1','ASC')->paginate(15);
+        $varones = Socio::where('genero','=','Varón')->count();
+        $damas = Socio::where('genero','=','Dama')->count();
+        $total = Socio::all()->count();
+        $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();        
+        $total_consulta = $socios->total();
+
+        return view('home', compact('socios','estados','varones','damas','total','total_consulta'));
+    }
 }

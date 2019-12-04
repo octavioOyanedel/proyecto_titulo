@@ -110,12 +110,17 @@ $(window).on('load',function(){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-asociado').removeClass('d-none');
 	}
+
 	//fin mantenedores
 	if(ruta.localeCompare('/filtro_historial') === 0 || ruta.localeCompare('/historial') === 0 || ruta.localeCompare('/filtro_historial_form') === 0){
 		$('#span-historial').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-historial').removeClass('d-none');
 	}
 
+	
+	if(ruta.localeCompare('/estadisticas') === 0){
+		$('#span-estadisticas').addClass('font-weight-bold text-uppercase text-primary');
+	}
 
 	if(ruta.localeCompare('/register') === 0 || ruta.search('/usuarios') != -1){
 		$('#span-usuarios').addClass('font-weight-bold text-uppercase text-primary');

@@ -745,4 +745,17 @@ class MantenedorController extends Controller
         }
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function estadisticaGenero()
+    {
+        $sedes = Sede::orderBy('nombre','ASC')->get();
+        $areas = Area::orderBy('nombre','ASC')->get();
+        return view('sind1.estadistica.estadistica',compact('sedes','areas'));
+    }
+
+
 }
