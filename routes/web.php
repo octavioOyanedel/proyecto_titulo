@@ -203,4 +203,4 @@ Route::get('conciliacion_excel/{cuenta}/{mes}/{year}','ConciliacionController@ex
 
 Route::get('estadisticas','MantenedorController@estadisticaGenero')->name('estadisticas')->middleware('auth');
 
-Route::get('socios_sede/{sede_id}','SocioController@sociosSede')->name('socios_sede')->middleware('auth');
+Route::get('socios_sede','SocioController@sociosSede')->name('socios_sede')->middleware('auth');
