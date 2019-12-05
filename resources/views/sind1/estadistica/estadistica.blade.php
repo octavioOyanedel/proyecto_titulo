@@ -24,7 +24,7 @@
 	                                @if($s->contarTodos($s->id) != 0)
 	                                    <tr>
 	                                        <td><b>{{ $s->nombre }}</b></td>
-	                                        <td class="text-center"><a href="{{ route('socios_sede', ['sede' => $s->id]) }}">{{ $s->contarVarones($s->id) }}</a></td>
+	                                        <td class="text-center"><a href="{{ route('socios_sede', ['sede_id' => $s->id]) }}">{{ $s->contarVarones($s->id) }}</a></td>
 	                                        <td class="text-center"><a href="">{{ $s->contarDamas($s->id) }}</a></td>
 	                                        <td class="text-center"><a href="">{{ $s->contarTodos($s->id) }}</a></td>
 	                                    </tr>
@@ -35,14 +35,14 @@
 			                                        <td class="text-center"><a href="">{{ $a->contarVarones($a->id) }}</a></td>
 			                                        <td class="text-center"><a href="">{{ $a->contarDamas($a->id) }}</a></td>
 			                                        <td class="text-center"><a href="">{{ $a->contarTodos($a->id) }}</a></td>
-			                                    </tr>  
-			                                @endif                                 
-		                                @endforeach   
-		                            @endif                                        
-                                @endforeach                               	
+			                                    </tr>
+			                                @endif
+		                                @endforeach
+		                            @endif
+                                @endforeach
                             </tbody>
                         </table>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>

@@ -266,9 +266,10 @@ class SocioController extends Controller
      */
     public function filtroSocios(FiltrarSocioRequest $request)
     {
+        //dd($request);
         $total_consulta = 0;
 
-        if(request()->has('registros') && request('registros') != ''){
+        if(request()->has('registros') || request('registros') != ''){
             $registros = request('registros');
         }else{
             $registros = 15;
@@ -829,19 +830,60 @@ class SocioController extends Controller
     /**
      * Exportar a excel.
      */
-    public function sociosSede($sede)
+    public function sociosSede(Request $request,$sede_id)
     {
+        //dd($request);
 
+        if(request()->has('registros') || request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'fecha_sind1';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'DESC';
+        }
+
+        if($columna === 'genero' && $orden === 'DESC'){
+             $orden = 'ASC';
+        }else if($columna === 'genero' && $orden === 'ASC'){
+            $orden = 'DESC';
+        }
         $socios = Socio::where([
-            ['sede_id','=',$sede],
+            ['sede_id','=',$sede_id],
             ['genero','=','Varón']
-        ])->orderBy('apellido1','ASC')->paginate(15);
+        ])->orderBy('apellido1',$orden)->paginate($registros);
         $varones = Socio::where('genero','=','Varón')->count();
         $damas = Socio::where('genero','=','Dama')->count();
         $total = Socio::all()->count();
-        $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();        
+        $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
         $total_consulta = $socios->total();
 
-        return view('home', compact('socios','estados','varones','damas','total','total_consulta'));
+        $desvinculados = 'activos';
+        $fecha_nac_ini = null;
+        $fecha_nac_fin = null;
+        $fecha_pucv_ini = null;
+        $fecha_pucv_fin = null;
+        $fecha_sind1_ini = null;
+        $fecha_sind1_fin = null;
+        $genero = null;
+        $rut = null;
+        $comuna_id = null;
+        $ciudad_id = null;
+        $direccion = null;
+        $sede_id = null;
+        $area_id = null;
+        $cargo_id = null;
+        $estado_socio_id = null;
+        $nacionalidad_id = null;
+        return view('sind1.socios.resultados', compact('socios','estados','total_consulta','desvinculados','fecha_nac_ini','fecha_nac_fin','fecha_pucv_ini','fecha_pucv_fin','fecha_sind1_ini','fecha_sind1_fin','genero','rut','comuna_id','ciudad_id','direccion','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id'));
     }
 }
