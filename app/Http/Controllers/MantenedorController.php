@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
-use App\Area;
-use App\Cargo;
-use App\EstadoSocio;
-use App\Nacionalidad;
-use App\FormaPago;
-use App\Cuenta;
-use App\TipoCuenta;
-use App\Concepto;
-use App\Asociado;
-use App\User;
 use App\Rol;
+use App\Area;
+use App\Sede;
+use App\User;
 use App\Banco;
-use App\Parentesco;
-use App\GradoAcademico;
-use App\Institucion;
-use App\EstadoGradoAcademico;
+use App\Cargo;
+use App\Socio;
+use App\Ciudad;
+use App\Comuna;
+use App\Cuenta;
 use App\Titulo;
+use App\Asociado;
+use App\Concepto;
+use App\FormaPago;
+use App\Parentesco;
+use App\TipoCuenta;
+use App\EstadoSocio;
+use App\Institucion;
+use App\Nacionalidad;
+use App\GradoAcademico;
 use Illuminate\Http\Request;
+use App\EstadoGradoAcademico;
 
 class MantenedorController extends Controller
 {
@@ -750,12 +753,71 @@ class MantenedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function estadisticaGenero()
+    public function estadisticaCargo()
     {
-        $sedes = Sede::orderBy('nombre','ASC')->get();
-        $areas = Area::orderBy('nombre','ASC')->get();
-        return view('sind1.estadistica.estadistica',compact('sedes','areas'));
+        $total = Socio::all()->count();
+        $varones = Socio::where('genero','=','Varón')->count();
+        $damas = Socio::where('genero','=','Dama')->count();
+        $cargos = Cargo::orderBy('nombre','ASC')->get();
+        return view('sind1.estadistica.estadistica_cargo',compact('cargos','total','varones','damas'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function estadisticaComunaCiudad()
+    {
+        $total = Socio::all()->count();
+        $varones = Socio::where('genero','=','Varón')->count();
+        $damas = Socio::where('genero','=','Dama')->count();
+        $comunas = Comuna::orderBy('nombre','ASC')->get();
+        return view('sind1.estadistica.estadistica_comuna_ciudad',compact('comunas','total','varones','damas'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function estadisticaNacionalidad()
+    {
+        $total = Socio::all()->count();
+        $varones = Socio::where('genero','=','Varón')->count();
+        $damas = Socio::where('genero','=','Dama')->count();
+        $sedes = Sede::orderBy('nombre','ASC')->get();
+        $nacionalidades = NAcionalidad::orderBy('nombre','ASC')->get();
+        return view('sind1.estadistica.estadistica_nacionalidad',compact('nacionalidades','total','varones','damas'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function estadisticaSedeArea()
+    {
+        $total = Socio::all()->count();
+        $varones = Socio::where('genero','=','Varón')->count();
+        $damas = Socio::where('genero','=','Dama')->count();
+        $sedes = Sede::orderBy('nombre','ASC')->get();
+        return view('sind1.estadistica.estadistica_sede_area',compact('sedes','total','varones','damas'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function estadisticaIncorporadoDesvinculado()
+    {
+        $socio = new Socio;
+        $fecha_ini = date('Y').'-01-01';
+        $fecha_fin = date('Y-m-d');
+        $incorporados = Socio::whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])->orderBy('nombre','ASC')->count();
+        $desvinculados = Socio::onlyTrashed()->whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])->orderBy('nombre','ASC')->count(); 
+        return view('sind1.estadistica.estadistica_incorporados_desvinculados',compact('socio','incorporados','desvinculados'));
+    }
 
 }

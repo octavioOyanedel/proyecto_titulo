@@ -49,4 +49,36 @@ class Cargo extends Model
     {
         return Cargo::where('nombre', $nombre)->first();
     }
+
+    /**
+     * Contar varones 
+     */
+    public function contarVarones($id)
+    {
+        return Socio::where([
+            ['genero','=','Varón'],
+            ['cargo_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar damas 
+     */
+    public function contarDamas($id)
+    {
+        return Socio::where([
+            ['genero','=','Dama'],
+            ['cargo_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar varones 
+     */
+    public function contarTodos($id)
+    {
+        return Socio::where([
+            ['cargo_id','=',$id]
+        ])->count();
+    }
 }

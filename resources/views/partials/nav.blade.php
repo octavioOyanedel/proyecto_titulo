@@ -15,7 +15,7 @@
             <!-- módulo sesion -->
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    Hola, <span class="font-weight-bold text-uppercase text-dark">{{ Auth::user()->nombre1 }}</span> <span class="caret"></span>
+                    Hola, <span class="font-weight-bold text-dark">{{ Auth::user()->nombre1 }}</span> <span class="caret"></span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -76,11 +76,11 @@
                     <span id="span-estadisticas">Estadísticas</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por sede - área</a>
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por cargo</a>
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por comuna - ciudad</a>                    
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por nacionalidad</a>
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas') }}">Distribución por incorporación - desvinculación</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_sede_area') }}">Distribución de Socios por Sede - Área</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_cargo') }}">Distribución de Socios por Cargo</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_comuna_ciudad') }}">Distribución de Socios por Comuna - Ciudad</a>                    
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_nacionalidad') }}">Distribución de Socios por Nacionalidad</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_Incorporados_desvinculados') }}">Distribución de Socios por Incorporación - Desvinculación</a>
                 </div>
             </li>
 

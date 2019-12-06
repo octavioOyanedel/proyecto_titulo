@@ -112,14 +112,15 @@ $(window).on('load',function(){
 	}
 
 	//fin mantenedores
-	if(ruta.localeCompare('/filtro_historial') === 0 || ruta.localeCompare('/historial') === 0 || ruta.localeCompare('/filtro_historial_form') === 0){
+	if(ruta.localeCompare('/filtro_historial') === 0 || ruta.localeCompare('/historial') === 0 || ruta.localeCompare('/filtro_historial_form') === 0){	
 		$('#span-historial').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-historial').removeClass('d-none');
 	}
 
 	
-	if(ruta.localeCompare('/estadisticas') === 0){
+	if(ruta.localeCompare('/estadisticas_sede_area') === 0 || ruta.localeCompare('/estadisticas_cargo') === 0 || ruta.localeCompare('/estadisticas_comuna_ciudad') === 0 || ruta.localeCompare('/estadisticas_nacionalidad') === 0 || ruta.localeCompare('/estadisticas_Incorporados_desvinculados') === 0){	
 		$('#span-estadisticas').addClass('font-weight-bold text-uppercase text-primary');
+		$('#buscador-socio').removeClass('d-none');
 	}
 
 	if(ruta.localeCompare('/register') === 0 || ruta.search('/usuarios') != -1){

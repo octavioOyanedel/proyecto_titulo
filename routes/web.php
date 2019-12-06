@@ -201,6 +201,10 @@ Route::get('filtro_contables_excel/{fecha_solicitud_ini}/{fecha_solicitud_fin}/{
 
 Route::get('conciliacion_excel/{cuenta}/{mes}/{year}','ConciliacionController@exportarExcel')->name('listado_conciliacion')->middleware('auth');
 
-Route::get('estadisticas','MantenedorController@estadisticaGenero')->name('estadisticas')->middleware('auth');
+Route::get('estadisticas_cargo','MantenedorController@estadisticaCargo')->name('estadisticas_cargo')->middleware('auth');
+Route::get('estadisticas_comuna_ciudad','MantenedorController@estadisticaComunaCiudad')->name('estadisticas_comuna_ciudad')->middleware('auth');
+Route::get('estadisticas_nacionalidad','MantenedorController@estadisticaNacionalidad')->name('estadisticas_nacionalidad')->middleware('auth');
+Route::get('estadisticas_sede_area','MantenedorController@estadisticaSedeArea')->name('estadisticas_sede_area')->middleware('auth');
+Route::get('estadisticas_Incorporados_desvinculados','MantenedorController@estadisticaIncorporadoDesvinculado')->name('estadisticas_Incorporados_desvinculados')->middleware('auth');
 
 Route::get('socios_sede','SocioController@sociosSede')->name('socios_sede')->middleware('auth');

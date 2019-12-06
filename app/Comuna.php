@@ -32,4 +32,36 @@ class Comuna extends Model
     {
         return $this->hasMany('App\Ciudad');
     }
+
+    /**
+     * Contar varones 
+     */
+    public function contarVarones($id)
+    {
+        return Socio::where([
+            ['genero','=','Varón'],
+            ['comuna_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar damas 
+     */
+    public function contarDamas($id)
+    {
+        return Socio::where([
+            ['genero','=','Dama'],
+            ['comuna_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar varones 
+     */
+    public function contarTodos($id)
+    {
+        return Socio::where([
+            ['comuna_id','=',$id]
+        ])->count();
+    }
 }

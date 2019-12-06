@@ -44,4 +44,36 @@ class Nacionalidad extends Model
     {
         $this->attributes['nombre'] = ucfirst($value);
     }
+
+    /**
+     * Contar varones 
+     */
+    public function contarVarones($id)
+    {
+        return Socio::where([
+            ['genero','=','Varón'],
+            ['nacionalidad_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar damas 
+     */
+    public function contarDamas($id)
+    {
+        return Socio::where([
+            ['genero','=','Dama'],
+            ['nacionalidad_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar varones 
+     */
+    public function contarTodos($id)
+    {
+        return Socio::where([
+            ['nacionalidad_id','=',$id]
+        ])->count();
+    }
 }

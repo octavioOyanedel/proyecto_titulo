@@ -100,7 +100,7 @@ class Area extends Model
     }
 
     /**
-     * Contar varones 
+     * Contar damas 
      */
     public function contarDamas($id)
     {

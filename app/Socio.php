@@ -623,4 +623,25 @@ class Socio extends Model
     {
         $this->attributes['apellido2'] = formatoNombres($value);
     }
+
+    /**
+     * Contar incorporaciones por mes
+     */
+    public function obtenerVinculadosPorMes($mes)
+    {
+        $fecha_ini = date('Y').'-'.$mes.'-01';
+        $fecha_fin = date('Y').'-'.$mes.'-'.obtenerDiasPorMes($mes);
+        return Socio::whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])->count();
+    }
+
+    /**
+     * Contar desvinculaciones por mes
+     */
+    public function obtenDesvinculadosPorMes($mes)
+    {
+        $fecha_ini = date('Y').'-'.$mes.'-01';
+        $fecha_fin = date('Y').'-'.$mes.'-'.obtenerDiasPorMes($mes);
+        return Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])->count();
+    }
+
 }

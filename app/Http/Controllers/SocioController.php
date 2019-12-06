@@ -920,4 +920,6 @@ class SocioController extends Controller
 
         return view('sind1.socios.resultados_estadistica_area_sede', compact('socios','estados','total_consulta','sede_id'));
     }
+ 
+
 }

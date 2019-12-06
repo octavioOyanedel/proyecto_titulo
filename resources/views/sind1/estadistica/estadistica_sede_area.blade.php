@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header text-center"><h3 class="mb-0">Estadisticas por Género</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Distribución de Socios por Sede - Área</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
@@ -14,9 +14,9 @@
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
-                                    <th class="text-center" scope="col">Varones</th>
-                                    <th class="text-center" scope="col">Damas</th>
-                                    <th class="text-center" scope="col">Total</th>
+                                    <th class="text-center" scope="col">Varones ({{ $varones }})</th>
+                                    <th class="text-center" scope="col">Damas ({{ $damas }})</th>
+                                    <th class="text-center" scope="col">Total ({{ $total }})</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -35,4 +35,36 @@ class Ciudad extends Model
     {
         return $this->belongsTo('App\Comuna');
     }
+
+    /**
+     * Contar varones 
+     */
+    public function contarVarones($id)
+    {
+        return Socio::where([
+            ['genero','=','Varón'],
+            ['ciudad_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar damas 
+     */
+    public function contarDamas($id)
+    {
+        return Socio::where([
+            ['genero','=','Dama'],
+            ['ciudad_id','=',$id]
+        ])->count();
+    }
+
+    /**
+     * Contar varones 
+     */
+    public function contarTodos($id)
+    {
+        return Socio::where([
+            ['ciudad_id','=',$id]
+        ])->count();
+    }
 }
