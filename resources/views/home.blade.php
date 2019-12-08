@@ -8,7 +8,7 @@
             @include('partials.alertas')
 
             <div class="card">
-                <div class="card-header text-center"><h3 class="mb-0">Socios Incorporados</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Socios Incorporados test</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
