@@ -207,4 +207,5 @@ Route::get('estadisticas_nacionalidad','MantenedorController@estadisticaNacional
 Route::get('estadisticas_sede_area','MantenedorController@estadisticaSedeArea')->name('estadisticas_sede_area')->middleware('auth');
 Route::get('estadisticas_Incorporados_desvinculados','MantenedorController@estadisticaIncorporadoDesvinculado')->name('estadisticas_Incorporados_desvinculados')->middleware('auth');
 
-Route::get('socios_sede','SocioController@sociosSede')->name('socios_sede')->middleware('auth');
+Route::get('socios_filtrados','SocioController@socioFiltrados')->name('socios_filtrados')->middleware('auth');
+Route::get('socios_filtrados_incorporaciones','SocioController@socioFiltradosIncorporados')->name('socios_filtrados_incorporaciones')->middleware('auth');

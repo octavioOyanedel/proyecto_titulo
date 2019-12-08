@@ -24,9 +24,23 @@
 	                                @if($n->contarTodos($n->id) != 0)
 	                                    <tr>
 	                                        <td><b>{{ $n->nombre }}</b></td>
-	                                        <td class="text-center"><a href="">{{ $n->contarVarones($n->id) }}</a></td>
-	                                        <td class="text-center"><a href="">{{ $n->contarDamas($n->id) }}</a></td>
-	                                        <td class="text-center"><a href="">{{ $n->contarTodos($n->id) }}</a></td>
+                                            <td class="text-center">
+                                                @if($n->contarVarones($n->id))
+                                                    <a href="{{ route('socios_filtrados', ['nombre' => 'nacionalidad_id', 'id' => $n->id, 'genero' => 'Varón']) }}">{{ $n->contarVarones($n->id) }}</a>
+                                                @else
+                                                    {{ '0' }}
+                                                @endif                                                                                                
+                                            </td>
+                                            <td class="text-center">
+                                                @if($n->contarDamas($n->id))
+                                                    <a href="{{ route('socios_filtrados', ['nombre' => 'nacionalidad_id', 'id' => $n->id, 'genero' => 'Dama']) }}">{{ $n->contarDamas($n->id) }}</a>
+                                                @else
+                                                    {{ '0' }}
+                                                @endif                                                                                                
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ route('socios_filtrados', ['nombre' => 'nacionalidad_id', 'id' => $n->id, 'genero' => 'Todos']) }}">{{ $n->contarTodos($n->id) }}</a>                                                                               
+                                            </td>
 	                                    </tr>
 		                            @endif
                                 @endforeach

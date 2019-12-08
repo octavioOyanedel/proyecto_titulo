@@ -24,17 +24,45 @@
                                     @if($co->contarTodos($co->id) != 0)
                                         <tr>
                                             <td><b>{{ $co->nombre }}</b></td>
-                                            <td class="text-center"><a href="">{{ $co->contarVarones($co->id) }}</a></td>
-                                            <td class="text-center"><a href="">{{ $co->contarDamas($co->id) }}</a></td>
-                                            <td class="text-center"><a href="">{{ $co->contarTodos($co->id) }}</a></td>
+                                            <td class="text-center">
+                                                @if($co->contarVarones($co->id))
+                                                    <a href="{{ route('socios_filtrados', ['nombre' => 'comuna_id', 'id' => $co->id, 'genero' => 'Varón']) }}">{{ $co->contarVarones($co->id) }}</a>
+                                                @else
+                                                    {{ '0' }}
+                                                @endif                                                      
+                                            </td>
+                                            <td class="text-center">
+                                                @if($co->contarDamas($co->id))
+                                                    <a href="{{ route('socios_filtrados', ['nombre' => 'comuna_id', 'id' => $co->id, 'genero' => 'Dama']) }}">{{ $co->contarDamas($co->id) }}</a>
+                                                @else
+                                                    {{ '0' }}
+                                                @endif                                                                                                   
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ route('socios_filtrados', ['nombre' => 'comuna_id', 'id' => $co->id, 'genero' => 'Todos']) }}">{{ $co->contarTodos($co->id) }}</a>
+                                            </td>
                                         </tr>
                                         @foreach($co->ciudades as $ci)
                                             @if($ci->contarTodos($ci->id) != 0)
                                                 <tr>
                                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;<i>{{ $ci->nombre }}</i></td>
-                                                    <td class="text-center"><a href="">{{ $ci->contarVarones($ci->id) }}</a></td>
-                                                    <td class="text-center"><a href="">{{ $ci->contarDamas($ci->id) }}</a></td>
-                                                    <td class="text-center"><a href="">{{ $ci->contarTodos($ci->id) }}</a></td>
+                                                    <td class="text-center">
+                                                        @if($ci->contarVarones($ci->id))
+                                                            <a href="{{ route('socios_filtrados', ['nombre' => 'ciudad_id', 'id' => $ci->id, 'genero' => 'Varón']) }}">{{ $ci->contarVarones($ci->id) }}</a>
+                                                        @else
+                                                            {{ '0' }}
+                                                        @endif                                                          
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if($ci->contarDamas($ci->id))
+                                                            <a href="{{ route('socios_filtrados', ['nombre' => 'ciudad_id', 'id' => $ci->id, 'genero' => 'Dama']) }}">{{ $ci->contarDamas($ci->id) }}</a>
+                                                        @else
+                                                            {{ '0' }}
+                                                        @endif                                                                                                                    
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a href="{{ route('socios_filtrados', ['nombre' => 'ciudad_id', 'id' => $ci->id, 'genero' => 'Todos']) }}">{{ $ci->contarTodos($ci->id) }}</a>
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach

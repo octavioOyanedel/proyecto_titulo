@@ -99,7 +99,7 @@ class RegistroContable extends Model
         }
     }
 
-        /**
+    /**
      * scope busqueda concepto
      */
     public function scopeConceptoFiltro($query, $concepto)

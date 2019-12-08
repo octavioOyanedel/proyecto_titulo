@@ -6,7 +6,7 @@
             <a title="Exportar listado." class="mr-2" href="">|<b>Exportar Excel</b>|</a>
         </div>
     </div>
-    <form class="form-inline float-right" method="GET" action="{{ route('socios_filtrados') }}">
+    <form class="form-inline float-right" method="GET" action="{{ route('socios_filtrados_incorporaciones') }}">
         <div class="input-group mb-2 mr-sm-2">
             <select name="registros" id="registro" class="form-control form-control-sm">
                 <option value="" selected>N° Registros</option>
@@ -43,9 +43,9 @@
             </select>
         </div>
 
-        <input type="hidden" name="nombre" value="{{ request('nombre') }}">
-        <input type="hidden" name="id" value="{{ request('id') }}">
-        <input type="hidden" name="genero" value="{{ request('genero') }}">
+        <input type="hidden" name="mes" value="{{ request('mes') }}">
+        <input type="hidden" name="estado" value="{{ request('estado') }}">
+
 
         <div class="input-group mb-2 mr-sm-2">
             <button type="submit" id="filtrar" class="btn btn-sm btn-secondary">Filtrar</button>

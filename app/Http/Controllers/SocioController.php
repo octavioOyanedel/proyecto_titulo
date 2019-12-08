@@ -828,9 +828,9 @@ class SocioController extends Controller
     }
 
     /**
-     * Exportar a excel.
+     * filtrar socio.
      */
-    public function sociosSede(Request $request)
+    public function socioFiltrados(Request $request)
     {
 
         $total_consulta = 0;
@@ -852,74 +852,289 @@ class SocioController extends Controller
         }else{
             $orden = 'ASC';
         }
+
         switch ($columna) {
             case 'sede_id':
-                $socios = Socio::where([
-                    ['sede_id','=',$request->sede_id],
-                    ['genero','=','Varón']
-                ])->orderBy('sedes.nombre',$orden)
-                ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
-                ->paginate($registros)->appends([
-                    'registros' => $registros,
-                    'columna' => $columna,
-                    'orden' => $orden,
-                    'sede_id' => $request->sede_id,
-                ]);
-                 $total_consulta = $socios->total();
+                if($request->genero === 'Todos'){
+                    $socios = Socio::where([
+                        [$request->nombre,'=',$request->id]
+                    ])->orderBy('sedes.nombre',$orden)
+                    ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre,
+                        'id' => $request->id,
+                        'genero' => $request->genero
+                    ]);   
+                }else{
+                    $socios = Socio::where([
+                        [$request->nombre,'=',$request->id],
+                        ['genero','=',$request->genero]
+                    ])->orderBy('sedes.nombre',$orden)
+                    ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre,
+                        'id' => $request->id,
+                        'genero' => $request->genero
+                    ]);                       
+                }
+  
+                $total_consulta = $socios->total();
             break;
             case 'area_id':
-                $socios = Socio::where([
-                    ['sede_id','=',$request->sede_id],
-                    ['genero','=','Varón']
-                ])->orderBy('areas.nombre',$orden)
-                ->join('areas', 'socios.area_id', '=', 'areas.id')
-                ->paginate($registros)->appends([
-                    'registros' => $registros,
-                    'columna' => $columna,
-                    'orden' => $orden,
-                    'sede_id' => $request->sede_id,
-                ]);
-                 $total_consulta = $socios->total();
+                if($request->genero === 'Todos'){
+                    $socios = Socio::where([
+                        [$request->nombre,'=',$request->id]
+                    ])->orderBy('areas.nombre',$orden)
+                    ->join('areas', 'socios.area_id', '=', 'areas.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre,
+                        'id' => $request->id,
+                        'genero' => $request->genero
+                    ]);     
+                }else{
+                    $socios = Socio::where([
+                        [$request->nombre,'=',$request->id],
+                        ['genero','=',$request->genero]
+                    ])->orderBy('areas.nombre',$orden)
+                    ->join('areas', 'socios.area_id', '=', 'areas.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre,
+                        'id' => $request->id,
+                        'genero' => $request->genero
+                    ]);                         
+                }
+                $total_consulta = $socios->total();
             break;
             case 'cargo_id':
-                $socios = Socio::where([
-                    ['sede_id','=',$request->sede_id],
-                    ['genero','=','Varón']
-                ])->orderBy('cargos.nombre',$orden)
-                ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
-                ->paginate($registros)->appends([
-                    'registros' => $registros,
-                    'columna' => $columna,
-                    'orden' => $orden,
-                    'sede_id' => $request->sede_id,
-                ]);
-                 $total_consulta = $socios->total();
+                if($request->genero === 'Todos'){
+                    $socios = Socio::where([
+                        [$request->nombre,'=',$request->id]
+                    ])->orderBy('cargos.nombre',$orden)
+                    ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre,
+                        'id' => $request->id,
+                        'genero' => $request->genero
+                    ]);  
+                }else{
+                    $socios = Socio::where([
+                        [$request->nombre,'=',$request->id],
+                        ['genero','=',$request->genero]
+                    ])->orderBy('cargos.nombre',$orden)
+                    ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre,
+                        'id' => $request->id,
+                        'genero' => $request->genero
+                    ]);                      
+                }
+                $total_consulta = $socios->total();
             break;
             default:
-                $socios = Socio::where([
-                    ['sede_id','=',$request->sede_id],
-                    ['genero','=','Varón']
-                ])->orderBy($columna, $orden)
-                ->paginate($registros)->appends([
-                    'registros' => $registros,
-                    'columna' => $columna,
-                    'orden' => $orden,
-                    'sede_id' => $request->sede_id,
-                ]);
-                 $total_consulta = $socios->total();
+                if($request->genero === 'Todos'){
+                    $socios = Socio::where([
+                        [$request->nombre,'=',$request->id]
+                    ])->orderBy($columna, $orden)
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre,
+                        'id' => $request->id,
+                        'genero' => $request->genero
+                    ]);  
+                }else{
+                    $socios = Socio::where([
+                        [$request->nombre,'=',$request->id],
+                        ['genero','=',$request->genero]
+                    ])->orderBy($columna, $orden)
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre,
+                        'id' => $request->id,
+                        'genero' => $request->genero
+                    ]);                      
+                }
+                $total_consulta = $socios->total();
             break;
         }
-
+  
         $varones = Socio::where('genero','=','Varón')->count();
         $damas = Socio::where('genero','=','Dama')->count();
         $total = Socio::all()->count();
         $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
         $total_consulta = $socios->total();
-        $sede_id = $request->sede_id;
+        $nombre = $request->nombre;
+        $id = $request->id;
+        $genero = $request->genero;
 
-
-        return view('sind1.socios.resultados_estadistica_area_sede', compact('socios','estados','total_consulta','sede_id'));
+        return view('sind1.socios.resultados_estadistica_area_sede', compact('socios','estados','total_consulta','nombre','id','genero'));
     }
- 
+
+    /**
+     * filtrar socio sede.
+     */
+    public function socioFiltradosIncorporados(Request $request)
+    {
+
+        $total_consulta = 0;
+
+        if(request()->has('registros') || request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'fecha_sind1';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'ASC';
+        }
+
+        $fecha_ini = date('Y').'-'.$request->mes.'-01';
+        $fecha_fin = date('Y').'-'.$request->mes.'-'.obtenerDiasPorMes($request->mes);    
+
+        switch ($columna) {
+            case 'sede_id':
+                if($request->estado === 'incorporados'){
+                    $socios = Socio::whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])
+                    ->orderBy('sedes.nombre',$orden)
+                    ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'mes' => $request->mes,
+                        'estado' => $request->estado
+                    ]);   
+                }else{
+                    $socios = Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])
+                    ->orderBy('sedes.nombre',$orden)
+                    ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'mes' => $request->mes,
+                        'estado' => $request->estado
+                    ]);                       
+                }
+  
+                $total_consulta = $socios->total();
+            break;
+            case 'area_id':
+                if($request->estado === 'incorporados'){
+                    $socios = Socio::whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])
+                    ->orderBy('areas.nombre',$orden)
+                    ->join('areas', 'socios.area_id', '=', 'areas.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'mes' => $request->mes,
+                        'estado' => $request->estado
+                    ]);     
+                }else{
+                    $socios = Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])
+                    ->orderBy('areas.nombre',$orden)
+                    ->join('areas', 'socios.area_id', '=', 'areas.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'mes' => $request->mes,
+                        'estado' => $request->estado
+                    ]);                         
+                }
+                $total_consulta = $socios->total();
+            break;
+            case 'cargo_id':
+                if($request->estado === 'incorporados'){
+                    $socios = Socio::whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])
+                    ->orderBy('cargos.nombre',$orden)
+                    ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'mes' => $request->mes,
+                        'estado' => $request->estado
+                    ]);  
+                }else{
+                    $socios = Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])
+                    ->orderBy('cargos.nombre',$orden)
+                    ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'mes' => $request->mes,
+                        'estado' => $request->estado
+                    ]);                      
+                }
+                $total_consulta = $socios->total();
+            break;
+            default:
+                if($request->estado === 'incorporados'){
+                    $socios = Socio::whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])
+                    ->orderBy($columna, $orden)
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'mes' => $request->mes,
+                        'estado' => $request->estado
+                    ]);  
+                }else{
+                    $socios = Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])
+                    ->orderBy($columna, $orden)
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'mes' => $request->mes,
+                        'estado' => $request->estado
+                    ]);                      
+                }
+                $total_consulta = $socios->total();
+            break;
+        }
+  
+        $varones = Socio::where('genero','=','Varón')->count();
+        $damas = Socio::where('genero','=','Dama')->count();
+        $total = Socio::all()->count();
+        $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
+        $total_consulta = $socios->total();
+        $mes = $request->mes;
+        $estado = $request->estado;
+
+        return view('sind1.socios.resultados_estadistica_vinculos', compact('socios','estados','total_consulta','mes','estado'));
+    }
 
 }

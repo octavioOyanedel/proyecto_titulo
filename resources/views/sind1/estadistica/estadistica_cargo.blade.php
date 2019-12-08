@@ -24,9 +24,21 @@
 	                                @if($c->contarTodos($c->id) != 0)
 	                                    <tr>
 	                                        <td><b>{{ $c->nombre }}</b></td>
-	                                        <td class="text-center"><a href="">{{ $c->contarVarones($c->id) }}</a></td>
-	                                        <td class="text-center"><a href="">{{ $c->contarDamas($c->id) }}</a></td>
-	                                        <td class="text-center"><a href="">{{ $c->contarTodos($c->id) }}</a></td>
+	                                        <td class="text-center">
+                                                @if($c->contarVarones($c->id) != 0)
+                                                    <a href="{{ route('socios_filtrados', ['nombre' => 'cargo_id', 'id' => $c->id, 'genero' => 'Varón']) }}">{{ $c->contarVarones($c->id) }}</a>
+                                                @else
+                                                    {{ '0' }}
+                                                @endif   
+                                            </td>                                                   
+	                                        <td class="text-center">
+                                                @if($c->contarVarones($c->id) != 0)
+                                                    <a href="{{ route('socios_filtrados', ['nombre' => 'cargo_id', 'id' => $c->id, 'genero' => 'Dama']) }}">{{ $c->contarDamas($c->id) }}</a>
+                                                @else
+                                                    {{ '0' }}
+                                                @endif                                                   
+                                            </td>
+	                                        <td class="text-center"><a href="{{ route('socios_filtrados', ['nombre' => 'cargo_id', 'id' => $c->id, 'genero' => 'Todos']) }}">{{ $c->contarTodos($c->id) }}</a></td>
 	                                    </tr>
 		                            @endif
                                 @endforeach

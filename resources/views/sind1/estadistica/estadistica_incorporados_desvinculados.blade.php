@@ -32,21 +32,21 @@
                                             <td><b>{{ obtenerMesPorNumero($i) }}</b></td>
                                             <td class="text-center">
                                                 @if($socio->obtenerVinculadosPorMes($i) != 0)
-                                                    <a href="" title="Socios incorporados.">{{ $socio->obtenerVinculadosPorMes($i) }}</a>
+                                                    <a href="{{ route('socios_filtrados_incorporaciones', ['mes' => $i, 'estado' => 'incorporados']) }}" title="Socios incorporados.">{{ $socio->obtenerVinculadosPorMes($i) }}</a>
                                                 @else
                                                     {{ '0' }}
                                                 @endif                                                
                                             </td>
                                             <td class="text-center">    
                                                 @if($socio->obtenDesvinculadosPorMes($i) != 0)
-                                                    <a href="" title="Socios descinculados.">{{ $socio->obtenDesvinculadosPorMes($i) }}</a>
+                                                    <a href="{{ route('socios_filtrados_incorporaciones', ['mes' => $i, 'estado' => 'desvinculados']) }}" title="Socios descinculados.">{{ $socio->obtenDesvinculadosPorMes($i) }}</a>
                                                 @else
                                                     {{ '0' }}
                                                 @endif                                                     
                                             </td>
                                             <td class="text-center">
                                                 @if($socio->obtenerVinculadosPorMes($i) - $socio->obtenDesvinculadosPorMes($i) != 0)
-                                                    <a class="{{ ($socio->obtenerVinculadosPorMes($i) - $socio->obtenDesvinculadosPorMes($i) > 0) ? 'text-success' : 'text-danger' }}" href=""><b>{{ $socio->obtenerVinculadosPorMes($i) - $socio->obtenDesvinculadosPorMes($i) }}</b></a>
+                                                    <a class="{{ ($socio->obtenerVinculadosPorMes($i) - $socio->obtenDesvinculadosPorMes($i) > 0) ? 'text-success' : 'text-danger' }}"><b>{{ $socio->obtenerVinculadosPorMes($i) - $socio->obtenDesvinculadosPorMes($i) }}</b></a>
                                                 @else
                                                     {{ '0' }}
                                                 @endif

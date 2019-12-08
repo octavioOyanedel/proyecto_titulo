@@ -57,8 +57,7 @@ class RegistroContableController extends Controller
                 ->tipoRegistroContableId($campo)
                 ->numeroRegistro($campo)
                 ->cheque($campo)
-                ->montoUnico($campo)
-                ->conceptoId($campo)         
+                ->montoUnico($campo)         
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -83,8 +82,7 @@ class RegistroContableController extends Controller
                 ->tipoRegistroContableId($campo)
                 ->numeroRegistro($campo)
                 ->cheque($campo)
-                ->montoUnico($campo)
-                ->conceptoId($campo)    
+                ->montoUnico($campo)    
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -109,7 +107,6 @@ class RegistroContableController extends Controller
                 ->numeroRegistro($campo)
                 ->cheque($campo)
                 ->montoUnico($campo)
-                ->conceptoId($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -128,7 +125,6 @@ class RegistroContableController extends Controller
                 ]); 
             break;
         }
-
 
         $total_consulta = $registros->total();
 

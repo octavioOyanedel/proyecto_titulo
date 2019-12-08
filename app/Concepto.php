@@ -46,7 +46,7 @@ class Concepto extends Model
      */
     static public function obtenerConceptoPorNombre($nombre)
     {
-        return Concepto::where('nombre', $nombre)->first();
+        return Concepto::where('nombre','LIKE', "%$nombre%")->first();
     }
 
     /**

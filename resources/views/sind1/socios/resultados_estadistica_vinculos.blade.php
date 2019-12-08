@@ -8,18 +8,18 @@
             @include('partials.alertas')
 
             <div class="card">
-                <div class="card-header text-center"><h3 class="mb-0">Socios Incorporados</h3></div>
+                <div class="card-header text-center"><h3 class="mb-0">Resultados Búsqueda de Socios</h3></div>
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
 
                     @if($socios->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se han encontrado registros. <a href="{{ route('socios.create') }}">Crear nuevo.</a></b>
+                            <b>No se han encontrado registros. <a href="{{ route('filtro_socios_form') }}">Volver atrás.</a></b>
                         </div>
                     @else
                         <div>
-                            @include('partials.components.filtros.socios')
+                            @include('partials.components.filtros.estadistica_vinculos')
                         </div>
 
                         <div class="table-responsive">
@@ -28,6 +28,7 @@
                                     <tr>
                                         <th class="text-center" colspan="3" scope="col"></th>
                                         <th scope="col">Nombre</th>
+                                        <th scope="col">Estado socio</th>
                                         <th class="text-center" scope="col">Género</th>
                                         <th class="text-center" scope="col">Rut</th>
                                         <th class="text-center" scope="col">Fecha ingreso Sind1</th>
@@ -41,12 +42,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php $i = 0 @endphp
                                     @foreach($socios as $s)
                                         <tr>
                                             <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('socios.show',$s) }}"><span>@svg('ver')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href="{{ route('socios.edit',$s) }}"><span>@svg('editar')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" href="{{ route('eliminar_socio_form',$s->id) }}"><span>@svg('eliminar')</span></a></td>
                                             <td>@if($s->apellido2 != null) {{ $s->apellido1 }} {{ $s->apellido2 }}, @else {{ $s->apellido1 }}, @endif {{ $s->nombre1 }} {{ $s->nombre2 }}</td>
+                                            <td>{{ $s->estado_socio_id }}</td>
                                             <td class="text-center">{{ $s->genero }}</td>
                                             <td class="text-center">{{ $s->rut }}</td>
                                             <td class="text-center" title="{{ ($s->fecha_sind1 === '') ? 'Sin registro.' : '' }}">{{ celdaCadena($s->fecha_sind1) }}</td>
