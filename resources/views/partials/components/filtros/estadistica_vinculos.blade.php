@@ -3,7 +3,10 @@
         <div class="input-group mb-2 mr-sm-2">
             <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif &nbsp;</span>
             <a title="Resetear listado." class="mr-2" href="{{ route('home') }}">|<b>Resetear</b>|</a>
-            <a title="Exportar listado." class="mr-2" href="">|<b>Exportar Excel</b>|</a>
+            <a title="Exportar listado." class="mr-2" href="{{ route('socios_incorporados_estadistica',[
+                'mes' => $mes,
+                'estado' => $estado
+            ]) }}">|<b>Exportar Excel</b>|</a>
         </div>
     </div>
     <form class="form-inline float-right" method="GET" action="{{ route('socios_filtrados_incorporaciones') }}">

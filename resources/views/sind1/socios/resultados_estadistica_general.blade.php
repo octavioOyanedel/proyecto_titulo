@@ -19,7 +19,7 @@
                         </div>
                     @else
                         <div>
-                            @include('partials.components.filtros.estadistica_area_sede')
+                            @include('partials.components.filtros.estadistica_general')
                         </div>
 
                         <div class="table-responsive">

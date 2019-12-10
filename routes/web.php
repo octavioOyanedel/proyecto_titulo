@@ -208,4 +208,9 @@ Route::get('estadisticas_sede_area','MantenedorController@estadisticaSedeArea')-
 Route::get('estadisticas_Incorporados_desvinculados','MantenedorController@estadisticaIncorporadoDesvinculado')->name('estadisticas_Incorporados_desvinculados')->middleware('auth');
 
 Route::get('socios_filtrados','SocioController@socioFiltrados')->name('socios_filtrados')->middleware('auth');
+
+Route::get('socios_general_estadistica/{nombre}/{id}/{genero}','SocioController@exportarExcelEstadistica')->name('socios_general_estadistica')->middleware('auth');
+
 Route::get('socios_filtrados_incorporaciones','SocioController@socioFiltradosIncorporados')->name('socios_filtrados_incorporaciones')->middleware('auth');
+
+Route::get('socios_incorporados_estadistica/{mes}/{estado}','SocioController@exportarExcelEstadisticaIncorporados')->name('socios_incorporados_estadistica')->middleware('auth');

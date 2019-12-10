@@ -17,9 +17,11 @@ use App\Exports\SocioExport;
 use Illuminate\Http\Request;
 use App\Exports\FiltroSocioExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\EstadisticaSocioExport;
 use App\Http\Requests\EditarSocioRequest;
 use App\Http\Requests\FiltrarSocioRequest;
 use App\Http\Requests\IncorporarSocioRequest;
+use App\Exports\EstadisticaIncorporadoSocioExport;
 
 class SocioController extends Controller
 {
@@ -984,11 +986,12 @@ class SocioController extends Controller
         $total = Socio::all()->count();
         $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
         $total_consulta = $socios->total();
-        $nombre = $request->nombre;
-        $id = $request->id;
-        $genero = $request->genero;
 
-        return view('sind1.socios.resultados_estadistica_area_sede', compact('socios','estados','total_consulta','nombre','id','genero'));
+        ($request->nombre) ?  $nombre = $request->nombre : $nombre = 'null';
+        ($request->id) ?  $id = $request->id : $id = 'null';
+        ($request->genero) ?  $genero = $request->genero : $genero = 'null';
+
+        return view('sind1.socios.resultados_estadistica_general', compact('socios','estados','total_consulta','nombre','id','genero'));
     }
 
     /**
@@ -1131,10 +1134,26 @@ class SocioController extends Controller
         $total = Socio::all()->count();
         $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
         $total_consulta = $socios->total();
-        $mes = $request->mes;
-        $estado = $request->estado;
+
+        ($request->mes) ?  $mes = $request->mes : $mes = 'null';
+        ($request->estado) ?  $estado = $request->estado : $estado = 'null';
 
         return view('sind1.socios.resultados_estadistica_vinculos', compact('socios','estados','total_consulta','mes','estado'));
     }
 
+    /**
+     * Exportar a excel estadistica.
+     */
+    public function exportarExcelEstadistica($nombre, $id, $genero)
+    {
+        return Excel::download(new EstadisticaSocioExport($nombre, $id, $genero), 'listado_distribucion_socios.xlsx');
+    }
+
+    /**
+     * Exportar a excel estadistica incorporados.
+     */
+    public function exportarExcelEstadisticaIncorporados($mes, $estado)
+    {
+        return Excel::download(new EstadisticaIncorporadoSocioExport($mes, $estado), 'listado_distribucion_socios.xlsx');
+    }
 }
