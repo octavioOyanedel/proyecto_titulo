@@ -29,7 +29,7 @@ class PrestamoController extends Controller
     {
         $this->middleware('auth');
 
-        $this->middleware('administrador', ['only' => ['create', 'store']]);
+        $this->middleware('administrador', ['only' => ['create', 'store', 'simulacion']]);
 
         //$this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
     }
@@ -345,7 +345,7 @@ class PrestamoController extends Controller
      */
     public function edit(Prestamo $prestamo)
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -357,7 +357,7 @@ class PrestamoController extends Controller
      */
     public function update(Request $request, Prestamo $prestamo)
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -368,7 +368,7 @@ class PrestamoController extends Controller
      */
     public function destroy(Prestamo $prestamo)
     {
-        //
+        return redirect()->route('home');
     }
 
     /**

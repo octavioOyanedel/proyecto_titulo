@@ -25,6 +25,16 @@ use App\Exports\EstadisticaIncorporadoSocioExport;
 
 class SocioController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('administrador', ['only' => ['create', 'edit', 'store', 'update', 'destroy']]);
+
+        //$this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +42,7 @@ class SocioController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
