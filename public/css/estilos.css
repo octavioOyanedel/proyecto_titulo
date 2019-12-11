@@ -1,3 +1,6 @@
+table, form, input, select, option {
+	font-size: 14px;
+}
 
  table, th, tr{
 	overflow: hidden;
