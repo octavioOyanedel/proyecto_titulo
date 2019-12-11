@@ -172,10 +172,18 @@ class User extends Authenticatable
     }
 
     /**
-     * Obtener ultimo registro creado
+     * Obtener último registro creado
      */
     static public function obtenerUltimoUsuarioIngresado()
     {
         return User::orderBy('created_at', 'DESC')->first();
     }
+
+    /**
+     * Obtener último registro creado
+     */
+    static public function obtenerUsuarioPorEmail($email)
+    {
+        return User::where('email','=',$email)->first();
+    }    
 }

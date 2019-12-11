@@ -26,7 +26,11 @@
                             <table class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" colspan="3" scope="col"></th>
+                                        <th class="text-center" scope="col"></th>
+                                        @if(Auth::user()->rol_id != 'Invitado')
+                                        <th class="text-center" scope="col"></th>
+                                        <th class="text-center" scope="col"></th>
+                                        @endif    
                                         <th scope="col">Nombre</th>
                                         <th class="text-center" scope="col">Género</th>
                                         <th class="text-center" scope="col">Rut</th>
@@ -44,8 +48,10 @@
                                     @foreach($socios as $s)
                                         <tr>
                                             <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('socios.show',$s) }}"><span>@svg('ver')</span></a></td>
+                                        @if(Auth::user()->rol_id != 'Invitado')
                                             <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href="{{ route('socios.edit',$s) }}"><span>@svg('editar')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" href="{{ route('eliminar_socio_form',$s->id) }}"><span>@svg('eliminar')</span></a></td>
+                                        @endif    
                                             <td>@if($s->apellido2 != null) {{ $s->apellido1 }} {{ $s->apellido2 }}, @else {{ $s->apellido1 }}, @endif {{ $s->nombre1 }} {{ $s->nombre2 }}</td>
                                             <td class="text-center">{{ $s->genero }}</td>
                                             <td class="text-center">{{ $s->rut }}</td>

@@ -167,16 +167,32 @@ class LogSistema extends Model
     /**
      * registrar en log 
      */
-    static public function registrarAccion($accion)
+    static public function registrarAccion($accion, $id_usuario = null)
     {
-        $log = new LogSistema;
-        $log->fecha = date('Y-m-d');
-        $log->accion = $accion;
-        $log->ip = obtenerIp();
-        $log->navegador = obtenerBrowser();
-        $log->sistema = obtenerSistemaOperativo();
-        $log->usuario_id = auth()->user()->id;  
-        $log->correo = auth()->user()->email; 
-        $log->save();         
+        if(isset($id_usuario) && $id_usuario != null){
+
+            $usuario = User::findOrFail($id_usuario);
+
+            $log = new LogSistema;
+            $log->fecha = date('Y-m-d');
+            $log->accion = $accion;
+            $log->ip = obtenerIp();
+            $log->navegador = obtenerBrowser();
+            $log->sistema = obtenerSistemaOperativo();
+            $log->usuario_id = $usuario->id;  
+            $log->correo = $usuario->email; 
+            $log->save();  
+        }else{
+            $log = new LogSistema;
+            $log->fecha = date('Y-m-d');
+            $log->accion = $accion;
+            $log->ip = obtenerIp();
+            $log->navegador = obtenerBrowser();
+            $log->sistema = obtenerSistemaOperativo();
+            $log->usuario_id = auth()->user()->id;  
+            $log->correo = auth()->user()->email; 
+            $log->save();             
+        }
+       
     }
 }

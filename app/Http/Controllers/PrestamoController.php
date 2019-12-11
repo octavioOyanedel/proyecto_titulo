@@ -24,6 +24,16 @@ use App\Exports\FiltroPrestamoExport;
 
 class PrestamoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('administrador', ['only' => ['create', 'store']]);
+
+        //$this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
