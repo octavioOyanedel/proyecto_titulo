@@ -41,17 +41,27 @@
 
                     @if($estudios->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se han encontrado registros. <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}">Agregar estudio.</a></b>
+                            <b>Socio sin estudios registrados.
+                                @if(Auth::user()->rol_id != 'Invitado')
+                                    <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}">Agregar estudio.</a>
+                                @endif
+                            </b>
                         </div>                        
                     @else     
                         <div class="table-responsive">
-                            <h4 class="mt-4">Estudios Realizados <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Estudio</a></h4>                      
+                            <h4 class="mt-4">Estudios Realizados 
+                                @if(Auth::user()->rol_id != 'Invitado')
+                                    <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Estudio</a>
+                                @endif
+                            </h4>                      
                             <div class="table-responsive">
                                 <table class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
+                                            @if(Auth::user()->rol_id != 'Invitado')
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            @endif
                                             <th scope="col">Nivel educacional</th>
                                             <th scope="col">Institución</th>
                                             <th scope="col">Estado</th>
@@ -61,8 +71,10 @@
                                     <tbody>
                                         @foreach($estudios as $s)
                                             <tr>
-                                                <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="{{ route('estudios.edit', $s->id) }}"><span>@svg('editar')</span></a></td>
-                                                <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" href="{{ route('estudios.show', $s->id) }}"><span>@svg('eliminar')</span></a></td>
+                                                @if(Auth::user()->rol_id != 'Invitado')
+                                                    <td width="50" class="text-center" scope="row" title="Editar estudio"><a class="text-secondary" href="{{ route('estudios.edit', $s->id) }}"><span>@svg('editar')</span></a></td>
+                                                    <td width="50" class="text-center" scope="row" title="Eliminar estudio"><a class="text-danger" href="{{ route('estudios.show', $s->id) }}"><span>@svg('eliminar')</span></a></td>
+                                                @endif
                                                 <td>{{ $s->estudio_realizado->grado_academico_id }}</td>
                                                 <td>{{ $s->estudio_realizado->institucion_id }}</td>
                                                 <td>{{ $s->estudio_realizado->estado_grado_academico_id }}</td>
@@ -77,16 +89,26 @@
 
                     @if($cargas->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>Socio sin cargas familiares registrados. <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}">Agregar carga familiar</a></b>
+                            <b>Socio sin cargas familiares registradas. 
+                                @if(Auth::user()->rol_id != 'Invitado')
+                                    <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}">Agregar carga familiar</a>
+                                @endif
+                            </b>
                         </div>                               
                     @else
                         <div class="table-responsive">
-                            <h4 class="mt-4">Cargas Familiares <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Carga Familiar</a></h4>
+                            <h4 class="mt-4">Cargas Familiares
+                                @if(Auth::user()->rol_id != 'Invitado')
+                                    <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Carga Familiar</a>
+                                @endif
+                            </h4>
                             <table class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
+                                        @if(Auth::user()->rol_id != 'Invitado')
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                        @endif
                                         <th scope="col">Nombre</th>
                                         <th class="text-center" scope="col">Rut</th>
                                         <th class="text-center" scope="col">Fecha de nacimiento</th>
@@ -96,8 +118,10 @@
                                 <tbody>
                                     @foreach($cargas as $c)
                                         <tr>
-                                            <td width="50" class="text-center" scope="row" title="Editar carga familiar"><a class="text-secondary" href="{{ route('cargas.edit', $c->id) }}"><span>@svg('editar')</a></td>
-                                            <td width="50" class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" href="{{ route('cargas.show', $c->id) }}"><span>@svg('eliminar')</span></td>
+                                            @if(Auth::user()->rol_id != 'Invitado')
+                                                <td width="50" class="text-center" scope="row" title="Editar carga familiar"><a class="text-secondary" href="{{ route('cargas.edit', $c->id) }}"><span>@svg('editar')</a></td>
+                                                <td width="50" class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" href="{{ route('cargas.show', $c->id) }}"><span>@svg('eliminar')</span></td>
+                                            @endif
                                             <td>{{ $c->apellido1 }} {{ $c->apellido2 }}, {{ $c->nombre1 }} {{ $c->nombre2 }}</td>
                                             <td class="text-center">{{ $c->rut }}</td>
                                             <td class="text-center">{{ $c->fecha_nac }}</td>
@@ -111,7 +135,11 @@
 
                     @if($prestamos->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>Socio sin préstamos registrados. <a href="{{ route('prestamos.create') }}">Agregar préstamo</a></b>
+                            <b>Socio sin préstamos registrados. 
+                                @if(Auth::user()->rol_id != 'Invitado')
+                                    <a href="{{ route('prestamos.create') }}">Agregar préstamo</a>
+                                @endif
+                            </b>
                         </div>
                     @else  
                         <div class="table-responsive">                    
@@ -119,8 +147,7 @@
                             <table id="tabla-prestamos-socio" class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" scope="col" title=""></th>
-                                        <th class="text-center" scope="col" title=""></th>                                        
+                                        <th></th>                                       
                                         <th class="text-center" scope="col">Fecha solicitud</th>
                                         <th class="text-center" scope="col">Forma de pago</th>
                                         <th class="text-center" scope="col">Estado</th>
@@ -139,7 +166,7 @@
 
                                     <tr>
                                         <td width="50" class="text-center" scope="row" title="Ver detalle socio"><a class="text-primary" href="{{ route('prestamos.show',$p) }}"><span>@svg('ver')</span></a></td>
-                                        <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td>
+                                        {{-- <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href=""><span>@svg('editar')</span></a></td> --}}
                                         <td class="text-center">{{ $p->fecha_solicitud }}</td>
                                         <td class="text-center">{{ $p->forma_pago_id }}</td>
                                         <td class="text-center">

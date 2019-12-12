@@ -74,8 +74,10 @@
                             </table>
                         </div>
                     @endif
-                    @if($prestamo->getOriginal('forma_pago_id') === 2 && ($prestamo->getOriginal('estado_deuda_id') === 2 || $prestamo->getOriginal('estado_deuda_id') === 3))
-                        <a class="btn btn-primary" href="{{ route('cancelar_deposito', ['id' => $prestamo->id]) }}" role="button">Cancelar Préstamo</a>
+                    @if(Auth::user()->rol_id != 'Invitado')
+                        @if($prestamo->getOriginal('forma_pago_id') === 2 && ($prestamo->getOriginal('estado_deuda_id') === 2 || $prestamo->getOriginal('estado_deuda_id') === 3))
+                            <a class="btn btn-primary" href="{{ route('cancelar_deposito', ['id' => $prestamo->id]) }}" role="button">Cancelar Préstamo</a>
+                        @endif
                     @endif
                 </div>
             </div>

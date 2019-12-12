@@ -13,6 +13,16 @@ use App\Http\Requests\EditarPasswordRequest;
 
 class UsuarioController extends Controller 
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('administrador', ['only' => ['index','edit','create', 'store', 'destroy', 'show']]);
+
+        //$this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

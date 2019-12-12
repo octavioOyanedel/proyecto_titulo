@@ -21,6 +21,16 @@ use App\Http\Requests\IncorporarRegistroContableRequest;
 
 class RegistroContableController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('administrador', ['only' => ['create', 'edit', 'store', 'update', 'destroy']]);
+
+        //$this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
+    }
+        
     /**
      * Display a listing of the resource.
      *
