@@ -39,10 +39,21 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     @if(Auth::user()->rol_id != 'Invitado')
-                        <a class="dropdown-item sub-item" href="{{ route('socios.create') }}">Incorporar</a>
+                        <a class="dropdown-item sub-item" href="{{ route('socios.create') }}">Agregar</a>
                     @endif
                     <a class="dropdown-item sub-item" href="{{ route('home') }}">Listar</a>
                     <a class="dropdown-item sub-item" href="{{ route('filtro_socios_form') }}">Filtrar</a>
+                </div>
+            </li>
+
+            <!-- módulo socios -->
+            <li class="nav-item dropdown mr-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span id="span-cargas">Cargas Familiares</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item sub-item" href="{{ route('cargas.index') }}">Listar</a>
+                    <a class="dropdown-item sub-item" href="">Filtrar</a>
                 </div>
             </li>
 
@@ -71,7 +82,7 @@
                     @endif
                     <a class="dropdown-item sub-item" href="{{ route('contables.index') }}">Listar</a>
                     <a class="dropdown-item sub-item" href="{{ route('filtro_contables_form') }}">Filtrar</a>
-                    @if(Auth::user()->rol_id != 'Invitado')                    
+                    @if(Auth::user()->rol_id != 'Invitado')
                         <a class="dropdown-item sub-item" href="{{ route('crear_conciliacion') }}">Conciliación Bancaria</a>
                         <a class="dropdown-item sub-item" href="{{ route('anular_registro_form') }}">Anular Registro</a>
                     @endif
@@ -86,13 +97,13 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item sub-item" href="{{ route('estadisticas_sede_area') }}">Distribución de Socios por Sede - Área</a>
                     <a class="dropdown-item sub-item" href="{{ route('estadisticas_cargo') }}">Distribución de Socios por Cargo</a>
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_comuna_ciudad') }}">Distribución de Socios por Comuna - Ciudad</a>                    
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_comuna_ciudad') }}">Distribución de Socios por Comuna - Ciudad</a>
                     <a class="dropdown-item sub-item" href="{{ route('estadisticas_nacionalidad') }}">Distribución de Socios por Nacionalidad</a>
                     <a class="dropdown-item sub-item" href="{{ route('estadisticas_Incorporados_desvinculados') }}">Distribución de Socios por Incorporación - Desvinculación</a>
                 </div>
             </li>
 
-            @if(Auth::user()->rol_id === 'Administrador')            
+            @if(Auth::user()->rol_id === 'Administrador')
                 <!-- módulo historial -->
                 <li class="nav-item dropdown mr-3">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -104,8 +115,8 @@
                     </div>
                 </li>
             @endif
-    
-            @if(Auth::user()->rol_id != 'Invitado')    
+
+            @if(Auth::user()->rol_id != 'Invitado')
             <!-- módulo usuarios -->
                 <li class="nav-item dropdown mr-3">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

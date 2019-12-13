@@ -21,6 +21,92 @@ class CargaFamiliar extends Model
     ];
 
     /**
+     * scope busqueda por nombre 1
+     */
+    public function scopeNombre1($query, $nombre1)
+    {
+        if ($nombre1) {
+            return $query->orWhere('nombre1', 'LIKE', "%$nombre1%");
+        }
+    }
+
+    /**
+     * scope busqueda por nombre 2
+     */
+    public function scopeNombre2($query, $nombre2)
+    {
+        if ($nombre2) {
+            return $query->orWhere('nombre2', 'LIKE', "%$nombre2%");
+        }
+    }
+    /**
+     * scope busqueda por apellido 1
+     */
+    public function scopeApellido1($query, $apellido1)
+    {
+        if ($apellido1) {
+            return $query->orWhere('apellido1', 'LIKE', "%$apellido1%");
+        }
+    }
+
+    /**
+     * scope busqueda por apellido 2
+     */
+    public function scopeApellido2($query, $apellido2)
+    {
+        if ($apellido2) {
+            return $query->orWhere('apellido2', 'LIKE', "%$apellido2%");
+        }
+    }
+
+    /**
+     * scope busqueda por parentesco
+     */
+    public function scopeParentescoId($query, $parentesco)
+    {
+        if ($parentesco) {
+            $parentesco_id = Parentesco::obtenerParentescoPorNombre($parentesco);
+            if($parentesco_id != null){
+                return $query->orWhere('parentesco_id', '=', $parentesco_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda por parentesco
+     */
+    public function scopeSocioId($query, $rut)
+    {
+        if ($rut) {
+            $socio_id = Socio::obtenerSocioPorRut($rut);
+            if($socio_id != null){
+                return $query->orWhere('socio_id', '=', $socio_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda por rut
+     */
+    public function scopeRut($query, $rut)
+    {
+        if ($rut) {
+            return $query->orWhere('rut', '=', $rut);
+        }
+    }
+
+    /**
+     * scope busqueda fecha
+     */
+    public function scopeFechaNacimientoUnica($query, $fecha)
+    {
+        $fecha_formarteada = date("Y-m-d", strtotime($fecha));
+        if($fecha != null){
+            return $query->orWhere('fecha_nac','=',$fecha_formarteada);
+        }
+    }
+
+    /**
      * Modificador de parentescos
      */
     public function getParentescoIdAttribute($value)
@@ -32,11 +118,11 @@ class CargaFamiliar extends Model
             return $value;
         }else{
             return '';
-        }         
+        }
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function socio()
     {
@@ -44,12 +130,12 @@ class CargaFamiliar extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function parentesco()
     {
         return $this->hasOne('App\Parentesco');
-    }   
+    }
 
     /**
      * Modificador de fecha de nacimiento
@@ -60,8 +146,8 @@ class CargaFamiliar extends Model
             return formatoFecha($valor);
         }else{
             return '';
-        }          
-    }   
+        }
+    }
 
     /**
      * Modificador de rut
@@ -72,11 +158,11 @@ class CargaFamiliar extends Model
             return formatoRut($valor);
         }else{
             return '';
-        }          
+        }
     }
-    
+
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setNombre1Attribute($value)
     {
@@ -84,7 +170,7 @@ class CargaFamiliar extends Model
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setNombre2Attribute($value)
     {
@@ -92,7 +178,7 @@ class CargaFamiliar extends Model
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setApellido1Attribute($value)
     {
@@ -100,7 +186,7 @@ class CargaFamiliar extends Model
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setApellido2Attribute($value)
     {
@@ -108,7 +194,7 @@ class CargaFamiliar extends Model
     }
 
     /**
-     * Formato editar cargo 
+     * Formato editar cargo
      */
     static public function formatoEditarCargo($request, $carga)
     {

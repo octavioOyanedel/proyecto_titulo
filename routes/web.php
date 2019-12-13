@@ -220,3 +220,5 @@ Route::get('socios_incorporados_estadistica/{mes}/{estado}','SocioController@exp
 Route::get('listado_socios_buscar/{buscar_socio}','HomeController@exportarExcel')->name('listado_socios_buscar')->middleware('auth');
 
 Route::get('listado_prestamo_buscar/{buscar_prestamo}','PrestamoController@exportarExcelBusqueda')->name('listado_prestamo_buscar')->middleware('auth');
+
+Route::get('listado_contable_buscar/{buscar_registro}','RegistroContableController@exportarExcelBusqueda')->name('listado_contable_buscar')->middleware('auth');

@@ -1,16 +1,16 @@
     <div class="float-left">
         <div class="input-group mb-2 mr-sm-2">
             <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif &nbsp;</span>
-            <a title="Resetear listado." class="mr-2" href="{{ route('contables.index') }}">|<b>Resetear</b>|</a>
-            @if(request('buscar_registro') != null)
-                <a title="Exportar listado." class="mr-2" href="{{ route('listado_contable_buscar', ['buscar_registro' => request('buscar_registro')]) }}">|<b>Exportar Excel</b>|</a>
-            @else
-                <a title="Exportar listado." class="mr-2" href="{{ route('listado_contables') }}">|<b>Exportar Excel</b>|</a>
-            @endif
+            <a title="Resetear listado." class="mr-2" href="{{ route('cargas.index') }}">|<b>Resetear</b>|</a>
+                @if(request('buscar_carga') != null)
+                    <a title="Exportar listado." class="mr-2" href="">|<b>Exportar Excel</b>|</a>
+                @else
+                    <a title="Exportar listado." class="mr-2" href="">|<b>Exportar Excel</b>|</a>
+                @endif
+
         </div>
     </div>
-    <form class="form-inline float-right" method="GET" action="{{ route('contables.index') }}">
-
+    <form class="form-inline float-right" method="GET" action="{{ route('cargas.index') }}">
         <div class="input-group mb-2 mr-sm-2">
             <select name="registros" id="registro" class="form-control form-control-sm">
                 <option value="" selected>N° Registros</option>
@@ -24,12 +24,11 @@
         <div class="input-group mb-2 mr-sm-2">
             <select name="columna" id="columna" class="form-control form-control-sm">
                 <option value="" selected>Columna</option>
-                <option value="fecha" @if(request('columna') === 'fecha') {{ 'selected' }} @endif>Fecha de solicitud</option>
-                <option value="tipo_registro_contable_id" @if(request('columna') === 'tipo_registro_contable_id') {{ 'selected' }} @endif>Tipo de registro</option>
-                <option value="numero_registro" @if(request('columna') === 'numero_registro') {{ 'selected' }} @endif>Numero de registro</option>
-                <option value="cheque" @if(request('columna') === 'cheque') {{ 'selected' }} @endif>Cheque</option>
-                <option value="Monto" @if(request('columna') === 'Monto') {{ 'selected' }} @endif>Monto</option>
-                <option value="concepto_id" @if(request('columna') === 'concepto_id') {{ 'selected' }} @endif>Concepto</option>
+                <option value="nombre1" @if(request('columna') === 'nombre1') {{ 'selected' }} @endif>Primer nombre (carga)</option>
+                <option value="apellido1" @if(request('columna') === 'apellido1') {{ 'selected' }} @endif>Apellido paterno (carga)</option>
+                <option value="rut" @if(request('columna') === 'rut') {{ 'selected' }} @endif>Rut (carga)</option>
+                <option value="fecha_nac" @if(request('columna') === 'fecha_nac') {{ 'selected' }} @endif>Fecha nacimiento</option>
+                <option value="parentesco_id" @if(request('columna') === 'parentesco_id') {{ 'selected' }} @endif>Parentesco</option>
             </select>
         </div>
 
@@ -40,9 +39,7 @@
                 <option value="DESC" @if(request('orden') === 'DESC') {{ 'selected' }} @endif>Descendente</option>
             </select>
         </div>
-
-        <input type="hidden" name="buscar_registro" value="{{ request('buscar_registro') }}">
-
+            <input type="hidden" name="buscar_socio" value="{{ request('buscar_carga') }}">
         <div class="input-group mb-2 mr-sm-2">
             <button type="submit" id="filtrar" class="btn btn-sm btn-secondary">Filtrar</button>
         </div>

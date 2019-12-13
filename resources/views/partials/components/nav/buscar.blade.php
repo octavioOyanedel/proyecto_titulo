@@ -80,7 +80,7 @@
         <input class="form-control mr-sm-2" type="search" name="buscar_estado_socio" placeholder="Buscar estado" aria-label="Search">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
-</div>   
+</div>
 <!-- formulario nacionalidad-->
 <div id="buscador-nacionalidad" class="d-none">
     <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('mantenedor_socio_nacionalidad') }}">
@@ -115,7 +115,7 @@
         <input class="form-control mr-sm-2" type="search" name="buscar_institucion" placeholder="Buscar institución(es)" aria-label="Search">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
-</div>    
+</div>
 
 <!-- formulario estado educacion-->
 <div id="buscador-estado-nivel" class="d-none">
@@ -151,7 +151,7 @@
         <input class="form-control mr-sm-2" type="search" name="buscar_cuenta" placeholder="Buscar cuenta(s)" aria-label="Search">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
-</div>   
+</div>
 <!-- formulario banco-->
 <div id="buscador-banco" class="d-none">
     <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('mantenedor_contable_banco') }}">
@@ -186,4 +186,13 @@
         <input class="form-control mr-sm-2" type="search" name="buscar_asociado" placeholder="Buscar asociado(s)" aria-label="Search">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
-</div>  
+</div>
+
+<!-- formulario cargas-->
+<div id="buscador-carga" class="d-none">
+    <form class="form-inline my-2 my-lg-0" method="GET" action="">
+        <button type="button" class="btn btn-sm btn-outline-primary rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de carga(s) por medio de: Nombre (primer o segundo nombre), apellido (paterno o materno), Rut de carga (Ej. 11222333k), Fecha de nacimiento (Ej. 01-01-2019), Rut de socio (Ej. 11222333k) y parentesco (Ej. hijo).">?</button>
+        <input class="form-control mr-sm-2" type="search" name="buscar_carga" placeholder="Buscar carga(s)" aria-label="Search">
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+</div>

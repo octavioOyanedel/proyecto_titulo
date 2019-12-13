@@ -27,18 +27,26 @@ class Parentesco extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function carga_familiar()
     {
         return $this->belongsTo('App\CargaFamiliar');
     }
-    
+
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setNombreAttribute($value)
     {
         $this->attributes['nombre'] = ucfirst($value);
+    }
+
+    /**
+     * Obtener tipo cuenta
+     */
+    static public function obtenerParentescoPorNombre($nombre)
+    {
+        return Parentesco::where('nombre', $nombre)->first();
     }
 }

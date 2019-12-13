@@ -26,9 +26,62 @@ class CargaFamiliarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return redirect()->route('home');
+
+        if(request()->has('registros') && request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'apellido1';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'ASC';
+        }
+
+        $campo = $request->get('buscar_carga');
+
+        switch ($columna) {
+            case 'parentesco_id':
+                $cargas = CargaFamiliar::orderBy('parentescos.nombre', $orden)
+                ->join('parentescos', 'cargas_familiares.parentesco_id', '=', 'parentescos.id')
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_carga' => $campo,
+                ]);
+            break;
+            default:
+                $cargas = CargaFamiliar::orderBy($columna, $orden)
+                ->nombre1($campo)
+                ->nombre2($campo)
+                ->apellido1($campo)
+                ->apellido2($campo)
+                ->apellido2($campo)
+                ->socioId($campo)
+                ->parentescoId($campo)
+                ->fechaNacimientoUnica($campo)
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'buscar_carga' => $campo,
+                ]);
+            break;
+        }
+
+        $total_consulta = $cargas->total();
+
+        return view('sind1.carga.index', compact('cargas', 'total_consulta'));
     }
 
     /**
@@ -120,7 +173,7 @@ class CargaFamiliarController extends Controller
         $eliminada = convertirArrayAString($cargaFamiliar->toArray());
         CargaFamiliar::destroy($cargaFamiliar->id);
         session(['mensaje' => 'Carga familiar eliminada con éxito.']);
-        LogSistema::registrarAccion('Carga familiar eliminada: '.$eliminada); 
+        LogSistema::registrarAccion('Carga familiar eliminada: '.$eliminada);
         return redirect()->route('socios.show', compact('socio_id'));
     }
 

@@ -7,7 +7,7 @@ $(window).on('load',function(){
 	//alert(ruta);
 	console.log(ruta);
 
-	if(ruta.localeCompare('/home') === 0 || ruta.localeCompare('/filtro_socios') === 0 || ruta.localeCompare('/filtro_socios_form') === 0 || ruta.search('socios/') != -1){
+	if(ruta.localeCompare('/home') === 0 || ruta.localeCompare('/filtro_socios') === 0 || ruta.localeCompare('/filtro_socios_form') === 0 || ruta.search('socios/') != -1 || ruta.localeCompare('/socios_filtrados') === 0){
 		$('#span-socios').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-socio').removeClass('d-none');
 	}
@@ -112,13 +112,13 @@ $(window).on('load',function(){
 	}
 
 	//fin mantenedores
-	if(ruta.localeCompare('/filtro_historial') === 0 || ruta.localeCompare('/historial') === 0 || ruta.localeCompare('/filtro_historial_form') === 0){	
+	if(ruta.localeCompare('/filtro_historial') === 0 || ruta.localeCompare('/historial') === 0 || ruta.localeCompare('/filtro_historial_form') === 0){
 		$('#span-historial').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-historial').removeClass('d-none');
 	}
 
-	
-	if(ruta.localeCompare('/estadisticas_sede_area') === 0 || ruta.localeCompare('/estadisticas_cargo') === 0 || ruta.localeCompare('/estadisticas_comuna_ciudad') === 0 || ruta.localeCompare('/estadisticas_nacionalidad') === 0 || ruta.localeCompare('/estadisticas_Incorporados_desvinculados') === 0){	
+
+	if(ruta.localeCompare('/estadisticas_sede_area') === 0 || ruta.localeCompare('/estadisticas_cargo') === 0 || ruta.localeCompare('/estadisticas_comuna_ciudad') === 0 || ruta.localeCompare('/estadisticas_nacionalidad') === 0 || ruta.localeCompare('/estadisticas_Incorporados_desvinculados') === 0){
 		$('#span-estadisticas').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-socio').removeClass('d-none');
 	}
@@ -128,4 +128,8 @@ $(window).on('load',function(){
 		$('#buscador-usuario').removeClass('d-none');
 	}
 
+	if(ruta.localeCompare('/cargas') === 0){
+		$('#span-cargas').addClass('font-weight-bold text-uppercase text-primary');
+		$('#buscador-carga').removeClass('d-none');
+	}
 });

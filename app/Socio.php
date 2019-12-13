@@ -319,7 +319,7 @@ class Socio extends Model
     public function scopeCargo($query, $cargo)
     {
         if ($cargo) {
-            $cargo_id = cargo::obtenerCargoPorNombre($cargo);
+            $cargo_id = Cargo::obtenerCargoPorNombre($cargo);
             if($cargo_id != null){
                 return $query->orWhere('cargo_id', '=', $cargo_id->id);
             }
