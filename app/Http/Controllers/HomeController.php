@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Socio;
 use App\EstadoSocio;
 use Illuminate\Http\Request;
+use App\Exports\BusquedaSocioExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
@@ -160,5 +162,13 @@ class HomeController extends Controller
 
         return view('home', compact('socios','estados','varones','damas','total','total_consulta'));
     }
+
+    /**
+     * Exportar a excel estadistica.
+     */
+    public function exportarExcel($buscar_socio)
+    {
+        return Excel::download(new BusquedaSocioExport($buscar_socio), 'listado_socios_activos.xlsx');
+    }    
 
 }

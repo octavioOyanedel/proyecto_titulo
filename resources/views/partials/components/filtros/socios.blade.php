@@ -2,7 +2,12 @@
         <div class="input-group mb-2 mr-sm-2">
             <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif &nbsp;</span>
             <a title="Resetear listado." class="mr-2" href="{{ route('home') }}">|<b>Resetear</b>|</a>
-            <a title="Exportar listado." class="mr-2" href="{{ route('listado_socios') }}">|<b>Exportar Excel</b>|</a>
+                @if(request('buscar_socio') != null)
+                    <a title="Exportar listado." class="mr-2" href="{{ route('listado_socios_buscar', ['buscar_socio' => request('buscar_socio')]) }}">|<b>Exportar Excel</b>|</a>
+                @else
+                    <a title="Exportar listado." class="mr-2" href="{{ route('listado_socios') }}">|<b>Exportar Excel</b>|</a>
+                @endif
+            
         </div>                                                                            
     </div>        
     <form class="form-inline float-right" method="GET" action="{{ route('home') }}">
@@ -41,9 +46,7 @@
                 <option value="DESC" @if(request('orden') === 'DESC') {{ 'selected' }} @endif>Descendente</option>                
             </select>
         </div>
-
-        <input type="hidden" name="buscar_socio" value="{{ request('buscar_socio') }}">
-
+            <input type="hidden" name="buscar_socio" value="{{ request('buscar_socio') }}">
         <div class="input-group mb-2 mr-sm-2">
             <button type="submit" id="filtrar" class="btn btn-sm btn-secondary">Filtrar</button>
         </div> 

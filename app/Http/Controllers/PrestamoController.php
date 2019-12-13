@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Prestamo;
+use App\Banco;
 use App\Cuota;
-use App\FormaPago;
-use App\Interes;
 use App\Socio;
-use App\EstadoDeuda;
-use App\RegistroContable;
 use App\Cuenta;
+use App\Interes;
+use App\Prestamo;
+use App\FormaPago;
 use App\LogSistema;
 use App\TipoCuenta;
-use App\Banco;
-use Illuminate\Support\Facades\Auth;
+use App\EstadoDeuda;
+use App\RegistroContable;
 use Illuminate\Http\Request;
-use App\Http\Requests\IncorporarPrestamoRequest;
-use App\Http\Requests\SimularPrestamoRequest;
-use App\Http\Requests\FiltrarPrestamoRequest;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PrestamoExport;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\FiltroPrestamoExport;
+use App\Exports\BusquedaPrestamoExport;
+use App\Http\Requests\FiltrarPrestamoRequest;
+use App\Http\Requests\SimularPrestamoRequest;
+use App\Http\Requests\IncorporarPrestamoRequest;
 
 class PrestamoController extends Controller
 {
@@ -873,5 +874,13 @@ class PrestamoController extends Controller
     public function exportarExcelFiltro($rut, $fecha_solicitud_ini, $fecha_solicitud_fin, $monto_ini, $monto_fin, $forma_pago_id, $fecha_pago_ini, $fecha_pago_fin, $numero_cuotas, $cuenta_id, $estado_deuda_id)
     {
         return Excel::download(new FiltroPrestamoExport($rut, $fecha_solicitud_ini, $fecha_solicitud_fin, $monto_ini, $monto_fin, $forma_pago_id, $fecha_pago_ini, $fecha_pago_fin, $numero_cuotas, $cuenta_id, $estado_deuda_id), 'listado_prestamos.xlsx');
-    }
+    }   
+
+    /**
+     * Exportar a excel.
+     */
+    public function exportarExcelBusqueda($buscar_prestamo)
+    {
+        return Excel::download(new BusquedaPrestamoExport($buscar_prestamo), 'listado_prestamos.xlsx');
+    }    
 }

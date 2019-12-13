@@ -1,8 +1,12 @@
     <div class="float-left">
         <div class="input-group mb-2 mr-sm-2">
             <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif &nbsp;</span>
-            <a title="Resetear listado." class="mr-2" href="{{ route('prestamos.index') }}">|<b>Resetear</b>|</a>
-            <a title="Exportar listado." class="mr-2" href="{{ route('listado_prestamos') }}">|<b>Exportar Excel</b>|</a>
+            <a title="Resetear listado." class="mr-2" href="{{ route('prestamos.index') }}">|<b>Resetear</b>|</a> 
+            @if(request('buscar_prestamo') != null)
+                <a title="Exportar listado." class="mr-2" href="{{ route('listado_prestamo_buscar', ['buscar_prestamo' => request('buscar_prestamo')]) }}">|<b>Exportar Excel</b>|</a>            
+            @else
+                <a title="Exportar listado." class="mr-2" href="{{ route('listado_prestamos') }}">|<b>Exportar Excel</b>|</a>
+            @endif
         </div>                                                                            
     </div>   
     <form class="form-inline float-right" method="GET" action="{{ route('prestamos.index') }}">
