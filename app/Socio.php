@@ -39,6 +39,7 @@ class Socio extends Model
 
 //scope filtro
 //***************************************************************************************************************
+
     /**
      * scope busqueda fecha de nacimiento
      */

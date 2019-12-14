@@ -94,11 +94,13 @@
                     <span id="span-estadisticas">Estadísticas</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_sede_area') }}">Distribución de Socios por Sede - Área</a>
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_cargo') }}">Distribución de Socios por Cargo</a>
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_comuna_ciudad') }}">Distribución de Socios por Comuna - Ciudad</a>
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_nacionalidad') }}">Distribución de Socios por Nacionalidad</a>
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_Incorporados_desvinculados') }}">Distribución de Socios por Incorporación - Desvinculación</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_sede_area') }}">Socios por Sede - Área</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_cargo') }}">Socios por Cargo</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_comuna_ciudad') }}">Socios por Comuna - Ciudad</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_nacionalidad') }}">Socios por Nacionalidad</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_Incorporados_desvinculados') }}">Socios por Incorporación - Desvinculación</a>
+                    <a class="dropdown-item sub-item" href="">Socios Según Nivel Nducacional</a>
+                    <a class="dropdown-item sub-item" href="">Cargas Familiares por Socio</a>
                 </div>
             </li>
 

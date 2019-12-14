@@ -278,7 +278,13 @@ class SocioController extends Controller
      */
     public function filtroSocios(FiltrarSocioRequest $request)
     {
-        //dd($request);
+        //dd($request->cargas);
+        if($request->cargas === null){
+            $cargas = 'no';
+        }else{
+            $cargas = 'si';
+        }
+
         $total_consulta = 0;
 
         if(request()->has('registros') || request('registros') != ''){

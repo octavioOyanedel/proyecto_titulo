@@ -40,6 +40,7 @@ class FiltrarSocioRequest extends FormRequest
             'cargo_id' => ['nullable','numeric'],
             'estado_socio_id' => ['nullable','numeric'],
             'nacionalidad_id' => ['nullable','numeric'],
+            'carga' => ['nullable','numeric'],
         ];
     }
 }

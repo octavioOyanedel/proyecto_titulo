@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Búsqueda Filtrada Socios</h3></div>
 
@@ -12,27 +12,26 @@
                     <!-- Formulario -->
                     <form method="GET" action="{{ route('filtro_socios') }}">
 
-                    <div class="form-check text-center mb-3">
-                        <input class="form-check-input" type="radio" name="desvinculados" id="radio_incluir" value="activos" checked="">
-                        <label class="form-check-label" for="radio_incluir">
-                        Mostrar solo socios activos.
-                        </label>
-                    </div>
+                        <div class="form-check text-center mb-3">
+                            <input class="form-check-input" type="radio" name="desvinculados" id="radio_activos" value="activos" checked="">
+                            <label class="form-check-label" for="radio_activos">
+                            Mostrar solo socios activos.
+                            </label>
+                        </div>
 
-                    <div class="form-check text-center mb-3">
-                        <input class="form-check-input" type="radio" name="desvinculados" id="radio_incluir" value="incluir">
-                        <label class="form-check-label" for="radio_incluir">
-                        Incluir socios descvinculados.
-                        </label>
-                    </div>
+                        <div class="form-check text-center mb-3">
+                            <input class="form-check-input" type="radio" name="desvinculados" id="radio_incluir" value="incluir">
+                            <label class="form-check-label" for="radio_incluir">
+                            Incluir socios descvinculados.
+                            </label>
+                        </div>
 
-                    <div class="form-check text-center mb-3">
-                        <input class="form-check-input" type="radio" name="desvinculados" id="radio_solo" value="solo">
-                        <label class="form-check-label" for="radio_solo">
-                        Mostrar solo socios desvinculados.
-                        </label>
-                    </div>
-
+                        <div class="form-check text-center mb-3">
+                            <input class="form-check-input" type="radio" name="desvinculados" id="radio_solo" value="solo">
+                            <label class="form-check-label" for="radio_solo">
+                            Mostrar solo socios desvinculados.
+                            </label>
+                        </div>
                         <!-- Fecha nacimiento inicio -->
                         <div class="text-center alert alert-secondary" role="alert"><b>Fecha de nacimiento</b></div>
                         <div class="form-group row">
