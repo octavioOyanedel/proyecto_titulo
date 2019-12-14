@@ -53,7 +53,6 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item sub-item" href="{{ route('cargas.index') }}">Listar</a>
-                    <a class="dropdown-item sub-item" href="">Filtrar</a>
                 </div>
             </li>
 

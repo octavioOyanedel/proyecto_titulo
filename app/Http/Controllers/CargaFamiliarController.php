@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\CargaFamiliar;
-use App\Parentesco;
 use App\LogSistema;
+use App\Parentesco;
+use App\CargaFamiliar;
+use App\Exports\CargaExport;
 use Illuminate\Http\Request;
-use App\Http\Requests\IncorporarCargaRequest;
+use App\Exports\BusquedaCargaExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\EditarCargaRequest;
+use App\Http\Requests\IncorporarCargaRequest;
 
 class CargaFamiliarController extends Controller
 {
@@ -195,4 +198,22 @@ class CargaFamiliarController extends Controller
 
         }
     }
+
+    /**
+     * Exportar a excel.
+     */
+    public function exportarExcel()
+    {
+        return Excel::download(new CargaExport, 'listado_cargas.xlsx');
+    }
+
+    /**
+     * Exportar a excel.
+     */
+    public function exportarExcelBusqueda($buscar_carga)
+    {
+        return Excel::download(new BusquedaCargaExport($buscar_carga), 'listado_cargas.xlsx');
+    }     
+
+
 }

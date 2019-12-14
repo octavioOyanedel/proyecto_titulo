@@ -222,3 +222,7 @@ Route::get('listado_socios_buscar/{buscar_socio}','HomeController@exportarExcel'
 Route::get('listado_prestamo_buscar/{buscar_prestamo}','PrestamoController@exportarExcelBusqueda')->name('listado_prestamo_buscar')->middleware('auth');
 
 Route::get('listado_contable_buscar/{buscar_registro}','RegistroContableController@exportarExcelBusqueda')->name('listado_contable_buscar')->middleware('auth');
+
+Route::get('cargas_excel','CargaFamiliarController@exportarExcel')->name('listado_cargas')->middleware('auth');
+
+Route::get('listado_cargas_buscar/{buscar_carga}','CargaFamiliarController@exportarExcelBusqueda')->name('listado_cargas_buscar')->middleware('auth');

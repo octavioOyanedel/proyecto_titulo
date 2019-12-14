@@ -3,9 +3,9 @@
             <span><b>{{ $total_consulta }}</b>@if($total_consulta === 1) {{ 'Registro encontrado.' }} @else {{ 'Registros encontrados.' }} @endif &nbsp;</span>
             <a title="Resetear listado." class="mr-2" href="{{ route('cargas.index') }}">|<b>Resetear</b>|</a>
                 @if(request('buscar_carga') != null)
-                    <a title="Exportar listado." class="mr-2" href="">|<b>Exportar Excel</b>|</a>
+                    <a title="Exportar listado." class="mr-2" href="{{ route('listado_cargas_buscar', ['buscar_carga' => request('buscar_carga')]) }}">|<b>Exportar Excel</b>|</a>
                 @else
-                    <a title="Exportar listado." class="mr-2" href="">|<b>Exportar Excel</b>|</a>
+                    <a title="Exportar listado." class="mr-2" href="{{ route('listado_cargas') }}">|<b>Exportar Excel</b>|</a>
                 @endif
 
         </div>
@@ -39,7 +39,7 @@
                 <option value="DESC" @if(request('orden') === 'DESC') {{ 'selected' }} @endif>Descendente</option>
             </select>
         </div>
-            <input type="hidden" name="buscar_socio" value="{{ request('buscar_carga') }}">
+            <input type="hidden" name="buscar_carga" value="{{ request('buscar_carga') }}">
         <div class="input-group mb-2 mr-sm-2">
             <button type="submit" id="filtrar" class="btn btn-sm btn-secondary">Filtrar</button>
         </div>
