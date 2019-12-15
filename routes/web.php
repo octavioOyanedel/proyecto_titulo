@@ -207,7 +207,7 @@ Route::get('estadisticas_cargo','MantenedorController@estadisticaCargo')->name('
 Route::get('estadisticas_comuna_ciudad','MantenedorController@estadisticaComunaCiudad')->name('estadisticas_comuna_ciudad')->middleware('auth');
 Route::get('estadisticas_nacionalidad','MantenedorController@estadisticaNacionalidad')->name('estadisticas_nacionalidad')->middleware('auth');
 Route::get('estadisticas_sede_area','MantenedorController@estadisticaSedeArea')->name('estadisticas_sede_area')->middleware('auth');
-Route::get('estadisticas_Incorporados_desvinculados','MantenedorController@estadisticaIncorporadoDesvinculado')->name('estadisticas_Incorporados_desvinculados')->middleware('auth');
+Route::get('estadisticas_incorporados_desvinculados','MantenedorController@estadisticaIncorporadoDesvinculado')->name('estadisticas_incorporados_desvinculados')->middleware('auth');
 
 Route::get('socios_filtrados','SocioController@socioFiltrados')->name('socios_filtrados')->middleware('auth');
 
@@ -226,3 +226,14 @@ Route::get('listado_contable_buscar/{buscar_registro}','RegistroContableControll
 Route::get('cargas_excel','CargaFamiliarController@exportarExcel')->name('listado_cargas')->middleware('auth');
 
 Route::get('listado_cargas_buscar/{buscar_carga}','CargaFamiliarController@exportarExcelBusqueda')->name('listado_cargas_buscar')->middleware('auth');
+
+Route::get('estadisticas_estudio','MantenedorController@estadisticaEstudio')->name('estadisticas_estudio')->middleware('auth');
+Route::get('estadisticas_carga','MantenedorController@estadisticaCarga')->name('estadisticas_carga')->middleware('auth');
+
+Route::get('listado_cargas_estadistica','CargaFamiliarController@cargasFiltradas')->name('listado_cargas_estadistica')->middleware('auth');
+
+
+Route::get('socios_filtrados_educacion','SocioController@socioFiltradosEducacion')->name('socios_filtrados_educacion')->middleware('auth');
+Route::get('socios_estudios_estadistica/{nombre}','SocioController@exportarExcelEstadisticaEstudios')->name('socios_estudios_estadistica')->middleware('auth');
+
+Route::get('estadistica_carga_excel/{nombre}','CargaFamiliarController@exportarEstadisticaCarga')->name('estadistica_carga_excel')->middleware('auth');

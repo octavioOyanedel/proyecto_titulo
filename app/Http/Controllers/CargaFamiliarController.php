@@ -9,6 +9,7 @@ use App\Exports\CargaExport;
 use Illuminate\Http\Request;
 use App\Exports\BusquedaCargaExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\EstadisticaCargaExport;
 use App\Http\Requests\EditarCargaRequest;
 use App\Http\Requests\IncorporarCargaRequest;
 
@@ -56,6 +57,14 @@ class CargaFamiliarController extends Controller
             case 'parentesco_id':
                 $cargas = CargaFamiliar::orderBy('parentescos.nombre', $orden)
                 ->join('parentescos', 'cargas_familiares.parentesco_id', '=', 'parentescos.id')
+                ->nombre1($campo)
+                ->nombre2($campo)
+                ->apellido1($campo)
+                ->apellido2($campo)
+                ->apellido2($campo)
+                ->socioId($campo)
+                ->parentescoId($campo)
+                ->fechaNacimientoUnica($campo)                
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -215,5 +224,119 @@ class CargaFamiliarController extends Controller
         return Excel::download(new BusquedaCargaExport($buscar_carga), 'listado_cargas.xlsx');
     }     
 
+    /**
+     * Cargas filtradas
+     */
+    public function cargasFiltradas(Request $request)
+    {
 
+        $total_consulta = 0;
+
+        if(request()->has('registros') || request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'apellido1';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'ASC';
+        }
+
+        switch ($columna) {
+            case 'parentesco_id':
+                if($request->nombre === 'hijos'){
+                    $cargas = CargaFamiliar::orderBy('parentescos.nombre', $orden)
+                    ->join('parentescos', 'cargas_familiares.parentesco_id', '=', 'parentescos.id')
+                    ->orWhere('parentesco_id','=',1)
+                    ->orWhere('parentesco_id','=',2)
+                    ->paginate($columna)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre
+                    ]); 
+                }
+                if($request->nombre === 'padres'){
+                    $cargas = CargaFamiliar::orderBy('parentescos.nombre', $orden)
+                    ->join('parentescos', 'cargas_familiares.parentesco_id', '=', 'parentescos.id')                
+                    ->orWhere('parentesco_id','=',3)
+                    ->orWhere('parentesco_id','=',4)
+                    ->paginate($columna)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre
+                    ]); 
+                }
+                if($request->nombre === 'abuelos'){
+                    $cargas = CargaFamiliar::orderBy('parentescos.nombre', $orden)
+                    ->join('parentescos', 'cargas_familiares.parentesco_id', '=', 'parentescos.id')                
+                    ->orWhere('parentesco_id','=',5)
+                    ->orWhere('parentesco_id','=',6)
+                    ->paginate($columna)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre
+                    ]); 
+                }                                
+            break;
+            default:
+                if($request->nombre === 'hijos'){
+                    $cargas = CargaFamiliar::orderBy($columna,$orden)
+                    ->orWhere('parentesco_id','=',1)
+                    ->orWhere('parentesco_id','=',2)
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre
+                    ]);  
+                }
+                if($request->nombre === 'padres'){
+                    $cargas = CargaFamiliar::orderBy($columna,$orden)
+                    ->orWhere('parentesco_id','=',3)
+                    ->orWhere('parentesco_id','=',4)
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre
+                    ]);  
+                }
+                if($request->nombre === 'abuelos'){
+                    $cargas = CargaFamiliar::orderBy($columna,$orden)
+                    ->orWhere('parentesco_id','=',5)
+                    ->orWhere('parentesco_id','=',6)
+                    ->paginate($registros)->appends([
+                        'registros' => $registros,
+                        'columna' => $columna,
+                        'orden' => $orden,
+                        'nombre' => $request->nombre
+                    ]);  
+                }              
+            break;
+        }
+
+        ($request->nombre) ?  $nombre = $request->nombre : $nombre = 'null';
+
+        $total_consulta = $cargas->total();
+        return view('sind1.carga.resultados_estadistica_carga', compact('cargas', 'total_consulta','nombre'));        
+    }
+
+    /**
+     * Exportar a excel.
+     */
+    public function exportarEstadisticaCarga($nombre)
+    {
+        return Excel::download(new EstadisticaCargaExport($nombre), 'listado_cargas.xlsx');
+    }   
 }

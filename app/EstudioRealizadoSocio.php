@@ -35,4 +35,5 @@ class EstudioRealizadoSocio extends Model
     {
         return $this->belongsTo('App\EstudioRealizado');
     } 
+  
 }

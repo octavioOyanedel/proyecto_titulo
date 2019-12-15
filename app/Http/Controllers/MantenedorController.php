@@ -21,6 +21,7 @@ use App\TipoCuenta;
 use App\EstadoSocio;
 use App\Institucion;
 use App\Nacionalidad;
+use App\CargaFamiliar;
 use App\GradoAcademico;
 use Illuminate\Http\Request;
 use App\EstadoGradoAcademico;
@@ -819,5 +820,27 @@ class MantenedorController extends Controller
         $desvinculados = Socio::onlyTrashed()->whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])->orderBy('nombre','ASC')->count(); 
         return view('sind1.estadistica.estadistica_incorporados_desvinculados',compact('socio','incorporados','desvinculados'));
     }
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function estadisticaEstudio()
+    {
+        $niveles = GradoAcademico::all();
+        $socios = Socio::orderBy('apellido1','ASC')
+        ->join('estudios_realizados_socios','estudios_realizados_socios.socio_id','=','socios.id')
+        ->get();
+        return view('sind1.estadistica.estadistica_educacion',compact('niveles','socios'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function estadisticaCarga()
+    {
+        $carga = new CargaFamiliar;
+        return view('sind1.estadistica.estadistica_cargas', compact('carga'));
+    }
 }

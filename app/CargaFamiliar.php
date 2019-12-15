@@ -205,4 +205,34 @@ class CargaFamiliar extends Model
 
         return convertirArrayAString($formato_carga).' >>> a >>> '.convertirArrayAString($formato_request);
     }
+
+    /**
+     * contar hijos
+     */
+    public function contarHijos()
+    {
+        return CargaFamiliar::orWhere('parentesco_id','=',1)
+        ->orWhere('parentesco_id','=',2)
+        ->count();
+    }
+
+    /**
+     * contar hijos
+     */
+    public function contarPadres()
+    {
+        return CargaFamiliar::orWhere('parentesco_id','=',3)
+        ->orWhere('parentesco_id','=',4)
+        ->count();
+    }
+
+    /**
+     * contar hijos
+     */
+    public function contarAbuelos()
+    {
+        return CargaFamiliar::orWhere('parentesco_id','=',5)
+        ->orWhere('parentesco_id','=',6)
+        ->count();
+    }
 }

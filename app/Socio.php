@@ -496,7 +496,6 @@ class Socio extends Model
     {
         return $this->hasMany('App\EstudioRealizadoSocio');
     }
-
     /**
      * Relación
      */

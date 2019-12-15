@@ -98,9 +98,9 @@
                     <a class="dropdown-item sub-item" href="{{ route('estadisticas_cargo') }}">Socios por Cargo</a>
                     <a class="dropdown-item sub-item" href="{{ route('estadisticas_comuna_ciudad') }}">Socios por Comuna - Ciudad</a>
                     <a class="dropdown-item sub-item" href="{{ route('estadisticas_nacionalidad') }}">Socios por Nacionalidad</a>
-                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_Incorporados_desvinculados') }}">Socios por Incorporación - Desvinculación</a>
-                    <a class="dropdown-item sub-item" href="">Socios Según Nivel Nducacional</a>
-                    <a class="dropdown-item sub-item" href="">Cargas Familiares por Socio</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_incorporados_desvinculados') }}">Socios por Incorporación - Desvinculación</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_estudio') }}">Socios Según Nivel Educacional</a>
+                    <a class="dropdown-item sub-item" href="{{ route('estadisticas_carga') }}">Cargas Familiares</a>
                 </div>
             </li>
 

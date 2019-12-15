@@ -39,14 +39,14 @@
                         </table>                         
                     </div>
 
-                    @if($estudios->count() === 0)
+                    @if($estudios->count() === 0 && $estudios != null)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
                             <b>Socio sin estudios registrados.
                                 @if(Auth::user()->rol_id != 'Invitado')
                                     <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}">Agregar estudio.</a>
                                 @endif
                             </b>
-                        </div>                        
+                        </div>    
                     @else     
                         <div class="table-responsive">
                             <h4 class="mt-4">Estudios Realizados 
@@ -87,7 +87,7 @@
                         </div>                           
                     @endif  
 
-                    @if($cargas->count() === 0)
+                    @if($cargas->count() === 0 && $cargas != null)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
                             <b>Socio sin cargas familiares registradas. 
                                 @if(Auth::user()->rol_id != 'Invitado')
@@ -133,7 +133,7 @@
                         </div>
                     @endif 
 
-                    @if($prestamos->count() === 0)
+                    @if($prestamos->count() === 0 && $prestamos != null)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
                             <b>Socio sin préstamos registrados. 
                                 @if(Auth::user()->rol_id != 'Invitado')

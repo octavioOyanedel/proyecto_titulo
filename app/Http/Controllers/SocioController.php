@@ -13,6 +13,7 @@ use App\LogSistema;
 use App\EstadoSocio;
 use App\Nacionalidad;
 use App\CargaFamiliar;
+use App\GradoAcademico;
 use App\Exports\SocioExport;
 use Illuminate\Http\Request;
 use App\Exports\FiltroSocioExport;
@@ -21,6 +22,7 @@ use App\Exports\EstadisticaSocioExport;
 use App\Http\Requests\EditarSocioRequest;
 use App\Http\Requests\FiltrarSocioRequest;
 use App\Http\Requests\IncorporarSocioRequest;
+use App\Exports\EstadisticaEstudioSocioExport;
 use App\Exports\EstadisticaIncorporadoSocioExport;
 
 class SocioController extends Controller
@@ -1011,7 +1013,7 @@ class SocioController extends Controller
     }
 
     /**
-     * filtrar socio sede.
+     * filtrar socio incorporaciones.
      */
     public function socioFiltradosIncorporados(Request $request)
     {
@@ -1158,6 +1160,110 @@ class SocioController extends Controller
     }
 
     /**
+     * filtrar socio sede.
+     */
+    public function socioFiltradosEducacion(Request $request)
+    {
+
+        $total_consulta = 0;
+
+        if(request()->has('registros') || request('registros') != ''){
+            $registros = request('registros');
+        }else{
+            $registros = 15;
+        }
+
+        if(request()->has('columna') && request('columna') != ''){
+            $columna = request('columna');
+        }else{
+            $columna = 'apellido1';
+        }
+
+        if(request()->has('orden') && request('orden') != ''){
+            $orden = request('orden');
+        }else{
+            $orden = 'ASC';
+        }
+
+        $grado = (new GradoAcademico)->obtenerIdPorNombre(request('nombre'));
+
+        switch ($columna) {
+            case 'sede_id':
+                $socios = Socio::orderBy('sedes.nombre',$orden)
+                ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
+                ->join('estudios_realizados_socios','estudios_realizados_socios.socio_id','=','socios.id')
+                ->join('estudios_realizados','estudios_realizados_socios.estudio_realizado_id','=','estudios_realizados.id')
+                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')   
+                ->where('estudios_realizados.grado_academico_id','=',$grado->id)
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'nombre' => $request->nombre,
+
+                ]);
+                 $total_consulta = $socios->total();
+            break;
+            case 'area_id':
+                $socios = Socio::orderBy('areas.nombre',$orden)
+                ->join('areas', 'socios.area_id', '=', 'areas.id')
+                ->join('estudios_realizados_socios','estudios_realizados_socios.socio_id','=','socios.id')
+                ->join('estudios_realizados','estudios_realizados_socios.estudio_realizado_id','=','estudios_realizados.id')
+                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')   
+                ->where('estudios_realizados.grado_academico_id','=',$grado->id)
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'nombre' => $request->nombre,
+
+                ]);
+                 $total_consulta = $socios->total();
+            break;
+            case 'cargo_id':
+                $socios = Socio::orderBy('cargos.nombre',$orden)
+                ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
+                ->join('estudios_realizados_socios','estudios_realizados_socios.socio_id','=','socios.id')
+                ->join('estudios_realizados','estudios_realizados_socios.estudio_realizado_id','=','estudios_realizados.id')
+                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')   
+                ->where('estudios_realizados.grado_academico_id','=',$grado->id)
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'nombre' => $request->nombre,
+
+                ]);
+                 $total_consulta = $socios->total();
+            break;
+            default:
+                $socios = Socio::orderBy($columna, $orden)
+                ->join('estudios_realizados_socios','estudios_realizados_socios.socio_id','=','socios.id')
+                ->join('estudios_realizados','estudios_realizados_socios.estudio_realizado_id','=','estudios_realizados.id')
+                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')   
+                ->where('estudios_realizados.grado_academico_id','=',$grado->id)
+                ->paginate($registros)->appends([
+                    'registros' => $registros,
+                    'columna' => $columna,
+                    'orden' => $orden,
+                    'nombre' => $request->nombre,
+                ]);
+                 $total_consulta = $socios->total();
+            break;
+        }
+
+        $total_consulta = $socios->total();
+  
+        $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
+        $total_consulta = $socios->total();
+
+        ($request->nombre) ?  $nombre = $request->nombre : $nombre = 'null';
+
+        return view('sind1.socios.resultados_estadistica_estudio', compact('socios','estados','total_consulta','nombre'));
+    }
+
+
+    /**
      * Exportar a excel estadistica.
      */
     public function exportarExcelEstadistica($nombre, $id, $genero)
@@ -1172,4 +1278,12 @@ class SocioController extends Controller
     {
         return Excel::download(new EstadisticaIncorporadoSocioExport($mes, $estado), 'listado_distribucion_socios.xlsx');
     }
+
+    /**
+     * Exportar a excel estadistica incorporados.
+     */
+    public function exportarExcelEstadisticaEstudios($nombre)
+    {
+        return Excel::download(new EstadisticaEstudioSocioExport($nombre), 'listado_estudios_socios.xlsx');
+    }    
 }
