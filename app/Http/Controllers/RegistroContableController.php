@@ -65,11 +65,12 @@ class RegistroContableController extends Controller
             case 'concepto_id':
                 $registros = RegistroContable::orderBy('conceptos.nombre', $orden)
                 ->join('conceptos', 'registros_contables.concepto_id', '=', 'conceptos.id')
-                ->fechaUnica($campo)
-                ->tipoRegistroContableId($campo)
+                ->fecha($campo)
+                ->tipoRegistroContable($campo)
                 ->numeroRegistro($campo)
                 ->cheque($campo)
-                ->montoUnico($campo)
+                ->monto($campo)
+                ->concepto($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -90,11 +91,12 @@ class RegistroContableController extends Controller
             case 'tipo_registro_contable_id':
                 $registros = RegistroContable::orderBy('tipos_registro_contable.nombre', $orden)
                 ->join('tipos_registro_contable', 'registros_contables.tipo_registro_contable_id', '=', 'tipos_registro_contable.id')
-                ->fechaUnica($campo)
-                ->tipoRegistroContableId($campo)
+                ->fecha($campo)
+                ->tipoRegistroContable($campo)
                 ->numeroRegistro($campo)
                 ->cheque($campo)
-                ->montoUnico($campo)
+                ->monto($campo)
+                ->concepto($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -114,11 +116,12 @@ class RegistroContableController extends Controller
             break;
             default:
                 $registros = RegistroContable::orderBy($columna, $orden)
-                ->fechaUnica($campo)
-                ->tipoRegistroContableId($campo)
+                ->fecha($campo)
+                ->tipoRegistroContable($campo)
                 ->numeroRegistro($campo)
                 ->cheque($campo)
-                ->montoUnico($campo)
+                ->monto($campo)
+                ->concepto($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -189,7 +192,10 @@ class RegistroContableController extends Controller
         $asociados = Asociado::orderBy('concepto')->get();
         session(['mensaje' => 'Registro contable agregado con éxito.']);
         LogSistema::registrarAccion('Registro contable agragado: '.convertirArrayAString($contable->toArray()));
-        return redirect()->route('contables.create', compact('tipos_registro','cuentas','conceptos','socios','asociados'));
+        $registros = RegistroContable::orderBy('fecha','DESC')->paginate(15);
+        $total_consulta = $registros->total();
+        //return redirect()->route('contables.index', compact('registros','total_consulta'));  
+        return view('sind1.contables.index', compact('registros','total_consulta'));  
     }
 
     /**
@@ -336,14 +342,14 @@ class RegistroContableController extends Controller
             case 'concepto_id':
                 $registros = RegistroContable::orderBy('conceptos.nombre', $orden)
                 ->join('conceptos', 'registros_contables.concepto_id', '=', 'conceptos.id')
-                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
-                ->monto($request->monto_ini, $request->monto_fin)
+                ->fechaSolicitudFiltro($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->montoFiltro($request->monto_ini, $request->monto_fin)
                 ->tipoRegistroContableFiltro($request->tipo_registro_contable_id)
-                ->cuentaId($request->cuenta_id)
+                ->cuentaFiltro($request->cuenta_id)
                 ->conceptoFiltro($request->concepto_id)
-                ->socioId($request->socio_id)
-                ->asociadoId($request->asociado_id)
-                ->detalle($request->detalle)
+                ->socioFiltro($request->socio_id)
+                ->asociadoFiltro($request->asociado_id)
+                ->detalleFiltro($request->detalle)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -363,14 +369,14 @@ class RegistroContableController extends Controller
             case 'tipo_registro_contable_id':
                 $registros = RegistroContable::orderBy('tipos_registro_contable.nombre', $orden)
                 ->join('tipos_registro_contable', 'registros_contables.tipo_registro_contable_id', '=', 'tipos_registro_contable.id')
-                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
-                ->monto($request->monto_ini, $request->monto_fin)
+                ->fechaSolicitudFiltro($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->montoFiltro($request->monto_ini, $request->monto_fin)
                 ->tipoRegistroContableFiltro($request->tipo_registro_contable_id)
-                ->cuentaId($request->cuenta_id)
+                ->cuentaFiltro($request->cuenta_id)
                 ->conceptoFiltro($request->concepto_id)
-                ->socioId($request->socio_id)
-                ->asociadoId($request->asociado_id)
-                ->detalle($request->detalle)
+                ->socioFiltro($request->socio_id)
+                ->asociadoFiltro($request->asociado_id)
+                ->detalleFiltro($request->detalle)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -389,14 +395,14 @@ class RegistroContableController extends Controller
             break;
             default:
                 $registros = RegistroContable::orderBy($columna, $orden)
-                ->fechaSolicitud($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
-                ->monto($request->monto_ini, $request->monto_fin)
+                ->fechaSolicitudFiltro($request->fecha_solicitud_ini, $request->fecha_solicitud_fin)
+                ->montoFiltro($request->monto_ini, $request->monto_fin)
                 ->tipoRegistroContableFiltro($request->tipo_registro_contable_id)
-                ->cuentaId($request->cuenta_id)
+                ->cuentaFiltro($request->cuenta_id)
                 ->conceptoFiltro($request->concepto_id)
-                ->socioId($request->socio_id)
-                ->asociadoId($request->asociado_id)
-                ->detalle($request->detalle)
+                ->socioFiltro($request->socio_id)
+                ->asociadoFiltro($request->asociado_id)
+                ->detalleFiltro($request->detalle)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,

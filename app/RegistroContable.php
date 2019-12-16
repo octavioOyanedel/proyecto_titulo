@@ -30,7 +30,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda fecha de solicitud
      */
-    public function scopeFechaSolicitud($query, $fecha_ini, $fecha_fin)
+    public function scopeFechaSolicitudFiltro($query, $fecha_ini, $fecha_fin)
     {
         if($fecha_ini != null && $fecha_fin != null){
             return $query->whereBetween('fecha', [date($fecha_ini),date($fecha_fin)]);
@@ -46,7 +46,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda monto
      */
-    public function scopeMonto($query, $monto_ini, $monto_fin)
+    public function scopeMontoFiltro($query, $monto_ini, $monto_fin)
     {
         if($monto_ini != null && $monto_fin != null){
             return $query->whereBetween('monto', [date($monto_ini),date($monto_fin)]);
@@ -62,7 +62,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda cuenta
      */
-    public function scopeCuentaId($query, $cuenta)
+    public function scopeCuentaFiltro($query, $cuenta)
     {
         if($cuenta != null){
             return $query->where('cuenta_id','=',$cuenta);
@@ -72,7 +72,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda socio
      */
-    public function scopeSocioId($query, $socio)
+    public function scopeSocioFiltro($query, $socio)
     {
         if($socio != null){
             return $query->where('socio_id','=',$socio);
@@ -82,7 +82,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda asociado
      */
-    public function scopeAsociadoId($query, $asociado)
+    public function scopeAsociadoFiltro($query, $asociado)
     {
         if($asociado != null){
             return $query->where('asociado_id','=',$asociado);
@@ -92,7 +92,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda asociado
      */
-    public function scopeDetalle($query, $detalle)
+    public function scopeDetalleFiltro($query, $detalle)
     {
         if($detalle != null){
             return $query->where('detalle','LIKE',"%$detalle%");
@@ -128,7 +128,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda monto
      */
-    static public function scopeMontoUnico($query, $monto)
+    static public function scopeMonto($query, $monto)
     {
         if($monto != null){
             return $query->orWhere('monto','=', $monto);
@@ -159,7 +159,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda concepto
      */
-    public function scopeConceptoId($query, $concepto)
+    public function scopeConcepto($query, $concepto)
     {
         if ($concepto) {
             $concepto_id = Concepto::obtenerConceptoPorNombre($concepto);
@@ -172,7 +172,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda concepto
      */
-    public function scopeTipoRegistroContableId($query, $registro)
+    public function scopeTipoRegistroContable($query, $registro)
     {
         if ($registro) {
             $registro_id = TipoRegistroContable::obtenerTipoRegistroContablePorNombre($registro);
@@ -185,7 +185,7 @@ class RegistroContable extends Model
     /**
      * scope busqueda fecha
      */
-    public function scopeFechaUnica($query, $fecha)
+    public function scopeFecha($query, $fecha)
     {
         $fecha_formarteada = date("Y-m-d", strtotime($fecha));
         if($fecha != null){
@@ -193,6 +193,7 @@ class RegistroContable extends Model
         }
     }
 
+//***************************************************************************************************************
     /**
      * Modificador de tipo de registro
      */
