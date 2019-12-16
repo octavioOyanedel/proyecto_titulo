@@ -27,11 +27,13 @@ class BusquedaRegistroContableExport implements FromCollection, WithHeadings
     	$campo = $this->buscar_registro;
     	$registros =  RegistroContable::select('fecha','usuario_id','tipo_registro_contable_id','numero_registro','concepto_id','socio_id','detalle','asociado_id','cheque','monto','cuenta_id')
     	->orderBY('fecha','DESC')
-        ->fechaUnica($campo)
-        ->tipoRegistroContableId($campo)
+        ->fecha($campo)
+        ->tipoRegistroContable($campo)
         ->numeroRegistro($campo)
         ->cheque($campo)
-        ->montoUnico($campo)
+        ->monto($campo)
+        ->concepto($campo)
+        ->detalle($campo)
         ->get();
         foreach ($registros as $r) {
         	$r->usuario_id = User::findOrFail($r->usuario_id)->nombre1.' '.User::findOrFail($r->usuario_id)->apellido1.' - '.User::findOrFail($r->usuario_id)->email;

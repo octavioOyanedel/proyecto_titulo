@@ -102,13 +102,14 @@ class RegistroContable extends Model
     /**
      * scope busqueda concepto
      */
-    public function scopeConceptoFiltro($query, $concepto)
+    public function scopeConceptoFiltro($query, $concepto, $tipo)
     {
-        if ($concepto) {
-            $concepto_id = Concepto::obtenerConceptoPorNombre($concepto);
-            if($concepto_id != null){
-                return $query->where('concepto_id', '=', $concepto_id->id);
-            }
+        //dd($concepto.' - '.$tipo);
+        if($concepto != null && $tipo != null){
+            return $query->where([
+                ['concepto_id', '=', $concepto],
+                ['tipo_registro_contable_id', '=', $tipo]
+            ]);
         }
     }
 
@@ -117,11 +118,8 @@ class RegistroContable extends Model
      */
     public function scopeTipoRegistroContableFiltro($query, $registro)
     {
-        if ($registro) {
-            $registro_id = TipoRegistroContable::obtenerTipoRegistroContablePorNombre($registro);
-            if($registro_id != null){
-                return $query->where('tipo_registro_contable_id', '=', $registro_id->id);
-            }
+        if($registro != null){
+            return $query->where('tipo_registro_contable_id', '=', $registro);
         }
     }
 //***************************************************************************************************************
@@ -162,8 +160,10 @@ class RegistroContable extends Model
     public function scopeConcepto($query, $concepto)
     {
         if ($concepto) {
-            $concepto_id = Concepto::obtenerConceptoPorNombre($concepto);
-            if($concepto_id != null){
+            if(strtoupper($concepto) === 'NULO'){
+                return $query->orWhere('concepto_id', '=', 1)->orWhere('concepto_id', '=', 2);
+            }else{
+                $concepto_id = Concepto::obtenerConceptoPorNombre($concepto);
                 return $query->orWhere('concepto_id', '=', $concepto_id->id);
             }
         }
@@ -193,6 +193,15 @@ class RegistroContable extends Model
         }
     }
 
+    /**
+     * scope busqueda por numero de detalle
+     */
+    public function scopeDetalle($query, $detalle)
+    {
+        if ($detalle) {
+            return $query->orWhere('detalle', 'LIKE', "%$detalle%");
+        }
+    }
 //***************************************************************************************************************
     /**
      * Modificador de tipo de registro
@@ -206,7 +215,7 @@ class RegistroContable extends Model
             return $valor;
         }else{
             return '';
-        }        
+        }
     }
 
     /**
@@ -221,11 +230,11 @@ class RegistroContable extends Model
             return $valor;
         }else{
             return '';
-        }        
+        }
     }
 
     /**
-     * Modificador de fecha 
+     * Modificador de fecha
      */
     public function getFechaAttribute($valor)
     {
@@ -233,7 +242,7 @@ class RegistroContable extends Model
             return formatoFecha($valor);
         }else{
             return '';
-        }            
+        }
     }
 
     /**
@@ -245,7 +254,7 @@ class RegistroContable extends Model
             return formatoMoneda($valor);
         }else{
             return '';
-        }            
+        }
     }
 
     /**
@@ -256,7 +265,7 @@ class RegistroContable extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function asociado()
     {
@@ -264,7 +273,7 @@ class RegistroContable extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function socio()
     {
@@ -272,7 +281,7 @@ class RegistroContable extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function usuario()
     {
@@ -280,21 +289,21 @@ class RegistroContable extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
 
     public function tipo_registro_contable()
     {
         return $this->hasOne('App\TipoRegistroContable');
-    } 
+    }
 
     /**
-     * Relación 
+     * Relación
      */
     public function cuenta()
     {
         return $this->belongsTo('App\Cuenta');
-    } 
+    }
 
     /**
      * Obtener ultimo registro creado

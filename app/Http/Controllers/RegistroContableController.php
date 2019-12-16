@@ -71,6 +71,7 @@ class RegistroContableController extends Controller
                 ->cheque($campo)
                 ->monto($campo)
                 ->concepto($campo)
+                ->detalle($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -97,6 +98,7 @@ class RegistroContableController extends Controller
                 ->cheque($campo)
                 ->monto($campo)
                 ->concepto($campo)
+                ->detalle($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -122,6 +124,7 @@ class RegistroContableController extends Controller
                 ->cheque($campo)
                 ->monto($campo)
                 ->concepto($campo)
+                ->detalle($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -194,8 +197,8 @@ class RegistroContableController extends Controller
         LogSistema::registrarAccion('Registro contable agragado: '.convertirArrayAString($contable->toArray()));
         $registros = RegistroContable::orderBy('fecha','DESC')->paginate(15);
         $total_consulta = $registros->total();
-        //return redirect()->route('contables.index', compact('registros','total_consulta'));  
-        return view('sind1.contables.index', compact('registros','total_consulta'));  
+        //return redirect()->route('contables.index', compact('registros','total_consulta'));
+        return view('sind1.contables.index', compact('registros','total_consulta'));
     }
 
     /**
@@ -218,7 +221,7 @@ class RegistroContableController extends Controller
      */
     public function edit(RegistroContable $registroContable)
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -230,7 +233,7 @@ class RegistroContableController extends Controller
      */
     public function update(Request $request, RegistroContable $registroContable)
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -241,7 +244,7 @@ class RegistroContableController extends Controller
      */
     public function destroy(RegistroContable $registroContable)
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -346,7 +349,7 @@ class RegistroContableController extends Controller
                 ->montoFiltro($request->monto_ini, $request->monto_fin)
                 ->tipoRegistroContableFiltro($request->tipo_registro_contable_id)
                 ->cuentaFiltro($request->cuenta_id)
-                ->conceptoFiltro($request->concepto_id)
+                ->conceptoFiltro($request->concepto_id, $request->tipo_registro_contable_id)
                 ->socioFiltro($request->socio_id)
                 ->asociadoFiltro($request->asociado_id)
                 ->detalleFiltro($request->detalle)
@@ -373,7 +376,7 @@ class RegistroContableController extends Controller
                 ->montoFiltro($request->monto_ini, $request->monto_fin)
                 ->tipoRegistroContableFiltro($request->tipo_registro_contable_id)
                 ->cuentaFiltro($request->cuenta_id)
-                ->conceptoFiltro($request->concepto_id)
+                ->conceptoFiltro($request->concepto_id, $request->tipo_registro_contable_id)
                 ->socioFiltro($request->socio_id)
                 ->asociadoFiltro($request->asociado_id)
                 ->detalleFiltro($request->detalle)
@@ -399,7 +402,7 @@ class RegistroContableController extends Controller
                 ->montoFiltro($request->monto_ini, $request->monto_fin)
                 ->tipoRegistroContableFiltro($request->tipo_registro_contable_id)
                 ->cuentaFiltro($request->cuenta_id)
-                ->conceptoFiltro($request->concepto_id)
+                ->conceptoFiltro($request->concepto_id, $request->tipo_registro_contable_id)
                 ->socioFiltro($request->socio_id)
                 ->asociadoFiltro($request->asociado_id)
                 ->detalleFiltro($request->detalle)
@@ -473,9 +476,10 @@ class RegistroContableController extends Controller
      */
     public function anular(AnularChequeRequest $request)
     {
+        //dd($request);
         $concepto = 0;
 
-        if($request->tipo_registro_contable_id === 1){
+        if($request->tipo_registro_contable_id === '1'){
             $concepto = 1;
         }else{
             $concepto = 2;

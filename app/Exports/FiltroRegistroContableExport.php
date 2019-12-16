@@ -21,7 +21,7 @@ class FiltroRegistroContableExport implements FromCollection, WithHeadings
         ($monto_ini != 'null') ?  $monto_ini = $monto_ini : $monto_ini = null;
         ($monto_fin != 'null') ?  $monto_fin = $monto_fin : $monto_fin = null;
         ($tipo_registro_contable_id != 'null') ?  $tipo_registro_contable_id = $tipo_registro_contable_id : $tipo_registro_contable_id = null;
-        ($cuenta_id != 'null') ?  $cuenta_id = $cuenta_id : $cuenta_id = null;        
+        ($cuenta_id != 'null') ?  $cuenta_id = $cuenta_id : $cuenta_id = null;
         ($concepto_id != 'null') ?  $concepto_id = $concepto_id : $concepto_id = null;
         ($socio_id != 'null') ?  $socio_id = $socio_id : $socio_id = null;
         ($asociado_id != 'null') ?  $asociado_id = $asociado_id : $asociado_id = null;
@@ -38,7 +38,7 @@ class FiltroRegistroContableExport implements FromCollection, WithHeadings
 		$this->asociado_id = $asociado_id;
 		$this->detalle = $detalle;
 
-    }	
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
@@ -46,14 +46,14 @@ class FiltroRegistroContableExport implements FromCollection, WithHeadings
     {
     	$registros =  RegistroContable::select('fecha','usuario_id','tipo_registro_contable_id','numero_registro','concepto_id','socio_id','detalle','asociado_id','cheque','monto','cuenta_id')
     	->orderBY('fecha','DESC')
-        ->fechaSolicitud($this->fecha_solicitud_ini, $this->fecha_solicitud_fin)
-        ->monto($this->monto_ini, $this->monto_fin)
+        ->fechaSolicitudFiltro($this->fecha_solicitud_ini, $this->fecha_solicitud_fin)
+        ->montoFiltro($this->monto_ini, $this->monto_fin)
         ->tipoRegistroContableFiltro($this->tipo_registro_contable_id)
-        ->cuentaId($this->cuenta_id)
-        ->conceptoFiltro($this->concepto_id)
-        ->socioId($this->socio_id)
-        ->asociadoId($this->asociado_id)
-        ->detalle($this->detalle)
+        ->cuentaFiltro($this->cuenta_id)
+        ->conceptoFiltro($this->concepto_id, $this->tipo_registro_contable_id)
+        ->socioFiltro($this->socio_id)
+        ->asociadoFiltro($this->asociado_id)
+        ->detalleFiltro($this->detalle)
         ->get();
         foreach ($registros as $r) {
         	$r->usuario_id = User::findOrFail($r->usuario_id)->nombre1.' '.User::findOrFail($r->usuario_id)->apellido1.' - '.User::findOrFail($r->usuario_id)->email;
@@ -66,9 +66,9 @@ class FiltroRegistroContableExport implements FromCollection, WithHeadings
         	if($r->cuenta_id){
         		$r->cuenta_id = Cuenta::findOrFail($r->cuenta_id)->tipo_cuenta_id.' N° '.Cuenta::findOrFail($r->cuenta_id)->numero.' - '.Cuenta::findOrFail($r->cuenta_id)->banco_id;
         	}
-        } 
+        }
 
-        return $registros;       
+        return $registros;
     }
 
     public function headings(): array
@@ -76,5 +76,5 @@ class FiltroRegistroContableExport implements FromCollection, WithHeadings
         return [
             'Fecha de solicitud','Registrado por','Tipo de registro','Número de registro','Concepto','Socio','Detalle','Asociado','Cheque','Monto','Cuenta',
         ];
-    }  
+    }
 }
