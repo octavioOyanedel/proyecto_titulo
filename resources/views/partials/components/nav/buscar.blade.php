@@ -190,7 +190,7 @@
 
 <!-- formulario cargas-->
 <div id="buscador-carga" class="d-none">
-    <form class="form-inline my-2 my-lg-0" method="GET" action="">
+    <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('cargas.index') }}">
         <button type="button" class="btn btn-sm btn-outline-primary rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de carga(s) por medio de: Nombre (primer o segundo nombre), apellido (paterno o materno), Rut de carga (Ej. 11222333k), Fecha de nacimiento (Ej. 01-01-2019), Rut de socio (Ej. 11222333k) y parentesco (Ej. hijo).">?</button>
         <input class="form-control mr-sm-2" type="search" name="buscar_carga" placeholder="Buscar carga(s)" aria-label="Search">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>

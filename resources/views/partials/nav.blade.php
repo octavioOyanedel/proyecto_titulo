@@ -9,7 +9,7 @@
 
             <!-- inicio -->
             <li class="nav-item mr-4">
-                <a class="nav-link p-0 mt-1 text-secundary" href="{{ route('home') }}"><span class="">@svg('home')</span><span class="sr-only">(current)</span></a>
+                <a class="nav-link p-0 mt-1 text-secundary" href="{{ route('home') }}"><span class="">@svg('logo_sin_texto_home')</span><span class="sr-only">(current)</span></a>
             </li>
 
             <!-- módulo sesion -->
@@ -124,7 +124,7 @@
                         <span id="span-usuarios">Usuarios</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item sub-item" href="{{ route('register') }}">Agregar</a>
+                        <a class="dropdown-item sub-item" href="{{ route('usuarios.create') }}">Agregar</a>
                         <a class="dropdown-item sub-item" href="{{ route('usuarios.index') }}">Listar</a>
                     </div>
                 </li>

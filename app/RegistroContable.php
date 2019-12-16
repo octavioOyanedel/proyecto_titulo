@@ -164,7 +164,9 @@ class RegistroContable extends Model
                 return $query->orWhere('concepto_id', '=', 1)->orWhere('concepto_id', '=', 2);
             }else{
                 $concepto_id = Concepto::obtenerConceptoPorNombre($concepto);
-                return $query->orWhere('concepto_id', '=', $concepto_id->id);
+                if($concepto_id){
+                    return $query->orWhere('concepto_id', '=', $concepto_id->id);
+                }
             }
         }
     }

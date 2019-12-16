@@ -13,15 +13,12 @@
                         <table class="table table-hover table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col"></th>
                                     @foreach($niveles as $n)
                                         <th class="text-center" scope="col">{{ $n->nombre }}</th>
                                     @endforeach
-                                </tr>                   
+                                </tr>
                             </thead>
                             <tbody>
-                                <td scope="col"><b>Socios</b></td>  
-                                    
                                 @foreach($niveles as $n)
                                     @if($n->contarEstudiosPorSocio($n->nombre) != 0)
                                         <td class="text-center" scope="col">
@@ -33,7 +30,6 @@
                                         </td>
                                     @endif
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>

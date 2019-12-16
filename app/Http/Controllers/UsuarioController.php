@@ -11,7 +11,7 @@ use App\Http\Requests\IncorporarUsuarioRequest;
 use App\Http\Requests\EditarUsuarioRequest;
 use App\Http\Requests\EditarPasswordRequest;
 
-class UsuarioController extends Controller 
+class UsuarioController extends Controller
 {
 
     public function __construct()
@@ -65,13 +65,13 @@ class UsuarioController extends Controller
                 ->apellido1($campo)
                 ->apellido2($campo)
                 ->email($campo)
-                ->rolId($campo)               
+                ->rolId($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_usuario' => $campo,                               
-                ]); 
+                    'buscar_usuario' => $campo,
+                ]);
             break;
             case 'apellido1':
                 $usuarios = User::orderBy('roles.nombre', $orden)
@@ -81,14 +81,14 @@ class UsuarioController extends Controller
                 ->apellido1($campo)
                 ->apellido2($campo)
                 ->email($campo)
-                ->rolId($campo)               
+                ->rolId($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_usuario' => $campo,                               
-                ]); 
-            break;                                                                                    
+                    'buscar_usuario' => $campo,
+                ]);
+            break;
             default:
                 $usuarios = User::orderBy($columna, $orden)
                 ->nombre1($campo)
@@ -96,13 +96,13 @@ class UsuarioController extends Controller
                 ->apellido1($campo)
                 ->apellido2($campo)
                 ->email($campo)
-                ->rolId($campo)               
+                ->rolId($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_usuario' => $campo,                               
-                ]); 
+                    'buscar_usuario' => $campo,
+                ]);
             break;
         }
 
@@ -118,7 +118,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Rol::orderBy('nombre','ASC')->get();
+        return view('sind1.usuario.create', compact('roles'));
     }
 
     /**
@@ -141,8 +142,8 @@ class UsuarioController extends Controller
         $user = User::obtenerUltimoUsuarioIngresado();
         $roles = Rol::orderBy('nombre','ASC')->get();
         session(['mensaje' => 'Usuario agregado con éxito.']);
-        LogSistema::registrarAccion('Usuario agragado: '.convertirArrayAString($user->toArray()));        
-        return redirect()->route('register', compact('roles'));  
+        LogSistema::registrarAccion('Usuario agragado: '.convertirArrayAString($user->toArray()));
+        return redirect()->route('register', compact('roles'));
     }
 
     /**
@@ -181,13 +182,13 @@ class UsuarioController extends Controller
         $modificar->nombre1 = $request->nombre1;
         $modificar->nombre2 = $request->nombre2;
         $modificar->apellido1 = $request->apellido1;
-        $modificar->apellido2 = $request->apellido2;    
+        $modificar->apellido2 = $request->apellido2;
         $modificar->email = $request->email;
-        $modificar->rol_id = $request->rol_id;   
-        $modificar->update(); 
-        session(['mensaje' => 'Usuario editado con éxito.']); 
-        LogSistema::registrarAccion('Usuario editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($usuario->toArray()));        
-        return redirect()->route('usuarios.index');                               
+        $modificar->rol_id = $request->rol_id;
+        $modificar->update();
+        session(['mensaje' => 'Usuario editado con éxito.']);
+        LogSistema::registrarAccion('Usuario editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($usuario->toArray()));
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -200,8 +201,8 @@ class UsuarioController extends Controller
     {
         User::destroy($usuario->id);
         session(['mensaje' => 'Usuario eliminado con éxito.']);
-        LogSistema::registrarAccion('xxx eliminada: '.convertirArrayAString($eliminada->toArray()));        
-        return redirect()->route('usuarios.index');    
+        LogSistema::registrarAccion('xxx eliminada: '.convertirArrayAString($eliminada->toArray()));
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -238,10 +239,10 @@ class UsuarioController extends Controller
         $modificar = User::findOrFail($request->user_id);
         $usuario = User::findOrfail($request->user_id);
         $modificar->password = Hash::make($request->password);
-        $modificar->update(); 
-        session(['mensaje' => 'Contraseña editada con éxito.']); 
-        LogSistema::registrarAccion('Contraseña editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($usuario->toArray()));       
-        return redirect()->route('usuarios.index');              
+        $modificar->update();
+        session(['mensaje' => 'Contraseña editada con éxito.']);
+        LogSistema::registrarAccion('Contraseña editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($usuario->toArray()));
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -250,7 +251,7 @@ class UsuarioController extends Controller
      * @param  \App\User  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function verificarCorreo(Request $request) 
+    public function verificarCorreo(Request $request)
     {
         if ($request->ajax()) {
             $usuario = User::where('email','=',$request->elemento)->get();
@@ -259,7 +260,7 @@ class UsuarioController extends Controller
             }else{
                 return response()->json(0);
             }
-            
+
         }
     }
 }

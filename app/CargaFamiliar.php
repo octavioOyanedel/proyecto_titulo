@@ -20,6 +20,7 @@ class CargaFamiliar extends Model
         'rut','nombre1','nombre2','apellido1','apellido2','fecha_nac','socio_id','parentesco_id',
     ];
 
+//*************************************************************************
     /**
      * scope busqueda por nombre 1
      */
@@ -62,7 +63,7 @@ class CargaFamiliar extends Model
     /**
      * scope busqueda por parentesco
      */
-    public function scopeParentescoId($query, $parentesco)
+    public function scopeParentesco($query, $parentesco)
     {
         if ($parentesco) {
             $parentesco_id = Parentesco::obtenerParentescoPorNombre($parentesco);
@@ -75,7 +76,7 @@ class CargaFamiliar extends Model
     /**
      * scope busqueda por parentesco
      */
-    public function scopeSocioId($query, $rut)
+    public function scopeSocio($query, $rut)
     {
         if ($rut) {
             $socio_id = Socio::obtenerSocioPorRut($rut);
@@ -98,13 +99,15 @@ class CargaFamiliar extends Model
     /**
      * scope busqueda fecha
      */
-    public function scopeFechaNacimientoUnica($query, $fecha)
+    public function scopeFechaNacimiento($query, $fecha)
     {
         $fecha_formarteada = date("Y-m-d", strtotime($fecha));
         if($fecha != null){
             return $query->orWhere('fecha_nac','=',$fecha_formarteada);
         }
     }
+
+//*************************************************************************
 
     /**
      * Modificador de parentescos

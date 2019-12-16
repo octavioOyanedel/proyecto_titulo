@@ -14,7 +14,7 @@ class BusquedaCargaExport implements FromCollection, WithHeadings
     {
     	($buscar_carga != 'null') ?  $buscar_carga = $buscar_carga : $buscar_carga = null;
     	$this->buscar_carga = $buscar_carga;
-    }	
+    }
 
     /**
     * @return \Illuminate\Support\Collection
@@ -28,15 +28,15 @@ class BusquedaCargaExport implements FromCollection, WithHeadings
         ->nombre2($campo)
         ->apellido1($campo)
         ->apellido2($campo)
-        ->apellido2($campo)
-        ->socioId($campo)
-        ->parentescoId($campo)
-        ->fechaNacimientoUnica($campo)        
-        ->get();     
+        ->parentesco($campo)
+        ->socio($campo)
+        ->rut($campo)
+        ->fechaNacimiento($campo)
+        ->get();
         foreach ($cargas as $c) {
         	$c->socio_id = Socio::findOrFail($c->socio_id)->nombre1.' '.Socio::findOrFail($c->socio_id)->apellido1.' - '.Socio::findOrFail($c->socio_id)->rut;
         }
-        return $cargas;           
+        return $cargas;
     }
 
     public function headings(): array
@@ -44,5 +44,5 @@ class BusquedaCargaExport implements FromCollection, WithHeadings
         return [
             'Apellido materno','Apellido paterno','Primer nombre','Segundo nombre','Rut', 'Fecha de nacimiento', 'Socio', 'Parentesco'
         ];
-    }  
+    }
 }

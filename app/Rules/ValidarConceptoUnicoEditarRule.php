@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Concepto;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarConceptoUnicoEditarRule implements Rule
@@ -27,7 +28,7 @@ class ValidarConceptoUnicoEditarRule implements Rule
     {
         //$value = concepto actual
         if($this->concepto_original != $value){
-            $concepto = Concepto::where('nombre','=',$value)->get();            
+            $concepto = Concepto::where('nombre','=',$value)->get();
             if($concepto->count() > 0){
                 return false;
             }else{

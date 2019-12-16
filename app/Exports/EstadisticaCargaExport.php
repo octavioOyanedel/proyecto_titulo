@@ -27,22 +27,22 @@ class EstadisticaCargaExport implements FromCollection, WithHeadings
 	        ->orderBY('apellido1','ASC')
 			->orWhere('parentesco_id','=',1)
 			->orWhere('parentesco_id','=',2)
-	        ->get();   		
+	        ->get();
     	}
     	if($this->nombre === 'padres'){
 	         $cargas = CargaFamiliar::select('apellido1','apellido2','nombre1','nombre2','rut','fecha_nac','socio_id','parentesco_id')
 	        ->orderBY('apellido1','ASC')
 			->orWhere('parentesco_id','=',3)
 			->orWhere('parentesco_id','=',4)
-	        ->get();   		
+	        ->get();
     	}
     	if($this->nombre === 'abuelos'){
 	         $cargas = CargaFamiliar::select('apellido1','apellido2','nombre1','nombre2','rut','fecha_nac','socio_id','parentesco_id')
 	        ->orderBY('apellido1','ASC')
 			->orWhere('parentesco_id','=',5)
 			->orWhere('parentesco_id','=',6)
-	        ->get();   		
-    	}    	
+	        ->get();
+    	}
         foreach ($cargas as $c) {
         	$c->socio_id = Socio::findOrFail($c->socio_id)->nombre1.' '.Socio::findOrFail($c->socio_id)->apellido1.' - '.Socio::findOrFail($c->socio_id)->rut;
         }
@@ -54,5 +54,5 @@ class EstadisticaCargaExport implements FromCollection, WithHeadings
         return [
             'Apellido materno','Apellido paterno','Primer nombre','Segundo nombre','Rut', 'Fecha de nacimiento', 'Socio', 'Parentesco'
         ];
-    }       
+    }
 }

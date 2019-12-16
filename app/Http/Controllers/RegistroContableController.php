@@ -499,7 +499,7 @@ class RegistroContableController extends Controller
         $registro_anulado = $registro;
         $registro->save();
         session(['mensaje' => 'Registro contable anulado con éxito.']);
-        LogSistema::registrarAccion('Préstamo contable anulado N° '. $registro_anulado);
+        LogSistema::registrarAccion('Registro contable anulado N° '. $registro_anulado);
         return redirect()->route('contables.index');
     }
 
