@@ -13,7 +13,10 @@
                 'fecha_pago_fin' => $fecha_pago_fin,
                 'numero_cuotas' => $numero_cuotas,
                 'cuenta_id' => $cuenta_id,
-                'estado_deuda_id' => $estado_deuda_id
+                'estado_deuda_id' => $estado_deuda_id,
+                'numero_egreso' => $numero_egreso,
+                'cheque' => $cheque,
+                'monto' => $monto
             ]) }}">|<b>Exportar Excel</b>|</a>                      
         </div>                                                                            
     </div>   
@@ -32,7 +35,8 @@
         <div class="input-group mb-2 mr-sm-2">
             <select name="columna" id="columna" class="form-control form-control-sm">
                 <option value="" selected>Columna</option>
-                <option value="socio_id" @if(request('columna') === 'socio_id') {{ 'selected' }} @endif>Nombre socio</option>
+                <option value="nombre" @if(request('columna') === 'nombre') {{ 'selected' }} @endif>Primer nombre</option>
+                <option value="apellido" @if(request('columna') === 'apellido') {{ 'selected' }} @endif>Apellido paterno</option>
                 <option value="rut" @if(request('columna') === 'rut') {{ 'selected' }} @endif>Rut</option>                
                 <option value="fecha_solicitud" @if(request('columna') === 'fecha_solicitud') {{ 'selected' }} @endif>Fecha solicitud</option>
                 <option value="numero_egreso" @if(request('columna') === 'numero_egreso') {{ 'selected' }} @endif>Numero de egreso</option>
@@ -65,7 +69,10 @@
         <input type="hidden" name="rut" value="{{ request('rut') }}">
         <input type="hidden" name="cuenta_id" value="{{ request('cuenta_id') }}">
         <input type="hidden" name="estado_deuda_id" value="{{ request('estado_deuda_id') }}">
-
+        <input type="hidden" name="numero_egreso" value="{{ request('numero_egreso') }}">
+        <input type="hidden" name="cheque" value="{{ request('cheque') }}">
+        <input type="hidden" name="monto" value="{{ request('monto') }}">      
+          
         <div class="input-group mb-2 mr-sm-2">
             <button type="submit" id="filtrar" class="btn btn-sm btn-secondary">Filtrar</button>
         </div> 

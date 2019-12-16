@@ -24,14 +24,15 @@
         <div class="input-group mb-2 mr-sm-2">
             <select name="columna" id="columna" class="form-control form-control-sm">
                 <option value="" selected>Columna</option>
-                <option value="socio_id" @if(request('columna') === 'socio_id') {{ 'selected' }} @endif>Nombre socio</option>
+                <option value="nombre" @if(request('columna') === 'nombre') {{ 'selected' }} @endif>Primer nombre</option>
+                <option value="apellido" @if(request('columna') === 'apellido') {{ 'selected' }} @endif>Apellido paterno</option>
                 <option value="rut" @if(request('columna') === 'rut') {{ 'selected' }} @endif>Rut</option>                
                 <option value="fecha_solicitud" @if(request('columna') === 'fecha_solicitud') {{ 'selected' }} @endif>Fecha solicitud</option>
                 <option value="numero_egreso" @if(request('columna') === 'numero_egreso') {{ 'selected' }} @endif>Numero de egreso</option>
                 <option value="tipo_cuenta_id" @if(request('columna') === 'tipo_cuenta_id') {{ 'selected' }} @endif>Tipo de cuenta</option>           
                 <option value="numero" @if(request('columna') === 'numero') {{ 'selected' }} @endif>Número cuenta</option>      
                 <option value="banco_id" @if(request('columna') === 'banco_id') {{ 'selected' }} @endif>Banco</option>
-                <option value="forma_pago_id" @if(request('columna') === 'forma_pago_id') {{ 'selected' }} @endif>Forma de pago</option>                                           
+                <option value="forma_pago_id" @if(request('columna') === 'forma_pago_id') {{ 'selected' }} @endif>Forma de pago</option> 
                 <option value="cheque" @if(request('columna') === 'cheque') {{ 'selected' }} @endif>Cheque</option>
                 <option value="monto" @if(request('columna') === 'monto') {{ 'selected' }} @endif>Monto</option>
                 <option value="estado_deuda_id" @if(request('columna') === 'estado_deuda_id') {{ 'selected' }} @endif>Estado de préstamo</option>                

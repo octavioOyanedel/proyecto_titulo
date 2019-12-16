@@ -63,6 +63,7 @@ class CargaFamiliarController extends Controller
                 ->apellido2($campo)
                 ->apellido2($campo)
                 ->socioId($campo)
+                ->rut($campo)
                 ->parentescoId($campo)
                 ->fechaNacimientoUnica($campo)                
                 ->paginate($registros)->appends([
@@ -80,6 +81,7 @@ class CargaFamiliarController extends Controller
                 ->apellido2($campo)
                 ->apellido2($campo)
                 ->socioId($campo)
+                ->rut($campo)
                 ->parentescoId($campo)
                 ->fechaNacimientoUnica($campo)
                 ->paginate($registros)->appends([

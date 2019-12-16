@@ -4,7 +4,6 @@ $(window).on('load',function(){
 	var forma_pago = $('#forma_pago_id');
 	var cuenta = $('#cuenta_id');
 	var rut = $('#rut');
-	var cuenta = $('#cuenta_id');
 	var estado = $('#estado_deuda_id');
 	var contenedor_cuotas = $('#contenedor_cuotas');
 	var contenedor_fechas = $('#contenedor_fecha_pago');

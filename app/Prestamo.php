@@ -25,71 +25,14 @@ class Prestamo extends Model
 
 //scope filtro
 //***************************************************************************************************************
-    /**
-     * scope busqueda fecha de solicitud
-     */
-    public function scopeFechaSolicitud($query, $fecha_ini, $fecha_fin)
-    {
-        if($fecha_ini != null && $fecha_fin != null){
-            return $query->whereBetween('fecha_solicitud', [date($fecha_ini),date($fecha_fin)]);
-        }
-        if($fecha_ini != null && $fecha_fin === null){
-             return $query->where('fecha_solicitud','>=',$fecha_ini);
-        }
-        if($fecha_ini === null && $fecha_fin != null){
-             return $query->where('fecha_solicitud','<=',$fecha_fin);
-        }
-    }
 
     /**
-     * scope busqueda fecha de solicitud
+     * scope busqueda estado prestamo
      */
-    public function scopeFechaPago($query, $fecha_ini, $fecha_fin)
+    public function scopeEstadoDeudaFiltro($query, $estado)
     {
-        if($fecha_ini != null && $fecha_fin != null){
-            return $query->whereBetween('fecha_pago_deposito', [date($fecha_ini),date($fecha_fin)]);
-        }
-        if($fecha_ini != null && $fecha_fin === null){
-             return $query->where('fecha_pago_deposito','>=',$fecha_ini);
-        }
-        if($fecha_ini === null && $fecha_fin != null){
-             return $query->where('fecha_pago_deposito','<=',$fecha_fin);
-        }
-    }
-
-    /**
-     * scope busqueda monto
-     */
-    public function scopeMonto($query, $monto_ini, $monto_fin)
-    {
-        if($monto_ini != null && $monto_fin != null){
-            return $query->whereBetween('monto', [date($monto_ini),date($monto_fin)]);
-        }
-        if($monto_ini != null && $monto_fin === null){
-             return $query->where('monto','>=',$monto_ini);
-        }
-        if($monto_ini === null && $monto_fin != null){
-             return $query->where('monto','<=',$monto_fin);
-        }
-    }
-
-    /**
-     * scope busqueda numero de cuotas
-     */
-    public function scopeNumeroCuotas($query, $numero)
-    {
-        if($numero != null){
-            return $query->where('numero_cuotas','=',$numero);
-        }
-    }
-
-    /**
-     * scope busqueda forma pago
-     */
-    public function scopeFormaPagoFiltro($query, $forma)
-    {
-        if($forma != null){
-            return $query->where('forma_pago_id','=',$forma);
+        if($estado != null){
+            return $query->where('estado_deuda_id','=',$estado);
         }
     }
 
@@ -104,32 +47,116 @@ class Prestamo extends Model
                 return $query->where('socio_id', '=', $socio->id);
             }
         }
-    }
+    }   
 
     /**
-     * scope busqueda cuenta
+     * scope busqueda fecha de solicitud
      */
-    public function scopeCuentaId($query, $cuenta)
+    public function scopeFechaSolicitudFiltro($query, $fecha_ini, $fecha_fin)
     {
-        if($cuenta != null){
-            return $query->where('cuenta_id','=',$cuenta);
+        if($fecha_ini != null && $fecha_fin != null){
+            return $query->whereBetween('fecha_solicitud', [date($fecha_ini),date($fecha_fin)]);
+        }
+        if($fecha_ini != null && $fecha_fin === null){
+             return $query->where('fecha_solicitud','>=',$fecha_ini);
+        }
+        if($fecha_ini === null && $fecha_fin != null){
+             return $query->where('fecha_solicitud','<=',$fecha_fin);
         }
     }
 
     /**
-     * scope busqueda estado prestamo
+     * scope busqueda por numero egreso
      */
-    public function scopeEstadoDeudaIdFiltro($query, $estado)
+    public function scopeNumeroEgresoFiltro($query, $numero_egreso)
     {
-        if($estado != null){
-            return $query->where('estado_deuda_id','=',$estado);
+        if ($numero_egreso) {
+            return $query->where('numero_egreso', '=', $numero_egreso);
+        }
+    }
+
+    /**
+     * scope busqueda numero cuenta
+     */
+    public function scopeNumeroCuentaFiltro($query, $cuenta)
+    {
+        if ($cuenta) {
+            $cuenta_id = Cuenta::obtenerCuentaPorNumero($cuenta);
+            if($cuenta_id != null){
+                return $query->where('cuenta_id', '=', $cuenta_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda forma pago
+     */
+    public function scopeFormaPagoFiltro($query, $forma)
+    {
+        if ($forma) {
+            $forma_id = FormaPago::obtenerFormaPagoPorNombre($forma);
+            if($forma_id != null){
+                return $query->where('forma_pago_id', '=', $forma_id->id);
+            }
+        }
+    }
+
+    /**
+     * scope busqueda por numero de cheque
+     */
+    public function scopeChequeFiltro($query, $cheque)
+    {
+        if ($cheque) {
+            return $query->where('cheque', '=', $cheque);
+        }
+    }
+
+    /**
+     * scope busqueda monto
+     */
+    static public function scopeMontoFiltro($query, $monto)
+    {
+        if($monto != null){
+            return $query->where('monto','=', $monto);
+        }
+    }
+
+    /**
+     * scope busqueda monto
+     */
+    public function scopeMontosFiltro($query, $monto_ini, $monto_fin)
+    {
+        if($monto_ini != null && $monto_fin != null){
+            return $query->whereBetween('monto', [date($monto_ini),date($monto_fin)]);
+        }
+        if($monto_ini != null && $monto_fin === null){
+             return $query->where('monto','>=',$monto_ini);
+        }
+        if($monto_ini === null && $monto_fin != null){
+             return $query->where('monto','<=',$monto_fin);
+        }
+    }    
+
+    /**
+     * scope busqueda fecha de solicitud
+     */
+    public function scopeFechaPagoFiltro($query, $fecha_ini, $fecha_fin)
+    {
+        if($fecha_ini != null && $fecha_fin != null){
+            return $query->whereBetween('fecha_pago_deposito', [date($fecha_ini),date($fecha_fin)]);
+        }
+        if($fecha_ini != null && $fecha_fin === null){
+             return $query->where('fecha_pago_deposito','>=',$fecha_ini);
+        }
+        if($fecha_ini === null && $fecha_fin != null){
+             return $query->where('fecha_pago_deposito','<=',$fecha_fin);
         }
     }
 //***************************************************************************************************************
     /**
      * scope busqueda estado
      */
-    public function scopeEstadoDeudaId($query, $estado)
+    public function scopeEstadoDeuda($query, $estado)
     {
         if ($estado) {
             $estado_id = EstadoDeuda::obtenerEstadoPorNombre($estado);
@@ -139,16 +166,39 @@ class Prestamo extends Model
         }
     }
 
+        /**
+     * scope busqueda rut
+     */
+    public function scopeRut($query, $rut)
+    {
+        if ($rut) {
+            $socio = Socio::obtenerSocioPorRut($rut);
+            if($socio != null){
+                return $query->orWhere('socio_id', '=', $socio->id);
+            }
+        }
+    }   
+
     /**
      * scope busqueda fecha
      */
-    public function scopeFechaUnica($query, $fecha)
+    public function scopeFecha($query, $fecha)
     {
         $fecha_formarteada = date("Y-m-d", strtotime($fecha));
         if($fecha != null){
             return $query->orWhere('fecha_solicitud','=',$fecha_formarteada);
         }
-    }
+    }   
+
+    /**
+     * scope busqueda por numero egreso
+     */
+    public function scopeNumeroEgreso($query, $numero_egreso)
+    {
+        if ($numero_egreso) {
+            return $query->orWhere('numero_egreso', '=', $numero_egreso);
+        }
+    } 
 
     /**
      * scope busqueda numero cuenta
@@ -161,12 +211,12 @@ class Prestamo extends Model
                 return $query->orWhere('cuenta_id', '=', $cuenta_id->id);
             }
         }
-    }
+    }    
 
     /**
      * scope busqueda forma pago
      */
-    public function scopeFormaPagoId($query, $forma)
+    public function scopeFormaPago($query, $forma)
     {
         if ($forma) {
             $forma_id = FormaPago::obtenerFormaPagoPorNombre($forma);
@@ -174,27 +224,7 @@ class Prestamo extends Model
                 return $query->orWhere('forma_pago_id', '=', $forma_id->id);
             }
         }
-    }
-
-    /**
-     * scope busqueda monto
-     */
-    static public function scopeMontoUnico($query, $monto)
-    {
-        if($monto != null){
-            return $query->orWhere('monto','=', $monto);
-        }
-    }
-
-    /**
-     * scope busqueda por numero egreso
-     */
-    public function scopeNumeroEgreso($query, $numero_egreso)
-    {
-        if ($numero_egreso) {
-            return $query->orWhere('numero_egreso', '=', $numero_egreso);
-        }
-    }
+    }    
 
     /**
      * scope busqueda por numero de cheque
@@ -204,17 +234,18 @@ class Prestamo extends Model
         if ($cheque) {
             return $query->orWhere('cheque', '=', $cheque);
         }
-    }
+    }    
 
     /**
-     * scope busqueda rut
+     * scope busqueda monto
      */
-    public function scopeRut($query, $id)
+    static public function scopeMonto($query, $monto)
     {
-        if($id != null){
-            return $query->orWhere('socio_id', '=', $id);
+        if($monto != null){
+            return $query->orWhere('monto','=', $monto);
         }
-    }
+    }    
+//***************************************************************************************************************
 
     /**
      * Modificador de cuenta

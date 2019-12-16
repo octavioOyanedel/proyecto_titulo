@@ -18,7 +18,7 @@ class UsuarioController extends Controller
     {
         $this->middleware('auth');
 
-        $this->middleware('administrador', ['only' => ['index','edit','create', 'store', 'destroy', 'show']]);
+        $this->middleware('administrador', ['only' => ['index','create', 'store', 'destroy', 'show']]);
 
         //$this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
     }

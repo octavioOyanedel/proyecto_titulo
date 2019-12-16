@@ -20,6 +20,7 @@
         <script src="{{ asset('js/ajax/validar_cheque_prestamo_create.js') }}" defer></script>
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
         <script src="{{ asset('js/switch_pago_cheque.js') }}" defer></script>
+        <script src="{{ asset('js/switch_pago_cheque.js') }}" defer></script>
     @break
     {{-- mantenedor --}}
     @case('mantenedor_prestamo_forma_pago')

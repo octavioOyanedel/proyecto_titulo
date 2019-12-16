@@ -328,6 +328,16 @@ class Socio extends Model
     }
 
     /**
+     * scope busqueda por anexo
+     */
+    public function scopeGeneroUnico($query, $genero)
+    {
+        if ($genero != null) {
+            return $query->orWhere('genero', '=', $genero);
+        }
+    }
+
+    /**
      * Modificador de comuna
      */
     public function getComunaIdAttribute($valor)

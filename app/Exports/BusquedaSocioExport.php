@@ -25,7 +25,7 @@ class BusquedaSocioExport implements FromCollection, WithHeadings
     	$campo = $this->buscar_socio;
         return $socios = Socio::select('apellido1','apellido2','nombre1','nombre2','rut','genero','fecha_nac','celular','correo','direccion','fecha_pucv','anexo','numero_socio','fecha_sind1','comuna_id','ciudad_id','sede_id','area_id','cargo_id','estado_socio_id','nacionalidad_id')
         ->rut($campo)
-        ->genero($campo)
+        ->generoUnico($campo)
         ->fechaUnica($campo)
         ->nombre1($campo)
         ->nombre2($campo)

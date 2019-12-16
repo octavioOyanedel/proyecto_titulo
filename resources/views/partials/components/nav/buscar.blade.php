@@ -1,7 +1,7 @@
 <!-- formulario búsqueda socio-->
 <div id="buscador-socio" class="d-none">
     <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('home') }}">
-        <button type="button" class="btn btn-sm btn-outline-primary rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de socio(s) por medio de: Nombre (primer o segundo nombre), apellido (paterno o materno), género (varón o dama), Rut (Ej. 11222333k), Fecha ingreso Sind1 (Ej. 01-01-2019), Número de socio, Correo, Celular y Anexo, Sede (Ej. casa central), Área (Ej. abastecimiento), Cargo (Ej. secretaria).">?</button>
+        <button type="button" class="btn btn-sm btn-outline-primary rounded-circle mr-2 pb-0" data-container="body" data-toggle="popover" data-placement="left" data-content="Búsqueda de socio(s) por medio de: Nombre (primer o segundo nombre), apellido (paterno o materno), género (varón o dama), Rut (Ej. 11222333k), Fecha ingreso Sind1 (Ej. 01-01-2019), Número de socio, Correo, Celular, Anexo, Sede (Ej. casa central), Área (Ej. abastecimiento) y Cargo (Ej. secretaria).">?</button>
         <input class="form-control mr-sm-2" type="search" name="buscar_socio" placeholder="Buscar socio(s)" aria-label="Search">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
