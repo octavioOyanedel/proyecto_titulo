@@ -31,82 +31,82 @@ $(window).on('load',function(){
 	}
 
 	//mantenedores
-	if(ruta.localeCompare('/mantenedor_socio_sede') === 0){
+	if(ruta.localeCompare('/mantenedor_socio_sede') === 0 || ruta.search('/sedes/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-sede').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_socio_area') === 0){
+	if(ruta.localeCompare('/mantenedor_socio_area') === 0 || ruta.search('/areas/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-area').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_socio_cargo') === 0){
+	if(ruta.localeCompare('/mantenedor_socio_cargo') === 0 || ruta.search('/cargos/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-cargo').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_socio_estado') === 0){
+	if(ruta.localeCompare('/mantenedor_socio_estado') === 0 || ruta.search('/estado_socios/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-estado-socio').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_socio_nacionalidad') === 0){
+	if(ruta.localeCompare('/mantenedor_socio_nacionalidad') === 0 || ruta.search('/nacionalidades/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-nacionalidad').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_carga_parentesco') === 0){
+	if(ruta.localeCompare('/mantenedor_carga_parentesco') === 0 || ruta.search('/parentescos/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-parentesco').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_estudio_nivel') === 0){
+	if(ruta.localeCompare('/mantenedor_estudio_nivel') === 0 || ruta.search('/niveles/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-nivel').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_estudio_institucion') === 0){
+	if(ruta.localeCompare('/mantenedor_estudio_institucion') === 0 || ruta.search('/instituciones/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-institucion').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_estudio_estado_nivel') === 0){
+	if(ruta.localeCompare('/mantenedor_estudio_estado_nivel') === 0 || ruta.search('/estados_nivel/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-estado-nivel').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_estudio_titulo') === 0){
+	if(ruta.localeCompare('/mantenedor_estudio_titulo') === 0 || ruta.search('/titulos/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-titulo').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_prestamo_forma_pago') === 0){
+	if(ruta.localeCompare('/mantenedor_prestamo_forma_pago') === 0 || ruta.search('/formas_pago/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-pago').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_contable_cuenta') === 0){
+	if(ruta.localeCompare('/mantenedor_contable_cuenta') === 0 || ruta.search('/cuentas/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-cuenta').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_contable_banco') === 0){
+	if(ruta.localeCompare('/mantenedor_contable_banco') === 0 || ruta.search('/bancos/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-banco').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_contable_concepto') === 0){
+	if(ruta.localeCompare('/mantenedor_contable_concepto') === 0 || ruta.search('/conceptos/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-concepto').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_contable_tipo_cuenta') === 0){
+	if(ruta.localeCompare('/mantenedor_contable_tipo_cuenta') === 0 || ruta.search('/tipos_cuentas/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-tipo-cuenta').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/mantenedor_contable_asociado') === 0){
+	if(ruta.localeCompare('/mantenedor_contable_asociado') === 0 || ruta.search('/asociados/') != -1){
 		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-asociado').removeClass('d-none');
 	}

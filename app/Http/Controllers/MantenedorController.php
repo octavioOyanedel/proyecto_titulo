@@ -45,13 +45,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_sede');
@@ -86,13 +86,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_area');
@@ -144,13 +144,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_cargo');
@@ -185,13 +185,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_estado_socio');
@@ -226,13 +226,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_nacionalidad');
@@ -266,13 +266,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_parentesco');
@@ -307,13 +307,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_nivel');
@@ -347,13 +347,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_institucion');
@@ -387,13 +387,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_estado_nivel');
@@ -427,13 +427,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_titulo');
@@ -467,13 +467,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_pago');
@@ -507,7 +507,7 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
@@ -573,13 +573,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_banco');
@@ -613,13 +613,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_concepto');
@@ -671,13 +671,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_tipo_cuenta');
@@ -711,13 +711,13 @@ class MantenedorController extends Controller
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'nombre';
+            $columna = 'created_at';
         }
 
         $campo = $request->get('buscar_asociado');

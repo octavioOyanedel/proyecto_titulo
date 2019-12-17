@@ -19,7 +19,7 @@ class CuentaController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -103,9 +103,7 @@ class CuentaController extends Controller
      */
     public function destroy(Cuenta $cuenta)
     {
-        $eliminada_tipo = $cuenta->tipo_cuenta_id;
-        $eliminada_numero = $cuenta->numero;
-        $eliminada_banco = $cuenta->banco_id;              
+        $eliminada = Cuenta::findOrFail($cuenta->id);           
         Cuenta::destroy($cuenta->id);
         session(['mensaje' => 'Cuenta bancaria eliminada con éxito.']); 
         LogSistema::registrarAccion('Cuenta eliminada: '.convertirArrayAString($eliminada->toArray()));     

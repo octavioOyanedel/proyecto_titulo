@@ -17,7 +17,7 @@ class FormaPagoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -96,7 +96,7 @@ class FormaPagoController extends Controller
      */
     public function destroy($id)
     {
-        $eliminada = FormaPago::findOrFail($id)->nombre;
+        $eliminada = FormaPago::findOrFail($id);
         FormaPago::destroy($id);
         session(['mensaje' => 'Forma de pago eliminada con éxito.']);   
         LogSistema::registrarAccion('Forma pago eliminada: '.convertirArrayAString($eliminada->toArray()));    

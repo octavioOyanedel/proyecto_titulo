@@ -17,7 +17,7 @@ class TipoCuentaController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -94,7 +94,7 @@ class TipoCuentaController extends Controller
      */
     public function destroy($id)
     {
-        $eliminada = TipoCuenta::findOrFail($id)->nombre;
+        $eliminada = TipoCuenta::findOrFail($id);
         TipoCuenta::destroy($id);
         session(['mensaje' => 'Tipo de cuenta eliminada con éxito.']);    
         LogSistema::registrarAccion('Tipo de cuenta eliminada: '.convertirArrayAString($eliminada->toArray())); 

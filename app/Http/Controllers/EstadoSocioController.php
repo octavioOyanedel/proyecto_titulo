@@ -17,7 +17,7 @@ class EstadoSocioController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -40,7 +40,7 @@ class EstadoSocioController extends Controller
     {
         $estado = EstadoSocio::create($request->all());
         session(['mensaje' => 'Estado socio agregado con éxito.']);
-        LogSistema::registrarAccion('Estado socio agragado: '.convertirArrayAString($carga->toArray()));
+        LogSistema::registrarAccion('Estado socio agragado: '.convertirArrayAString($estado->toArray()));
         return redirect()->route('mantenedor_socio_estado');
     }
 
@@ -92,7 +92,7 @@ class EstadoSocioController extends Controller
      */
     public function destroy(EstadoSocio $estadoSocio)
     {
-        $eliminada = $estadoSocio->nombre;        
+        $eliminada = EstadoSocio::findOrFail($estadoSocio->id);       
         EstadoSocio::destroy($estadoSocio->id);
         session(['mensaje' => 'Estado socio eliminado con éxito.']);
         LogSistema::registrarAccion('Estado socio eliminado: '.convertirArrayAString($eliminada->toArray())); 

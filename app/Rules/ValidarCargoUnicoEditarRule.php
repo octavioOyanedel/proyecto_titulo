@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Cargo;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarCargoUnicoEditarRule implements Rule

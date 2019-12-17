@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\TipoCuenta;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarTipoCuentaUnicaEditarRule implements Rule

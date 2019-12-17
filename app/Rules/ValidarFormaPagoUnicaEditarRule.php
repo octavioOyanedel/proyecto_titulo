@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\FormaPago;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarFormaPagoUnicaEditarRule implements Rule

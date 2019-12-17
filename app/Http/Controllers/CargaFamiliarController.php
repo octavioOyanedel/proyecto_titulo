@@ -42,13 +42,13 @@ class CargaFamiliarController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'apellido1';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){
             $orden = request('orden');
         }else{
-            $orden = 'ASC';
+            $orden = 'DESC';
         }
 
         $campo = $request->get('buscar_carga');

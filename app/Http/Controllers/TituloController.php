@@ -18,7 +18,7 @@ class TituloController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -95,7 +95,7 @@ class TituloController extends Controller
      */
     public function destroy(Titulo $titulo)
     {
-        $eliminada = $titulo->nombre;
+        $eliminada = Titulo::findOrFail($titulo->id); 
         Titulo::destroy($titulo->id);
         session(['mensaje' => 'Título eliminado con éxito.']);
         LogSistema::registrarAccion('Título eliminado: '.convertirArrayAString($eliminada->toArray()));     

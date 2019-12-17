@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Nacionalidad;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarNacionalidadUnicaEditarRule implements Rule

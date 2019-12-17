@@ -17,7 +17,7 @@ class ParentescoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -92,7 +92,7 @@ class ParentescoController extends Controller
      */
     public function destroy(Parentesco $parentesco)
     {
-        $eliminada = $parentesco->nombre;        
+        $eliminada = Parentesco::findOrFail($parentesco->id);        
         Parentesco::destroy($parentesco->id);
         session(['mensaje' => 'Parentesco eliminado con éxito.']);
         LogSistema::registrarAccion('parentesco eliminado: '.convertirArrayAString($eliminada->toArray())); 

@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Banco;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarBancoUnicoEditarRule implements Rule

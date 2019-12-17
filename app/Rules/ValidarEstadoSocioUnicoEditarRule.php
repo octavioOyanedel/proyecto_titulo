@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\EstadoSocio;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarEstadoSocioUnicoEditarRule implements Rule

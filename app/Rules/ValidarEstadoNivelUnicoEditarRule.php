@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\EstadoGradoAcademico;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarEstadoNivelUnicoEditarRule implements Rule

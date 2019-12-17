@@ -17,7 +17,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -91,7 +91,7 @@ class SedeController extends Controller
      */
     public function destroy(Sede $sede)
     {
-        $eliminada_nombre = $sede->nombre;
+        $eliminada = Sede::findOrFail($sede->id); 
         $sede = Sede::destroy($sede->id);
         session(['mensaje' => 'Sede eliminada con éxito.']);
         LogSistema::registrarAccion('Área eliminada: '.convertirArrayAString($eliminada->toArray()));         

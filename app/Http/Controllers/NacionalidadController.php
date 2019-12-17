@@ -17,7 +17,7 @@ class NacionalidadController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -94,7 +94,7 @@ class NacionalidadController extends Controller
      */
     public function destroy($id)
     {
-        $eliminada = Nacionalidad::findOrFail($id)->nombre;       
+        $eliminada = Nacionalidad::findOrFail($id);      
         Nacionalidad::destroy($id);
         session(['mensaje' => 'Nacionalidad eliminada con éxito.']);
         LogSistema::registrarAccion('Nacionalidad eliminada: '.convertirArrayAString($eliminada->toArray())); 

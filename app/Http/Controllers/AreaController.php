@@ -18,7 +18,7 @@ class AreaController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -95,7 +95,7 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
-        $eliminada = $area->nombre;
+        $eliminada = Area::findOrFail($area->id); 
         Area::destroy($area->id);
         session(['mensaje' => 'Área eliminada con éxito.']);
         LogSistema::registrarAccion('Área eliminada: '.convertirArrayAString($eliminada->toArray())); 

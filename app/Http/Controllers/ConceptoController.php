@@ -18,7 +18,7 @@ class ConceptoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -96,8 +96,7 @@ class ConceptoController extends Controller
      */
     public function destroy(Concepto $concepto)
     {
-        $eliminada_nombre = $concepto->nombre;
-        $eliminada_tipo = $concepto->tipo_registro_contable_id;
+        $eliminada = Concepto::findOrFail($concepto->id); 
         Concepto::destroy($concepto->id);
         session(['mensaje' => 'Concepto eliminado con éxito.']);     
         LogSistema::registrarAccion('Concepto eliminado: '.convertirArrayAString($eliminada->toArray()));  

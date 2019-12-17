@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Titulo;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarTituloUnicoEditarRule implements Rule

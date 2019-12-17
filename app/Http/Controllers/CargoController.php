@@ -17,7 +17,7 @@ class CargoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -91,7 +91,7 @@ class CargoController extends Controller
      */
     public function destroy(Cargo $cargo)
     {
-        $eliminada = $cargo->nombre;        
+        $eliminada = Cargo::findOrFail($cargo->id);        
         Cargo::destroy($cargo->id);
         session(['mensaje' => 'Cargo eliminado con éxito.']);
         LogSistema::registrarAccion('Área eliminada: '.convertirArrayAString($eliminada->toArray())); 

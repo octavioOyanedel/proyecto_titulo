@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Asociado;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarAsociadoUnicoEditarRule implements Rule

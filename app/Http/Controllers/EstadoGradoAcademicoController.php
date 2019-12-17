@@ -18,7 +18,7 @@ class EstadoGradoAcademicoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -96,7 +96,7 @@ class EstadoGradoAcademicoController extends Controller
      */
     public function destroy($id)
     {
-        $eliminada = EstadoGradoAcademico::findOrFail($id)->nombre;
+        $eliminada = EstadoGradoAcademico::findOrFail($id);
         EstadoGradoAcademico::destroy($id);
         session(['mensaje' => 'Estado nivel educacional eliminado con éxito.']); 
         LogSistema::registrarAccion('Estado nivel educacional eliminado: '.convertirArrayAString($eliminada->toArray()));      

@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Sede;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarSedeUnicaEditarRule implements Rule

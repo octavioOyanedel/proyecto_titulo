@@ -17,7 +17,7 @@ class AsociadoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -93,8 +93,7 @@ class AsociadoController extends Controller
      */
     public function destroy(Asociado $asociado)
     {
-        $eliminada_concepto = $asociado->concepto;
-        $eliminada_nombre = $asociado->nombre;
+        $eliminada = Asociado::findOrFail($asociado->id); 
         Asociado::destroy($asociado->id);
         session(['mensaje' => 'Asociado eliminado con éxito.']); 
         LogSistema::registrarAccion('Asociado eliminado: '.convertirArrayAString($eliminada->toArray()));   

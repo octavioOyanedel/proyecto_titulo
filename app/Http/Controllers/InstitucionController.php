@@ -19,7 +19,7 @@ class InstitucionController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -98,7 +98,7 @@ class InstitucionController extends Controller
      */
     public function destroy($id)
     {
-        $eliminada = Institucion::findOrFail($id)->nombre;
+        $eliminada = Institucion::findOrFail($id);
         Institucion::destroy($id);
         session(['mensaje' => 'Institución educacional eliminada con éxito.']);      
         LogSistema::registrarAccion('Institución eliminada: '.convertirArrayAString($eliminada->toArray())); 

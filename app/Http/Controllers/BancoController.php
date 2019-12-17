@@ -17,7 +17,7 @@ class BancoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -92,7 +92,7 @@ class BancoController extends Controller
      */
     public function destroy(Banco $banco)
     {
-        $eliminada = $banco->nombre;
+        $eliminada = Banco::findOrFail($banco->id); 
         Banco::destroy($banco->id);
         session(['mensaje' => 'Banco eliminado con éxito.']);  
         LogSistema::registrarAccion('Banco eliminado: '.convertirArrayAString($eliminada->toArray()));  

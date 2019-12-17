@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Parentesco;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidarParentescoUnicoEditarRule implements Rule
