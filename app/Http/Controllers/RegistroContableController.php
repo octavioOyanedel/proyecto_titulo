@@ -20,6 +20,7 @@ use App\Exports\FiltroRegistroContableExport;
 use App\Exports\BusquedaRegistroContableExport;
 use App\Http\Requests\FiltrarContableRequest;
 use App\Http\Requests\IncorporarRegistroContableRequest;
+use App\Http\Requests\EditarRegistroContableRequest;
 
 class RegistroContableController extends Controller
 {
@@ -219,9 +220,17 @@ class RegistroContableController extends Controller
      * @param  \App\RegistroContable  $registroContable
      * @return \Illuminate\Http\Response
      */
-    public function edit(RegistroContable $registroContable)
+    public function edit($id)
     {
-        return redirect()->route('home');
+        //dd($id);
+        $registro = RegistroContable::findOrFail($id);
+        //dd($registro);
+        $socios = Socio::orderBy('apellido1','ASC')->get();
+        $cuentas = Cuenta::all();
+        $conceptos = Concepto::where('id','<>',57)->orderBy('nombre')->get();
+        $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
+        $asociados = Asociado::orderBy('concepto')->get();
+        return view('sind1.contables.edit', compact('tipos_registro','cuentas','conceptos','socios','asociados','registro'));
     }
 
     /**
@@ -231,9 +240,29 @@ class RegistroContableController extends Controller
      * @param  \App\RegistroContable  $registroContable
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RegistroContable $registroContable)
+    public function update(EditarRegistroContableRequest $request, $id)
     {
-        return redirect()->route('home');
+        //dd($id);
+        $registro = RegistroContable::findOrFail($id);
+        $modificar = RegistroContable::findOrFail($id);
+        $modificar->fecha = $request->fecha;
+        $modificar->tipo_registro_contable_id = $request->tipo_registro_contable_id;
+        $modificar->numero_registro = $request->numero_registro;
+        $modificar->cheque = $request->cheque;
+        $modificar->monto = $request->monto;
+        $modificar->cuenta_id = $request->cuenta_id;
+        $modificar->concepto_id = $request->concepto_id;
+        $modificar->detalle = $request->detalle;
+        $modificar->socio_id = $request->socio_id;
+        $modificar->asociado_id = $request->asociado_id;
+        $modificar->usuario_id = $request->usuario_id;
+        $modificar->update();
+        session(['mensaje' => 'Registro contable editado con éxito.']);
+        LogSistema::registrarAccion('Registro contable editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($registro->toArray()));
+        $registros = RegistroContable::orderBy('fecha','DESC')->paginate(15);
+        $total_consulta = $registros->total();
+        return view('sind1.contables.index', compact('registros','total_consulta'));
+        //return redirect()->route('contables.index', compact('registros','total_consulta'));
     }
 
     /**
@@ -311,7 +340,7 @@ class RegistroContableController extends Controller
         $conceptos = Concepto::orderBy('nombre')->get();
         $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
         $asociados = Asociado::orderBy('concepto')->get();
-        return view('sind1.contables.busqueda', compact('tipos_registro', 'cuentas', 'socios', 'asociados'));
+        return view('sind1.contables.busqueda', compact('tipos_registro', 'cuentas', 'socios', 'asociados','conceptos'));
     }
 
     /**

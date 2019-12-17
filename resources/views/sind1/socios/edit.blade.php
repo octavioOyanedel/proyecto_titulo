@@ -19,17 +19,17 @@
 
                         @include('partials.components.elementos.socio.numero_socio')
 
-                        @include('partials.components.elementos.socio.nombre1') 
+                        @include('partials.components.elementos.socio.nombre1')
 
-                        @include('partials.components.elementos.socio.nombre2') 
+                        @include('partials.components.elementos.socio.nombre2')
 
                         @include('partials.components.elementos.socio.apellido1')
 
                         @include('partials.components.elementos.socio.apellido2')
-                        
-                        @include('partials.components.elementos.socio.genero') 
 
-                        @include('partials.components.elementos.socio.fecha_nac') 
+                        @include('partials.components.elementos.socio.genero')
+
+                        @include('partials.components.elementos.socio.fecha_nac')
 
                         @include('partials.components.elementos.socio.celular')
 
@@ -42,19 +42,19 @@
                         @include('partials.components.elementos.socio.fecha_sind1')
 
                         @include('partials.components.elementos.socio.comuna')
-                        
+
                         @include('partials.components.elementos.socio.ciudad')
 
                         @include('partials.components.elementos.socio.direccion')
 
-                        @include('partials.components.elementos.socio.sede')  
-        
+                        @include('partials.components.elementos.socio.sede')
+
                         @include('partials.components.elementos.socio.area')
 
                         @include('partials.components.elementos.socio.cargo')
 
                         @include('partials.components.elementos.socio.situacion')
-                                                
+
                         @include('partials.components.elementos.socio.nacion')
 
                         <input type="hidden" name="rut_original" value="{{ $socio->getOriginal('rut') }}">
@@ -62,7 +62,7 @@
                         <input type="hidden" name="numero_socio_original" value="{{ $socio->numero_socio }}">
 
                         <input type="hidden" name="correo_original" value="{{ $socio->correo }}">
-     
+
                         <!-- Botón submit -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -70,8 +70,8 @@
                                     {{ __('Editar') }}
                                 </button>
                             </div>
-                        </div>                                                                                                                                                                                                                                                                                                                      
-                        <!-- fin form -->                                                                                                                 
+                        </div>
+                        <!-- fin form -->
                     </form>
                 </div>
             </div>

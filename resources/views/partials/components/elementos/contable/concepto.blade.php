@@ -1,3 +1,12 @@
+@if(isset($registro))
+    @php
+        $concepto_id = $registro->getOriginal('concepto_id');
+    @endphp
+@else
+    @php
+        $concepto_id = '';
+    @endphp
+@endif
 @php
     $id = 0;
 @endphp
@@ -7,19 +16,20 @@
     <div class="col-md-6">
         <select id="concepto_id" class="default-selects form-control @error('concepto_id') is-invalid @enderror" name="concepto_id" required autocomplete="concepto_id" autofocus>
             <option selected="true" value="">Seleccione...</option>
-        </select>
 
-        {{-- validacion php --}}
-        <small class="form-text text-danger"><strong>@if($errors->has('concepto_id')) {{ $errors->first('concepto_id') }}@endif</strong></small>
+
+        </select>
 
         {{-- captura valor old --}}
         @if(old('concepto_id') != null)
-            @php 
+            @php
                 $id = old('concepto_id');
             @endphp
         @endif
 
-        <input id="old_concepto" type="hidden" value="{{ $id }}">  
+        <input id="old_concepto" type="hidden" value="{{ $id }}">
 
+        {{-- validacion php --}}
+        <small class="form-text text-danger"><strong>@if($errors->has('concepto_id')) {{ $errors->first('concepto_id') }}@endif</strong></small>
     </div>
-</div> 
+</div>

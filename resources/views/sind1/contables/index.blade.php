@@ -16,47 +16,50 @@
                         <div class="alert alert-dark mt-4 text-center" role="alert">
                             <b>No se han encontrado registros. <a href="{{ route('contables.create') }}">Crear nuevo.</a></b>
                         </div>
-                    @else 
-                        <div>                               
-                            @include('partials.components.filtros.contables') 
-                        </div>                     
+                    @else
+                        <div>
+                            @include('partials.components.filtros.contables')
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-success"></th>
+                                        <th colspan="2"></th>
                                         <th class="text-center" scope="col">Fecha de solicitud</th>
                                         <th class="text-center" scope="col">Tipo de registro</th>
                                         <th class="text-center" scope="col">Número de registro</th>
                                         <th class="text-center" scope="col">Cheque</th>
-                                        <th class="text-center" scope="col">Monto</th>                                          
+                                        <th class="text-center" scope="col">Monto</th>
                                         <th class="" scope="col">Concepto</th>
                                         <th class="" scope="col">Detalle</th>
-                              
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($registros as $r)
                                         <tr>
                                             <td class="text-center" scope="row" title="Ver detalle registro contable"><a class="text-primary" href="{{ route('contables.show',['id' => $r->id]) }}"><span>@svg('ver')</span></a></td>
+                                            @if(Auth::user()->rol_id != 'Invitado')
+                                                <td class="text-center" scope="row" title="Editar registro contable"><a class="text-secondary" href="{{ route('contables.edit',['id' => $r->id]) }}"><span>@svg('editar')</span></a></td>
+                                            @endif
                                             <td class="text-center">{{ $r->fecha }}</td>
                                             <td class="text-center">{{ $r->tipo_registro_contable_id }}</td>
                                             <td class="text-center">{{ $r->numero_registro }}</td>
                                             <td class="text-center" title="@if($r->cheque != null) {{ '' }} @else {{ 'Ingreso sin cheque asociado.' }} @endif">@if($r->cheque != null) {{ $r->cheque }} @else {{ '-' }} @endif</td>
-                                            <td class="text-center">@if($r->monto) {{ $r->monto }} @else {{ '-' }}@endif</td>                                              
+                                            <td class="text-center">@if($r->monto) {{ $r->monto }} @else {{ '-' }}@endif</td>
                                             <td class="">
                                                 <b>{{ $r->concepto_id }}</b>@if($r->socio != null) - {{ $r->socio->apellido1 }} {{ $r->socio->apellido2 }}, {{ $r->socio->nombre1 }} {{ $r->socio->nombre2 }}@endif
                                                 @if($r->asociado != null){{ $r->asociado->concepto }} - {{ $r->asociado->nombre }}@endif
                                             </td>
-                                            <td title="@if($r->detalle != null) {{ '' }} @else {{ 'Sin detalle asociado.' }} @endif">@if($r->detalle != null) {{ $r->detalle }} @else {{ '-' }} @endif</td>                                    
+                                            <td title="@if($r->detalle != null) {{ '' }} @else {{ 'Sin detalle asociado.' }} @endif">@if($r->detalle != null) {{ $r->detalle }} @else {{ '-' }} @endif</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </table>                      
+                            </table>
                         </div>
                         <div class="float-right mt-3">
-                            {{ $registros->links() }}    
-                        </div>                          
+                            {{ $registros->links() }}
+                        </div>
                     @endif
                 </div>
             </div>

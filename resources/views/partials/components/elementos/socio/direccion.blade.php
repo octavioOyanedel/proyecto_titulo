@@ -1,4 +1,12 @@
-@php isset($socio->direccion) ? $direccion = $socio->direccion : $direccion = '' @endphp
+@php
+	$direccion = '';
+@endphp
+@isset($socio)
+    @php
+    	$direccion = $socio->direccion;
+    @endphp
+@endisset
+
 <!-- Dirección -->
 <div class="form-group row">
     <label for="direccion" class="col-md-4 col-form-label text-md-right">{{ __('Dirección') }}</label>
@@ -9,4 +17,4 @@
         <small class="form-text text-danger"><strong>@if($errors->has('direccion')) {{ $errors->first('direccion') }}@endif</strong></small>
 
     </div>
-</div>  
+</div>

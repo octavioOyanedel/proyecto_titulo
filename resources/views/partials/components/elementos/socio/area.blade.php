@@ -14,14 +14,14 @@
 
 	    {{-- captura valor old --}}
 		@if(old('area_id') != null)
-			@php 
+			@php
 				$id = old('area_id');
 			@endphp
 		@endif
 
 		<input id="old_area" type="hidden" value="{{ $id }}">
-		@isset($socio)      
-			<input id="edit_area" type="hidden" value="@if($socio->area_id) {{ $socio->getOriginal('area_id') }} @else {{ null }} @endif">  
+		@isset($socio)
+			<input id="edit_area" type="hidden" value="@if($socio->area_id) {{ $socio->getOriginal('area_id') }} @else {{ null }} @endif">
 		@endisset
     </div>
-</div> 
+</div>
