@@ -22,12 +22,9 @@ $(window).on('load',function(){
 		$('#buscador-contable').removeClass('d-none');
 	}
 
-	if(ruta.search('/instituciones') != -1 || ruta.search('/titulos') != -1){
-		$('#span-mantenedores').addClass('font-weight-bold text-uppercase text-primary');
-	}
-
-	if(ruta.search('/estudios') != -1){
+	if(ruta.search('/estudios/') != -1){
 		$('#span-socios').addClass('font-weight-bold text-uppercase text-primary');
+		$('#buscador-socio').removeClass('d-none');
 	}
 
 	//mantenedores

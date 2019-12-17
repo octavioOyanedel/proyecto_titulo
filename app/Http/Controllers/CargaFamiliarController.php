@@ -125,7 +125,6 @@ class CargaFamiliarController extends Controller
             $total_consulta = $cargas->total();
             return redirect()->route('cargas.index', compact('cargas', 'total_consulta'));
         }
-
     }
 
     /**

@@ -33,7 +33,19 @@
         <script src="{{ asset('js/ajax/cargar_instituciones.js') }}" defer></script>
         <script src="{{ asset('js/ajax/cargar_titulos.js') }}" defer></script>
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
-    @break    
+    @break
+    {{-- crear --}}
+    @case('estudios/create/'.request()->route()->id.'/create')
+        <script src="{{ asset('js/ajax/cargar_instituciones.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/cargar_titulos.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+            {{-- crear --}}
+    @case('estudios/create/'.request()->route()->id.'/show')
+        <script src="{{ asset('js/ajax/cargar_instituciones.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/cargar_titulos.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
     @default
 @endswitch
 

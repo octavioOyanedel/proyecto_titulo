@@ -28,6 +28,7 @@ class IncorporarEstudioRealizadoRequest extends FormRequest
             'institucion_id' => ['required','numeric'],
             'grado_academico_id' => ['required','numeric'],
             'estado_grado_academico_id' => ['required','numeric'],
+            'desde' => ['required'],
         ];
     }
 }

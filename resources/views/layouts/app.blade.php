@@ -29,12 +29,12 @@
             @include('partials.nav')
         @else
 
-        @endif        
+        @endif
 
         <main class="py-4 margen-container-nav">
             @yield('content')
         </main>
-        
+
     </div>
 {{ request()->path() }}
 </body>
@@ -42,7 +42,8 @@
     <script src="{{ asset('js/ajax/pago_automatico.js') }}" defer></script>
     <script src="{{ asset('js/ajax/saldar_prestamo.js') }}" defer></script>
     <script src="{{ asset('js/ajax/pago_cuota.js') }}" defer></script>
-    
+
+
 
     <!-- selector de js -->
 
@@ -55,5 +56,4 @@
 
     <!-- fin selector de js -->
     <script src="{{ asset('js/links_nav.js') }}" defer></script>
-
 </html>

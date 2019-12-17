@@ -43,7 +43,7 @@
                         <div class="alert alert-dark mt-4 text-center" role="alert">
                             <b>Socio sin estudios registrados.
                                 @if(Auth::user()->rol_id != 'Invitado')
-                                    <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}">Agregar estudio.</a>
+                                    <a href="{{ route('estudios.create', ['id'=>$socio->id, 'desde'=>'show']) }}">Agregar estudio.</a>
                                 @endif
                             </b>
                         </div>
@@ -51,7 +51,7 @@
                         <div class="table-responsive">
                             <h4 class="mt-4">Estudios Realizados
                                 @if(Auth::user()->rol_id != 'Invitado')
-                                    <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Estudio</a>
+                                    <a href="{{ route('estudios.create', ['id'=>$socio->id, 'desde'=>'show']) }}" class="btn btn-primary btn-sm float-right">Agregar Estudio</a>
                                 @endif
                             </h4>
                             <div class="table-responsive">

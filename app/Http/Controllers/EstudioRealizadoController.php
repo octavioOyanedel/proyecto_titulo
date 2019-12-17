@@ -65,9 +65,18 @@ class EstudioRealizadoController extends Controller
         $estudio_socio->estudio_realizado_id = $estudio->id;
         $estudio_socio->save();
 
-        session(['mensaje' => 'Estudio realizado agregado con éxito.']); 
-        LogSistema::registrarAccion('Estudio realizado agragado: '.convertirArrayAString($estudio->toArray()));        
-        return redirect()->route('estudios.create',['id'=>$request->input('socio_id')]);
+        session(['mensaje' => 'Estudio realizado agregado con éxito.']);
+        LogSistema::registrarAccion('Estudio realizado agragado: '.convertirArrayAString($estudio->toArray()));
+
+        if($request->desde === 'create'){
+            return redirect()->route('estudios.create',['id'=>$request->input('socio_id'), 'desde'=>'create']);
+        }else{
+            $socio = Socio::findOrFail($request->input('socio_id'));
+            $prestamos = $socio->prestamos()->paginate(15);
+            $estudios = $socio->estudios_realizados_socios;
+            $cargas = $socio->cargas_familiares;
+            return redirect()->route('socios.show', compact('socio','prestamos','estudios','cargas'));
+        }
     }
 
     /**
@@ -94,10 +103,10 @@ class EstudioRealizadoController extends Controller
         $estudioRealizadoSocio = EstudioRealizado::obtenerEstudioRealizadoSocio($id);
         $socio_id = $estudioRealizadoSocio->socio_id;
         $grados = GradoAcademico::orderBy('nombre','ASC')->get();
-        $estados = EstadoGradoAcademico::orderBy('nombre','ASC')->get();       
-        $instituciones = GradoAcademicoInstitucion::all();         
-        $titulos = GradoAcademicoTitulo::all();              
-        return view('sind1.estudio.edit', compact('grados', 'instituciones', 'estados', 'titulos','estudioRealizado','socio_id'));        
+        $estados = EstadoGradoAcademico::orderBy('nombre','ASC')->get();
+        $instituciones = GradoAcademicoInstitucion::all();
+        $titulos = GradoAcademicoTitulo::all();
+        return view('sind1.estudio.edit', compact('grados', 'instituciones', 'estados', 'titulos','estudioRealizado','socio_id'));
     }
 
     /**
@@ -108,7 +117,7 @@ class EstudioRealizadoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(EditarEstudioRealizadoRequest $request, $id)
-    {  
+    {
         $estudioRealizado = EstudioRealizado::findOrFail($id);
 
         if($request->titulo_id === 'Seleccione...'){
@@ -124,14 +133,15 @@ class EstudioRealizadoController extends Controller
           $estudioRealizado->titulo_id = $request->titulo_id;
           $estudioRealizado->update();
         }
-                      
+
         $socio = Socio::findOrFail($request->socio_id);
         $prestamos = $socio->prestamos()->paginate(15);
         $estudios = $socio->estudios_realizados_socios;
         $cargas = $socio->cargas_familiares;
         session(['mensaje' => 'Estudio realizado editado con éxito.']);
-        LogSistema::registrarAccion('Estudio realizado editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($estudioRealizado->toArray()));    
-        return view('sind1.socios.show', compact('socio','prestamos','estudios','cargas'));
+        LogSistema::registrarAccion('Estudio realizado editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($estudioRealizado->toArray()));
+        return redirect()->route('socios.show', compact('socio','prestamos','estudios','cargas'));
+        //return view('sind1.socios.show', compact('socio','prestamos','estudios','cargas'));
     }
 
     /**
@@ -151,10 +161,10 @@ class EstudioRealizadoController extends Controller
         $socio = Socio::findOrFail($estudioRealizadoSocio->socio_id);
         $prestamos = $socio->prestamos()->paginate(15);
         $estudios = $socio->estudios_realizados_socios;
-        $cargas = $socio->cargas_familiares;        
-        session(['mensaje' => 'Estudio realizado eliminado con éxito.']);      
-        LogSistema::registrarAccion('Estudio realizado eliminado: '.convertirArrayAString($eliminada->toArray())); 
-        return view('sind1.socios.show', compact('socio','prestamos','estudios','cargas')); 
+        $cargas = $socio->cargas_familiares;
+        session(['mensaje' => 'Estudio eliminado con éxito.']);
+        LogSistema::registrarAccion('Estudio eliminado: '.convertirArrayAString($eliminada->toArray()));
+        return view('sind1.socios.show', compact('socio','prestamos','estudios','cargas'));
     }
 
 }

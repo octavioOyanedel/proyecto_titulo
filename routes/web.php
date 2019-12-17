@@ -113,7 +113,7 @@ Route::resource('/cargas', 'CargaFamiliarController', ['except' => 'create'])->m
 
 //****************************************************************************************************
 //ruta carga continua de info estudios realizados
-Route::get('estudios/create/{id}', [
+Route::get('estudios/create/{id}/{desde}', [
     'as' => 'estudios.create',
     'uses' => 'EstudioRealizadoController@create'
 ]);
