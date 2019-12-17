@@ -76,8 +76,8 @@ class SocioController extends Controller
         Socio::create($request->all());
         $socio = Socio::obtenerUltimoSocioIngresado();
         session(['mensaje' => 'Socio incorporado con éxito.']);
-        LogSistema::registrarAccion('Socio agragado: '.convertirArrayAString($socio->toArray()));
-        return redirect()->route('cargas.create',['id'=>$socio->id]);
+        LogSistema::registrarAccion('Socio agregado: '.convertirArrayAString($socio->toArray()));
+        return redirect()->route('cargas.create',['id'=>$socio->id, 'desde'=>'create']);
     }
 
     /**
@@ -887,7 +887,7 @@ class SocioController extends Controller
                         'nombre' => $request->nombre,
                         'id' => $request->id,
                         'genero' => $request->genero
-                    ]);   
+                    ]);
                 }else{
                     $socios = Socio::where([
                         [$request->nombre,'=',$request->id],
@@ -901,9 +901,9 @@ class SocioController extends Controller
                         'nombre' => $request->nombre,
                         'id' => $request->id,
                         'genero' => $request->genero
-                    ]);                       
+                    ]);
                 }
-  
+
                 $total_consulta = $socios->total();
             break;
             case 'area_id':
@@ -919,7 +919,7 @@ class SocioController extends Controller
                         'nombre' => $request->nombre,
                         'id' => $request->id,
                         'genero' => $request->genero
-                    ]);     
+                    ]);
                 }else{
                     $socios = Socio::where([
                         [$request->nombre,'=',$request->id],
@@ -933,7 +933,7 @@ class SocioController extends Controller
                         'nombre' => $request->nombre,
                         'id' => $request->id,
                         'genero' => $request->genero
-                    ]);                         
+                    ]);
                 }
                 $total_consulta = $socios->total();
             break;
@@ -950,7 +950,7 @@ class SocioController extends Controller
                         'nombre' => $request->nombre,
                         'id' => $request->id,
                         'genero' => $request->genero
-                    ]);  
+                    ]);
                 }else{
                     $socios = Socio::where([
                         [$request->nombre,'=',$request->id],
@@ -964,7 +964,7 @@ class SocioController extends Controller
                         'nombre' => $request->nombre,
                         'id' => $request->id,
                         'genero' => $request->genero
-                    ]);                      
+                    ]);
                 }
                 $total_consulta = $socios->total();
             break;
@@ -980,7 +980,7 @@ class SocioController extends Controller
                         'nombre' => $request->nombre,
                         'id' => $request->id,
                         'genero' => $request->genero
-                    ]);  
+                    ]);
                 }else{
                     $socios = Socio::where([
                         [$request->nombre,'=',$request->id],
@@ -993,12 +993,12 @@ class SocioController extends Controller
                         'nombre' => $request->nombre,
                         'id' => $request->id,
                         'genero' => $request->genero
-                    ]);                      
+                    ]);
                 }
                 $total_consulta = $socios->total();
             break;
         }
-  
+
         $varones = Socio::where('genero','=','Varón')->count();
         $damas = Socio::where('genero','=','Dama')->count();
         $total = Socio::all()->count();
@@ -1039,7 +1039,7 @@ class SocioController extends Controller
         }
 
         $fecha_ini = date('Y').'-'.$request->mes.'-01';
-        $fecha_fin = date('Y').'-'.$request->mes.'-'.obtenerDiasPorMes($request->mes);    
+        $fecha_fin = date('Y').'-'.$request->mes.'-'.obtenerDiasPorMes($request->mes);
 
         switch ($columna) {
             case 'sede_id':
@@ -1053,7 +1053,7 @@ class SocioController extends Controller
                         'orden' => $orden,
                         'mes' => $request->mes,
                         'estado' => $request->estado
-                    ]);   
+                    ]);
                 }else{
                     $socios = Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])
                     ->orderBy('sedes.nombre',$orden)
@@ -1064,9 +1064,9 @@ class SocioController extends Controller
                         'orden' => $orden,
                         'mes' => $request->mes,
                         'estado' => $request->estado
-                    ]);                       
+                    ]);
                 }
-  
+
                 $total_consulta = $socios->total();
             break;
             case 'area_id':
@@ -1080,7 +1080,7 @@ class SocioController extends Controller
                         'orden' => $orden,
                         'mes' => $request->mes,
                         'estado' => $request->estado
-                    ]);     
+                    ]);
                 }else{
                     $socios = Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])
                     ->orderBy('areas.nombre',$orden)
@@ -1091,7 +1091,7 @@ class SocioController extends Controller
                         'orden' => $orden,
                         'mes' => $request->mes,
                         'estado' => $request->estado
-                    ]);                         
+                    ]);
                 }
                 $total_consulta = $socios->total();
             break;
@@ -1106,7 +1106,7 @@ class SocioController extends Controller
                         'orden' => $orden,
                         'mes' => $request->mes,
                         'estado' => $request->estado
-                    ]);  
+                    ]);
                 }else{
                     $socios = Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])
                     ->orderBy('cargos.nombre',$orden)
@@ -1117,7 +1117,7 @@ class SocioController extends Controller
                         'orden' => $orden,
                         'mes' => $request->mes,
                         'estado' => $request->estado
-                    ]);                      
+                    ]);
                 }
                 $total_consulta = $socios->total();
             break;
@@ -1131,7 +1131,7 @@ class SocioController extends Controller
                         'orden' => $orden,
                         'mes' => $request->mes,
                         'estado' => $request->estado
-                    ]);  
+                    ]);
                 }else{
                     $socios = Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])
                     ->orderBy($columna, $orden)
@@ -1141,12 +1141,12 @@ class SocioController extends Controller
                         'orden' => $orden,
                         'mes' => $request->mes,
                         'estado' => $request->estado
-                    ]);                      
+                    ]);
                 }
                 $total_consulta = $socios->total();
             break;
         }
-  
+
         $varones = Socio::where('genero','=','Varón')->count();
         $damas = Socio::where('genero','=','Dama')->count();
         $total = Socio::all()->count();
@@ -1193,7 +1193,7 @@ class SocioController extends Controller
                 ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
                 ->join('estudios_realizados_socios','estudios_realizados_socios.socio_id','=','socios.id')
                 ->join('estudios_realizados','estudios_realizados_socios.estudio_realizado_id','=','estudios_realizados.id')
-                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')   
+                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')
                 ->where('estudios_realizados.grado_academico_id','=',$grado->id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
@@ -1209,7 +1209,7 @@ class SocioController extends Controller
                 ->join('areas', 'socios.area_id', '=', 'areas.id')
                 ->join('estudios_realizados_socios','estudios_realizados_socios.socio_id','=','socios.id')
                 ->join('estudios_realizados','estudios_realizados_socios.estudio_realizado_id','=','estudios_realizados.id')
-                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')   
+                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')
                 ->where('estudios_realizados.grado_academico_id','=',$grado->id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
@@ -1225,7 +1225,7 @@ class SocioController extends Controller
                 ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
                 ->join('estudios_realizados_socios','estudios_realizados_socios.socio_id','=','socios.id')
                 ->join('estudios_realizados','estudios_realizados_socios.estudio_realizado_id','=','estudios_realizados.id')
-                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')   
+                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')
                 ->where('estudios_realizados.grado_academico_id','=',$grado->id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
@@ -1240,7 +1240,7 @@ class SocioController extends Controller
                 $socios = Socio::orderBy($columna, $orden)
                 ->join('estudios_realizados_socios','estudios_realizados_socios.socio_id','=','socios.id')
                 ->join('estudios_realizados','estudios_realizados_socios.estudio_realizado_id','=','estudios_realizados.id')
-                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')   
+                ->join('grados_academicos','estudios_realizados.grado_academico_id','=','grados_academicos.id')
                 ->where('estudios_realizados.grado_academico_id','=',$grado->id)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
@@ -1253,7 +1253,7 @@ class SocioController extends Controller
         }
 
         $total_consulta = $socios->total();
-  
+
         $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
         $total_consulta = $socios->total();
 
@@ -1285,5 +1285,5 @@ class SocioController extends Controller
     public function exportarExcelEstadisticaEstudios($nombre)
     {
         return Excel::download(new EstadisticaEstudioSocioExport($nombre), 'listado_estudios_socios.xlsx');
-    }    
+    }
 }

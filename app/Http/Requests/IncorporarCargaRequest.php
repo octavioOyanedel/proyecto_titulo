@@ -34,6 +34,7 @@ class IncorporarCargaRequest extends FormRequest
             'fecha_nac' => ['nullable','date'],
             'socio_id' => ['required','numeric'],
             'parentesco_id' => ['required','numeric'],
+            'desde' => ['required'],
         ];
     }
 }

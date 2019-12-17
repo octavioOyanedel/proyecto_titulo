@@ -17,12 +17,12 @@
                         <table class="table table-hover table-striped table-bordered">
                             <thead></thead>
                             <tbody>
-                                <tr><th>Nombre</th><td>{{ $socio->nombre1 }} {{ $socio->nombre2 }} {{ $socio->apellido1 }} {{ $socio->apellido2 }}</td></tr> 
+                                <tr><th>Nombre</th><td>{{ $socio->nombre1 }} {{ $socio->nombre2 }} {{ $socio->apellido1 }} {{ $socio->apellido2 }}</td></tr>
                                 <tr><th>Rut</th><td>{{ $socio->rut }}</td></tr>
                                 <tr><th>Género</th><td>{{ $socio->genero }}</td></tr>
                                 <tr><th>Fecha nacimiento</th><td>{{ $socio->fecha_nac }}</td></tr>
                                 <tr><th>Celular</th><td>{{ $socio->celular }}</td></tr>
-                                <tr><th>Correo</th><td>{{ $socio->correo }}</td></tr>                                    
+                                <tr><th>Correo</th><td>{{ $socio->correo }}</td></tr>
                                 <tr><th>Fecha ingreso PUCV</th><td>{{ $socio->fecha_pucv }}</td></tr>
                                 <tr><th>Anexo</th><td>{{ $socio->anexo }}</td></tr>
                                 <tr><th>Número Socio</th><td>{{ $socio->numero_socio }}</td></tr>
@@ -36,7 +36,7 @@
                                 <tr><th>Estado socio</th><td>{{ $socio->estado_socio_id }}</td></tr>
                                 <tr><th>Nacionalidad</th><td>{{ $socio->nacionalidad_id }}</td></tr>
                             </tbody>
-                        </table>                         
+                        </table>
                     </div>
 
                     @if($estudios->count() === 0 && $estudios != null)
@@ -46,14 +46,14 @@
                                     <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}">Agregar estudio.</a>
                                 @endif
                             </b>
-                        </div>    
-                    @else     
+                        </div>
+                    @else
                         <div class="table-responsive">
-                            <h4 class="mt-4">Estudios Realizados 
+                            <h4 class="mt-4">Estudios Realizados
                                 @if(Auth::user()->rol_id != 'Invitado')
                                     <a href="{{ route('estudios.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Estudio</a>
                                 @endif
-                            </h4>                      
+                            </h4>
                             <div class="table-responsive">
                                 <table class="table table-hover table-striped table-bordered">
                                     <thead>
@@ -83,23 +83,23 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div> 
-                        </div>                           
-                    @endif  
+                            </div>
+                        </div>
+                    @endif
 
                     @if($cargas->count() === 0 && $cargas != null)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>Socio sin cargas familiares registradas. 
+                            <b>Socio sin cargas familiares registradas.
                                 @if(Auth::user()->rol_id != 'Invitado')
-                                    <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}">Agregar carga familiar</a>
+                                    <a href="{{ route('cargas.create', ['id'=>$socio->id, 'desde'=>'show']) }}">Agregar carga familiar</a>
                                 @endif
                             </b>
-                        </div>                               
+                        </div>
                     @else
                         <div class="table-responsive">
                             <h4 class="mt-4">Cargas Familiares
                                 @if(Auth::user()->rol_id != 'Invitado')
-                                    <a href="{{ route('cargas.create', ['id'=>$socio->id]) }}" class="btn btn-primary btn-sm float-right">Agregar Carga Familiar</a>
+                                    <a href="{{ route('cargas.create', ['id'=>$socio->id, 'desde'=>'show']) }}" class="btn btn-primary btn-sm float-right">Agregar Carga Familiar</a>
                                 @endif
                             </h4>
                             <table class="table table-hover table-striped table-bordered">
@@ -114,7 +114,7 @@
                                         <th class="text-center" scope="col">Fecha de nacimiento</th>
                                         <th class="text-center" scope="col">Parentesco</th>
                                     </tr>
-                                </thead>   
+                                </thead>
                                 <tbody>
                                     @foreach($cargas as $c)
                                         <tr>
@@ -128,26 +128,26 @@
                                             <td class="text-center">{{ $c->parentesco_id }}</td>
                                         </tr>
                                     @endforeach
-                                </tbody>                                                         
+                                </tbody>
                             </table>
                         </div>
-                    @endif 
+                    @endif
 
                     @if($prestamos->count() === 0 && $prestamos != null)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>Socio sin préstamos registrados. 
+                            <b>Socio sin préstamos registrados.
                                 @if(Auth::user()->rol_id != 'Invitado')
                                     <a href="{{ route('prestamos.create') }}">Agregar préstamo</a>
                                 @endif
                             </b>
                         </div>
-                    @else  
-                        <div class="table-responsive">                    
+                    @else
+                        <div class="table-responsive">
                         <h4 class="mt-4">Historial de Prestamos</h4>
                             <table id="tabla-prestamos-socio" class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th></th>                                       
+                                        <th></th>
                                         <th class="text-center" scope="col">Fecha solicitud</th>
                                         <th class="text-center" scope="col">Forma de pago</th>
                                         <th class="text-center" scope="col">Estado</th>
@@ -156,11 +156,11 @@
                                         <th class="text-center" scope="col">Cheque</th>
                                         <th class="text-center" scope="col">Monto</th>
                                         <th class="text-center" scope="col">Interés</th>
-                                        <th class="text-center" scope="col">Saldo</th>                                        
+                                        <th class="text-center" scope="col">Saldo</th>
                                         <th class="text-center" scope="col">Total</th>
-                                        <th class="text-center" scope="col">Coutas</th>   
+                                        <th class="text-center" scope="col">Coutas</th>
                                     </tr>
-                                </thead>  
+                                </thead>
                                 <tbody>
                                     @foreach($prestamos as $p)
 
@@ -179,20 +179,20 @@
                                         <td class="text-center">{{$p->interes_id }}%</td>
                                         <td class="text-center">
                                             {{ celdaCadena(formatoMoneda(calculoSaldo($p->getOriginal('monto'),$p->interes_id))) }}
-                                        </td>                                        
+                                        </td>
                                         <td class="text-center">
                                             {{ celdaCadena(formatoMoneda(calculoTotal($p->getOriginal('monto'),$p->interes_id))) }}
                                         </td>
-                                        <td class="text-center">{{ $p->numero_cuotas }}</td>                                       
+                                        <td class="text-center">{{ $p->numero_cuotas }}</td>
                                     </tr>
                                     @endforeach
-                                </tbody>                                                        
+                                </tbody>
                             </table>
                         </div>
                         <div class="mx-auto mt-4">
                             {{ $prestamos->links() }}
-                        </div> 
-                    @endif                  
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -17,8 +17,21 @@
     @case('mantenedor_carga_parentesco')
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break
+    @case('cargas')
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
     {{-- crear --}}
     @case('cargas/create/'.request()->route()->id)
+        <script src="{{ asset('js/ajax/validar_rut_carga_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    {{-- crear --}}
+    @case('cargas/create/'.request()->route()->id.'/create')
+        <script src="{{ asset('js/ajax/validar_rut_carga_create.js') }}" defer></script>
+        <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
+    @break
+    {{-- crear --}}
+    @case('cargas/create/'.request()->route()->id.'/show')
         <script src="{{ asset('js/ajax/validar_rut_carga_create.js') }}" defer></script>
         <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script>
     @break

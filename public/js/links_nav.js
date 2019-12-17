@@ -117,7 +117,6 @@ $(window).on('load',function(){
 		$('#buscador-historial').removeClass('d-none');
 	}
 
-
 	if(ruta.localeCompare('/estadisticas_estudio') === 0 || ruta.localeCompare('/estadisticas_sede_area') === 0 || ruta.localeCompare('/estadisticas_cargo') === 0 || ruta.localeCompare('/estadisticas_comuna_ciudad') === 0 || ruta.localeCompare('/estadisticas_nacionalidad') === 0 || ruta.localeCompare('/estadisticas_Incorporados_desvinculados') === 0 || ruta.localeCompare('/estadisticas_carga') === 0){
 		$('#span-estadisticas').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-socio').removeClass('d-none');
@@ -128,7 +127,7 @@ $(window).on('load',function(){
 		$('#buscador-usuario').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/cargas') === 0 || ruta.localeCompare('/listado_cargas_estadistica') === 0){
+	if(ruta.localeCompare('/cargas') === 0 || ruta.localeCompare('/listado_cargas_estadistica') === 0 || ruta.search('/cargas/create/') != -1){
 		$('#span-cargas').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-carga').removeClass('d-none');
 	}

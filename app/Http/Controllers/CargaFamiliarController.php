@@ -118,7 +118,14 @@ class CargaFamiliarController extends Controller
         $carga = CargaFamiliar::create($request->all());
         session(['mensaje' => 'Carga familiar incorporada con éxito.']);
         LogSistema::registrarAccion('Carga familiar agragada: '.convertirArrayAString($carga->toArray()));
-        return redirect()->route('cargas.create',['id'=>$request->input('socio_id')]);
+        if($request->desde === 'create'){
+            return redirect()->route('cargas.create',['id'=>$request->input('socio_id'), 'desde'=>'create']);
+        }else{
+            $cargas = CargaFamiliar::orderBy('apellido1','ASC')->paginate(15);
+            $total_consulta = $cargas->total();
+            return redirect()->route('cargas.index', compact('cargas', 'total_consulta'));
+        }
+
     }
 
     /**
@@ -169,7 +176,9 @@ class CargaFamiliarController extends Controller
         $modificar->update();
         session(['mensaje' => 'Carga familiar editada con éxito.']);
         LogSistema::registrarAccion('Carga familiar editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($cargaFamiliar->toArray()));
-        return redirect()->route('home');
+        $cargas = CargaFamiliar::orderBy('apellido1','ASC')->paginate(15);
+        $total_consulta = $cargas->total();
+        return redirect()->route('cargas.index', compact('cargas', 'total_consulta'));
     }
 
     /**
@@ -186,7 +195,10 @@ class CargaFamiliarController extends Controller
         CargaFamiliar::destroy($cargaFamiliar->id);
         session(['mensaje' => 'Carga familiar eliminada con éxito.']);
         LogSistema::registrarAccion('Carga familiar eliminada: '.$eliminada);
-        return redirect()->route('socios.show', compact('socio_id'));
+        $cargas = CargaFamiliar::orderBy('apellido1','ASC')->paginate(15);
+        $total_consulta = $cargas->total();
+        //return view('sind1.carga.index', compact('cargas', 'total_consulta'));
+        return redirect()->route('cargas.index', compact('cargas', 'total_consulta'));
     }
 
     /**
@@ -382,6 +394,7 @@ class CargaFamiliarController extends Controller
 
         $total_consulta = $cargas->total();
         return view('sind1.carga.resultados_estadistica_carga', compact('cargas', 'total_consulta','nombre'));
+        //return redirect()->route('cargas.index', compact('cargas', 'total_consulta'));
     }
 
     /**

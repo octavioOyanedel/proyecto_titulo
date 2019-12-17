@@ -99,7 +99,7 @@ Route::resource('/contables', 'RegistroContableController')->middleware('auth');
 
 //****************************************************************************************************
 //ruta carga continua de info cargas familiares
-Route::get('cargas/create/{id}', [
+Route::get('cargas/create/{id}/{desde}', [
     'as' => 'cargas.create',
     'uses' => 'CargaFamiliarController@create'
 ])->middleware('administrador');
