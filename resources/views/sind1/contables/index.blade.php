@@ -24,7 +24,10 @@
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th colspan="2"></th>
+                                        @if(Auth::user()->rol_id != 'Invitado')
+                                            <th></th>
+                                        @endif
+                                        <th></th>
                                         <th class="text-center" scope="col">Fecha de solicitud</th>
                                         <th class="text-center" scope="col">Tipo de registro</th>
                                         <th class="text-center" scope="col">Número de registro</th>
