@@ -162,7 +162,7 @@ class RegistroContableController extends Controller
         $conceptos = Concepto::where('id','<>',57)->orderBy('nombre')->get();
         $tipos_registro = TipoRegistroContable::orderBy('nombre')->get();
         $asociados = Asociado::orderBy('concepto')->get();
-        return view('sind1.contables.create', compact('tipos_registro','cuentas','conceptos','socios','asociados'));
+        return view('sind1.contables.create', compact('tipos_registro','cuentas','socios','asociados'));
     }
 
     /**
