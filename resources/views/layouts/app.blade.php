@@ -36,7 +36,7 @@
         </main>
 
     </div>
-{{ request()->path() }}
+{{-- request()->path() --}}
 </body>
     <script src="{{ asset('js/ajax/evaluar_fecha_prestamo.js') }}" defer></script>
     <script src="{{ asset('js/ajax/pago_automatico.js') }}" defer></script>
