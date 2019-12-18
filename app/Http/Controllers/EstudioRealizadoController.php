@@ -69,7 +69,7 @@ class EstudioRealizadoController extends Controller
         LogSistema::registrarAccion('Estudio realizado agragado: '.convertirArrayAString($estudio->toArray()));
 
         if($request->desde === 'create'){
-            return redirect()->route('estudios.create',['id'=>$request->input('socio_id'), 'desde'=>'create']);
+            return redirect()->route('home');
         }else{
             $socio = Socio::findOrFail($request->input('socio_id'));
             $prestamos = $socio->prestamos()->paginate(15);

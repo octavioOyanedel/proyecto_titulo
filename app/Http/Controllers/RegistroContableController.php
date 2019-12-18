@@ -51,7 +51,7 @@ class RegistroContableController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'fecha';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){
@@ -361,7 +361,7 @@ class RegistroContableController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'fecha';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){
@@ -525,7 +525,7 @@ class RegistroContableController extends Controller
             $modificar->detalle = $request->detalle;
             $registro->tipo_registro_contable_id = $request->tipo_registro_contable_id;
             $modificar->socio_id = null;
-            $modificar->asociado_id = null;            
+            $modificar->asociado_id = null;
             $modificar->update();
         }else{
             $registro = new RegistroContable;
@@ -540,7 +540,7 @@ class RegistroContableController extends Controller
             $registro->asociado_id = null;
             $registro->usuario_id = Auth::user()->id;
             $registro->socio_id = null;
-            $registro->save();            
+            $registro->save();
         }
 
         session(['mensaje' => 'Registro contable anulado con éxito.']);

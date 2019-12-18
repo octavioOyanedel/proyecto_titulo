@@ -40,7 +40,7 @@ class EstadisticaIncorporadoSocioExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Apellido paterno','Apellido materno','Primer nombre','Segundo nombre','Rut','Género','Fecha nacimiento','Celular','Correo','Dirección','Fecha ingreso PUCV','anexo',
+            'Apellido paterno','Apellido materno','Primer nombre','Segundo nombre','Rut','Género','Fecha nacimiento','Celular','Correo','Dirección','Fecha ingreso PUCV','Anexo',
             'Número socio','Fecha ingreso Sind1','Comuna','Ciudad','Sede','Área','Cargo','Estado socio','Nacionalidad',
         ];
     }

@@ -298,7 +298,7 @@ class SocioController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'fecha_sind1';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){
@@ -864,7 +864,7 @@ class SocioController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'fecha_sind1';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){
@@ -1029,7 +1029,7 @@ class SocioController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'fecha_sind1';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){

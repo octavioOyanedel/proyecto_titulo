@@ -33,7 +33,7 @@
                                 </button>
                                 @if(request()->route()->desde != '' && request()->route()->desde != null)
                                     @if(request()->route()->desde === 'create')
-                                        <a class="btn btn-secondary" href="{{ route('home') }}" role="button">Finalizar</a>
+                                       {{--  <a class="btn btn-secondary" href="{{ route('home') }}" role="button">Finalizar</a> --}}
                                     @endif
                                 @endif
                             </div>

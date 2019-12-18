@@ -21,7 +21,7 @@ class EstadoDeuda extends Model
     ];
 
     /**
-     * Relación 
+     * Relación
      */
     public function prestamo()
     {
@@ -29,7 +29,7 @@ class EstadoDeuda extends Model
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function cuota()
     {
@@ -37,9 +37,10 @@ class EstadoDeuda extends Model
     }
 
     /**
-     * Obtener cargo 
+     * Obtener cargo
      */
     static public function obtenerEstadoPorNombre($nombre)
+
     {
         return EstadoDeuda::where('nombre', $nombre)->first();
     }

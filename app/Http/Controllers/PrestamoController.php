@@ -53,7 +53,7 @@ class PrestamoController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'fecha_solicitud';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){
@@ -130,7 +130,7 @@ class PrestamoController extends Controller
                     'cheque' => $request->cheque,
                     'monto' => $request->monto,
                 ]);
-            break;            
+            break;
             case 'rut':
                 $prestamos = Prestamo::orderBy('socios.rut', $orden)
                 ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
@@ -395,8 +395,8 @@ class PrestamoController extends Controller
         $prestamos = Prestamo::orderBy('fecha_solicitud','DESC')->paginate(15);
         $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
         $total_consulta = $prestamos->total();
-
-        return redirect()->route('prestamos.index', compact('prestamos','formas_pago','total_consulta'));   
+        //return view('sind1.prestamos.index', compact('prestamos','formas_pago','total_consulta'));
+        return redirect()->route('prestamos.index', compact('prestamos','formas_pago','total_consulta'));
     }
 
     /**
@@ -680,7 +680,7 @@ class PrestamoController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'fecha_solicitud';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){
@@ -704,7 +704,7 @@ class PrestamoController extends Controller
                 ->chequeFiltro($request->cheque)
                 ->montoFiltro($request->monto)
                 ->montosFiltro($request->monto_ini, $request->monto_fin)
-                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)                
+                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -737,7 +737,7 @@ class PrestamoController extends Controller
                 ->chequeFiltro($request->cheque)
                 ->montoFiltro($request->monto)
                 ->montosFiltro($request->monto_ini, $request->monto_fin)
-                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)                
+                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -757,7 +757,7 @@ class PrestamoController extends Controller
                     'cheque' => $request->cheque,
                     'monto' => $request->monto,
                 ]);
-            break;            
+            break;
             case 'rut':
                 $prestamos = Prestamo::orderBy('socios.rut', $orden)
                 ->join('socios', 'prestamos.socio_id', '=', 'socios.id')
@@ -770,7 +770,7 @@ class PrestamoController extends Controller
                 ->chequeFiltro($request->cheque)
                 ->montoFiltro($request->monto)
                 ->montosFiltro($request->monto_ini, $request->monto_fin)
-                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)                
+                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -804,7 +804,7 @@ class PrestamoController extends Controller
                 ->chequeFiltro($request->cheque)
                 ->montoFiltro($request->monto)
                 ->montosFiltro($request->monto_ini, $request->monto_fin)
-                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)                
+                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -837,7 +837,7 @@ class PrestamoController extends Controller
                 ->chequeFiltro($request->cheque)
                 ->montoFiltro($request->monto)
                 ->montosFiltro($request->monto_ini, $request->monto_fin)
-                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)                
+                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -871,7 +871,7 @@ class PrestamoController extends Controller
                 ->chequeFiltro($request->cheque)
                 ->montoFiltro($request->monto)
                 ->montosFiltro($request->monto_ini, $request->monto_fin)
-                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)                
+                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -904,7 +904,7 @@ class PrestamoController extends Controller
                 ->chequeFiltro($request->cheque)
                 ->montoFiltro($request->monto)
                 ->montosFiltro($request->monto_ini, $request->monto_fin)
-                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)                
+                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -937,7 +937,7 @@ class PrestamoController extends Controller
                 ->chequeFiltro($request->cheque)
                 ->montoFiltro($request->monto)
                 ->montosFiltro($request->monto_ini, $request->monto_fin)
-                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)                
+                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -969,7 +969,7 @@ class PrestamoController extends Controller
                 ->chequeFiltro($request->cheque)
                 ->montoFiltro($request->monto)
                 ->montosFiltro($request->monto_ini, $request->monto_fin)
-                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)                
+                ->fechaPagoFiltro($request->fecha_pago_ini, $request->fecha_pago_fin)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
@@ -1026,7 +1026,7 @@ class PrestamoController extends Controller
     public function exportarExcelFiltro($rut, $fecha_solicitud_ini, $fecha_solicitud_fin, $monto_ini, $monto_fin, $forma_pago_id, $fecha_pago_ini, $fecha_pago_fin, $numero_cuotas, $cuenta_id, $estado_deuda_id, $numero_egreso, $cheque, $monto)
     {
         return Excel::download(new FiltroPrestamoExport($rut, $fecha_solicitud_ini, $fecha_solicitud_fin, $monto_ini, $monto_fin, $forma_pago_id, $fecha_pago_ini, $fecha_pago_fin, $numero_cuotas, $cuenta_id, $estado_deuda_id, $numero_egreso, $cheque, $monto), 'listado_prestamos.xlsx');
-    }   
+    }
 
     /**
      * Exportar a excel.
@@ -1034,5 +1034,5 @@ class PrestamoController extends Controller
     public function exportarExcelBusqueda($buscar_prestamo)
     {
         return Excel::download(new BusquedaPrestamoExport($buscar_prestamo), 'listado_prestamos.xlsx');
-    }    
+    }
 }

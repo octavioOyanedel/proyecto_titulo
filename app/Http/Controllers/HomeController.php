@@ -37,7 +37,7 @@ class HomeController extends Controller
         if(request()->has('columna') && request('columna') != ''){
             $columna = request('columna');
         }else{
-            $columna = 'fecha_sind1';
+            $columna = 'created_at';
         }
 
         if(request()->has('orden') && request('orden') != ''){
@@ -57,10 +57,10 @@ class HomeController extends Controller
         $total = Socio::all()->count();
 
         $estados = EstadoSocio::where('id','>',1)->orderBy('nombre','ASC')->get();
-        
+
         $campo = $request->get('buscar_socio');
 
-        switch ($columna) {        
+        switch ($columna) {
             case 'sede_id':
                 $socios = Socio::orderBy('sedes.nombre',$orden)
                 ->join('sedes', 'socios.sede_id', '=', 'sedes.id')
@@ -82,8 +82,8 @@ class HomeController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_socio' => $campo,            
-                ]); 
+                    'buscar_socio' => $campo,
+                ]);
             break;
             case 'area_id':
                 $socios = Socio::orderBy('areas.nombre',$orden)
@@ -105,10 +105,10 @@ class HomeController extends Controller
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden,    
-                    'buscar_socio' => $campo,        
-                ]); 
-            break;     
+                    'orden' => $orden,
+                    'buscar_socio' => $campo,
+                ]);
+            break;
             case 'cargo_id':
                 $socios = Socio::orderBy('cargos.nombre',$orden)
                 ->join('cargos', 'socios.cargo_id', '=', 'cargos.id')
@@ -129,10 +129,10 @@ class HomeController extends Controller
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden, 
-                    'buscar_socio' => $campo,                               
-                ]); 
-            break;                                   
+                    'orden' => $orden,
+                    'buscar_socio' => $campo,
+                ]);
+            break;
             default:
                 $socios = Socio::orderBy($columna, $orden)
                 ->rut($campo)
@@ -148,13 +148,13 @@ class HomeController extends Controller
                 ->numeroSocio($campo)
                 ->sede($campo)
                 ->area($campo)
-                ->cargo($campo)                                            
+                ->cargo($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden,   
-                    'buscar_socio' => $campo,                             
-                ]); 
+                    'orden' => $orden,
+                    'buscar_socio' => $campo,
+                ]);
             break;
         }
 
@@ -169,6 +169,6 @@ class HomeController extends Controller
     public function exportarExcel($buscar_socio)
     {
         return Excel::download(new BusquedaSocioExport($buscar_socio), 'listado_socios_activos.xlsx');
-    }    
+    }
 
 }

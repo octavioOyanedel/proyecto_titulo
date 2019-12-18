@@ -10,13 +10,14 @@
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
                     <!-- Formulario -->
-                    <form method="POST" action="{{ route('conceptos.update',$concepto) }}">   
+                    <form method="POST" action="{{ route('conceptos.update',$concepto) }}">
 
                         @csrf
                         @method('PUT')
 
-                        @include('partials.components.elementos.contable.nuevo_concepto')
                         @include('partials.components.elementos.contable.tipo_registro')
+                        @include('partials.components.elementos.contable.nuevo_concepto')
+
 
                         <input type="hidden" name="concepto_original" value="{{ $concepto->nombre }}">
 
