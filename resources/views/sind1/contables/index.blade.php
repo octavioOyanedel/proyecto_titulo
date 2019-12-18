@@ -43,7 +43,15 @@
                                         <tr>
                                             <td class="text-center" scope="row" title="Ver detalle registro contable"><a class="text-primary" href="{{ route('contables.show',['id' => $r->id]) }}"><span>@svg('ver')</span></a></td>
                                             @if(Auth::user()->rol_id != 'Invitado')
-                                                <td class="text-center" scope="row" title="Editar registro contable"><a class="text-secondary" href="{{ route('contables.edit',['id' => $r->id]) }}"><span>@svg('editar')</span></a></td>
+                            
+                                                <td class="text-center" scope="row">
+                                                    @if($r->concepto_id != 'Préstamo')
+                                                        <a class="text-secondary" title="Editar registro contable" href="{{ route('contables.edit',['id' => $r->id]) }}"><span>@svg('editar')</span></a>
+                                                    @else
+                                                        <a class="text-secondary" title="Préstamos socios no editables."> - </a>
+                                                    @endif
+                                                </td>
+
                                             @endif
                                             <td class="text-center">{{ $r->fecha }}</td>
                                             <td class="text-center">{{ $r->tipo_registro_contable_id }}</td>

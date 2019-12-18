@@ -7,6 +7,7 @@ use App\Cuota;
 use App\Socio;
 use App\Cuenta;
 use App\Interes;
+use App\Concepto;
 use App\Prestamo;
 use App\FormaPago;
 use App\LogSistema;
@@ -378,7 +379,7 @@ class PrestamoController extends Controller
         $registro->numero_registro = $prestamo->numero_egreso;
         $registro->cheque = $prestamo->cheque;
         $registro->monto = $prestamo->getOriginal('monto');
-        $registro->concepto_id = 57; //57 préstamo
+        $registro->concepto_id = Concepto::obtenerConceptoPorNombreUnico('Préstamo')->id;
         $registro->detalle = null;
         $registro->tipo_registro_contable_id = 1;
         $registro->cuenta_id = 2;

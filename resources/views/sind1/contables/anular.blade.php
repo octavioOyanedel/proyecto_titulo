@@ -11,22 +11,7 @@
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
                     <!-- Formularios -->
-                    <h4 class="text-center">Registro Exixtente</h4>
-                    <form method="POST" action="">
 
-                        @csrf
-
-                        <!-- Botón submit -->
-                        <div class="form-group row mb-0">
-                            <div id="anular_existente" class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Anular') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <hr>
-                    <h4 class="text-center">Registro Nuevo</h4>
                     <form method="POST" action="{{ route('anular_registro') }}">
 
                         @csrf

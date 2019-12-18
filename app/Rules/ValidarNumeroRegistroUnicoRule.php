@@ -26,15 +26,28 @@ class ValidarNumeroRegistroUnicoRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $registro = RegistroContable::where([
-            ['numero_registro','=',$value],
-            ['tipo_registro_contable_id','=',$this->tipo_id]
-        ]);
-        if($registro->count() > 0){
+        $registro = null;
+
+        if($this->tipo_id === '1'){
+            $registro = RegistroContable::where([
+                ['numero_registro','=',$value],
+                ['tipo_registro_contable_id','=',$this->tipo_id],
+                ['concepto_id','=',1],
+            ])->first();
+        }else{
+            $registro = RegistroContable::where([
+                ['numero_registro','=',$value],
+                ['tipo_registro_contable_id','=',$this->tipo_id],
+                ['concepto_id','=',2],
+            ])->first();
+        }
+
+        if($registro){
             return false;
         }else{
             return true;
-        }   
+        }
+
     }
 
     /**
@@ -44,6 +57,6 @@ class ValidarNumeroRegistroUnicoRule implements Rule
      */
     public function message()
     {
-        return 'El valor de este campo ya ha sido registrado.';
+        return 'Este registro contable ya está anulado.';
     }
 }

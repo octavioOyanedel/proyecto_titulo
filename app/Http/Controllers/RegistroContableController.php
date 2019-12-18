@@ -505,7 +505,6 @@ class RegistroContableController extends Controller
      */
     public function anular(AnularChequeRequest $request)
     {
-        //dd($request);
         $concepto = 0;
 
         if($request->tipo_registro_contable_id === '1'){
@@ -513,22 +512,39 @@ class RegistroContableController extends Controller
         }else{
             $concepto = 2;
         }
-        $registro = new RegistroContable;
-        $registro->fecha = date('Y-m-d');
-        $registro->numero_registro = $request->numero_registro;
-        $registro->cheque = $request->cheque;
-        $registro->monto = null;
-        $registro->concepto_id = $concepto;
-        $registro->detalle = $request->detalle;
-        $registro->tipo_registro_contable_id = $request->tipo_registro_contable_id;
-        $registro->cuenta_id = $request->cuenta_id;
-        $registro->asociado_id = null;
-        $registro->usuario_id = Auth::user()->id;
-        $registro->socio_id = null;
-        $registro_anulado = $registro;
-        $registro->save();
+
+        $registro = null;
+
+        if(RegistroContable::existeRegistroContable($request->numero_registro, $request->tipo_registro_contable_id)){
+            $registro = RegistroContable::obtenerRegistroContablePorNumeroTipo($request->numero_registro, $request->tipo_registro_contable_id);
+            $modificar = RegistroContable::obtenerRegistroContablePorNumeroTipo($request->numero_registro, $request->tipo_registro_contable_id);
+            $modificar->cuenta_id = $request->cuenta_id;
+            $modificar->monto = null;
+            $modificar->concepto_id = $concepto;
+            $modificar->cheque = $request->cheque;
+            $modificar->detalle = $request->detalle;
+            $registro->tipo_registro_contable_id = $request->tipo_registro_contable_id;
+            $modificar->socio_id = null;
+            $modificar->asociado_id = null;            
+            $modificar->update();
+        }else{
+            $registro = new RegistroContable;
+            $registro->fecha = date('Y-m-d');
+            $registro->numero_registro = $request->numero_registro;
+            $registro->cheque = $request->cheque;
+            $registro->monto = null;
+            $registro->concepto_id = $concepto;
+            $registro->detalle = $request->detalle;
+            $registro->tipo_registro_contable_id = $request->tipo_registro_contable_id;
+            $registro->cuenta_id = $request->cuenta_id;
+            $registro->asociado_id = null;
+            $registro->usuario_id = Auth::user()->id;
+            $registro->socio_id = null;
+            $registro->save();            
+        }
+
         session(['mensaje' => 'Registro contable anulado con éxito.']);
-        LogSistema::registrarAccion('Registro contable anulado N° '. $registro_anulado);
+        LogSistema::registrarAccion('Registro contable anulado'.convertirArrayAString($registro->toArray()));
         return redirect()->route('contables.index');
     }
 

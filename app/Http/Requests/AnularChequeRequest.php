@@ -28,7 +28,8 @@ class AnularChequeRequest extends FormRequest
             'cuenta_id' => ['required','numeric'],
             'tipo_registro_contable_id' => ['nullable','numeric'],
             'numero_registro' => ['nullable','numeric',new ValidarNumeroRegistroUnicoRule(Request()->tipo_registro_contable_id)],
-            'cheque' => ['nullable','numeric','unique:registros_contables,cheque'],
+            //'numero_registro' => ['nullable','numeric'],
+            'cheque' => ['nullable','numeric'],
             'detalle' => ['nullable'],
         ];
     }

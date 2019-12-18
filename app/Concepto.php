@@ -50,6 +50,14 @@ class Concepto extends Model
     }
 
     /**
+     * Obtener tipo cuenta
+     */
+    static public function obtenerConceptoPorNombreUnico($nombre)
+    {
+        return Concepto::where('nombre','=', $nombre)->first();
+    }
+
+    /**
      * Relación 
      */
     public function registros_contables()

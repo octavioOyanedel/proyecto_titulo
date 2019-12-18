@@ -322,4 +322,44 @@ class RegistroContable extends Model
     {
         return RegistroContable::orderBy('created_at', 'DESC')->first();
     }
+
+    /**
+     * Obtener ultimo registro creado
+     */
+    static public function existeRegistroContable($numero, $tipo)
+    {
+        $registro = RegistroContable::where([
+                ['numero_registro', '=', $numero],
+                ['tipo_registro_contable_id', '=', $tipo]
+        ])->get();
+        if($registro->count() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Obtener ultimo registro creado
+     */
+    static public function obtenerRegistroContablePorNumeroTipo($numero, $tipo)
+    {
+        $registro = RegistroContable::where([
+                ['numero_registro', '=', $numero],
+                ['tipo_registro_contable_id', '=', $tipo]
+        ])->first();
+        if($registro){
+            return $registro;
+        }else{
+            return null;
+        }
+    }    
+
+    /**
+     * Obtener tipo cuenta
+     */
+    static public function obtenerConceptoPorNombreUnico($nombre)
+    {
+        return Concepto::obtenerConceptoPorNombreUnico($nombre);
+    }    
 }
