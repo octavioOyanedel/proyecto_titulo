@@ -10,7 +10,7 @@ use App\Rules\ValidarNumeroSocioUnicoEditarRule;
 use App\Rules\ValidarCorreoSocioUnicoEditarRule;
 use App\Rules\ValidarDireccionRule;
 
-class EditarSocioRequest extends FormRequest
+class VincularSocioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,7 @@ class EditarSocioRequest extends FormRequest
     public function rules()
     {
         return [
-            'rut' => ['required',new ValidarRutRule,new ValidarRutUnicoEditarRule(Request()->rut_original),'max:9'],
+            'rut' => ['required',new ValidarRutRule,'max:9'],
             'nombre1' => ['required',new ValidarFormatoNombreRule,new ValidarNumeroSocioUnicoEditarRule(Request()->numero_socio_original),'max:255'],
             'nombre2' => ['nullable',new ValidarFormatoNombreRule,new ValidarCorreoSocioUnicoEditarRule(Request()->correo_original),'max:255'],
             'apellido1' => ['required',new ValidarFormatoNombreRule,'max:255'],
@@ -54,6 +54,7 @@ class EditarSocioRequest extends FormRequest
             'rut_original' => ['required'],
             'numero_socio_original' => ['required'],
             'correo_original' => ['nullable'],
+            'socio_id' => ['required','numeric'],
         ];
     }
 }

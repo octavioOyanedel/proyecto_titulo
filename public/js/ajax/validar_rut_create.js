@@ -78,12 +78,18 @@ $(window).on('load',function(){
 			dataType: 'json',
 			url: '/verificar_rut',
 			data: {elemento: valor},
-			success: function(respuesta){												
-				if(respuesta === 1){
-					yaRegistrado();
-				}else{
-					valido();
-				}
+			success: function(respuesta){	
+				console.log(respuesta);											
+			    switch(respuesta) {
+			      case 0:
+			      		valido();
+			        break;
+			      case 1:
+						yaRegistrado();
+			        break;
+			      default:
+			      	desvinculado(respuesta);
+			    } 
 			},
 			error: function(respuesta){
 				console.log('ERROR: '+respuesta);
@@ -107,6 +113,17 @@ $(window).on('load',function(){
 		limpiarMensajes();
 		error.removeClass('d-none').append('El campo es inválido.');
 		ocultarSpin();
+	}
+
+	function desvinculado(respuesta){
+		var url = '/vincular/'+respuesta;
+		//var url = '/socios/'+respuesta+'/edit';
+		ocultarErrorPhp();
+		esInvalido();
+		desactivarBoton();
+		limpiarMensajes();	
+		error.removeClass('d-none').append('Socio desvinculado. <a href='+url+'>¿Desea incorporar a este socio?</a>');
+		ocultarSpin();		
 	}
 
 	function yaRegistrado(){

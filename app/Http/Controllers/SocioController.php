@@ -21,6 +21,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\EstadisticaSocioExport;
 use App\Http\Requests\EditarSocioRequest;
 use App\Http\Requests\FiltrarSocioRequest;
+use App\Http\Requests\VincularSocioRequest;
 use App\Http\Requests\IncorporarSocioRequest;
 use App\Exports\EstadisticaEstudioSocioExport;
 use App\Exports\EstadisticaIncorporadoSocioExport;
@@ -70,10 +71,33 @@ class SocioController extends Controller
      */
     public function store(IncorporarSocioRequest $request)
     {
+
         if($request->ciudad_id === 'Seleccione...'){
             $request->ciudad_id = null;
         }
-        Socio::create($request->all());
+        $socio = new Socio;
+        $socio->nombre1 = $request->nombre1;
+        $socio->nombre2 = $request->nombre2;
+        $socio->apellido1 = $request->apellido1;
+        $socio->apellido2 = $request->apellido2;
+        $socio->rut = $request->rut;
+        $socio->genero = $request->genero;
+        $socio->fecha_nac = $request->fecha_nac;
+        $socio->celular = $request->celular;
+        $socio->correo = $request->correo;
+        $socio->direccion = $request->direccion;
+        $socio->fecha_pucv = $request->fecha_pucv;
+        $socio->anexo = $request->anexo;
+        $socio->numero_socio = $request->numero_socio;
+        $socio->fecha_sind1 = $request->fecha_sind1;
+        $socio->comuna_id = $request->comuna_id;
+        $socio->ciudad_id = $request->ciudad_id;
+        $socio->sede_id = $request->sede_id;
+        $socio->area_id = $request->area_id;
+        $socio->cargo_id = $request->cargo_id;
+        $socio->estado_socio_id = Socio::obtenerEstadoPorNombre('Activo')->id;
+        $socio->nacionalidad_id = $request->nacionalidad_id;
+        $socio->save();
         $socio = Socio::obtenerUltimoSocioIngresado();
         session(['mensaje' => 'Socio incorporado con éxito.']);
         LogSistema::registrarAccion('Socio agregado: '.convertirArrayAString($socio->toArray()));
@@ -142,8 +166,9 @@ class SocioController extends Controller
         $modificar->sede_id = $request->sede_id;
         $modificar->area_id = $request->area_id;
         $modificar->cargo_id = $request->cargo_id;
-        $modificar->estado_socio_id = $request->estado_socio_id;
+        $modificar->estado_socio_id = Socio::obtenerEstadoPorNombre('Activo')->id;
         $modificar->nacionalidad_id = $request->nacionalidad_id;
+        $modificar->deleted_at = null;
         $modificar->update();
         session(['mensaje' => 'Socio editado con éxito.']);
         LogSistema::registrarAccion('Socio editado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($socio->toArray()));
@@ -191,11 +216,15 @@ class SocioController extends Controller
     {
         $socio = null;
         if ($request->ajax()) {
-            $socios = Socio::where('rut','=',$request->elemento)->get();
-            if(count($socios) != 0){
-                return response()->json(1); //si existe
+            $socio = Socio::withTrashed()->where('rut','=',$request->elemento)->first();
+            if($socio != null){
+                if($socio->deleted_at === null){
+                    return 1; //socio existe
+                }else{
+                    return $socio->id; //socio existe (desvinculado)
+                }
             }else{
-                return response()->json(0);
+                return 0; //socio no existe
             }
 
         }
@@ -1286,4 +1315,64 @@ class SocioController extends Controller
     {
         return Excel::download(new EstadisticaEstudioSocioExport($nombre), 'listado_estudios_socios.xlsx');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function reVincular($id)
+    {
+        $socio = Socio::withTrashed()->where('id','=',$id)->first();
+        //dd($socio);
+        $comunas = Comuna::orderBy('nombre', 'ASC')->get();
+        $sedes = Sede::orderBy('nombre', 'ASC')->get();
+        $cargos = Cargo::orderBy('nombre', 'ASC')->get();
+        $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
+        $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();
+        return view('sind1.socios.vincular', compact('socio','cargos', 'estados', 'nacionalidades', 'comunas', 'sedes'));        
+    }    
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Socio  $socio
+     * @return \Illuminate\Http\Response
+     */
+    public function reVincularSocio(VincularSocioRequest $request)
+    {
+        if($request->ciudad_id === 'Seleccione...'){
+            $request->ciudad_id = null;
+        }
+        $socio = Socio::withTrashed()->where('id','=',$request->socio_id)->first();
+        $modificar = Socio::withTrashed()->where('id','=',$request->socio_id)->first();
+        $modificar->nombre1 = $request->nombre1;
+        $modificar->nombre2 = $request->nombre2;
+        $modificar->apellido1 = $request->apellido1;
+        $modificar->apellido2 = $request->apellido2;
+        $modificar->rut = $request->rut;
+        $modificar->genero = $request->genero;
+        $modificar->fecha_nac = $request->fecha_nac;
+        $modificar->celular = $request->celular;
+        $modificar->correo = $request->correo;
+        $modificar->direccion = $request->direccion;
+        $modificar->fecha_pucv = $request->fecha_pucv;
+        $modificar->anexo = $request->anexo;
+        $modificar->numero_socio = $request->numero_socio;
+        $modificar->fecha_sind1 = $request->fecha_sind1;
+        $modificar->comuna_id = $request->comuna_id;
+        $modificar->ciudad_id = $request->ciudad_id;
+        $modificar->sede_id = $request->sede_id;
+        $modificar->area_id = $request->area_id;
+        $modificar->cargo_id = $request->cargo_id;
+        $modificar->estado_socio_id = Socio::obtenerEstadoPorNombre('Activo')->id;
+        $modificar->nacionalidad_id = $request->nacionalidad_id;
+        $modificar->deleted_at = null;
+        $modificar->update();
+        session(['mensaje' => 'Socio incorporado con éxito.']);
+        LogSistema::registrarAccion('Socio re-incorporado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($socio->toArray()));
+        return redirect()->route('home');
+    }    
 }

@@ -53,7 +53,7 @@
 
                         @include('partials.components.elementos.socio.cargo')
 
-                        @include('partials.components.elementos.socio.situacion')
+                        {{-- @include('partials.components.elementos.socio.situacion') --}}
 
                         @include('partials.components.elementos.socio.nacion')
 

@@ -654,4 +654,21 @@ class Socio extends Model
         return Socio::onlyTrashed()->whereBetween('deleted_at', [date($fecha_ini),date($fecha_fin)])->count();
     }
 
+    /**
+     * Obtener estado socio por nombre
+     */
+    public static function obtenerEstadoPorNombre($nombre)
+    {
+        return EstadoSocio::where('nombre','=',$nombre)->first();
+    }
+
+    /**
+     * Obtener estado socio por nombre
+     */
+    public static function recomendarNumeroSocio()
+    {
+        $socio = Socio::orderBy('numero_socio','DESC')->withTrashed()->first();
+        return intval($socio->numero_socio) + 1;
+    }
+
 }

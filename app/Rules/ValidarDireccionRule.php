@@ -25,7 +25,7 @@ class ValidarDireccionRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/^[a-zA-Z áéíóúÁÉÍÓÚñÑ 0-9 \-\_\.\,]*$/",$value);
+        return preg_match("/^[a-zA-Z áéíóúÁÉÍÓÚñÑ 0-9 \-\_\.\,\°\']*$/",$value);
     }
 
     /**

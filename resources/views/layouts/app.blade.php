@@ -54,4 +54,5 @@
 
     <!-- fin selector de js -->
     <script src="{{ asset('js/links_nav.js') }}" defer></script>
+    <script src="{{ asset('js/ajax/eliminar_alertas.js') }}" defer></script> 
 </html>

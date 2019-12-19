@@ -19,7 +19,7 @@ $factory->define(Socio::class, function (Faker $faker) {
         'direccion' => $faker->address(),
         'fecha_pucv' => $faker->dateTimeBetween('-19 years', '-14 years'),
         'anexo' => $faker->numberBetween(2000, 4999),
-        'numero_socio' => rand(1, 99999999),
+        'numero_socio' => rand(1, 999999),
         'fecha_sind1' => $faker->dateTimeBetween('-13 years', 'now'),
         'comuna_id' => 6,
         'ciudad_id' => $faker->numberBetween(27, 33),

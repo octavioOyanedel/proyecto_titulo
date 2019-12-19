@@ -237,3 +237,6 @@ Route::get('socios_filtrados_educacion','SocioController@socioFiltradosEducacion
 Route::get('socios_estudios_estadistica/{nombre}','SocioController@exportarExcelEstadisticaEstudios')->name('socios_estudios_estadistica')->middleware('auth');
 
 Route::get('estadistica_carga_excel/{nombre}','CargaFamiliarController@exportarEstadisticaCarga')->name('estadistica_carga_excel')->middleware('auth');
+
+Route::get('vincular/{id}','SocioController@reVincular')->name('vincular')->middleware('auth');
+Route::put('vincular_socio','SocioController@reVincularSocio')->name('vincular_socio')->middleware('auth');

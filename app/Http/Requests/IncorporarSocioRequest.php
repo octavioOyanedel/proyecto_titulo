@@ -27,7 +27,7 @@ class IncorporarSocioRequest extends FormRequest
     public function rules()
     {
         return [
-            'rut' => ['required',new ValidarRutRule,'unique:socios,rut','max:9'],
+            'rut' => ['required',new ValidarRutRule,'unique:socios,rut','max:9'],        
             'nombre1' => ['required',new ValidarFormatoNombreRule,'max:255'],
             'nombre2' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
             'apellido1' => ['required',new ValidarFormatoNombreRule,'max:255'],
@@ -46,7 +46,7 @@ class IncorporarSocioRequest extends FormRequest
             'sede_id' => ['required','numeric'],
             'area_id' => ['nullable','numeric'],
             'cargo_id' => ['required','numeric'],
-            'estado_socio_id' => ['required','numeric'],
+            //'estado_socio_id' => ['required','numeric'],
             'nacionalidad_id' => ['required','numeric'],
         ];
     }
