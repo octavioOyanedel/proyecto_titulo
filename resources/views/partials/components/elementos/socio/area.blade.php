@@ -7,6 +7,22 @@
     <div class="col-md-6">
 	    <select id="area_id" class="default-selects form-control @error('area_id') is-invalid @enderror" name="area_id" autocomplete="area_id" autofocus required>
 	        <option selected="true" value="">Seleccione...</option>
+            @if(old('area_id') === null)
+                {{-- loop sin old --}}
+                @if(isset($socio) && isset($areas))
+                    @foreach($areas as $a) 
+                        {{-- si existe socio -editar- --}}
+                        <option value="{{ $a->id }}" {{ $socio->getOriginal('area_id') == $a->id ? 'selected' : ''}}>{{ $a->nombre }}</option>
+                    @endforeach
+                @endif
+            @else
+                {{-- loop con old --}}
+                @if(isset($socio) && isset($areas))
+                    @foreach($areas as $a)        
+                        <option value="{{ $a->id }}" @if(old('area_id') == $a->id) {{ 'selected' }} @endif>{{ $a->nombre }}</option>
+                    @endforeach
+                @endif
+            @endif	        
 	    </select>
 
         {{-- validacion php --}}

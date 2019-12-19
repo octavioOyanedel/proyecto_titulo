@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Area;
 use App\Sede;
 use App\Cargo;
 use App\Socio;
+use App\Ciudad;
 use App\Comuna;
 use App\Interes;
 use App\Prestamo;
@@ -1325,13 +1327,14 @@ class SocioController extends Controller
     public function reVincular($id)
     {
         $socio = Socio::withTrashed()->where('id','=',$id)->first();
-        //dd($socio);
         $comunas = Comuna::orderBy('nombre', 'ASC')->get();
         $sedes = Sede::orderBy('nombre', 'ASC')->get();
         $cargos = Cargo::orderBy('nombre', 'ASC')->get();
         $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
         $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();
-        return view('sind1.socios.vincular', compact('socio','cargos', 'estados', 'nacionalidades', 'comunas', 'sedes'));        
+        $ciudades = Ciudad::orderBy('nombre', 'ASC')->where('comuna_id','=',$socio->getOriginal('comuna_id'))->get();
+        $areas = Area::orderBy('nombre', 'ASC')->where('sede_id','=',$socio->getOriginal('sede_id'))->get();
+        return view('sind1.socios.vincular', compact('socio','cargos', 'estados', 'nacionalidades', 'comunas', 'sedes','ciudades','areas'));        
     }    
 
     /**

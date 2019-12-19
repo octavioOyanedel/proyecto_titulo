@@ -8,6 +8,25 @@
     <div class="col-md-6">
         <select id="ciudad_id" class="default-selects form-control @error('ciudad_id') is-invalid @enderror" name="ciudad_id" autocomplete="ciudad_id" autofocus>
             <option selected="true" value="">Seleccione...</option>
+
+            @if(old('ciudad_id') === null)
+                {{-- loop sin old --}}
+                @if(isset($socio) && isset($ciudades))
+                    @foreach($ciudades as $c) 
+                        {{-- si existe socio -editar- --}}
+                        <option value="{{ $c->id }}" {{ $socio->getOriginal('ciudad_id') == $c->id ? 'selected' : ''}}>{{ $c->nombre }}</option>
+                    @endforeach
+                @endif
+            @else
+                {{-- loop con old --}}
+                @if(isset($socio) && isset($ciudades))
+                    @foreach($ciudades as $c)        
+                        <option value="{{ $c->id }}" @if(old('ciudad_id') == $c->id) {{ 'selected' }} @endif>{{ $c->nombre }}</option>
+                    @endforeach
+                @endif
+            @endif
+
+
         </select>
         
         {{-- validacion php --}}
@@ -18,6 +37,7 @@
     		@php 
     			$id = old('ciudad_id');
     		@endphp
+
     	@endif
 
 	   <input id="old_ciudad" type="hidden" value="{{ $id }}">
