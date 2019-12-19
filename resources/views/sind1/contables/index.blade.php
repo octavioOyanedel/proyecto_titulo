@@ -14,7 +14,7 @@
 
                     @if($registros->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se han encontrado registros. <a href="{{ route('contables.create') }}">Crear nuevo.</a></b>
+                            <b>No se han encontrado registros contables. <a href="{{ route('contables.create') }}">Registrar nuevo.</a></b>
                         </div>
                     @else
                         <div>
@@ -43,7 +43,7 @@
                                         <tr>
                                             <td class="text-center" scope="row" title="Ver detalle registro contable"><a class="text-primary" href="{{ route('contables.show',['id' => $r->id]) }}"><span>@svg('ver')</span></a></td>
                                             @if(Auth::user()->rol_id != 'Invitado')
-                            
+
                                                 <td class="text-center" scope="row">
                                                     @if($r->concepto_id != 'Préstamo')
                                                         <a class="text-secondary" title="Editar registro contable" href="{{ route('contables.edit',['id' => $r->id]) }}"><span>@svg('editar')</span></a>

@@ -15,18 +15,18 @@
 
                     @if($prestamos->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se han encontrado registros. <a href="{{ route('prestamos.create') }}">Crear nuevo.</a></b>
+                            <b>No se han encontrado préstamos registradoss. <a href="{{ route('prestamos.create') }}">Solicitar préstamo.</a></b>
                         </div>
                     @else
-                        <div>                               
-                            @include('partials.components.filtros.prestamos') 
-                        </div> 
+                        <div>
+                            @include('partials.components.filtros.prestamos')
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="text-center" scope="col">Estado de préstamo</th>                                    
+                                        <th class="text-center" scope="col">Estado de préstamo</th>
                                         <th scope="col">Nombre socio</th>
                                         <th class="text-center" scope="col">Rut</th>
                                         <th class="text-center" scope="col">Fecha de solicitud</th>
@@ -43,7 +43,7 @@
                                             <td width="50" class="text-center" scope="row" title="Ver detalle préstamo"><a class="text-primary" href="{{ route('prestamos.show',$p) }}"><span>@svg('ver')</span></a></td>
                                             <td class="text-center">
                                                 <span class="texto-deuda shadow-sm p-1 rounded">{{ textoDeudaPrestamo($p->getOriginal('estado_deuda_id')) }}</span>
-                                            </td>                                                 
+                                            </td>
                                             <td class="">@if($p->socio->apellido2 != null) {{ $p->socio->apellido1 }} {{ $p->socio->apellido2 }}, @else {{ $p->socio->apellido1 }}, @endif {{ $p->socio->nombre1 }} {{ $p->socio->nombre2 }} </td>
                                             <td class="text-center">{{ $p->socio->rut }}</td>
                                             <td class="text-center">{{ $p->fecha_solicitud }}</td>
@@ -51,15 +51,15 @@
                                             <td>{{ $p->cuenta_id }}</td>
                                             <td>{{ $p->forma_pago_id }}</td>
                                             <td class="text-center">{{ celdaCadena($p->cheque) }}</td>
-                                            <td class="text-center">{{ $p->monto }}</td>                                       
+                                            <td class="text-center">{{ $p->monto }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </table>                      
+                            </table>
                         </div>
                         <div class="float-right mt-3">
-                            {{ $prestamos->links() }}    
-                        </div>     
+                            {{ $prestamos->links() }}
+                        </div>
                     @endif
                 </div>
             </div>

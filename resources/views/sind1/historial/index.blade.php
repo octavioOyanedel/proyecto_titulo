@@ -12,12 +12,12 @@
 
                     @if($registros->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se han encontrado registros. <a href="{{ route('historial.index') }}">Volver a historial.</a></b>
+                            <b>No se han encontrado registros de log, informar al administrador del sistema. <a href="{{ route('historial.index') }}">Volver a historial.</a></b>
                         </div>
-                    @else 
-                        <div>                               
-                            @include('partials.components.filtros.historial') 
-                        </div>                     
+                    @else
+                        <div>
+                            @include('partials.components.filtros.historial')
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
@@ -35,7 +35,7 @@
                                     @foreach($registros as $r)
                                         <tr>
                                             <td>{{ $r->usuario_id }}</td>
-                                            <td>{{ $r->correo }}</td>                                            
+                                            <td>{{ $r->correo }}</td>
                                             <td class="text-center">{{ $r->created_at }}</td>
                                             <td>{{ $r->accion }}</td>
                                             <td class="text-center">{{ $r->ip }}</td>
@@ -44,11 +44,11 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </table>                      
+                            </table>
                         </div>
                         <div class="float-right mt-3">
-                            {{ $registros->links() }}    
-                        </div>                         
+                            {{ $registros->links() }}
+                        </div>
                     @endif
                 </div>
             </div>

@@ -6,7 +6,7 @@
         <div class="col-md-12">
 
             @include('partials.alertas')
-            
+
             <div class="card">
                 <div class="card-header text-center"><h3 class="mb-0">Resultados Búsqueda de Socios</h3></div>
 
@@ -15,17 +15,17 @@
 
                     @if($socios->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se han encontrado registros. <a href="{{ route('filtro_socios_form') }}">Volver atrás.</a></b>
+                            <b>No se han encontrado socios registrados. <a href="{{ route('socios.create') }}">Incorporar socio.</a></b>
                         </div>
-                    @else 
-                        <div>                                                                                   
-                            @include('partials.components.filtros.socios_busqueda')                         
-                        </div>   
-                 
+                    @else
+                        <div>
+                            @include('partials.components.filtros.socios_busqueda')
+                        </div>
+
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered">
                                 <thead>
-                                    <tr>                                        
+                                    <tr>
                                         <th class="text-center" colspan="3" scope="col"></th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Estado socio</th>
@@ -63,12 +63,12 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </table>                      
+                            </table>
                         </div>
                         <div class="float-right mt-3">
-                            {{ $socios->links() }}    
-                        </div>                        
-                    @endif 
+                            {{ $socios->links() }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

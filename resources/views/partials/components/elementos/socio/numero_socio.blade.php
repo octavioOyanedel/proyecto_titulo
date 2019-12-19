@@ -1,13 +1,13 @@
-@php 
+@php
 	$numero_socio = 0;
 @endphp
-@if(isset($socio))
-    @php 
-        $numero_socio = $socio->numero_socio; 
+@if(isset($socio) && $socio != null)
+    @php
+        $numero_socio = $socio->numero_socio;
     @endphp
 @else
-    @php 
-        $numero_socio = App\Socio::recomendarNumeroSocio(); 
+    @php
+        $numero_socio = App\Socio::recomendarNumeroSocio();
     @endphp
 @endif
 
@@ -19,14 +19,14 @@
 
         {{-- validacion php --}}
         <small id="error-numero-php" class="form-text text-danger"><strong>@if($errors->has('numero_socio')) {{ $errors->first('numero_socio') }}@endif</strong></small>
-        
+
         {{-- validacion javascript --}}
 		<small id="error-numero" class="d-none form-text text-danger font-weight-bold"></small>
 
 		<small id="comprobar-numero" class="form-text text-secundary d-none">
 			<div class="spinner-border spinner-border-sm" role="status">
 				<span class="sr-only">Comprobando...</span>
-			</div>&nbsp;&nbsp;Comprobando...		
+			</div>&nbsp;&nbsp;Comprobando...
 		</small>
 
 		<small id="numero-ok" class="d-done form-text text-success font-weight-bold"></small>

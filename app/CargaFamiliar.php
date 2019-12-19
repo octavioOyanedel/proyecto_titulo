@@ -238,4 +238,12 @@ class CargaFamiliar extends Model
         ->orWhere('parentesco_id','=',6)
         ->count();
     }
+
+    /**
+     * contar hijos
+     */
+    public function contarTotal()
+    {
+        return CargaFamiliar::all()->count();
+    }
 }

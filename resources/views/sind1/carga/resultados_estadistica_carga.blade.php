@@ -15,7 +15,7 @@
 
                     @if($cargas->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se encontraron registros de cargas familiares. <a href="{{ route('home') }}">Volver a inicio.</a></b>
+                            <b>No se han encontrado cargas familiares registradas. <a href="{{ route('home') }}">Volver a inicio.</a></b>
                         </div>
                     @else
                         <div>

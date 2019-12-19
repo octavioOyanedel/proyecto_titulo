@@ -668,7 +668,11 @@ class Socio extends Model
     public static function recomendarNumeroSocio()
     {
         $socio = Socio::orderBy('numero_socio','DESC')->withTrashed()->first();
-        return intval($socio->numero_socio) + 1;
+        if($socio){
+            return intval($socio->numero_socio) + 1;
+        }else{
+            return 1;
+        }
     }
 
 }

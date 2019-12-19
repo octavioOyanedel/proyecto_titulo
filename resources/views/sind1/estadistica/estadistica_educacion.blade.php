@@ -9,30 +9,37 @@
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped table-bordered">
-                            <thead>
-                                <tr>
+                    @if($niveles->count() === 0)
+                        <div class="alert alert-dark mt-4 text-center" role="alert">
+                            <b>No se han encontrado estudios registrados. <a href="{{ route('home') }}">Volver a inicio.</a></b>
+                        </div>
+                    @else
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        @foreach($niveles as $n)
+                                            <th class="text-center" scope="col">{{ $n->nombre }}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach($niveles as $n)
-                                        <th class="text-center" scope="col">{{ $n->nombre }}</th>
+                                        @if($n->contarEstudiosPorSocio($n->nombre) != 0)
+                                            <td class="text-center" scope="col">
+                                                <a href="{{ route('socios_filtrados_educacion', ['nombre' => $n->nombre]) }}">{{ $n->contarEstudiosPorSocio($n->nombre) }}</a>
+                                            </td>
+                                        @else
+                                            <td class="text-center" scope="col">
+                                                {{ '0' }}
+                                            </td>
+                                        @endif
                                     @endforeach
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($niveles as $n)
-                                    @if($n->contarEstudiosPorSocio($n->nombre) != 0)
-                                        <td class="text-center" scope="col">
-                                            <a href="{{ route('socios_filtrados_educacion', ['nombre' => $n->nombre]) }}">{{ $n->contarEstudiosPorSocio($n->nombre) }}</a>
-                                        </td>
-                                    @else
-                                        <td class="text-center" scope="col">
-                                            {{ '0' }}
-                                        </td>
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

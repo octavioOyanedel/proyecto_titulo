@@ -57,12 +57,13 @@ class SocioController extends Controller
      */
     public function create()
     {
+        $socio = null;
         $comunas = Comuna::orderBy('nombre', 'ASC')->get();
         $sedes = Sede::orderBy('nombre', 'ASC')->get();
         $cargos = Cargo::orderBy('nombre', 'ASC')->get();
         $estados = EstadoSocio::orderBy('nombre', 'ASC')->get();
         $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();
-        return view('sind1.socios.create', compact('cargos', 'estados', 'nacionalidades', 'comunas', 'sedes'));
+        return view('sind1.socios.create', compact('socio','cargos', 'estados', 'nacionalidades', 'comunas', 'sedes'));
     }
 
     /**
@@ -1334,8 +1335,8 @@ class SocioController extends Controller
         $nacionalidades = Nacionalidad::orderBy('nombre', 'ASC')->get();
         $ciudades = Ciudad::orderBy('nombre', 'ASC')->where('comuna_id','=',$socio->getOriginal('comuna_id'))->get();
         $areas = Area::orderBy('nombre', 'ASC')->where('sede_id','=',$socio->getOriginal('sede_id'))->get();
-        return view('sind1.socios.vincular', compact('socio','cargos', 'estados', 'nacionalidades', 'comunas', 'sedes','ciudades','areas'));        
-    }    
+        return view('sind1.socios.vincular', compact('socio','cargos', 'estados', 'nacionalidades', 'comunas', 'sedes','ciudades','areas'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -1377,5 +1378,5 @@ class SocioController extends Controller
         session(['mensaje' => 'Socio incorporado con éxito.']);
         LogSistema::registrarAccion('Socio re-incorporado, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($socio->toArray()));
         return redirect()->route('home');
-    }    
+    }
 }

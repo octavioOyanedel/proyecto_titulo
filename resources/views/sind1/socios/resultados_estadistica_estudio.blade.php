@@ -15,7 +15,7 @@
 
                     @if($socios->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se han encontrado registros. <a href="{{ route('filtro_socios_form') }}">Volver atrás.</a></b>
+                            <b>No se han encontrado socios registrados. <a href="{{ route('socios.create') }}">Incorporar socio.</a></b>
                         </div>
                     @else
                         <div>

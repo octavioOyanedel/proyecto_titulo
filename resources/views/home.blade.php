@@ -15,7 +15,7 @@
 
                     @if($socios->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se han encontrado registros. <a href="{{ route('socios.create') }}">Crear nuevo.</a></b>
+                            <b>No se han encontrado socios registrados. <a href="{{ route('socios.create') }}">Incorporar socio.</a></b>
                         </div>
                     @else
                         <div>
@@ -28,9 +28,9 @@
                                     <tr>
                                         <th class="text-center" scope="col"></th>
                                         @if(Auth::user()->rol_id != 'Invitado')
-                                        <th class="text-center" scope="col"></th>
-                                        <th class="text-center" scope="col"></th>
-                                        @endif    
+                                            <th class="text-center" scope="col"></th>
+                                            <th class="text-center" scope="col"></th>
+                                        @endif
                                         <th scope="col">Nombre</th>
                                         <th class="text-center" scope="col">Género</th>
                                         <th class="text-center" scope="col">Rut</th>
@@ -51,7 +51,7 @@
                                         @if(Auth::user()->rol_id != 'Invitado')
                                             <td width="50" class="text-center" scope="row" title="Editar socio"><a class="text-secondary" href="{{ route('socios.edit',$s) }}"><span>@svg('editar')</span></a></td>
                                             <td width="50" class="text-center" scope="row" title="Eliminar socio"><a class="text-danger" href="{{ route('eliminar_socio_form',$s->id) }}"><span>@svg('eliminar')</span></a></td>
-                                        @endif    
+                                        @endif
                                             <td>@if($s->apellido2 != null) {{ $s->apellido1 }} {{ $s->apellido2 }}, @else {{ $s->apellido1 }}, @endif {{ $s->nombre1 }} {{ $s->nombre2 }}</td>
                                             <td class="text-center">{{ $s->genero }}</td>
                                             <td class="text-center">{{ $s->rut }}</td>
