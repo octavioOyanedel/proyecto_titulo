@@ -123,7 +123,8 @@ class CargaFamiliarController extends Controller
         }else{
             $cargas = CargaFamiliar::orderBy('apellido1','ASC')->paginate(15);
             $total_consulta = $cargas->total();
-            return redirect()->route('cargas.index', compact('cargas', 'total_consulta'));
+            //return redirect()->route('cargas.index', compact('cargas', 'total_consulta'));
+            return view('sind1.carga.index', compact('cargas', 'total_consulta'));
         }
     }
 
