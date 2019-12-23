@@ -52,6 +52,7 @@ class UsuarioController extends Controller
         $roles = Rol::orderBy('nombre','ASC')->get();
 
         $campo = $request->get('buscar_usuario');
+
         if(Rol::obtenerRolPorNombre($campo) != null){
             $campo = Rol::obtenerRolPorNombre($campo)->id;
         }
@@ -107,7 +108,6 @@ class UsuarioController extends Controller
         }
 
         $total_consulta = $usuarios->total();
-
         return view('sind1.usuario.index', compact('usuarios','roles','total_consulta'));
     }
 
@@ -130,7 +130,9 @@ class UsuarioController extends Controller
      */
     public function store(IncorporarUsuarioRequest $request) //Hash::make($data['password'])
     {
+        //dd($request);
         $usuario = new User;
+        $usuario->id =(User::obtenerUltimoUsuarioIngresado()->id + 1);
         $usuario->nombre1 = $request->nombre1;
         $usuario->nombre2 = $request->nombre2;
         $usuario->apellido1 = $request->apellido1;
@@ -139,11 +141,15 @@ class UsuarioController extends Controller
         $usuario->password = Hash::make($request->password);
         $usuario->rol_id = $request->rol_id;
         $usuario->save();
+
         $user = User::obtenerUltimoUsuarioIngresado();
         $roles = Rol::orderBy('nombre','ASC')->get();
         session(['mensaje' => 'Usuario agregado con éxito.']);
         LogSistema::registrarAccion('Usuario agragado: '.convertirArrayAString($user->toArray()));
-        return redirect()->route('register', compact('roles'));
+        //return redirect()->route('register', compact('roles'));
+        //$usuarios = User::orderBy('apellido1','DESC')->paginate(15);
+        //$total_consulta = $usuarios->total();
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -199,9 +205,10 @@ class UsuarioController extends Controller
      */
     public function destroy(User $usuario)
     {
+        $usuario = User::findOrFail($usuario->id);
         User::destroy($usuario->id);
         session(['mensaje' => 'Usuario eliminado con éxito.']);
-        LogSistema::registrarAccion('xxx eliminada: '.convertirArrayAString($eliminada->toArray()));
+        LogSistema::registrarAccion('xxx eliminada: '.convertirArrayAString($usuario->toArray()));
         return redirect()->route('usuarios.index');
     }
 

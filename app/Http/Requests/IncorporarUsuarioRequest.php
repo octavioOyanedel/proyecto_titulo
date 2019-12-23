@@ -30,7 +30,7 @@ class IncorporarUsuarioRequest extends FormRequest
             'nombre2' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
             'apellido1' => ['required',new ValidarFormatoNombreRule,'max:255'],
             'apellido2' => ['nullable',new ValidarFormatoNombreRule,'max:255'],
-            'email' => ['required','email'],
+            'email' => ['required','email','unique:usuarios,email'],
             'password' => ['required','alpha_num',new ValidarContrasenasIgualesRule(Request()->password_confirm),'min:8','max:15'],
             'password_confirm' => ['required','alpha_num',new ValidarContrasenasIgualesRule(Request()->password),'min:8','max:15'],
             'rol_id' => ['required','numeric']

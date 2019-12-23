@@ -11,7 +11,7 @@ $(window).on('load',function(){
 	var original = '';
 	var error_php = $('#error-email-php');
 	var boton = $('#incorporar');
-	
+
 	//activar boton con valor old
 	var email = $('#old_email').val();
 	if(email != ''){
@@ -38,7 +38,7 @@ $(window).on('load',function(){
 		limpiarMensajes();
 
 		if(valor != ''){
-			mostrarSpin();				
+			mostrarSpin();
 			//condiciones que se deben cumplir para llamar a funcion ajax
 			if(valor.length >= 5 && valor.length <= 50 && valor != '' &&  validarFormato() != null){
 				//form editar
@@ -60,7 +60,7 @@ $(window).on('load',function(){
 			}else{
 				invalido();
 			}
-		}		
+		}
 	});
 
 	function consultaAjax(valor){
@@ -69,14 +69,14 @@ $(window).on('load',function(){
 			headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}}
-		);		
-		
+		);
+
 		$.ajax({
 			method: 'GET',
 			dataType: 'json',
 			url: '/verificar_correo_usuario',
 			data: {elemento: valor},
-			success: function(respuesta){												
+			success: function(respuesta){
 				if(respuesta === 1){
 					yaRegistrado();
 				}else{
@@ -86,20 +86,20 @@ $(window).on('load',function(){
 			error: function(respuesta){
 				console.log('ERROR: '+respuesta);
 			}
-		});		
+		});
 	}
 
 	function valido(){
 		ocultarErrorPhp();
-		noEsInvalido();	
-		limpiarMensajes();	
+		noEsInvalido();
+		limpiarMensajes();
 		ok.removeClass('d-none').append('El campo es válido.');
 		ocultarSpin();
 	}
 
 	function invalido(){
-	
-		ocultarErrorPhp();		
+
+		ocultarErrorPhp();
 		esInvalido();
 		limpiarMensajes();
 		error.removeClass('d-none').append('El campo no es un correo válido.');
@@ -107,11 +107,11 @@ $(window).on('load',function(){
 	}
 
 	function yaRegistrado(){
-		ocultarErrorPhp();		
+		ocultarErrorPhp();
 		esInvalido();
-		limpiarMensajes();	
+		limpiarMensajes();
 		error.removeClass('d-none').append('El valor de este campo ya ha sido registrado.');
-		ocultarSpin();		
+		ocultarSpin();
 	}
 
 	function ocultarErrorPhp(){
@@ -135,7 +135,7 @@ $(window).on('load',function(){
 	}
 
 	function comprobarRuta(){
-		return ruta.search('register');
+		return ruta.search('usuarios/create');
 	}
 
 	function formatearEntrada(texto){

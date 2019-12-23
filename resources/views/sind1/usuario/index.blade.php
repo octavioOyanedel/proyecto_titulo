@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            
+
             @include('partials.alertas')
 
             <div class="card">
@@ -16,10 +16,10 @@
                         <div class="alert alert-warning mt-4 text-center" role="alert">
                             <b>No existen registros.</b>
                         </div>
-                    @else    
+                    @else
                     <div>
-                        @include('partials.components.filtros.usuarios') 
-                    </div>    
+                        @include('partials.components.filtros.usuarios')
+                    </div>
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
@@ -43,12 +43,12 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </table>                      
+                            </table>
                         </div>
                         <div class="float-right mt-3">
-                            {{ $usuarios->links() }}    
-                        </div>                         
-                    @endif 
+                            {{ $usuarios->links() }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
