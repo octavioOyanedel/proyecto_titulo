@@ -8,6 +8,9 @@
                 <div class="card-header text-center"><h3 class="mb-0">{{ __('Restablecer la contraseña') }}</h3></div>
 
                 <div class="card-body">
+                    <div class="alert alert-dark mt-4 text-center" role="alert">
+                        En caso de que correo no esté en la bandeja de entrada verificar las carpetas "SPAM" o "No deseados" de su cuenta de correo. El asunto del mensaje es: <b>Sind1 - Restablecer Contraseña.</b>
+                    </div>                    
                     @if (session('status'))
                         <div class="alert alert-success text-center" role="alert">
                             <strong>{{ session('status') }}</strong>

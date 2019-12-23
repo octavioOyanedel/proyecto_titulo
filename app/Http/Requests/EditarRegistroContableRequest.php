@@ -39,7 +39,7 @@ class EditarRegistroContableRequest extends FormRequest
             'socio_id' => ['nullable','numeric'],
             'numero_registro_original' => ['required'],
             'tipo_registro_contable_original' => ['required'],
-            'cheque_original' => ['required'],
+            'cheque_original' => ['nullable'],
         ];
     }
 }

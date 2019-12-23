@@ -8,6 +8,7 @@
                 <div class="card-header text-center"><h3 class="mb-0">{{ __('Restablecer contraseña') }}</h3></div>
 
                 <div class="card-body">
+
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
 

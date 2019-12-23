@@ -173,7 +173,6 @@ class RegistroContableController extends Controller
      */
     public function store(IncorporarRegistroContableRequest $request)
     {
-
         $registro = new RegistroContable;
         $registro->fecha = $request->fecha;
         $registro->numero_registro = $request->numero_registro;
@@ -242,7 +241,7 @@ class RegistroContableController extends Controller
      */
     public function update(EditarRegistroContableRequest $request, $id)
     {
-        //dd($id);
+        //dd($request);
         $registro = RegistroContable::findOrFail($id);
         $modificar = RegistroContable::findOrFail($id);
         $modificar->fecha = $request->fecha;

@@ -28,13 +28,17 @@ class ValidarChequeRegistroContableUnicoEditarRule implements Rule
     public function passes($attribute, $value)
     {
         //$value = numero nuevo
-        if($this->cheque_original != $value &&  $this->tipo_original != $this->tipo_nuevo){
-            $registro = RegistroContable::where([
-                ['cheque','=',$value],
-                ['tipo_registro_contable_id','=',$this->tipo_id]
-            ]);
-            if($registro->count() > 0){
-                return false;
+        if($this->cheque_original != null){
+            if($this->cheque_original != $value &&  $this->tipo_original != $this->tipo_nuevo){
+                $registro = RegistroContable::where([
+                    ['cheque','=',$value],
+                    ['tipo_registro_contable_id','=',$this->tipo_id]
+                ]);
+                if($registro->count() > 0){
+                    return false;
+                }else{
+                    return true;
+                }
             }else{
                 return true;
             }
