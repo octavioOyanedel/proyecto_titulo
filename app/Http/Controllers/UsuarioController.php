@@ -58,23 +58,7 @@ class UsuarioController extends Controller
         }
 
         switch ($columna) {
-            case 'nombre1':
-                $usuarios = User::orderBy('roles.nombre', $orden)
-                ->join('roles', 'usuarios.rol_id', '=', 'roles.id')
-                ->nombre1($campo)
-                ->nombre2($campo)
-                ->apellido1($campo)
-                ->apellido2($campo)
-                ->email($campo)
-                ->rolId($campo)
-                ->paginate($registros)->appends([
-                    'registros' => $registros,
-                    'columna' => $columna,
-                    'orden' => $orden,
-                    'buscar_usuario' => $campo,
-                ]);
-            break;
-            case 'apellido1':
+            case 'rol_id':
                 $usuarios = User::orderBy('roles.nombre', $orden)
                 ->join('roles', 'usuarios.rol_id', '=', 'roles.id')
                 ->nombre1($campo)
@@ -132,7 +116,7 @@ class UsuarioController extends Controller
     {
         //dd($request);
         $usuario = new User;
-        $usuario->id =(User::obtenerUltimoUsuarioIngresado()->id + 1);
+        //$usuario->id =(User::obtenerUltimoUsuarioIngresado()->id + 1);
         $usuario->nombre1 = $request->nombre1;
         $usuario->nombre2 = $request->nombre2;
         $usuario->apellido1 = $request->apellido1;

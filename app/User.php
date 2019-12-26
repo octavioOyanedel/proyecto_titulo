@@ -101,7 +101,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function LogsSistema()
     {
@@ -109,15 +109,15 @@ class User extends Authenticatable
     }
 
     /**
-     * Relación 
+     * Relación
      */
     public function rol()
     {
         return $this->hasOne('App\Rol');
-    }   
+    }
 
     /**
-     * Relación 
+     * Relación
      */
     public function registros_contables()
     {
@@ -136,11 +136,11 @@ class User extends Authenticatable
             return $valor;
         }else{
             return '';
-        }           
+        }
     }
-    
+
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setNombre1Attribute($value)
     {
@@ -148,7 +148,7 @@ class User extends Authenticatable
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setNombre2Attribute($value)
     {
@@ -156,7 +156,7 @@ class User extends Authenticatable
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setApellido1Attribute($value)
     {
@@ -164,7 +164,7 @@ class User extends Authenticatable
     }
 
     /**
-     * mutator nombre 
+     * mutator nombre
      */
     public function setApellido2Attribute($value)
     {
@@ -185,5 +185,5 @@ class User extends Authenticatable
     static public function obtenerUsuarioPorEmail($email)
     {
         return User::where('email','=',$email)->first();
-    }    
+    }
 }
