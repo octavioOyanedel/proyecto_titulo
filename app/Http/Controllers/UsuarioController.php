@@ -227,6 +227,7 @@ class UsuarioController extends Controller
      */
     public function updatePassword(EditarPasswordRequest $request)
     {
+        //dd($request);
         $modificar = User::findOrFail($request->user_id);
         $usuario = User::findOrfail($request->user_id);
         $modificar->password = Hash::make($request->password);

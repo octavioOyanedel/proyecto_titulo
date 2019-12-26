@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidarFormatoNombreRule;
-use App\rules\ValidarCorreoUsuarioUnicoEditarRule;
+use App\Rules\ValidarCorreoUsuarioUnicoEditarRule;
 
 class EditarUsuarioRequest extends FormRequest
 {

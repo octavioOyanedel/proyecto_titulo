@@ -119,7 +119,7 @@ $(window).on('load',function(){
 		$('#buscador-socio').removeClass('d-none');
 	}
 
-	if(ruta.localeCompare('/register') === 0 || ruta.search('/usuarios') != -1){
+	if(ruta.localeCompare('/register') === 0 || ruta.search('/usuarios') != -1 || ruta.localeCompare('/passwords') === 0){
 		$('#span-usuarios').addClass('font-weight-bold text-uppercase text-primary');
 		$('#buscador-usuario').removeClass('d-none');
 	}

@@ -35,7 +35,7 @@
                                         <tr>
                                             <td class="text-center" with="50" scope="row" title="Ver detalle usuario"><a class="text-primary" href="{{ route('usuarios.show', $us->id) }}"><span>@svg('ver')</span></a></td>
                                             <td class="text-center" with="50" scope="row" title="Editar usuario"><a class="text-secondary" href="{{ route('usuarios.edit', $us->id) }}"><span>@svg('editar')</span></a></td>
-                                            <td class="text-center" with="50" scope="row" title="Cambiar contraseña"><a class="text-warning" href="{{ route('passwords', $us->id) }}"><span>@svg('pass')</span></a></td>
+                                            <td class="text-center" with="50" scope="row" title="Cambiar contraseña"><a class="text-warning" href="{{ route('passwords', ['id' => $us->id]) }}"><span>@svg('pass')</span></a></td>
                                             <td class="text-center" with="50" scope="row" title="Eliminar usuario"><a class="text-danger" href="{{ route('eliminar_usuario_form',$us->id) }}"><span>@svg('eliminar')</span></a></td>
                                             <td>@if($us->apellido2 != null) {{ $us->apellido1 }} {{ $us->apellido2 }}, @else {{ $us->apellido1 }}, @endif {{ $us->nombre1 }} {{ $us->nombre2 }}</td>
                                             <td>{{ $us->email }}</td>
