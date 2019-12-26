@@ -63,7 +63,7 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            
+
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -73,12 +73,12 @@
 
                     @endauth
                 </div>
-            @endif  
+            @endif
             <div class="content">
                 <div class="title m-b-md">
                     @svg('logo_sin_texto')
                 </div>
-                <h3>Sind1</h3>
+                <h3>Sind1.</h3>
                 <h4>Sistema de administración de socios del Sindicato Interempresas N° 1 de trabajadores PUCV.</h4>
             </div>
         </div>
