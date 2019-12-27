@@ -122,7 +122,7 @@
                                                 <td width="50" class="text-center" scope="row" title="Editar carga familiar"><a class="text-secondary" href="{{ route('cargas.edit', $c->id) }}"><span>@svg('editar')</a></td>
                                                 <td width="50" class="text-center" scope="row" title="Desvincular carga familiar"><a class="text-danger" href="{{ route('cargas.show', $c->id) }}"><span>@svg('eliminar')</span></td>
                                             @endif
-                                            <td>{{ $c->apellido1 }} {{ $c->apellido2 }}, {{ $c->nombre1 }} {{ $c->nombre2 }}</td>
+                                            <td>@if($c->apellido2) {{ $c->apellido1 }} {{ $c->apellido2 }}, @else {{ $c->apellido1 }}, @endif {{ $c->nombre1 }} {{ $c->nombre2 }}</td>
                                             <td class="text-center">{{ $c->rut }}</td>
                                             <td class="text-center">{{ $c->fecha_nac }}</td>
                                             <td class="text-center">{{ $c->parentesco_id }}</td>

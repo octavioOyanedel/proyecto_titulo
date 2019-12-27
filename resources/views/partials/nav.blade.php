@@ -39,7 +39,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     @if(Auth::user()->rol_id != 'Invitado')
-                        <a class="dropdown-item sub-item" href="{{ route('socios.create') }}">Agregar</a>
+                        <a class="dropdown-item sub-item" href="{{ route('socios.create') }}">Incorporar</a>
                     @endif
                     <a class="dropdown-item sub-item" href="{{ route('home') }}">Listar</a>
                     <a class="dropdown-item sub-item" href="{{ route('filtro_socios_form') }}">Filtrar</a>
@@ -130,7 +130,7 @@
                 </li>
 
                 <!-- módulo mantenedor -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown mr-3">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span id="span-mantenedores">Mantenedor</span>
                     </a>
@@ -144,6 +144,15 @@
                 </li>
             @endif
 
+            <!-- módulo registros contables -->
+            <li class="nav-item dropdown mr-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span id="span-estadisticas">Ayuda</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item sub-item" href="{{ route('ayuda') }}">Procedimientos</a>
+                </div>
+            </li>
         </ul>
 
         @include('partials.components.nav.buscar')

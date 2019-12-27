@@ -61,9 +61,9 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_sede' => $campo,        
-        ]); 
+            'orden' => $orden,
+            'buscar_sede' => $campo,
+        ]);
 
         $total_consulta = $sedes->total();
         return view('sind1.mantenedores.socio.sede', compact('sedes','total_consulta'));
@@ -97,7 +97,7 @@ class MantenedorController extends Controller
 
         $campo = $request->get('buscar_area');
 
-        switch ($columna) {        
+        switch ($columna) {
             case 'sede_id':
                 $areas = Area::orderBy('sedes.nombre',$orden)
                 ->join('sedes', 'areas.sede_id', '=', 'sedes.id')
@@ -107,23 +107,23 @@ class MantenedorController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_area' => $campo,            
-                ]); 
-            break;                          
+                    'buscar_area' => $campo,
+                ]);
+            break;
             default:
                 $areas = Area::orderBy($columna,$orden)
                 ->nombre($campo)
-                ->sede($campo)                                          
+                ->sede($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden,   
-                    'buscar_area' => $campo,                             
-                ]); 
+                    'orden' => $orden,
+                    'buscar_area' => $campo,
+                ]);
             break;
         }
 
-        $total_consulta = $areas->total();        
+        $total_consulta = $areas->total();
         return view('sind1.mantenedores.socio.area', compact('areas','total_consulta'));
     }
 
@@ -160,11 +160,11 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_cargo' => $campo,        
+            'orden' => $orden,
+            'buscar_cargo' => $campo,
         ]);
 
-        $total_consulta = $cargos->total();        
+        $total_consulta = $cargos->total();
         return view('sind1.mantenedores.socio.cargo', compact('cargos','total_consulta'));
     }
 
@@ -201,11 +201,11 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_estado_socio' => $campo,        
+            'orden' => $orden,
+            'buscar_estado_socio' => $campo,
         ]);
-        
-        $total_consulta = $estados->total();        
+
+        $total_consulta = $estados->total();
         return view('sind1.mantenedores.socio.estado', compact('estados','total_consulta'));
     }
 
@@ -242,10 +242,10 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_nacionalidad' => $campo,        
+            'orden' => $orden,
+            'buscar_nacionalidad' => $campo,
         ]);
-        $total_consulta = $nacionalidades->total();        
+        $total_consulta = $nacionalidades->total();
         return view('sind1.mantenedores.socio.nacionalidad', compact('nacionalidades','total_consulta'));
     }
 
@@ -282,11 +282,11 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_parentesco' => $campo,        
+            'orden' => $orden,
+            'buscar_parentesco' => $campo,
         ]);
 
-        $total_consulta = $parentescos->total();        
+        $total_consulta = $parentescos->total();
         return view('sind1.mantenedores.carga.parentesco', compact('parentescos','total_consulta'));
     }
 
@@ -323,10 +323,10 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_nivel' => $campo,        
+            'orden' => $orden,
+            'buscar_nivel' => $campo,
         ]);
-        $total_consulta = $grados->total();        
+        $total_consulta = $grados->total();
         return view('sind1.mantenedores.estudio.nivel', compact('grados','total_consulta'));
     }
 
@@ -363,10 +363,10 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_institucion' => $campo,        
+            'orden' => $orden,
+            'buscar_institucion' => $campo,
         ]);
-        $total_consulta = $instituciones->total();        
+        $total_consulta = $instituciones->total();
         return view('sind1.mantenedores.estudio.institucion', compact('instituciones','total_consulta'));
     }
 
@@ -403,10 +403,10 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_estado_nivel' => $campo,        
+            'orden' => $orden,
+            'buscar_estado_nivel' => $campo,
         ]);
-        $total_consulta = $estados->total();        
+        $total_consulta = $estados->total();
         return view('sind1.mantenedores.estudio.estado_nivel', compact('estados','total_consulta'));
     }
 
@@ -443,10 +443,10 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_titulo' => $campo,        
+            'orden' => $orden,
+            'buscar_titulo' => $campo,
         ]);
-        $total_consulta = $titulos->total();        
+        $total_consulta = $titulos->total();
         return view('sind1.mantenedores.estudio.titulo', compact('titulos','total_consulta'));
     }
 
@@ -483,10 +483,10 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_pago' => $campo,        
+            'orden' => $orden,
+            'buscar_pago' => $campo,
         ]);
-        $total_consulta = $formas_pago->total();        
+        $total_consulta = $formas_pago->total();
         return view('sind1.mantenedores.prestamo.forma_pago', compact('formas_pago','total_consulta'));
     }
 
@@ -518,41 +518,41 @@ class MantenedorController extends Controller
 
         $campo = $request->get('buscar_cuenta');
 
-        switch ($columna) {        
+        switch ($columna) {
             case 'tipo_cuenta_id':
                 $cuentas = Cuenta::orderBy('tipos_cuenta.nombre', $orden)
                 ->join('tipos_cuenta', 'cuentas.tipo_cuenta_id', '=', 'tipos_cuenta.id')
-                ->numeroCuenta($campo)           
+                ->numeroCuenta($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_cuenta' => $campo,                               
-                ]); 
+                    'buscar_cuenta' => $campo,
+                ]);
             break;
             case 'banco_id':
                 $cuentas = Cuenta::orderBy('bancos.nombre', $orden)
                 ->join('bancos', 'cuentas.banco_id', '=', 'bancos.id')
-                ->numeroCuenta($campo)           
+                ->numeroCuenta($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_cuenta' => $campo,                               
-                ]); 
-            break;                       
+                    'buscar_cuenta' => $campo,
+                ]);
+            break;
             default:
                 $cuentas = Cuenta::orderBy($columna, $orden)
-                ->numeroCuenta($campo)                                             
+                ->numeroCuenta($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden,   
-                    'buscar_cuenta' => $campo,                             
-                ]); 
+                    'orden' => $orden,
+                    'buscar_cuenta' => $campo,
+                ]);
             break;
         }
-        $total_consulta = $cuentas->total();        
+        $total_consulta = $cuentas->total();
         return view('sind1.mantenedores.contable.cuenta', compact('cuentas','total_consulta'));
     }
 
@@ -589,10 +589,10 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_banco' => $campo,        
+            'orden' => $orden,
+            'buscar_banco' => $campo,
         ]);
-        $total_consulta = $bancos->total();        
+        $total_consulta = $bancos->total();
         return view('sind1.mantenedores.contable.banco', compact('bancos','total_consulta'));
     }
 
@@ -624,7 +624,7 @@ class MantenedorController extends Controller
 
         $campo = $request->get('buscar_concepto');
 
-        switch ($columna) {        
+        switch ($columna) {
             case 'tipo_registro_contable_id':
                 $conceptos = Concepto::orderBy('tipos_registro_contable.nombre',$orden)
                 ->join('tipos_registro_contable', 'conceptos.tipo_registro_contable_id', '=', 'tipos_registro_contable.id')
@@ -634,23 +634,23 @@ class MantenedorController extends Controller
                     'registros' => $registros,
                     'columna' => $columna,
                     'orden' => $orden,
-                    'buscar_concepto' => $campo,            
-                ]); 
-            break;                          
+                    'buscar_concepto' => $campo,
+                ]);
+            break;
             default:
                 $conceptos = Concepto::orderBy($columna, $orden)
                 ->concepto($campo)
-                ->tipoRegistroContabele($campo)                                          
+                ->tipoRegistroContabele($campo)
                 ->paginate($registros)->appends([
                     'registros' => $registros,
                     'columna' => $columna,
-                    'orden' => $orden,   
-                    'buscar_concepto' => $campo,                             
-                ]); 
+                    'orden' => $orden,
+                    'buscar_concepto' => $campo,
+                ]);
             break;
         }
 
-        $total_consulta = $conceptos->total();        
+        $total_consulta = $conceptos->total();
         return view('sind1.mantenedores.contable.concepto', compact('conceptos','total_consulta'));
     }
 
@@ -687,10 +687,10 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_tipo_cuenta' => $campo,        
+            'orden' => $orden,
+            'buscar_tipo_cuenta' => $campo,
         ]);
-        $total_consulta = $tipos_cuenta->total();        
+        $total_consulta = $tipos_cuenta->total();
         return view('sind1.mantenedores.contable.tipo_cuenta', compact('tipos_cuenta','total_consulta'));
     }
 
@@ -728,14 +728,14 @@ class MantenedorController extends Controller
         ->paginate($registros)->appends([
             'registros' => $registros,
             'columna' => $columna,
-            'orden' => $orden,    
-            'buscar_asociado' => $campo,        
+            'orden' => $orden,
+            'buscar_asociado' => $campo,
         ]);
 
 
-        $total_consulta = $asociados->total();        
+        $total_consulta = $asociados->total();
         return view('sind1.mantenedores.contable.asociado', compact('asociados','total_consulta'));
-    }    
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -817,7 +817,7 @@ class MantenedorController extends Controller
         $fecha_ini = date('Y').'-01-01';
         $fecha_fin = date('Y-m-d');
         $incorporados = Socio::whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])->orderBy('nombre','ASC')->count();
-        $desvinculados = Socio::onlyTrashed()->whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])->orderBy('nombre','ASC')->count(); 
+        $desvinculados = Socio::onlyTrashed()->whereBetween('fecha_sind1', [date($fecha_ini),date($fecha_fin)])->orderBy('nombre','ASC')->count();
         return view('sind1.estadistica.estadistica_incorporados_desvinculados',compact('socio','incorporados','desvinculados'));
     }
     /**
@@ -842,5 +842,15 @@ class MantenedorController extends Controller
     {
         $carga = new CargaFamiliar;
         return view('sind1.estadistica.estadistica_cargas', compact('carga'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ayuda()
+    {
+        return view('ayuda.index');
     }
 }

@@ -59,7 +59,7 @@
                                             <td class="text-center" title="@if($r->cheque != null) {{ '' }} @else {{ 'Ingreso sin cheque asociado.' }} @endif">@if($r->cheque != null) {{ $r->cheque }} @else {{ '-' }} @endif</td>
                                             <td class="text-center">@if($r->monto) {{ $r->monto }} @else {{ '-' }}@endif</td>
                                             <td class="">
-                                                <b>{{ $r->concepto_id }}</b>@if($r->socio != null) - {{ $r->socio->apellido1 }} {{ $r->socio->apellido2 }}, {{ $r->socio->nombre1 }} {{ $r->socio->nombre2 }}@endif
+                                                <b>{{ $r->concepto_id }}</b>@if($r->socio != null) - @if($r->socio->apellido2) {{ $r->socio->apellido1 }} {{ $r->socio->apellido2 }}, @else {{ $r->socio->apellido1 }}, @endif {{ $r->socio->nombre1 }} {{ $r->socio->nombre2 }}@endif
                                                 @if($r->asociado != null){{ $r->asociado->concepto }} - {{ $r->asociado->nombre }}@endif
                                             </td>
                                             <td title="@if($r->detalle != null) {{ '' }} @else {{ 'Sin detalle asociado.' }} @endif">@if($r->detalle != null) {{ $r->detalle }} @else {{ '-' }} @endif</td>

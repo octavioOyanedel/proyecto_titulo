@@ -240,3 +240,5 @@ Route::get('estadistica_carga_excel/{nombre}','CargaFamiliarController@exportarE
 
 Route::get('vincular/{id}','SocioController@reVincular')->name('vincular')->middleware('auth');
 Route::put('vincular_socio','SocioController@reVincularSocio')->name('vincular_socio')->middleware('auth');
+
+Route::get('ayuda','MantenedorController@ayuda')->name('ayuda')->middleware('auth');

@@ -9,7 +9,7 @@
 
                 <div class="card-body shadow-lg p-3 bg-white rounded">
 
-                    @if($niveles->count() === 0)
+                    @if($socios->count() === 0)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
                             <b>No se han encontrado estudios registrados. <a href="{{ route('home') }}">Volver a inicio.</a></b>
                         </div>
