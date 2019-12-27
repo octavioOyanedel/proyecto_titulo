@@ -26,6 +26,7 @@
                                 <thead>
                                     <tr>
                                         <th></th>
+                                        <th></th>
                                         <th class="text-center" scope="col">Estado de préstamo</th>
                                         <th scope="col">Nombre socio</th>
                                         <th class="text-center" scope="col">Rut</th>
@@ -41,6 +42,7 @@
                                     @foreach($prestamos as $p)
                                         <tr>
                                             <td width="50" class="text-center" scope="row" title="Ver detalle préstamo"><a class="text-primary" href="{{ route('prestamos.show',$p) }}"><span>@svg('ver')</span></a></td>
+                                            <td width="50" class="text-center" scope="row" title="Editar préstamo"><a class="text-secondary" href="{{ route('prestamos.edit', $p) }}"><span>@svg('editar')</span></a></td>
                                             <td class="text-center">
                                                 <span class="texto-deuda shadow-sm p-1 rounded">{{ textoDeudaPrestamo($p->getOriginal('estado_deuda_id')) }}</span>
                                             </td>

@@ -23,6 +23,7 @@ use App\Exports\BusquedaPrestamoExport;
 use App\Http\Requests\FiltrarPrestamoRequest;
 use App\Http\Requests\SimularPrestamoRequest;
 use App\Http\Requests\IncorporarPrestamoRequest;
+use App\Http\Requests\EditarPrestamoRequest;
 
 class PrestamoController extends Controller
 {
@@ -395,8 +396,8 @@ class PrestamoController extends Controller
         $prestamos = Prestamo::orderBy('fecha_solicitud','DESC')->paginate(15);
         $formas_pago = FormaPago::orderBy('nombre', 'ASC')->get();
         $total_consulta = $prestamos->total();
-        //return view('sind1.prestamos.index', compact('prestamos','formas_pago','total_consulta'));
-        return redirect()->route('prestamos.index', compact('prestamos','formas_pago','total_consulta'));
+        return view('sind1.prestamos.index', compact('prestamos','formas_pago','total_consulta'));
+        //return redirect()->route('prestamos.index', compact('prestamos','formas_pago','total_consulta'));
     }
 
     /**
@@ -422,7 +423,8 @@ class PrestamoController extends Controller
      */
     public function edit(Prestamo $prestamo)
     {
-        return redirect()->route('home');
+        $cuentas = Cuenta::all();
+        return view('sind1.prestamos.edit', compact('prestamo','cuentas'));
     }
 
     /**
@@ -432,9 +434,17 @@ class PrestamoController extends Controller
      * @param  \App\Prestamo  $prestamo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prestamo $prestamo)
+    public function update(EditarPrestamoRequest $request)
     {
-        return redirect()->route('home');
+        $prestamo = Prestamo::findOrFail($request->prestamo_id);
+        $modificar = Prestamo::findOrFail($request->prestamo_id);
+        $modificar->numero_egreso = $request->numero_egreso;
+        $modificar->cuenta_id = $request->cuenta_id;
+        $modificar->cheque = $request->cheque;
+        $modificar->update();
+        session(['mensaje' => 'Préstamo editado con éxito.']);
+        LogSistema::registrarAccion('Área editada, de: '.convertirArrayAString($request->toArray()).' >>> a >>> '.convertirArrayAString($prestamo->toArray()));
+        return redirect()->route('prestamos.index');
     }
 
     /**

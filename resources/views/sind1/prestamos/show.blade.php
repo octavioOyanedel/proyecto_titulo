@@ -24,6 +24,7 @@
                                 <tr><th>Fecha de solicitud</th><td>{{ $prestamo->fecha_solicitud }}</td></tr>
                                 <tr><th>Número de egreso</th><td>{{ $prestamo->numero_egreso }}</td></tr>
                                 <tr><th>Método de pago</th><td>{{ $prestamo->forma_pago_id }}</td></tr>
+                                <tr><th>Cuenta</th><td>{{ $prestamo->cuenta_id }}</td></tr>
                                 @if($prestamo->getOriginal('forma_pago_id') === 1)
                                     <tr><th>Cheque</th><td>{{ $prestamo->cheque }}</td></tr>
                                 @else
