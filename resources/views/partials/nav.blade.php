@@ -150,7 +150,7 @@
                     <span id="span-estadisticas">Ayuda</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item sub-item" href="{{ route('ayuda') }}">Procedimientos</a>
+                    <a class="dropdown-item sub-item" href="{{ route('ayuda') }}" target="_blank">Documentación</a>
                 </div>
             </li>
         </ul>
