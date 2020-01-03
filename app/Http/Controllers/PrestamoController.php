@@ -606,10 +606,10 @@ class PrestamoController extends Controller
             ])->get();
 
             foreach ($cuotas as $cuota) {
-                $cuota_ok = $cuota;
+                //$cuota_ok = $cuota;
                 $cuota->estado_deuda_id = 1;
                 $cuota->update();
-                LogSistema::registrarAccion('Cuota pagada: '.convertirArrayAString($cuota_ok->toArray()));
+                //LogSistema::registrarAccion('Cuota pagada: '.convertirArrayAString($cuota_ok->toArray()));
             }
         }
     }
@@ -659,11 +659,11 @@ class PrestamoController extends Controller
             ])->get();
 
             foreach ($cuotas as $cuota) {
-                $cuota_ok = $cuota;
+                //$cuota_ok = $cuota;
                 if($cuota->getOriginal('fecha_pago') === date('Y-m-d')){
                     $cuota->estado_deuda_id = 1; //1 - pagada
                     $cuota->update();
-                    LogSistema::registrarAccion('Cuota pagada: '.convertirArrayAString($cuota_ok->toArray()));
+                    //LogSistema::registrarAccion('Cuota pagada: '.convertirArrayAString($cuota_ok->toArray()));
                 }
             }
         }
