@@ -560,9 +560,11 @@ class PrestamoController extends Controller
         $total_consulta = $prestamos->total();
 
         $prestamo = Prestamo::findorFail($id);
+        $prestamo_ok = $prestamo;
         $prestamo->estado_deuda_id = 1;
         $prestamo->update();
         session(['mensaje' => 'Préstamo cancelado con éxito.']);
+        LogSistema::registrarAccion('Préstamo cancelado: '.convertirArrayAString($prestamo_ok->toArray()));
         return redirect()->route('prestamos.index', compact('prestamos','formas_pago','total_consulta'));
     }
 
@@ -582,8 +584,10 @@ class PrestamoController extends Controller
             ])->get();
 
             foreach ($prestamos as $prestamo) {
+                $prestamo_ok = $prestamo;
                 $prestamo->estado_deuda_id = 3;
                 $prestamo->update();
+                LogSistema::registrarAccion('Préstamo atrasado: '.convertirArrayAString($prestamo_ok->toArray()));
             }
         }
     }
@@ -602,8 +606,10 @@ class PrestamoController extends Controller
             ])->get();
 
             foreach ($cuotas as $cuota) {
+                $cuota_ok = $cuota;
                 $cuota->estado_deuda_id = 1;
                 $cuota->update();
+                LogSistema::registrarAccion('Cuota pagada: '.convertirArrayAString($cuota_ok->toArray()));
             }
         }
     }
@@ -623,6 +629,7 @@ class PrestamoController extends Controller
             ])->get();
 
             foreach ($prestamos as $prestamo) {
+                $prestamo_ok = $prestamo;
                 $pagadas = 0;
                 foreach ($prestamo->cuotas as $cuota) {
                     if($cuota->getOriginal('estado_deuda_id') === 1){
@@ -632,6 +639,7 @@ class PrestamoController extends Controller
                 if($pagadas == $prestamo->numero_cuotas){
                     $prestamo->estado_deuda_id = 1; //1 - pagada
                     $prestamo->update();
+                    LogSistema::registrarAccion('Préstamo cancelado: '.convertirArrayAString($prestamo_ok->toArray()));
                 }
             }
         }
@@ -651,9 +659,11 @@ class PrestamoController extends Controller
             ])->get();
 
             foreach ($cuotas as $cuota) {
+                $cuota_ok = $cuota;
                 if($cuota->getOriginal('fecha_pago') === date('Y-m-d')){
                     $cuota->estado_deuda_id = 1; //1 - pagada
                     $cuota->update();
+                    LogSistema::registrarAccion('Cuota pagada: '.convertirArrayAString($cuota_ok->toArray()));
                 }
             }
         }
