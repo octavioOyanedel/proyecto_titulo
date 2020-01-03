@@ -117,7 +117,7 @@
                 </li>
             @endif
 
-            @if(Auth::user()->rol_id != 'Invitado')
+            @if(Auth::user()->rol_id === 'Administrador')
             <!-- módulo usuarios -->
                 <li class="nav-item dropdown mr-3">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -128,7 +128,8 @@
                         <a class="dropdown-item sub-item" href="{{ route('usuarios.index') }}">Listar</a>
                     </div>
                 </li>
-
+            @endif
+            @if(Auth::user()->rol_id != 'Invitado')
                 <!-- módulo mantenedor -->
                 <li class="nav-item dropdown mr-3">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -143,8 +144,7 @@
                     </div>
                 </li>
             @endif
-
-            <!-- módulo registros contables -->
+{{--  
             <li class="nav-item dropdown mr-3">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span id="span-estadisticas">Ayuda</span>
@@ -153,6 +153,7 @@
                     <a class="dropdown-item sub-item" href="{{ route('ayuda') }}" target="_blank">Documentación</a>
                 </div>
             </li>
+--}}            
         </ul>
 
         @include('partials.components.nav.buscar')

@@ -11,7 +11,7 @@
 
                     @if($socio->id === null)
                         <div class="alert alert-dark mt-4 text-center" role="alert">
-                            <b>No se han encontrado socios registrados. <a href="{{ route('socios.create') }}">Incorporar socio.</a></b>
+                            <b>No se han encontrado socios incorporados o desvinculados en el presente año <a href="{{ route('home') }}">Ir a inicio.</a></b>
                         </div>
                     @else
                         <div class="table-responsive">

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Rol;
+use App\User;
 use App\LogSistema;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Http\Requests\IncorporarUsuarioRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\EditarUsuarioRequest;
 use App\Http\Requests\EditarPasswordRequest;
+use App\Http\Requests\IncorporarUsuarioRequest;
 
 class UsuarioController extends Controller
 {

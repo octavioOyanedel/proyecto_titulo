@@ -35,7 +35,7 @@ class SocioController extends Controller
     {
         $this->middleware('auth');
 
-        $this->middleware('administrador', ['only' => ['create', 'edit', 'store', 'update', 'destroy']]);
+        $this->middleware('user.admin', ['only' => ['create', 'edit', 'store', 'update', 'destroy', 'show']]);
 
         //$this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
     }

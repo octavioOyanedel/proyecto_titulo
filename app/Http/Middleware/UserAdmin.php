@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Support\Facades\Auth;
+use Closure;
 
-class Administrador
+class UserAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class Administrador
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->rol_id === 'Administrador'){
+        if(Auth::user()->rol_id === 'Administrador' || Auth::user()->rol_id === 'Usuario'){
             return $next($request);
         }
         return redirect('home');
